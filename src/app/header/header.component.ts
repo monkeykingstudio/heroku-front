@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { User } from '../models/user.model';
+// import { User } from '../models/user.model';
 // import { AuthService } from './../services/auth.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // user$: Observable<User>;
 
   isShown = false;
-  currentUser: User;
+  // currentUser: User;
 
   constructor() { }
 
