@@ -1,0 +1,511 @@
+@import "~bootstrap/scss/bootstrap";
+@import 'global/mixins';
+@import 'global/colors';
+// @import 'global/fonts';
+@import 'global/icons';
+@import 'global/inputs';
+
+@import '../../node_modules\animate.css\animate.css';
+
+html {
+  min-height: 100vh;
+}
+
+span {
+  color: #393939;
+}
+.antslab-tooltip .tooltip-inner {
+  background-color: #62d744;
+  font-size: 125%;
+  padding: 2rem;
+}
+
+.bs-tooltip-right .arrow::before {
+  right: 0;
+  border-width: 0.4rem 0.4rem 0.4rem 0;
+  border-right-color: #71db56!important;
+}
+.antslab-tooltip .tooltip-arrow::before {
+  border-color: #62d744!important;
+}
+
+.tooltip.right .tooltip-arrow {
+  top: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-bottom-color: #ff0000; /* black */
+  border-width: 0 5px 5px;
+}
+
+
+.form-check {
+  display: flex!important;
+  align-items: center;
+}
+
+.container-fluid {
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: #e8e8e8;
+  min-height: 100vh;
+}
+
+.form-check-input {
+  height: 1.4rem;
+  font-size: 1.8rem;
+  top: -7px;
+  width: 1.5rem
+}
+.custom-file-label {
+  padding: .3rem 1rem 0rem 1rem!important;
+}
+form .custom-file-label, input[type=text], input[type=file] form input[type=email], form input[type=password], form input[type=tel], form input[type=search], form input[type=url], form input[type=number], form textarea, form select {
+  border-radius: 5px;
+    box-shadow: inset 0 2px 0 rgb(84 94 111 / 20%);
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: #1f1f1f;
+    padding: 9px 14px 5px;
+    background: rgba(84,94,111,.04);
+    border: none;
+    outline: none;
+    line-height: 28px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.form-check-label {
+  font-size: 1.6rem!important;
+  margin: 1rem 0;
+  margin-left: 1rem;
+}
+
+.btn-green {
+  span {
+    color: white;
+  }
+}
+
+.orange-btn {
+  background-color: #d66f0f;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 0.2rem solid #e67d1c;
+  font-size: 1.4rem;
+
+  &:hover {
+    transition: all .2s;
+    background-color: #7e4608;
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.green {
+  color: #62d744;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100vh;
+}
+
+html, body {
+  background-color: #f2ecff;
+  &::-webkit-scrollbar {
+    width: .5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #6767675e;
+    border-radius: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #63d745;
+    border-radius: 5rem;
+    border-bottom: 0.2rem solid #468f33;
+    cursor: pointer;
+  }
+}
+
+body {
+  line-height: 1.8rem;
+}
+
+a, span, p {
+  letter-spacing: .1rem;
+}
+
+*:focus {outline:none !important}
+
+h6 {
+  font-weight: bold;
+  font-size: 2.2rem !important;
+  color: $black;
+}
+h5 {
+  font-size: 2.8rem!important;
+  font-weight: bold;
+  color: $black;
+}
+h4 {
+  font-weight: bold;
+  font-size: 3.2rem!important;
+  color: $black;
+}
+h3 {
+  font-weight: bold;
+  font-size: 3.6rem!important;
+  color: $black;
+}
+h2 {
+  font-weight: bold;
+  font-size: 3.8rem!important;
+  color: $black;
+}
+h1 {
+  font-size: 4rem!important;
+  font-weight: bold;
+  color: $black;
+}
+
+
+.toggle-task {
+  .button-left {
+    border-radius: .5rem 0 0 .5rem!important;
+    border-right: 0.1rem solid #74fd51;
+  }
+  .button-right {
+    border-radius: 0 .5rem .5rem 0!important;
+    border-left: 0.1rem solid #55ab3f;
+  }
+  .grey {
+    background-color: #cccccb!important;
+    border-right: 1px solid #e9e9e9!important;
+    border-bottom: 0.2rem solid #999999!important;
+    color: #afafaf!important;
+    &:hover {
+      background-color: $green!important;
+      color: white!important;
+      border-bottom: 0.2rem solid #4f9218!important;
+      border-right: 1px solid transparent!important;
+    }
+  }
+  .button-left, .button-right {
+    background-color: #62d744;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .2s;
+    border-bottom: .2rem solid #4f9218;
+    font-size: 1.2rem;
+
+    &:hover {
+      transition: all .2s;
+      background-color: #75e659;
+      text-decoration: none;
+      color: white;
+    }
+  }
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $green;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: all .2s;
+  border-radius: .5rem!important;
+
+  &:hover {
+    background-color: $dark-green;
+    transition: all .2s;
+  }
+}
+
+.reset-btn {
+  background-color: $red;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .2s;
+  margin-left: 1rem;
+  border-bottom: .2rem solid #7c1b1b;
+
+  &:hover {
+    transition: all .2s;
+    background-color: $dark-red;
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.edit-btn {
+  background-color: #0f9ed6;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: .6rem 2rem;
+  max-width: 5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 0.2rem solid #0a6e95;
+
+
+  &:hover {
+    transition: all .2s;
+    background-color: $dark-blue;
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.red-btn {
+  background-color: #d74444;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .2s;
+  border-bottom: .2rem solid #921818;
+  font-size: 1.4rem;
+
+  &:disabled {
+    background-color: #cccccb;
+    border-right: 1px solid #e9e9e9;
+    border-bottom: 0.2rem solid #999999;
+    color: #afafaf!important;
+    &:hover {
+      background-color: #cccccb;
+      border-right: 1px solid #e9e9e9;
+      border-bottom: 0.2rem solid #999999;
+      color: #afafaf!important;
+    }
+  }
+
+  &:hover {
+    transition: all .2s;
+    background-color: #e65656;
+    text-decoration: none;
+    color: white;
+  }
+}
+.blue-btn {
+
+  background-color: #0f9ed6;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .2s;
+  border-bottom: .2rem solid $dark-blue;
+  font-size: 1.4rem;
+
+  &:disabled {
+    background-color: #cccccb;
+    border-right: 1px solid #e9e9e9;
+    border-bottom: 0.2rem solid #999999;
+    color: #afafaf!important;
+    &:hover {
+      background-color: #cccccb;
+      border-right: 1px solid #e9e9e9;
+      border-bottom: 0.2rem solid #999999;
+      color: #afafaf!important;
+    }
+  }
+
+  &:hover {
+    transition: all .2s;
+    background-color: #26b2e9;
+    text-decoration: none;
+    color: white;
+  }
+}
+.green-btn {
+  background-color: #62d744;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .2s;
+  border-bottom: .2rem solid #4f9218;
+  font-size: 1.4rem;
+
+  &:disabled {
+    background-color: #cccccb;
+    border-right: 1px solid #e9e9e9;
+    border-bottom: 0.2rem solid #999999;
+    color: #afafaf!important;
+    &:hover {
+      background-color: #cccccb;
+      border-right: 1px solid #e9e9e9;
+      border-bottom: 0.2rem solid #999999;
+      color: #afafaf!important;
+    }
+  }
+
+  &:hover {
+    transition: all .2s;
+    background-color: #76e65b;
+    text-decoration: none;
+    color: white;
+  }
+}
+
+select {
+  border: none!important;
+}
+
+.form-control:focus, input:focus, textarea:focus, select:focus{
+  outline: none!important;
+  border: 1px solid #ced4da;
+  box-shadow: none!important;
+  color: inherit!important;
+}
+
+.form-control.ng-invalid {
+  border: transparent!important;
+  color: rgb(166 26 26);
+  background: #ff00001f;
+  &:focus {
+   border: transparent!important;
+   box-shadow: none!important;
+   color: rgb(166 26 26);
+    background: #ff00001f;
+
+  }
+}
+
+.custom-control-label:before{
+  background-color:red!important;
+}
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+  background-color:black!important;
+}
+
+.red {
+  background-color: $red;
+  &:hover {
+      background-color: $dark-red;
+  }
+}
+
+.separator-module {
+  top: 4rem;
+  left: 0;
+  height: 0.2rem;
+  background-color: #ffffff;
+  position: absolute;
+  width: 100%;
+  margin: 1rem 0;
+  border-top: 0.1rem solid #c9c9c9;
+}
+
+.badge-invalid {
+  margin-top: .3rem;
+  background-color: #cc2a2a38;
+  padding: .5rem;
+  border-radius: .3rem;
+  color: $dark-red;
+}
+
+.food-meat {
+  background-color: #d74444;
+  color: white!important;
+  border-radius: 30rem;
+  padding: .1rem 0;
+  display: flex;
+  justify-content: center;
+  min-width: 8rem;
+  border-bottom: 0.2rem solid #870000;
+}
+
+.food-seeds {
+  background-color: #c5b021;
+  color: white!important;
+  border-radius: 30rem;
+  padding: .1rem 0;
+  display: flex;
+  justify-content: center;
+  min-width: 8rem;
+  border-bottom: 0.2rem solid #8c7c11;
+}
+
+.food-insects {
+  background-color: #9744d7;
+  color: white!important;
+  border-radius: 30rem;
+  padding: .1rem 0;
+  display: flex;
+  justify-content: center;
+  min-width: 8rem;
+  border-bottom: .2rem solid #4c0087;
+}
+
+.food-sugar-water {
+  background-color: #44bdd7;
+  color: white!important;
+  border-radius: 30rem;
+  padding: .1rem .8rem;
+  display: flex;
+  justify-content: center;
+  min-width: 8rem;
+  border-bottom: .2rem solid #007287;
+}
+
+.food-fruits {
+  background-color: #f37a00;
+  color: white!important;
+  border-radius: 30rem;
+  padding: .1rem 0;
+  display: flex;
+  justify-content: center;
+  min-width: 8rem;
+  border-bottom: .2rem solid #873500;
+
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,409 @@
+.recurent-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/recurent.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 1rem;
+      height: 1rem;
+  }
+}
+
+.clock-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/clock.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
+.task-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/tasks.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 8rem;
+      height: 8rem;
+  }
+}
+
+
+.delete-trash-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/trash-white.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3rem;
+      height: 3rem;
+  }
+}
+
+.padlock-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/padlock.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3rem;
+      height: 2.5rem;
+  }
+}
+
+.error-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/error.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 8rem;
+      height: 8rem;
+      margin: 3rem;
+  }
+}
+
+.colony-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/colony.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 8rem;
+      height: 8rem;
+  }
+}
+
+.mail-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/mail.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 13rem;
+      height: 13rem;
+      margin: 1.5rem;
+  }
+}
+
+.success-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/success.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 8rem;
+      height: 8rem;
+      margin: 3rem;
+  }
+}
+
+.calendar-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/calendar.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+      margin: .2rem 0 0;
+  }
+}
+
+.gyne-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/gyne.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 5rem;
+      height: 4.5rem;
+  }
+}
+
+.caret-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/caret.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 1rem;
+      height: 1rem;
+      position: relative;
+      cursor: pointer;
+      top: .2rem;
+      left: .5rem;
+  }
+}
+
+.birthday-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/birthday-cake.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
+.temperature-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/temperature.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3.5rem;
+      height: 3.5rem;
+  }
+}
+
+.polymorphism-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/polymorphism.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 5rem;
+      height: 5rem;
+  }
+}
+
+.nopolymorphism-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/nopolymorphism.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 5rem;
+      height: 5rem;
+  }
+}
+
+.cold-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/cold.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3.5rem;
+      height: 3.5rem;
+  }
+}
+
+.geography-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/geography.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3.5rem;
+      height: 3.5rem;
+  }
+}
+
+.food-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/food.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3.5rem;
+      height: 3.5rem;
+  }
+}
+
+.humidity-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/humidity.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3rem;
+      height: 3rem;
+  }
+}
+
+.reset-icon {
+    &:before {
+        content: '';
+        background-image: url('../../app/icons/reset.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: inline-block;
+        position: relative;
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+}
+
+.options-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/options.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 1.7rem;
+      height: 1.7rem;
+      top: .1rem;
+  }
+}
+
+.delete-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/delete.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 1.2rem;
+      height: 1.2rem;
+  }
+}
+
+.close-icon-white {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 36rem;
+  top: -2rem;
+  right: -1rem;
+  position: absolute;
+  cursor: pointer;
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/close-white.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 1rem;
+      height: 1rem;
+  }
+}
+
+.close-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/close.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 1rem;
+    top: .2rem;
+    height: 1rem;
+  }
+}
+
+.edit-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/pen-edit.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: .3rem;
+  }
+}
+
+.parameters-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/parameters.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: .3rem;
+  }
+}
+
+.add-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/add-grey.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    transition: all .3s;
+  }
+  &:hover {
+    &:before {
+      rotate: (200deg);
+      background-image: url('../../app/icons/add-green.svg');
+      transition: all .2s;
+    }
+  }
+}
+
+.dots-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/dots.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 1.8rem;
+    height: 1.8rem;
+    transition: all .1s;
+    cursor: pointer;
+  }
+}
