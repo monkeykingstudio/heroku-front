@@ -1,0 +1,57 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 6rem
+}
+.version {
+  bottom: 2px;
+  position: absolute;
+  font-weight: bold;
+  color: white;
+  font-size: .8rem;
+  padding: .2rem 0.5rem;
+  background-color: #2d2d2d;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: all 2s;
+  transition: all 2s;
+
+  &:hover {
+  background-color: #464646;
+    transition: all 2s;
+  }
+}
+
+.separator {
+  display: flex;
+  width: 100%;
+  height: 0.15rem;
+  background-color: #363636;
+  border-bottom: 0.15rem solid #000000;
+}
+
+.logo-container {
+  display: flex;
+  width: 100%;
+  height: 8rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  .logo {
+    &:before {
+      content: '';
+      display: flex;
+      position: relative;
+      background-image: url('../images/antslab-logo-70.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 5.5rem;
+      height: 8rem;
+      background-position-x: center;
+      cursor: pointer;
+    }
+  }
+}
+
+
