@@ -1,0 +1,32 @@
+.menu {
+  background-color: #1f1f1f;
+  z-index: 8;
+  position: fixed;
+  min-height: 100vh;
+}
+
+.padlock-icon {
+  margin-right: 1rem;
+}
+
+.status-error {
+  padding: .8rem 1rem;
+  background: #d74646;
+  border-radius: 0.8rem;
+  color: white;
+  font-size: 1.1rem;
+  margin: 0 0 1.5rem 0;
+  align-items: center;
+  display: flex;
+}
+
+.status-ok {
+  padding: 1rem;
+  background: #81d746;
+  border-radius: .8rem;
+  color: white;
+  margin: 0 0 1.5rem 0;
+  align-items: center;
+  display: flex;
+}
+
