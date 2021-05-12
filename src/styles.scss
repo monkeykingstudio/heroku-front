@@ -5,7 +5,6 @@
 @import 'styles/global/icons';
 @import 'styles/global/inputs';
 
-
 html {
   min-height: 100vh;
 }
@@ -232,6 +231,7 @@ button {
   background-color: $green;
   color: white;
   font-weight: bold;
+  font-size: 1.4rem;
   border: none;
   cursor: pointer;
   transition: all .2s;
@@ -507,4 +507,4 @@ select {
 @import '~bootstrap/scss/bootstrap';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Roboto', "Helvetica Neue", 'verdana'; }
