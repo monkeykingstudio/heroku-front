@@ -1,11 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
-@import 'global/mixins';
-@import 'global/colors';
-// @import 'global/fonts';
-@import 'global/icons';
-@import 'global/inputs';
+@import 'styles/global/mixins';
+@import 'styles/global/colors';
+@import 'styles/global/animate';
+@import 'styles/global/icons';
+@import 'styles/global/inputs';
 
-@import '../../node_modules\animate.css\animate.css';
 
 html {
   min-height: 100vh;
