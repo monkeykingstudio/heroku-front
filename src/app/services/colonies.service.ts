@@ -1,0 +1,37 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Colony } from './../colonies/colony.model';
+import { map, shareReplay, tap } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ColoniesService {
+  private colonyUrl = 'http://localhost:3000/api/colonies';
+
+  constructor(private http: HttpClient) {}
+
+  loadAllColonies(): Observable<Colony[]> {
+    return this.http.get<Colony[]>(this.colonyUrl).pipe(
+      map(result => result['colonies']),
+      shareReplay()
+    );
+  }
+
+  loadColony(id: string): Observable<Colony> {
+    return this.http.get<Colony>(`${this.colonyUrl}/${id}`).pipe(
+      shareReplay()
+    );
+  }
+
+  createColony(colony) {
+    return this.http.post<Colony>(this.colonyUrl, colony).pipe(
+      shareReplay()
+    );
+  }
+
+  deleteColony(colonyId: string) {
+    return this.http.delete(`${this.colonyUrl}/${colonyId}`);
+  }
+}
