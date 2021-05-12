@@ -1,0 +1,100 @@
+// @import '../../styles/global/colors';
+
+:host {
+  height: 6.5rem;
+  display: flex;
+  position: sticky;
+  align-items: center;
+  padding: 1rem 0 0.5rem 0;
+  border-bottom: 0.2rem solid #4a4a4a;
+  margin-bottom: 1.5rem;
+  top: 0;
+  left: 0;
+  background-color: #e8e8e8;
+  z-index: 5;
+
+  .header-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+
+    .bread-crumb {
+      display: flex;
+      align-items: flex-end;
+      span {
+        font-size: 1.4rem;
+        color: #4a4a4a;
+        font-weight: bold;
+        margin-right: .5rem;
+      }
+
+      .current {
+        color: #63d745;
+      }
+    }
+
+    .user-container {
+      display: flex;
+      align-items: center;
+      position: relative;
+      min-width: 15rem;
+      justify-content: flex-end;
+
+      .action-block {
+        display: flex;
+        position: absolute;
+        background-color: white;
+        min-height: 4rem;
+        box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 22%);
+        padding: 1rem;
+        top: 4.5rem;
+        right: 5.5rem;
+        border-radius: .5rem;
+        z-index: 10;
+        justify-content: center;
+
+        button {
+          text-transform: uppercase;
+          margin-right: .5rem;
+          border-bottom: 0.2rem solid #4f9218;
+          min-height: 2.5rem;
+        }
+      }
+
+      span {
+        font-weight: bold;
+        cursor: pointer;
+        transition: all .3s;
+        white-space: nowrap;
+        &:hover {
+          transition: all .2s;
+          color: #63d745;
+        }
+
+        &::first-letter {
+          text-transform: capitalize;
+        }
+      }
+
+      .avatar {
+        // background-image: url("../../assets/black-ant.png");
+        background-repeat: no-repeat;
+        align-items: center;
+        justify-content: center;
+        background-position: center center;
+        display: flex;
+        width: 4rem;
+        height: 4rem;
+        min-width: 4rem;
+        min-height: 4rem;
+        background-color: white;
+        border-radius: 36rem;
+        border: .1rem solid #63d745;
+        margin-left: 2rem;
+        background-size: contain;
+      }
+    }
+  }
+}
+
