@@ -1,15 +1,18 @@
 <div class="header-container">
   <div class="bread-crumb">
+    <!-- <span>routeURL/</span>
+    <span>routeURL/</span>
+    <span class="current">currentpage</span> -->
   </div>
-  <div class="user-container">
+  <div *ngIf="(authService.currentUser | async)" class="user-container">
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button (click)="onLogout()">Logout</button>
     </div>
-    <span (click)="toggleShow()" class='d-flex align-items-center'>pseudostatic <i class="caret-icon"></i></span>
+    <span (click)="toggleShow()" class='d-flex align-items-center'>{{ (authService.currentUser | async)?.pseudo}} <i class="caret-icon"></i></span>
     <span (click)="toggleShow()" class='d-flex align-items-center'></span>
 
     <div class="avatar"
-    [style.background-image]=""></div>
+    [style.background-image]="'url('+(authService.currentUser | async).picture+')'"></div>
   </div>
 
   <div *ngIf="!(authService.currentUser | async)" class="user-container">
