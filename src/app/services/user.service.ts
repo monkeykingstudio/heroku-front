@@ -26,7 +26,7 @@ export class UsersService {
       userData.append('picture', user.picture, user.pseudo);
     }
     userData.append('pseudo', user.pseudo);
-    return this.http.post(`http://localhost:3000/api/auth/register`, userData);
+    return this.http.post(`https://calm-waters-91692.herokuapp.com/api/auth/register`, userData);
   }
 
   // userDelete(id: string) {

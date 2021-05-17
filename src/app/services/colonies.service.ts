@@ -8,7 +8,7 @@ import { map, shareReplay, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ColoniesService {
-  private colonyUrl = 'http://localhost:3000/api/colonies';
+  private colonyUrl = 'https://calm-waters-91692.herokuapp.com/api/colonies';
 
   constructor(private http: HttpClient) {}
 

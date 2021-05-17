@@ -86,7 +86,7 @@ export class SignupComponent {
 
 
     // Mail part
-    this.mailService.sendEmail('http://localhost:3000/api/mail/sendmail', this.user)
+    this.mailService.sendEmail('https://calm-waters-91692.herokuapp.com/api/mail/sendmail', this.user)
     .subscribe(data => {
       let res: any = data;
       console.log(`Yipee ${this.user.email} is successfully register and mail is sent for validation`);

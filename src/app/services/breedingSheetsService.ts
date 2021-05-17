@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class BreedingSheetsService {
-  private breedingSheetsUrl = 'http://localhost:3000/api/breedingsheets';
+  private breedingSheetsUrl = 'https://calm-waters-91692.herokuapp.com/api/breedingsheets';
 
   constructor(private http: HttpClient) {}
 

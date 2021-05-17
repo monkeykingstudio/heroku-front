@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private authRoute = 'http://localhost:3000/api/auth';
+  private authRoute = 'https://calm-waters-91692.herokuapp.com/api/auth';
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<User>;
   handleError: any;

@@ -11,7 +11,7 @@ export class TasksService {
   private readMode = new BehaviorSubject<boolean>(true);
   currentReadMode$ = this.readMode.asObservable();
 
-  private tasksUrl = 'http://localhost:3000/api/colonies/tasks';
+  private tasksUrl = 'https://calm-waters-91692.herokuapp.com/api/colonies/tasks';
   constructor(private http: HttpClient) {}
 
   loadAllTasks(colonyId: string) {

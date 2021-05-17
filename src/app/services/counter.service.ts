@@ -7,7 +7,7 @@ import { Counter } from '../models/counter.model';
 })
 export class CounterService {
 
-  private counterUrl = 'http://localhost:3000/api/colonies/counter';
+  private counterUrl = 'https://calm-waters-91692.herokuapp.com/api/colonies/counter';
   constructor(private http: HttpClient) {}
 
   // loadCounter(): Observable<Counter> {

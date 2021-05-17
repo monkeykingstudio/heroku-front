@@ -14,7 +14,7 @@ export class MailService {
 activateMail(token) {
   let headers = new HttpHeaders()
   .set('Authorization', `JWT ${token}`);
-  return this.http.get('http://localhost:3000/api/mail/activate', {
+  return this.http.get('https://calm-waters-91692.herokuapp.com/api/mail/activate', {
     observe: 'body',
     params: new HttpParams().append('token', token),
     'headers': headers
