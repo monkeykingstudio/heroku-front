@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-manager-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: .5rem;
+    padding: 1rem;
+    background-color: #e8e8e8;
+    border-bottom: .2rem solid #bdbdbd;
+    min-height: 37.3rem;
+  .task-manager {
+    position: relative;
+    background-color: white;
+    border-radius: 0.5rem;
+    border-bottom: 0.2rem solid #bdbdbd;
+    padding: 1rem ;
+    min-height: 100%;
+  }
+
+  h6 {
+    margin-bottom: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+  }
+}
+
+
+
+

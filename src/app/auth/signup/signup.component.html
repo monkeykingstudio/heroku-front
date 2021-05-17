@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="signup-container col-sm-12">
+  <div class="signup">
+    <div *ngIf='!registerSucces' class="ant-black"></div>
+    <form *ngIf='!registerSucces' style='margin:auto' [formGroup]="userForm" (ngSubmit)="add()" autocomplete="off" class="form-group col-md-8 col-lg-5">
+      <div class="form-row mb-4">
+        <div class="form-group col-md-6">
+          <label for="email">E-mail<pre>*</pre></label>
+          <input placeholder="E-mail" class="form-control" type="email" formControlName="email" />
+        </div>
+        <div class="form-group col-md-6">
+          <label for="password">Password<pre>*</pre></label>
+          <input placeholder="password" class="form-control" type="password" formControlName="password"/>
+        </div>
+      </div>
+      <div class="form-group mb-4">
+        <label for="pseudo">Pseudo</label>
+        <input placeholder="Pseudo" type="text" class="form-control" formControlName="pseudo">
+      </div>
+      <label for="">Profile picture</label>
+      <input class='hide-input' (change)="onImagePicked($event)" type="file"  #filePicker>
+      <div class="file-input">
+        <button (click)="filePicker.click()" type="button" class="green-btn">pick image</button>
+        <div class="fake-field">
+          <span *ngIf="imagePreview !== '' && userForm.get('picture').valid">{{imageName}}</span>
+        </div>
+      </div>
+      <div *ngIf="imagePreview !== '' && imagePreview && userForm.get('picture').valid" class="image-preview">
+        <img [src]="imagePreview" [alt]="userForm.value.title">
+      </div>
+      <span *ngIf='errorMsg !== null' class="animate__animated animate__fadeInUp badge-invalid">{{ errorMsg | json }}</span>
+      <span *ngIf='picture.invalid' class="animate__animated animate__fadeInUp badge-invalid">File must be a valid image format</span>
+      <div class="form-group mt-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="newsLetter">
+          <label class="form-check-label" for="newsLetter">
+            i want receive emails about the ongoing development
+          </label>
+        </div>
+      </div>
+      <span><pre style='top:1rem'>*</pre> Fields are required</span>
+      <button [disabled]="
+      (email.value == '' || email.value == null) ||
+      (password.value == '' || password.value == null) ||
+      (picture.invalid)"
+      class="green-btn mt-4" type="submit">Signup</button>
+
+      <div class="foot d-flex justify-content-center mt-4">
+        <span class="link">Legal Notice</span>
+        <span>-</span>
+        <span class="link">Contact us</span>
+      </div>
+    </form>
+    <div *ngIf='registerSucces' class="register-success">
+      <i class="mail-icon"></i>
+        <span style="font-size: 2rem;margin-bottom: 1rem;">Register complete</span>
+      <span style="margin: 1rem 0;">Please check your emails to <span class="green">activate your account</span> before accessing Antslab</span>
+      <button (click)='moveToLogin()' class="green-btn mt-4" type="button">Login</button>
+    </div>
+  </div>
+  </div>
+
+</div>
+
+
+
+
+
+

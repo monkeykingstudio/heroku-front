@@ -1,0 +1,97 @@
+.switch {
+  justify-content: flex-start;
+  display: flex;
+  align-items: flex-start;
+}
+
+.form-group {
+  margin-bottom: .8rem;
+}
+
+label {
+  font-size: 1.6rem;
+  white-space: nowrap;
+}
+
+textarea {
+  height: inherit!important;
+}
+
+form {
+  height: 100%;
+}
+
+.form-check-input {
+  width: 1.8rem;
+  height: 1.8rem;
+  top: 0;
+}
+
+.form-row {
+  align-items: center;
+  justify-content: space-between;
+
+  .form-check-input {
+    position: relative;
+    margin-top:0 !important;
+    top: -.2rem!important;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  label {
+    margin: 0;
+    margin-bottom: .5rem;
+  }
+}
+
+.form-control {
+  height: 3.5rem;
+  font-size: 1.6rem;
+  box-shadow: inset 0 2px 0 rgb(84 94 111 / 20%);
+  border:none!important;
+  &:focus {
+    box-shadow: inset 0 2px 0 rgb(84 94 111 / 20%)!important;
+  }
+}
+
+.form-check {
+  margin-right: 2.5rem;
+  margin: 0;
+  margin-right: 1.8rem;
+  .form-check-label {
+    top: 0;
+    margin-top: 0;
+  }
+}
+
+input, select, textarea {
+  background-color: #e8e8e8;
+}
+
+select {
+  &:focus {
+    background-color: white!important;
+  }
+  &::selection {
+    background-color: white!important;
+
+  }
+}
+
+input, textarea {
+  &:focus {
+    background-color: #e8e8e8!important;
+  }
+}
+
+pre {
+  display: inline-block;
+  font-size: 87.5%;
+  color: #f62525;
+  top: 1rem;
+  left: .3rem;
+  position: relative;
+}
+
+

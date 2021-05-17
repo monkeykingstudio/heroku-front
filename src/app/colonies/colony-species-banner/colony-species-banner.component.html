@@ -1,0 +1,54 @@
+<div class="species-informations">
+  <div class="item">
+    <i class="humidity-icon"></i>
+    <div class="content">
+      <span>{{breedSheet?.humidity}}</span>
+    </div>
+  </div>
+
+  <div class="item">
+    <i class="temperature-icon"></i>
+    <div class="content">
+      <span>{{breedSheet?.temperature}}</span>
+    </div>
+  </div>
+
+  <div class="item">
+    <i class="food-icon"></i>
+    <div class="content fix-icon ">
+      <span
+      [ngClass]="{
+        'food-insects': aliment === 'insects',
+        'food-meat': aliment === 'meat',
+        'food-sugar-water': aliment === 'sugar water',
+        'food-fruits': aliment === 'fruits',
+        'food-sugar-water': aliment === 'sugar water'
+      }"
+      class="multiline"
+      *ngFor="let aliment of breedSheet?.food">{{aliment}}</span>
+    </div>
+  </div>
+
+  <div class="item">
+    <i class="geography-icon"></i>
+    <div class="content fix-icon align-items-start">
+      <span class="multiline mb-0" *ngFor="let continents of breedSheet?.geography">{{continents}}</span>
+    </div>
+  </div>
+
+  <div class="item">
+    <i *ngIf="!breedSheet?.polymorphism" class="polymorphism-icon"></i>
+    <i *ngIf="breedSheet?.polymorphism" class="nopolymorphism-icon"></i>
+
+    <div class="content fix-icon align-items-start">
+        <span class="mb-0 polymorphism" >{{ breedSheet?.polymorph ? 'Have polymorphism' : 'Inexistant polymorphism'}}</span>
+    </div>
+  </div>
+
+  <div class="item">
+    <i class="cold-icon"></i>
+    <div class="content fix-icon ">
+      <span>{{breedSheet?.diapauseTemperature}}</span>
+    </div>
+  </div>
+</div>

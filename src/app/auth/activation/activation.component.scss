@@ -1,0 +1,42 @@
+.activator-container {
+  height: calc(100vh - 10rem);
+  .activator {
+    position: relative;
+    background-color: white;
+    border-radius: 0.5rem;
+    border-bottom: 0.2rem solid #bdbdbd;
+    padding: 2rem;
+    min-height: 100%;
+  }
+
+  a {
+    color: #62d744;
+    transition: all .2s;
+  }
+
+  .activated, .unactivated {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    span, a {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+  }
+
+}
+
+.ant-black {
+  background-image: url(../../../assets/black-ant.png);
+  transform: scaleX(-1);
+  width: 12rem;
+  margin: auto;
+  margin-bottom: 1rem;
+  background-size: contain;
+  height: 7rem;
+  background-repeat: no-repeat;
+  margin-top: 2rem;
+}
+

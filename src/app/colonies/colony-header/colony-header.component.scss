@@ -1,0 +1,167 @@
+.header-colony-container {
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 11rem;
+  border-bottom: 3px solid #4a4a4a;
+
+  h6 {
+    font-size: 2rem!important;
+    color: silver;
+    font-style: italic;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  .colony-name {
+    font-size: 3.3rem!important;
+    text-transform: uppercase;
+    letter-spacing: .05rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .gyne {
+    position: absolute;
+    right: 0;
+    top: .5rem;
+    cursor: pointer;
+
+    .polygyne {
+      margin-top: .5rem;
+      background-color: #d7448f;
+      border-bottom: 0.2rem solid #a7306d;
+      color: white;
+      padding: .5rem 1rem;
+      border-radius: .5rem;
+      &:hover {
+        background-color: #f34ba2;
+        transition: all .2s;
+        text-decoration: underline;
+        span {
+          color: white;
+        }
+      }
+    }
+
+    .gyne-name {
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #d7448f;
+      border-bottom: 0.2rem solid #a7306d;
+      padding: 0.2rem 0.5rem;
+      color: white;
+      border-radius: 0.5rem;
+      height: 3.5rem;
+      text-transform: capitalize;
+      margin-left: 1rem;
+      width: 9rem;
+      transition: all .2s;
+
+      &:hover {
+        background-color: #f34ba2;
+        transition: all .2s;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .dates {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 2rem;
+    left: 0;
+    bottom: .5rem;
+    span {
+      color: #737373;
+      white-space: nowrap;
+    }
+  }
+
+  .date-details {
+    position: relative;
+    top: .1rem;
+  }
+
+  .birthday-icon {
+    margin-right: 1rem;
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  .birthdate {
+    font-size: 1.3rem!important;
+    font-weight: bold;
+    color: #4a4a4a!important;
+    margin-right: .5rem;
+  }
+
+  .diapause {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    bottom: .3rem;
+    span {
+      text-transform: capitalize;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .badge-yes {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #62d744;
+      padding: 0.4rem 1rem 0.3rem 1rem;
+      color: white;
+      text-transform: uppercase;
+      margin-left: 1rem;
+      border-radius: .5rem;
+      border-bottom: .2rem solid #30811e
+      ;
+    }
+
+    .badge-no {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #d74444;
+      padding: 0.4rem 1rem 0.3rem 1rem;
+      color: white;
+      text-transform: uppercase;
+      margin-left: 1rem;
+      border-radius: .5rem;
+      border-bottom: .2rem solid #811e1e;
+    }
+  }
+
+  .difficulty {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 5.5rem;
+    position: absolute;
+    top: 2rem;
+    height: 2rem;
+    left: 0;
+
+    .bar {
+      height: 100%;
+      width: .8rem;
+      border-radius: .5rem;
+    }
+
+    .empty {
+      background-color: #d6d6d6;
+    }
+
+    .fill {
+      background-color: #62d744;
+    }
+  }
+
+}

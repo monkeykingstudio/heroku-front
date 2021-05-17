@@ -1,0 +1,59 @@
+<div class='task-list' *ngIf='(currentMode && allTasks$ | async) as tasks '>
+  <div class="head justify-content-between">
+    <div class="d-flex">
+      <button [ngClass]="expanded ? 'orange-btn' : 'blue-btn'" (click)='expandList()' *ngIf='tasks.length > 4' style='max-width:12rem' class="align-self-end  mr-2" type="button">
+        {{!expanded ? 'expand list' : 'reduce list'}}
+      </button>
+      <div class="toggle-task">
+        <button (click)='switchShowTodo()' [ngClass]="!showToDo ? 'grey' : '' " class="button-left">to do</button>
+        <button (click)='switchShowTodo()' [ngClass]="showToDo ? 'grey' : '' " class="button-right">done</button>
+      </div>
+    </div>
+    <button (click)='changeMode()' class="align-self-end green-btn ml-2" type="button">
+      Add task
+    </button>
+  </div>
+
+  <div
+  *ngIf='showToDo && (currentMode && toDoTasks$ | async) as toDoTasks'
+  [ngClass]="expanded ? 'expanded' : '' "
+  [ngStyle]="toDoTasks.length >= 4 ? {'padding-right': '.5rem'} : {'padding-right': '0'}"
+  class="list-container">
+    <div *ngIf='tasks.length == 0' class="empty">
+      <i class="task-icon"></i>
+      <span>You have no tasks to display!</span>
+      <span>Create your <b>first task</b> by clicking 'Add Task' button</span>
+    </div>
+    <div class="d-flex flex-column">
+      <app-task
+      (taskDeleted)='$deleted($event)'
+      (taskDone)='$done($event)'
+      (taskRecurence)='$recurence($event)'
+      [task]='toDoTasks[i]'
+      *ngFor="let toDoTask of toDoTasks; index as i">
+      </app-task>
+    </div>
+  </div>
+
+  <div
+  *ngIf='!showToDo && (currentMode && doneTasks$ | async) as doneTasks'
+  [ngClass]="expanded ? 'expanded' : '' "
+  [ngStyle]="doneTasks.length >= 4 ? {'padding-right': '.5rem'} : {'padding-right': '0'}"
+  class="list-container">
+    <div *ngIf='tasks.length == 0' class="empty">
+      <i class="task-icon"></i>
+      <span>You have no tasks to display!</span>
+      <span>Create your <b>first task</b> by clicking 'Add Task' button</span>
+    </div>
+    <div class="d-flex flex-column">
+      <app-task
+      (taskDeleted)='$deleted($event)'
+      [task]='doneTasks[i]'
+      *ngFor="let doneTask of doneTasks; index as i">
+      </app-task>
+    </div>
+  </div>
+</div>
+
+
+

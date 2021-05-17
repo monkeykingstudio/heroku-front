@@ -1,0 +1,63 @@
+<div class="col-sm-12 d-flex header-colony-container p-0">
+
+  <div
+  class="difficulty"
+  placement="right"
+  tooltipClass="antslab-tooltip"
+  ngbTooltip="
+
+  ">
+    <div
+    *ngFor="let difficulty of breedSheet?.difficulty"
+    [ngClass]="{
+      'fill': difficulty == 1,
+      'empty': difficulty == 0
+    }"
+    class="bar"></div>
+  </div>
+
+<div class="d-flex flex-column align-items-center">
+  <h2 class="colony-name">{{colony.name}}</h2>
+  <h6 class="colony-species">{{colony.species}}</h6>
+</div>
+
+  <div class="gyne">
+    <div *ngIf="!colony.polyGyne || !colony.gyneName === null" class="d-flex align-items-center">
+      <i class="gyne-icon"></i>
+      <span class="gyne-name">{{colony.gyneName}}</span>
+    </div>
+
+    <div *ngIf="colony.polyGyne" class="d-flex">
+      <span class='polygyne'>polygyne <span style="color:white" class='font-weight-bold'>x{{colony.polyGyneCount}}</span></span>
+    </div>
+  </div>
+
+
+  <div class="dates">
+    <i class="birthday-icon"></i>
+    <span class="birthdate">{{birthday}} </span>
+
+    <div class='date-details d-flex align-items-center'>
+      <span>({{age[0]}}&nbsp;</span>
+      <span> {{ age[0] > 1 ? ' days' : 'day'}}</span>
+      <span>
+        ,
+        <span>{{age[1]}}</span>
+        <span> {{age[1] > 1 ? 'months' : 'month'}}</span>
+      </span>
+      <span>
+        ,
+        <span>{{age[2]}}</span>
+        <span> {{age[2] > 1 ? 'years' : 'year'}})</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="diapause">
+    <span>in diapause</span>
+    <span class="badge-no">no</span>
+  </div>
+
+
+
+</div>

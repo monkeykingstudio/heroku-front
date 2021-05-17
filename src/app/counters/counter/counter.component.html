@@ -1,0 +1,113 @@
+<div id="counterRef" class="counter-container animate__animated animate__flipInY">
+  <button class="align-self-end edit-btn" type="button" (click)="openPopup('counterPopup')">
+    <i class="options-icon"></i>
+  </button>
+
+  <div class="separator-module"></div>
+
+  <form class="form-group incrementors" style="display:flex; flex-direction: column;" #counterForm (ngSubmit)='saveCount()'>
+    <div *ngIf="counter.polymorph" class="d-flex align-items-end mb-3">
+      <div class="d-flex flex-column">
+        <span class="types">Minor</span>
+        <div class="d-flex">
+          <button class='green-btn sub' [ngClass]="{disabled: counter.minorCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('minorRef')">-</button>
+          <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('minorRef')">+</button>
+        </div>
+      </div>
+      <input disabled='true' class="form-control" type="text" value='{{counter.minorCount}}' name="minor" #minorRef>
+    </div>
+
+    <div *ngIf="counter.polymorph" class="d-flex align-items-end mb-3">
+      <div class="d-flex flex-column">
+        <span class="types">Medium</span>
+        <div class="d-flex">
+          <button class='green-btn sub' [ngClass]="{disabled: counter.mediumCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('mediumRef')">-</button>
+          <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('mediumRef')">+</button>
+        </div>
+      </div>
+      <input disabled='true' class="form-control" type="text" value='{{counter.mediumCount}}' name="medium" #mediumRef>
+    </div>
+
+    <div *ngIf="counter.polymorph" class="d-flex align-items-end">
+      <div class="d-flex flex-column">
+        <span class="types">Major</span>
+        <div class="d-flex">
+          <button class='green-btn sub' [ngClass]="{disabled: counter.majorCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('majorRef')">-</button>
+          <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('majorRef')">+</button>
+        </div>
+      </div>
+      <input disabled='true' class="form-control" type="text" value='{{counter.majorCount}}' name="major" #majorRef>
+    </div>
+
+    <div *ngIf="counter.polymorph === false" class="d-flex align-items-end">
+      <div class="d-flex flex-column">
+        <span class="types">Global</span>
+        <div class="d-flex">
+          <button class='green-btn sub' [ngClass]="{disabled: counter.polyCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('polyRef')">-</button>
+          <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('polyRef')">+</button>
+        </div>
+      </div>
+      <input disabled='true' class="form-control" type="text" value='{{counter.polyCount}}' name="poly" #polyRef>
+    </div>
+
+    <div *ngIf="counter.breed" class="d-flex align-items-end mt-3">
+      <div class="d-flex flex-column">
+        <span class="types">Breed</span>
+        <div class="d-flex">
+          <button class='green-btn sub' [ngClass]="{disabled: counter.breedCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('breedRef')">-</button>
+          <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('breedRef')">+</button>
+        </div>
+      </div>
+      <input disabled='true' class="form-control breed" type="text" value='{{counter.breedCount}}' name="breed" #breedRef>
+    </div>
+
+    <div class="footer">
+      <div class="d-flex align-items-center w-100">
+        <span class="total-population">Population:</span>
+        <span *ngIf="counter.polymorph" class="total">{{totalPopulationPolyMorph}}</span>
+        <span *ngIf="!counter.polymorph" class="total">{{totalPopulationMonoMorph}}</span>
+      </div>
+    </div>
+  </form>
+
+<!-- -----------
+  Options popup
+------------ -->
+
+  <app-popup [data]="counter" class="counter-popup animate__animated animate__zoomIn" id='counterPopup'>
+    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+      <h6>Options</h6>
+      <form class="form-group options-popup" [formGroup]="optionsForm" (ngSubmit)='saveOptions(counter)'>
+        <div class="checkbox-container d-flex flex-column">
+          <label class="parameters-label" > <i class="parameters-icon"></i> Parameters</label>
+          <div class="d-flex flex-column">
+            <div class="form-check">
+              <input
+              [checked]='counter.polymorph'
+              type="checkbox"
+              (change)='counter.polymorph = !counter.polymorph; $event.stopPropagation()'
+              formControlName="polymorph"
+              class="form-check-input"/>
+              <label class="form-check-label">Polymorphism</label>
+            </div>
+            <div class="form-check">
+              <input
+              [checked]='counter.breed'
+              type="checkbox"
+              (change)='counter.breed = !counter.breed; $event.stopPropagation()'
+              formControlName="breed"
+              class="form-check-input"/>
+              <label class="form-check-label">Breed counter</label>
+            </div>
+          </div>
+        </div>
+
+        <button [disabled]="optionsForm.invalid" type="submit" (click)="closePopup('counterPopup'); $event.stopPropagation()" class='green-btn mt-4'>SAVE</button>
+
+      </form>
+      <button type="button" class='close-popup' (click)="closePopup('counterPopup'); $event.stopPropagation()">
+        <i class="close-icon"></i>
+      </button>
+    </div>
+  </app-popup>
+</div>

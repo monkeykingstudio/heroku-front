@@ -1,0 +1,152 @@
+<div *ngIf='allColonies$ | async as colonies' class="row">
+  <div class="colonies-container col-sm-12">
+    <div id="colonyRef" class="colonies">
+        <div class="col-sm-12">
+          <h6>My colonies</h6>
+        </div>
+        <div class="row m-0 w-100">
+          <div (click)="openPopup('addColony')" class="d-flex col-container col-sm-12 col-md-4 col-lg-2">
+            <div class="empty-colony-card">
+              <i class="add-icon"></i>
+            </div>
+          </div>
+
+         <div class="d-flex no-colony align-items-center" *ngIf='colonies.length === 0'>
+          <div class="colony-icon-container">
+            <i class="colony-icon"></i>
+          </div>
+          <div class="d-flex flex-column">
+            <span class="title">You don't have any colonies yet!</span>
+            <span>Start managing your first colony by clicking the <span class="green font-weight-bold">Add</span> button</span>
+          </div>
+         </div>
+
+        <app-colony-card
+          (colonyChange)='reloadColonies()'
+          *ngFor="let colony of colonies; index as i"
+          [colony]='colony'
+          class="col-sm-12 col-md-4 col-lg-2">
+        </app-colony-card>
+
+        <!--
+        ------------------
+        Add Colony Popup
+        ------------------
+        -->
+
+        <app-popup  id='addColony' class="animate__animated animate__zoomIn">
+          <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+          <h6>Add new colony</h6>
+          <form class="form-group colony-popup" [formGroup]="colonyForm" (ngSubmit)='saveColony()'>
+            <label for="name">Colony name <pre>*</pre></label>
+            <input placeholder="set a colony name" class="form-control" formControlName='name' type="text" />
+            <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf="colonyForm.get('name').dirty && colonyForm.get('name').hasError('minlength')">
+              Colony name should be 5 characters min
+            </span>
+            <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf="colonyForm.get('name').dirty && colonyForm.get('name').hasError('maxlength')">
+              Colony name should be 25 characters max
+            </span>
+
+            <div class="d-flex flex-column"  *ngIf="!switch" >
+              <label for="name">Gyne's name</label>
+              <input placeholder="Gyne's nickname" class="form-control" formControlName='gyneName' type="text" />
+              <div>
+                <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf="colonyForm.get('gyneName').dirty && colonyForm.get('gyneName').hasError('minlength')">
+                  Gyne's nickname should be 3 characters min
+                </span>
+                <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf="colonyForm.get('gyneName').dirty && colonyForm.get('gyneName').hasError('maxlength')">
+                  Colony name should be 18 characters max
+                </span>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row align-items-end mb-4"  *ngIf="switch" >
+              <div class="d-flex flex-column flex-grow-1">
+                <label for="name">Amount of gynes</label>
+                <input style="margin:0" class="form-control" formControlName='polyGyneCount' type="number" />
+              </div>
+              <div class="d-flex ml-2">
+                <button [disabled]="colonyForm.get('polyGyneCount').value <= 2" (click)='subGyne()' class='green-btn sub mr-2' type='button'>-</button>
+                <button (click)='addGyne()' class='green-btn add' type='button'>+</button>
+              </div>
+              <div>
+                <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf="colonyForm.get('gyneName').dirty && colonyForm.get('gyneName').hasError('minlength')">
+                  Gyne's nickname should be 3 characters min
+                </span>
+                <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf="colonyForm.get('gyneName').dirty && colonyForm.get('gyneName').hasError('maxlength')">
+                  Colony name should be 18 characters max
+                </span>
+              </div>
+            </div>
+
+            <label for="species">Select species</label>
+            <select formControlName='species' class="form-control" id="species">
+              <option *ngFor="let optionsSpecie of optionsSpecies" [ngValue]="optionsSpecie">{{optionsSpecie}}</option>
+            </select>
+
+            <label for="date">Creation date <pre>*</pre></label>
+            <div style='flex-grow:0' class="form-group">
+              <div class="align-items: center; input-group">
+                <div class="input-group-append">
+                  <button class="btn-green btn-calendar" (click)="d.toggle()" type="button">
+                    <span>Pick a date</span>
+                    <i class="calendar-icon"></i>
+                  </button>
+                </div>
+                <input
+                (dateSelect)="onDateSelect($event)"
+                type="date" class="form-control date-input" name="dp" formControlName="datePicker" ngbDatepicker #d="ngbDatepicker">
+              </div>
+              <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf='!dateCheck'>Date can't be higher as today!</span>
+            </div>
+
+            <div class="checkbox-container d-flex flex-column">
+              <div class="d-flex flex-row align-items-center">
+                <div class="form-check">
+                  <input
+                  type="checkbox"
+                  formControlName="polymorph"
+                  class="form-check-input"
+                  id="polymorph"
+                  [value]='true'
+                  />
+                  <label class="form-check-label">Polymorphism <pre>*</pre></label>
+                </div>
+
+                <div class="form-check">
+                  <input
+                  type="checkbox"
+                  formControlName="breed"
+                  class="form-check-input"
+                  id="polymorph"
+                  [value]='true'
+                  />
+                  <label class="form-check-label">Breed Counter</label>
+                </div>
+
+                <div class="form-check">
+                  <input
+                  type="checkbox"
+                  formControlName="polyGyne"
+                  class="form-check-input"
+                  id="polygyne"
+                  [value]='true'
+                  (change)="polySwitch()"
+                  />
+                  <label class="form-check-label">Polygyne</label>
+                </div>
+              </div>
+            </div>
+            <button [disabled]="colonyForm.invalid || !dateCheck" type='submit' (click)="closePopup('addColony'); $event.stopPropagation()" class='green-btn'>Create colony !</button>
+          </form>
+          <button type="button" class='close-popup' (click)="closePopup('addColony'); $event.stopPropagation()">
+            <i class="close-icon"></i>
+          </button>
+          <span><pre>*</pre> Fields are required</span>
+
+          </div>
+        </app-popup>
+        </div>
+    </div>
+  </div>
+</div>

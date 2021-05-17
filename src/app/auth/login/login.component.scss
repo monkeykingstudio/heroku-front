@@ -1,0 +1,79 @@
+.login-container {
+  height: calc(100vh - 10rem);
+
+  .foot {
+    .link {
+      margin: 0 .5rem;
+      cursor: pointer;
+      transition: all .2s;
+      color: #262626;
+      text-decoration: underline;
+
+      &:hover {
+        transition: all .2s;
+        color: #62d744;
+      }
+    }
+  }
+
+  pre {
+    display: inline-block;
+    font-size: 87.5%;
+    color: #f62525;
+    top: .5rem;
+    left: .3rem;
+    position: relative;
+  }
+
+  .ant-black {
+    background-image: url(../../../assets/black-ant.png);
+    transform: scaleX(-1);
+    width: 12rem;
+    margin: auto;
+    margin-bottom: 1rem;
+    background-size: contain;
+    height: 7rem;
+    background-repeat: no-repeat;
+    margin-top: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: .8rem;
+  }
+
+  label {
+    font-size: 1.6rem;
+    white-space: nowrap;
+  }
+
+  .form-control {
+    height: 3.5rem;
+    font-size: 1.6rem;
+    box-shadow: inset 0 2px 0 rgb(84 94 111 / 20%);
+    border:none!important;
+    &:focus {
+      box-shadow: inset 0 2px 0 rgb(84 94 111 / 20%);
+      background-color: #f8f9f9!important;
+    }
+  }
+
+  .form-check-input {
+    top: 1.2rem;
+  }
+
+  .login {
+    background-color: white;
+    border-radius: .5rem;
+    border-bottom: .2rem solid #bdbdbd;
+    padding: 2rem;
+    min-height: 100%;
+
+    button {
+      letter-spacing: 0.15rem;
+      font-size: 1.4rem;
+      bottom: 0;
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+}
