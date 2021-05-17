@@ -8,16 +8,16 @@
     <span (click)="toggleShow()" class='d-flex align-items-center'>pseudostatic <i class="caret-icon"></i></span>
     <span (click)="toggleShow()" class='d-flex align-items-center'></span>
 
-    <!-- <div class="avatar"
-    [style.background-image]=""></div> -->
+    <div class="avatar"
+    [style.background-image]=""></div>
   </div>
 
-  <!-- <div *ngIf="!(authService.currentUser | async)" class="user-container">
+  <div *ngIf="!(authService.currentUser | async)" class="user-container">
     <div style="top:5.5rem;right:0" *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button (click)="toggleShow()" routerLink="/login">Login</button>
       <button (click)="toggleShow()" routerLink="/signup">Signup</button>
     </div>
     <div (click)="toggleShow()" style='cursor:pointer' class="avatar"></div>
     <i (click)="toggleShow()" class="caret-icon"></i>
-  </div> -->
+  </div>
 </div>

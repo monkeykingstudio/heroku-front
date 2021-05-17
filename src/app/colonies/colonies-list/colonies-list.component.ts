@@ -6,8 +6,6 @@ import { PopupService } from './../../services/popup.service';
 import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import * as moment from 'moment';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from './../../services/auth.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-colonies-list',
@@ -50,9 +48,8 @@ export class ColoniesListComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public colonyService: ColoniesService,
-    public popupService: PopupService,
-    private authService: AuthService
-    ) {}
+    public popupService: PopupService
+  ) {}
 
   ngOnInit(): void {
     this.nameCtrl = this.fb.control('', [Validators.required, Validators.minLength(5), Validators.maxLength(25)]);

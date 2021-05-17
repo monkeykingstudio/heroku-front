@@ -3,7 +3,6 @@ import { Observable, Subscription } from 'rxjs';
 import { ColoniesService } from './../../services/colonies.service';
 import { Colony } from './../colony.model';
 import { CounterService } from '../../services/counter.service';
-import { Counter } from '../../models/counter.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { BreedingSheet } from '../../models/breedingSheet.model';
 import { BreedingSheetsService } from './../../services/breedingSheetsService';
@@ -37,7 +36,6 @@ export class ColonyComponent implements OnInit, OnDestroy {
       }
     });
 
-    // methode youssef
     this.colony$
     .pipe(map((colony) => {
     this.breedingSheetSub = this.breedingSheetsService.getSheet(colony.species)
