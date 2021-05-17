@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
 // import { Observable } from 'rxjs';
 // import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { UsersService } from './services/user.service';
+
 
 @Component({
   selector: 'app-root',
@@ -13,6 +16,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   // public authStatusSubscription: Subscription;
+  testUser: String;
+  userSub: Subscription;
+
 
   title = 'antslab';
   hover = false;
@@ -21,7 +27,7 @@ export class AppComponent implements OnInit {
   // user$: Observable<User>;
   // currentUser: User;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public usersService: UsersService) {}
 
   ngOnInit(): void {
     // this.authStatusSubscription = this.authService.currentUser.pipe(
@@ -31,6 +37,12 @@ export class AppComponent implements OnInit {
     //     }
     //   })
     //   ).subscribe();
+
+    this.userSub = this.usersService.userGet('6091b24b1b29132a8036c970')
+    .subscribe((user) => {
+      this.testUser = user.email;
+      console.log(user.user.email);
+    });
 
   }
 }

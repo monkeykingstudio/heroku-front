@@ -15,7 +15,7 @@ export class UsersService {
   // }
 
   userGet(id: string) {
-    return this.http.get<User>(`http://localhost:3000/api/users/${id}`);
+    return this.http.get<any>(`https://calm-waters-91692.herokuapp.com/api/users/${id}`);
   }
 
   userAdd(user: User) {
