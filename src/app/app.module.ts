@@ -10,6 +10,9 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { ErrorInterceptor } from './auth/error-interceptor';
 import { HeaderComponent } from './header/header.component';
 import { LateralMenuComponent } from './lateral-menu/lateral-menu.component';
+import { LoginComponent } from '../app/auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { ActivationComponent } from './auth/activation/activation.component';
 import { HomeComponent } from './home/home.component';
 import { PopupModule } from './popup/popup.module';
 import { ColonyCardComponent } from './colonies/colony-card/colony-card.component';
@@ -24,7 +27,10 @@ import { ColonyComponent } from './colonies/colony/colony.component';
     ColonyComponent,
     HeaderComponent,
     LateralMenuComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    SignupComponent,
+    ActivationComponent,
   ],
   imports: [
     BrowserModule,
