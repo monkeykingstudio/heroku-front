@@ -37,11 +37,11 @@ export class AppComponent implements OnInit {
     //   })
     //   ).subscribe();
 
-    this.userSub = this.usersService.userGet('6091b24b1b29132a8036c970')
-    .subscribe((user) => {
-      this.testUser = user.email;
-      console.log(user.user.email);
-    });
+    // this.userSub = this.usersService.userGet('6091b24b1b29132a8036c970')
+    // .subscribe((user) => {
+    //   this.testUser = user.email;
+    //   console.log(user.user.email);
+    // });
 
   }
 }

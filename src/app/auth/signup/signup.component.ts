@@ -79,7 +79,7 @@ export class SignupComponent {
         console.log(this.user.email);
         if (this.errorMsg == null) {
           this.prepareForm();
-          // this.router.navigate(['/login']);
+          this.router.navigate(['/login']);
           this.registerSucces = true;
         }
     });

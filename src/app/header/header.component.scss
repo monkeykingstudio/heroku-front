@@ -1,4 +1,4 @@
-// @import '../../styles/global/colors';
+@import '../../styles/global/colors';
 
 :host {
   height: 6.5rem;
@@ -78,7 +78,7 @@
       }
 
       .avatar {
-        // background-image: url("../../assets/black-ant.png");
+        background-image: url("../../assets/black-ant.png");
         background-repeat: no-repeat;
         align-items: center;
         justify-content: center;
