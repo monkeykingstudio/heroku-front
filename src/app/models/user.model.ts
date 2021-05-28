@@ -4,6 +4,6 @@ export interface User {
   email: string;
   password: string;
   token?: string;
-  picture?: string;
+  // picture?: string;
   is_verified: boolean;
 }

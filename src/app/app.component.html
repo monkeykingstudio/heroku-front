@@ -20,7 +20,7 @@
     [ngStyle]="hover == true ? {'margin-left': '6rem', 'transition' : 'all .2s'} : {'margin-left' : '6rem', 'transition' : 'all .2s'}"
     class="d-flex flex-column">
       <app-header></app-header>
-      <!-- <div
+      <div
       style="display:flex;align-items:center"
       class="status-error animate__animated animate__fadeIn" *ngIf='!(authService.currentUser | async)?.is_verified && (authService.currentUser | async)?.is_verified !== null'>
         <span style="display:flex;align-items:center;color:white">
@@ -30,7 +30,7 @@
 
           <span style="font-weight:bold;color:white">&nbsp; cliking the link on the email &nbsp;</span>
           <span style="color:white">you have received just after your registration before accessing the application!</span>
-      </div> -->
+      </div>
 
       <router-outlet></router-outlet>
     </div>

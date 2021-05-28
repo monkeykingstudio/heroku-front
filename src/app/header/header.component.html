@@ -12,7 +12,8 @@
     <span (click)="toggleShow()" class='d-flex align-items-center'></span>
 
     <div class="avatar"
-    [style.background-image]="'url('+(authService.currentUser | async).picture+')'"></div>
+    ></div>
+    <!-- [style.background-image]="'url('+(authService.currentUser | async).picture+')'" -->
   </div>
 
   <div *ngIf="!(authService.currentUser | async)" class="user-container">

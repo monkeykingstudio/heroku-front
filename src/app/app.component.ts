@@ -14,7 +14,7 @@ import { UsersService } from './services/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  // public authStatusSubscription: Subscription;
+  public authStatusSubscription: Subscription;
   testUser: String;
   userSub: Subscription;
 
@@ -23,19 +23,19 @@ export class AppComponent implements OnInit {
   hover = false;
   isVerified = false;
 
-  // user$: Observable<User>;
-  // currentUser: User;
+  user$: Observable<User>;
+  currentUser: User;
 
-  constructor(private router: Router, public usersService: UsersService) {}
+  constructor(private router: Router, public usersService: UsersService, public authService: AuthService) {}
 
   ngOnInit(): void {
-    // this.authStatusSubscription = this.authService.currentUser.pipe(
-    //   map(user => {
-    //     if (user) {
-    //       this.currentUser = user;
-    //     }
-    //   })
-    //   ).subscribe();
+    this.authStatusSubscription = this.authService.currentUser.pipe(
+      map(user => {
+        if (user) {
+          this.currentUser = user;
+        }
+      })
+      ).subscribe();
 
     // this.userSub = this.usersService.userGet('6091b24b1b29132a8036c970')
     // .subscribe((user) => {

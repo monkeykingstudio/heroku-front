@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { UsersService } from '../../services/user.service';
 import { MailService } from '../../services/mail.service';
 
-import {mimeType} from '../../images/mime-type.validator';
+// import {mimeType} from '../../images/mime-type.validator';
 
 import { User } from './../../models/user.model';
 import { Router } from '@angular/router';
@@ -20,16 +20,16 @@ export class SignupComponent {
   users: User[];
   user: User;
   userForm: FormGroup;
-  imagePreview: string;
-  imageName: string;
-  fileError: Error = null;
+  // imagePreview: string;
+  // imageName: string;
+  // fileError: Error = null;
   errorMsg: string = null;
 
   registerSucces = false;
 
   constructor(
     private router: Router,
-    private fb: FormBuilder,
+    // private fb: FormBuilder,
     private userService: UsersService,
     private mailService: MailService,
   ) { this.prepareForm(); }
@@ -38,20 +38,20 @@ export class SignupComponent {
   get email() { return this.userForm.controls['email']; }
   get password() { return this.userForm.controls['password']; }
   get pseudo() { return this.userForm.controls['pseudo']; }
-  get picture() { return this.userForm.controls['picture']; }
+  // get picture() { return this.userForm.controls['picture']; }
 
-  onImagePicked(event: Event) {
-    this.errorMsg = null;
-    this.fileError = null;
-    const file = ((event.target as HTMLInputElement).files[0] as File);
-    this.userForm.get('picture').setValue(file);
-    this.userForm.get('picture').updateValueAndValidity();
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
-  }
+  // onImagePicked(event: Event) {
+  //   this.errorMsg = null;
+  //   this.fileError = null;
+  //   const file = ((event.target as HTMLInputElement).files[0] as File);
+  //   this.userForm.get('picture').setValue(file);
+  //   this.userForm.get('picture').updateValueAndValidity();
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     this.imagePreview = reader.result as string;
+  //   };
+  //   reader.readAsDataURL(file);
+  // }
 
   add() {
     this.errorMsg = null;
@@ -60,14 +60,15 @@ export class SignupComponent {
       pseudo: inputs.pseudo.value,
       email: inputs.email.value,
       password: inputs.password.value,
-      picture: inputs.picture.value,
       is_verified: false
     };
+    // picture: inputs.picture.value,
+
     this.userService.userAdd(this.user).pipe(
       catchError(err => {
         if (err instanceof HttpErrorResponse && err.status === 500) {
           this.errorMsg = err.error.err.message;
-          this.imagePreview = null;
+          // this.imagePreview = null;
           return of([]);
         } else {
           this.errorMsg = err;
@@ -106,9 +107,9 @@ export class SignupComponent {
       }),
       password: new FormControl(null, { validators: [Validators.required]
       }),
-      pseudo: new FormControl(null),
-      picture: new FormControl(null, { validators: [], asyncValidators: [mimeType]
-      }),
+      pseudo: new FormControl(null)
+      // picture: new FormControl(null, { validators: [], asyncValidators: [mimeType]
+      // }),
     });
   }
 
