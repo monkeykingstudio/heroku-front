@@ -17,19 +17,19 @@
         <label for="pseudo">Pseudo</label>
         <input placeholder="Pseudo" type="text" class="form-control" formControlName="pseudo">
       </div>
-      <label for="">Profile picture</label>
-      <input class='hide-input' (change)="onImagePicked($event)" type="file"  #filePicker>
-      <div class="file-input">
+      <!-- <label for="">Profile picture</label> -->
+      <!-- <input class='hide-input' (change)="onImagePicked($event)" type="file"  #filePicker> -->
+      <!-- <div class="file-input">
         <button (click)="filePicker.click()" type="button" class="green-btn">pick image</button>
         <div class="fake-field">
           <span *ngIf="imagePreview !== '' && userForm.get('picture').valid">{{imageName}}</span>
         </div>
-      </div>
-      <div *ngIf="imagePreview !== '' && imagePreview && userForm.get('picture').valid" class="image-preview">
+      </div> -->
+      <!-- <div *ngIf="imagePreview !== '' && imagePreview && userForm.get('picture').valid" class="image-preview">
         <img [src]="imagePreview" [alt]="userForm.value.title">
-      </div>
+      </div> -->
       <span *ngIf='errorMsg !== null' class="animate__animated animate__fadeInUp badge-invalid">{{ errorMsg | json }}</span>
-      <span *ngIf='picture.invalid' class="animate__animated animate__fadeInUp badge-invalid">File must be a valid image format</span>
+      <!-- <span *ngIf='picture.invalid' class="animate__animated animate__fadeInUp badge-invalid">File must be a valid image format</span> -->
       <div class="form-group mt-3">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="newsLetter">
@@ -41,8 +41,7 @@
       <span><pre style='top:1rem'>*</pre> Fields are required</span>
       <button [disabled]="
       (email.value == '' || email.value == null) ||
-      (password.value == '' || password.value == null) ||
-      (picture.invalid)"
+      (password.value == '' || password.value == null)"
       class="green-btn mt-4" type="submit">Signup</button>
 
       <div class="foot d-flex justify-content-center mt-4">
