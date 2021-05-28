@@ -64,18 +64,7 @@ export class SignupComponent {
     };
     // picture: inputs.picture.value,
 
-    this.userService.userAdd(this.user).pipe(
-      catchError(err => {
-        if (err instanceof HttpErrorResponse && err.status === 500) {
-          this.errorMsg = err.error.err.message;
-          // this.imagePreview = null;
-          return of([]);
-        } else {
-          this.errorMsg = err;
-          console.log(this.errorMsg);
-          return of([]);
-        }
-      }))
+    this.userService.userAdd(this.user)
       .subscribe(user => {
         console.log(this.user.email);
         if (this.errorMsg == null) {
@@ -84,6 +73,19 @@ export class SignupComponent {
           this.registerSucces = true;
         }
     });
+
+    // .pipe(
+    //   catchError(err => {
+    //     if (err instanceof HttpErrorResponse && err.status === 500) {
+    //       this.errorMsg = err.error.err.message;
+    //       // this.imagePreview = null;
+    //       return of([]);
+    //     } else {
+    //       this.errorMsg = err;
+    //       console.log(this.errorMsg);
+    //       return of([]);
+    //     }
+    //   }))
 
 
     // Mail part
