@@ -62,6 +62,8 @@ export class SignupComponent {
       password: inputs.password.value,
       is_verified: false
     };
+
+    console.log(this.user);
     // picture: inputs.picture.value,
 
     this.userService.userAdd(this.user)
