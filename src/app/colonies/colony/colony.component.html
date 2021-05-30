@@ -2,17 +2,7 @@
   <div *ngIf='colony$ | async as colony' class="colony-container col-sm-12">
     <div id="colonyRef" class="colony">
       <app-colony-header [colony]='colony'></app-colony-header>
-      <app-colony-species-banner [breedSheet]='breedSheet'></app-colony-species-banner>
-      <div class="body row">
-        <div class="col-sm-12 col-md-4 col-lg-3">
-        </div>
 
-        <div class="col-sm-12 col-md-4 col-lg-6">
-        </div>
-        <div class="col-sm-12 col-md-4 col-lg-3">
-
-        </div>
-      </div>
     </div>
   </div>
 </div>
