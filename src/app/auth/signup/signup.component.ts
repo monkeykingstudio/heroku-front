@@ -63,12 +63,11 @@ export class SignupComponent {
       is_verified: false
     };
 
-    console.log('youssef user', this.user);
+    // console.log('youssef user', this.user);
     // picture: inputs.picture.value,
 
     this.userService.userAdd(this.user)
       .subscribe(user => {
-        console.log(this.user.email);
         if (this.errorMsg == null) {
           this.prepareForm();
           this.router.navigate(['/login']);
