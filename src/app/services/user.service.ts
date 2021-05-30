@@ -20,6 +20,7 @@ export class UsersService {
 
   userAdd(user: User) {
     const userData = new FormData();
+    console.log('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy', user);
     userData.append('email', user.email);
     userData.append('password', user.password);
     // if (user.picture !== '') {
