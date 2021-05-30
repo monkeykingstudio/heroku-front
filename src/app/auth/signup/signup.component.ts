@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-signup',
@@ -28,6 +30,7 @@ export class SignupComponent {
   registerSucces = false;
 
   constructor(
+    private http: HttpClient,
     private router: Router,
     // private fb: FormBuilder,
     private userService: UsersService,
@@ -66,7 +69,8 @@ export class SignupComponent {
     // console.log('youssef user', this.user);
     // picture: inputs.picture.value,
 
-    this.userService.userAdd(this.user)
+    // this.userService.userAdd(this.user)
+    this.http.post(`https://calm-waters-91692.herokuapp.com/api/auth/register`, this.user)
       .subscribe(user => {
         if (this.errorMsg == null) {
           this.prepareForm();
