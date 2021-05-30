@@ -24,12 +24,6 @@ export class UsersService {
       'password': user.password,
       'pseudo': user.pseudo
     };
-    // userData.append('email', user.email);
-    // userData.append('password', user.password);
-    // if (user.picture !== '') {
-    //   userData.append('picture', user.picture, user.pseudo);
-    // }
-    // userData.append('pseudo', user.pseudo);
     return this.http.post(`https://calm-waters-91692.herokuapp.com/api/auth/register`, userData);
   }
 
