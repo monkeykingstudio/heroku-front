@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CounterComponent } from './counters/counter/counter.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { ErrorInterceptor } from './auth/error-interceptor';
@@ -28,6 +29,7 @@ import { TaskComponent } from './task-manager/task/task.component';
 @NgModule({
   declarations: [
     AppComponent,
+    CounterComponent,
     ColonyCardComponent,
     ColoniesListComponent,
     ColonyComponent,
