@@ -20,6 +20,10 @@ import { ColoniesListComponent } from './colonies/colonies-list/colonies-list.co
 import { ColonyComponent } from './colonies/colony/colony.component';
 import { ColonyHeaderComponent } from './colonies/colony-header/colony-header.component';
 import { ColonySpeciesBannerComponent } from './colonies/colony-species-banner/colony-species-banner.component';
+import { TaskManagerComponent } from './task-manager/task-manager.component';
+import { TaskCreatorComponent } from './task-manager/task-creator/task-creator.component';
+import { TaskListComponent } from './task-manager/task-list/task-list.component';
+import { TaskComponent } from './task-manager/task/task.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { ColonySpeciesBannerComponent } from './colonies/colony-species-banner/c
     SignupComponent,
     ActivationComponent,
     ColonyHeaderComponent,
-    ColonySpeciesBannerComponent
+    ColonySpeciesBannerComponent,
+    TaskManagerComponent,
+    TaskCreatorComponent,
+    TaskListComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
