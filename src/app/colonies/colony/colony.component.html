@@ -1,6 +1,7 @@
 <div class="row">
-  <div><span>test {{ (colony$ | async).id}}</span></div>
   <div *ngIf='colony$ | async as colony' class="colony-container col-sm-12">
+  <div><span>test {{ (colony$ | async).id}}</span></div>
+<div>{{ colony.id }}</div>
     <div id="colonyRef" class="colony">
       <app-colony-header [colony]='colony'></app-colony-header>
       <app-colony-species-banner [breedSheet]='breedSheet'></app-colony-species-banner>
