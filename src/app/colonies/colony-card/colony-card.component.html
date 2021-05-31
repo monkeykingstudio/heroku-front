@@ -1,8 +1,9 @@
-<div *ngIf="bubbleTools" class="d-flex buttons">
+
+<div class="colony-card">
+  <div *ngIf="bubbleTools" class="d-flex buttons">
     <div (click)="deleteColony(colony.id)" class="delete-icon icon animate__animated animate__bounceIn animate__delay-2s"></div>
     <div (click)="switchBubbles()" class="close-icon-white icon animate__animated animate__bounceIn"></div>
-</div>
-<div class="colony-card">
+  </div>
   <span class="species">{{colony.species}}</span>
   <div class="dots-container">
     <i (click)="switchBubbles()" class="dots-icon position-absolute"></i>

@@ -2,9 +2,14 @@
   height: calc(100vh - 10rem);
 
   .colony-popup {
+    .checkboxes {
+      padding: 0 1rem;
+      width: 100%;
+      justify-content: space-between;
+    }
     .form-check-input {
       position: absolute;
-      margin-top: 1.3rem;
+      margin-top: 0;
       top: 15px;
     }
 
@@ -22,6 +27,10 @@
       &:checked {
         background-color:#81d746;
       }
+    }
+
+    .form-check-input:checked {
+      background-color:#81d746!important;
     }
 
     .checkbox-container {
