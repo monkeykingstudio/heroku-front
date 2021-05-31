@@ -1,6 +1,34 @@
 .colonies-container {
   height: calc(100vh - 10rem);
 
+  .colony-popup {
+    .form-check-input {
+      position: absolute;
+      margin-top: 1.3rem;
+      top: 15px;
+    }
+
+    .form-check {
+      position: relative;
+    }
+
+    .form-check-input {
+      top: -.8rem;
+      position:initial!important;
+      height:2rem!important;
+      width: 2rem!important;
+      background-color: #bebebe!important;
+      box-shadow: inset 0 2px 0 rgb(53 53 53 / 20%);
+      &:checked {
+        background-color:#81d746;
+      }
+    }
+
+    .checkbox-container {
+      margin: 0;
+    }
+  }
+
   .no-colony {
     font-size: 1.4rem;
     text-align: center;
@@ -147,14 +175,6 @@
   label {
     font-size: 1.6rem;
     white-space: nowrap;
-  }
-
-  .form-check-input {
-    top: -.8rem;
-  }
-
-  .checkbox-container {
-    margin: 0;
   }
 
   .form-control {
