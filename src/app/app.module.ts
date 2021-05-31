@@ -18,6 +18,8 @@ import { PopupModule } from './popup/popup.module';
 import { ColonyCardComponent } from './colonies/colony-card/colony-card.component';
 import { ColoniesListComponent } from './colonies/colonies-list/colonies-list.component';
 import { ColonyComponent } from './colonies/colony/colony.component';
+import { ColonyHeaderComponent } from './colonies/colony-header/colony-header.component';
+import { ColonySpeciesBannerComponent } from './colonies/colony-species-banner/colony-species-banner.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ColonyComponent } from './colonies/colony/colony.component';
     LoginComponent,
     SignupComponent,
     ActivationComponent,
+    ColonyHeaderComponent,
+    ColonySpeciesBannerComponent
   ],
   imports: [
     BrowserModule,
