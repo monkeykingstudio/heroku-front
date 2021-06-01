@@ -38,7 +38,7 @@ export class TasksService {
   }
 
   removeRecurence(id: string) {
-    return this.http.post<Task>(`${this.tasksUrl}/job/${id}`, true).pipe(
+    return this.http.post<Task>(`${this.tasksUrl}/job/${id}`, {recurent: false}).pipe(
       shareReplay()
     );
   }
