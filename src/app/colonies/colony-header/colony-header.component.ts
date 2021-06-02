@@ -28,7 +28,6 @@ export class ColonyHeaderComponent implements OnInit, OnDestroy {
   constructor(public breedingSheetsService: BreedingSheetsService) { }
 
   ngOnInit(): void {
-    console.log('youssef le docteur angular');
     this.breedingSheetsub = this.breedingSheetsService.getSheet(this.colony.species)
     .subscribe((sheet) => {
       this.breedSheet = sheet;

@@ -63,7 +63,6 @@ export class SignupComponent {
       is_verified: false
     };
 
-    // console.log('youssef user', this.user);
     // picture: inputs.picture.value,
 
     this.userService.userAdd(this.user)
