@@ -23,7 +23,6 @@ export class SignupComponent {
   // imagePreview: string;
   // imageName: string;
   // fileError: Error = null;
-  isNewsletter = true;
   errorMsg: string = null;
   registerSucces = false;
 
