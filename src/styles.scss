@@ -22,6 +22,12 @@
   }
 }
 
+.form-check-input:checked {
+  background-color: #62d744!important;
+  border-color: #4f9218!important;
+}
+
+
 .delay-03 {
 --animate-delay: .3s;
 }
