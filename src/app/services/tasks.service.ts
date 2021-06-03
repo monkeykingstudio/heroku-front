@@ -15,14 +15,16 @@ export class TasksService {
   constructor(private http: HttpClient) {}
 
   loadAllTasks(colonyId: string) {
-    return this.http.get<Task[]>(`${this.tasksUrl}/${colonyId}`).pipe(
+    return this.http.get<Task[]>(`${this.tasksUrl}/${colonyId}`)
+    .pipe(
       map(result => result['tasks']),
       shareReplay()
     );
   }
 
   addTask(task: Task) {
-    return this.http.post<Task>(this.tasksUrl, task).pipe(
+    return this.http.post<Task>(this.tasksUrl, task)
+    .pipe(
       shareReplay()
     );
   }
@@ -31,14 +33,20 @@ export class TasksService {
     return this.http.delete<Task>(`${this.tasksUrl}/${id}`);
   }
 
+  deleteAllTasks(colonyId: string) {
+    return this.http.delete<Task[]>(`${this.tasksUrl}/${colonyId}`);
+  }
+
   setTaskDone(id: string) {
-    return this.http.post<Task>(`${this.tasksUrl}/${id}`, {toDo: true}).pipe(
+    return this.http.post<Task>(`${this.tasksUrl}/${id}`, {toDo: true})
+    .pipe(
       shareReplay()
     );
   }
 
   removeRecurence(id: string) {
-    return this.http.post<Task>(`${this.tasksUrl}/job/${id}`, {recurent: false}).pipe(
+    return this.http.post<Task>(`${this.tasksUrl}/job/${id}`, {recurent: false})
+    .pipe(
       shareReplay()
     );
   }
