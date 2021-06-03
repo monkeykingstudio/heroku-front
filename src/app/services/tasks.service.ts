@@ -33,9 +33,9 @@ export class TasksService {
     return this.http.delete<Task>(`${this.tasksUrl}/${id}`);
   }
 
-  deleteAllTasks(colonyId: string) {
-    return this.http.delete<Task[]>(`${this.tasksUrl}/${colonyId}`);
-  }
+  // deleteAllTasks(colonyId: string) {
+  //   return this.http.delete<Task[]>(`${this.tasksUrl}/${colonyId}`);
+  // }
 
   setTaskDone(id: string) {
     return this.http.post<Task>(`${this.tasksUrl}/${id}`, {toDo: true})
