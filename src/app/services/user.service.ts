@@ -22,7 +22,8 @@ export class UsersService {
     const userData = {
       'email': user.email,
       'password': user.password,
-      'pseudo': user.pseudo
+      'pseudo': user.pseudo,
+      'newsletter': user.newsletter
     };
     return this.http.post(`https://calm-waters-91692.herokuapp.com/api/auth/register`, userData);
   }
