@@ -2,8 +2,6 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Colony } from './../colony.model';
 import { Router } from '@angular/router';
 import { ColoniesService } from './../../services/colonies.service';
-import { TasksService } from './../../services/tasks.service';
-
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -21,7 +19,6 @@ export class ColonyCardComponent implements OnInit {
 
   constructor(
     public coloniesService: ColoniesService,
-    public tasksService: TasksService,
     public router: Router
     ) { }
 
@@ -38,7 +35,6 @@ export class ColonyCardComponent implements OnInit {
   }
 
   deleteColony(colonyId: string) {
-    // this.tasksService.deleteAllTasks(colonyId);
     this.coloniesService.deleteColony(colonyId)
     .pipe(
       tap(() => this.colonyChange.emit())

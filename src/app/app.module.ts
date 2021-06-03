@@ -25,6 +25,7 @@ import { TaskManagerComponent } from './task-manager/task-manager.component';
 import { TaskCreatorComponent } from './task-manager/task-creator/task-creator.component';
 import { TaskListComponent } from './task-manager/task-list/task-list.component';
 import { TaskComponent } from './task-manager/task/task.component';
+import { BreedSheetCreatorComponent } from './breed-sheet-creator/breed-sheet-creator.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { TaskComponent } from './task-manager/task/task.component';
     TaskManagerComponent,
     TaskCreatorComponent,
     TaskListComponent,
-    TaskComponent
+    TaskComponent,
+    BreedSheetCreatorComponent
   ],
   imports: [
     BrowserModule,

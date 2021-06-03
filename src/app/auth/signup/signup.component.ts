@@ -23,8 +23,8 @@ export class SignupComponent {
   // imagePreview: string;
   // imageName: string;
   // fileError: Error = null;
+  isNewsletter = true;
   errorMsg: string = null;
-
   registerSucces = false;
 
   constructor(
@@ -38,6 +38,7 @@ export class SignupComponent {
   get email() { return this.userForm.controls['email']; }
   get password() { return this.userForm.controls['password']; }
   get pseudo() { return this.userForm.controls['pseudo']; }
+  get newsletter() { return this.userForm.controls['newsletter']; }
   // get picture() { return this.userForm.controls['picture']; }
 
   // onImagePicked(event: Event) {
@@ -60,7 +61,9 @@ export class SignupComponent {
       pseudo: inputs.pseudo.value,
       email: inputs.email.value,
       password: inputs.password.value,
-      is_verified: false
+      is_verified: false,
+      role: 'user',
+      newsletter: inputs.newsletter.value
     };
 
     // picture: inputs.picture.value,
@@ -109,7 +112,8 @@ export class SignupComponent {
       }),
       password: new FormControl(null, { validators: [Validators.required]
       }),
-      pseudo: new FormControl(null)
+      pseudo: new FormControl(null),
+      newsletter: new FormControl(true),
       // picture: new FormControl(null, { validators: [], asyncValidators: [mimeType]
       // }),
     });

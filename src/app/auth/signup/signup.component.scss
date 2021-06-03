@@ -55,7 +55,6 @@
 
   label {
     font-size: 1.6rem;
-    white-space: nowrap;
   }
 
   .form-control {
@@ -65,6 +64,16 @@
     border:none!important;
     &:focus {
       background-color: #f8f9f9!important;
+    }
+  }
+
+  .form-check {
+    padding-left:0;
+    lebel {
+      margin-top: 1.5rem!important;
+    }
+    input {
+      margin-left:0;
     }
   }
 

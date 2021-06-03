@@ -32,7 +32,12 @@
       <!-- <span *ngIf='picture.invalid' class="animate__animated animate__fadeInUp badge-invalid">File must be a valid image format</span> -->
       <div class="form-group mt-3">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="newsLetter">
+          <input class="form-check-input"
+          id="newsLetter"
+          formControlName="newsletter"
+          [checked]='isNewsletter'
+          type="checkbox"
+          (change)='isNewsletter = !isNewsletter;$event.stopPropagation()'>
           <label class="form-check-label" for="newsLetter">
             i want receive emails about the ongoing development
           </label>

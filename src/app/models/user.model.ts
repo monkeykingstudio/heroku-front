@@ -6,4 +6,6 @@ export interface User {
   token?: string;
   // picture?: string;
   is_verified: boolean;
+  role: string;
+  newsletter?: boolean;
 }
