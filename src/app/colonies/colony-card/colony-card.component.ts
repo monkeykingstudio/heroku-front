@@ -38,7 +38,7 @@ export class ColonyCardComponent implements OnInit {
   }
 
   deleteColony(colonyId: string) {
-    this.tasksService.deleteAllTasks(colonyId);
+    // this.tasksService.deleteAllTasks(colonyId);
     this.coloniesService.deleteColony(colonyId)
     .pipe(
       tap(() => this.colonyChange.emit())
