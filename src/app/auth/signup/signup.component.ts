@@ -66,6 +66,8 @@ export class SignupComponent {
       newsletter: inputs.newsletter.value
     };
 
+    console.log(this.user);
+
     // picture: inputs.picture.value,
 
     this.userService.userAdd(this.user)
