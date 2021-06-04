@@ -51,6 +51,6 @@ export class AuthService {
   }
 
   admin() {
-    this.router.navigate(['/breedingsheet']);
+    this.router.navigate(['/adminpanel']);
   }
 }

@@ -7,7 +7,7 @@
   <div *ngIf="(authService.currentUser | async)" class="user-container">
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button (click)="onLogout()">Logout</button>
-      <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin Panel</button>
+      <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>
 
     </div>
     <span (click)="toggleShow()" class='d-flex align-items-center'>{{ (authService.currentUser | async)?.pseudo}} <i class="caret-icon"></i></span>
