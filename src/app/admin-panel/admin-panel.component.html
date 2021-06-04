@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf='allUsers$ | async as users' class="row">
   <div class="admin-panel-container">
     <div id="adminRef" class="admin-panel">
       <div class="row">
@@ -64,13 +64,7 @@
               </div>
             </div>
             <div class="body">
-              <div class="line">
-                <span>test</span>
-              </div>
-              <div class="line">
-                <span>test</span>
-              </div>
-              <div class="line">
+              <div *ngFor="let user of users; index as i" class="line">
                 <span>test</span>
               </div>
             </div>

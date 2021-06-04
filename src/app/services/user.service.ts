@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 import { User } from '../models/user.model';
 
@@ -10,8 +12,11 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  usersGet(id: string) {
-    return this.http.get<any>(`https://calm-waters-91692.herokuapp.com/api/users`);
+  usersGet(): Observable<User[]> {
+    return this.http.get<any>(`https://calm-waters-91692.herokuapp.com/api/users`)
+    .pipe(
+      map(result => result['users']),
+      shareReplay());
   }
 
   userGet(id: string) {

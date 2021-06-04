@@ -13,20 +13,23 @@ export class ColoniesService {
   constructor(private http: HttpClient) {}
 
   loadAllColonies(): Observable<Colony[]> {
-    return this.http.get<Colony[]>(this.colonyUrl).pipe(
+    return this.http.get<Colony[]>(this.colonyUrl)
+    .pipe(
       map(result => result['colonies']),
       shareReplay()
     );
   }
 
   loadColony(id: string): Observable<Colony> {
-    return this.http.get<Colony>(`${this.colonyUrl}/${id}`).pipe(
+    return this.http.get<Colony>(`${this.colonyUrl}/${id}`)
+    .pipe(
       shareReplay()
     );
   }
 
   createColony(colony) {
-    return this.http.post<Colony>(this.colonyUrl, colony).pipe(
+    return this.http.post<Colony>(this.colonyUrl, colony)
+    .pipe(
       shareReplay()
     );
   }
