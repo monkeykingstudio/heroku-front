@@ -26,6 +26,7 @@ import { TaskCreatorComponent } from './task-manager/task-creator/task-creator.c
 import { TaskListComponent } from './task-manager/task-list/task-list.component';
 import { TaskComponent } from './task-manager/task/task.component';
 import { BreedSheetCreatorComponent } from './breed-sheet-creator/breed-sheet-creator.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { BreedSheetCreatorComponent } from './breed-sheet-creator/breed-sheet-cr
     TaskCreatorComponent,
     TaskListComponent,
     TaskComponent,
-    BreedSheetCreatorComponent
+    BreedSheetCreatorComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,

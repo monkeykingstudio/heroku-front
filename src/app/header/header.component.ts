@@ -39,6 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   goToAdmin() {
     this.authService.admin();
+    this.toggleShow();
   }
 
   ngOnDestroy(): void {
