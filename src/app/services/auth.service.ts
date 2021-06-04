@@ -49,4 +49,8 @@ export class AuthService {
 
     this.router.navigate(['/login']);
   }
+
+  admin() {
+    this.router.navigate(['/breedingsheet']);
+  }
 }

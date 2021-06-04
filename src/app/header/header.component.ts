@@ -37,6 +37,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.toggleShow();
   }
 
+  goToAdmin() {
+    this.authService.admin();
+  }
+
   ngOnDestroy(): void {
     this.authStatusSubscription.unsubscribe();
   }

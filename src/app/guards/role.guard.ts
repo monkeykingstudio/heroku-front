@@ -23,7 +23,7 @@ export class RoleGuard implements CanActivate {
         this.router.navigate(['/login']);
         return false;
       } else if (isAuth && this.storage.role === 'admin') {
-        this.router.navigate(['/breedingsheet']);
+        // this.router.navigate(['/breedingsheet']);
         return true;
       }
       else if (isAuth && this.storage.role !== 'admin') {
@@ -36,7 +36,7 @@ export class RoleGuard implements CanActivate {
       }
     }
     return false;
-    this.router.navigate(['/login']);
+    this.router.navigate(['']);
   }
 
 }
