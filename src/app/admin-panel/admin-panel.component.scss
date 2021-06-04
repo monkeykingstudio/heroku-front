@@ -1,4 +1,48 @@
 .admin-panel-container {
   height: calc(100vh - 10rem);
-
 }
+
+.admin-panel {
+  position: relative;
+  background-color: white;
+  border-radius: .5rem;
+  border-bottom: .2rem solid #bdbdbd;
+  padding: 2rem;
+  min-height: 100%;
+}
+
+.primal-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: white;
+  border-radius: .5rem;
+  border-bottom: .2rem solid #bdbdbd;
+  position: relative;
+
+  .number {
+    font-size: 5rem;
+    font-weight: bold;
+  }
+
+  .description {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    color: #1f1f1f;
+  }
+
+  .registered {
+    color: #049ad9 ;
+  }
+
+  .colonies {
+    color: #b804d9 ;
+  }
+
+  .pending {
+    color: #d97204 ;
+  }
+}
+
