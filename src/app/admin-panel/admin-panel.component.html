@@ -15,7 +15,7 @@
           <div class="primal-stat">
             <div class="cont">
               <i class="user-pending-icon"></i>
-            <span class="number pending">3</span>
+            <span class="number pending">{{ users.is_verified.length }}</span>
             <span class="description">pending users</span>
             </div>
           </div>
@@ -65,7 +65,24 @@
             </div>
             <div class="body">
               <div *ngFor="let user of users; index as i" class="line">
-                <span>test</span>
+                <div class="col">
+                  <span>{{ user.created }}</span>
+                </div>
+                <div class="col">
+                  <span>pseudo</span>
+                </div>
+                <div class="col">
+                  <span>email</span>
+                </div>
+                <div class="col">
+                  <span>status</span>
+                </div>
+                <div class="col">
+                  <span>role</span>
+                </div>
+                <div class="col">
+                  <span>colonies</span>
+                </div>
               </div>
             </div>
           </div>
