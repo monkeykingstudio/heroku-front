@@ -68,17 +68,22 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 1rem;
-  background-color: #f2f2f2;
 
   .head {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-radius: .5rem .5rem 0 0;
+    padding: 1rem;
+    background-color: #f2f2f2;
 
     .col {
-
+      font-weight: bold;
     }
+  }
+
+  .body {
+
   }
 }
 
