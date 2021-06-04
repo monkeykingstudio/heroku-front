@@ -9,7 +9,6 @@ import { ActivationComponent } from './auth/activation/activation.component';
 
 import { AuthGuard } from './guards/auth.guard';
 
-
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'colonies', component: ColoniesListComponent, canActivate: [AuthGuard]},
