@@ -83,7 +83,17 @@
   }
 
   .body {
+    display: flex;
+    flex-direction: column;
+    .line {
+      &:nth-child(even) {
+        background-color: grey;
+      }
 
+      &:nth-child(odd) {
+        background-color: darkslategray;
+      }
+    }
   }
 }
 
