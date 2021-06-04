@@ -10,9 +10,9 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  // getAll(): Observable<User[]> {
-  //   return this.http.get<User[]>(`http://localhost:3000/users`);
-  // }
+  usersGet(id: string) {
+    return this.http.get<any>(`https://calm-waters-91692.herokuapp.com/api/users`);
+  }
 
   userGet(id: string) {
     return this.http.get<any>(`https://calm-waters-91692.herokuapp.com/api/users/${id}`);
