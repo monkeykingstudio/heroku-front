@@ -68,6 +68,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  border: .1rem solid #d1d1d1;
 
   .one, .two, .three, .four, .five, .six {
     justify-content: center;
@@ -76,7 +77,11 @@
   }
 
   .one, .two, .three, .four, .five {
-    border-right: .1rem solid #c4c4c4;
+    border-right: .1rem solid #cacaca;
+  }
+
+  .two, .three, .four, .five, six {
+    border-left: .1rem solid #fefefe;
   }
 
   .one {
@@ -115,7 +120,7 @@
     align-items: center;
     border-radius: .5rem .5rem 0 0;
     font-weight: bold;
-    background-color: #f2f2f2;
+    background-color: #d1d1d1;
     text-transform: capitalize;
   }
 
