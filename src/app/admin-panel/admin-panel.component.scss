@@ -87,6 +87,7 @@
     flex-direction: column;
     .line {
       padding: 1rem;
+      display: flex;
       &:nth-child(even) {
         background-color: white;
       }

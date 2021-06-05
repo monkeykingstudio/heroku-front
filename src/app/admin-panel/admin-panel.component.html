@@ -66,19 +66,19 @@
             <div class="body">
               <div *ngFor="let user of users; index as i" class="line">
                 <div class="col">
+                  <span>{{ user.created }}</span>
+                </div>
+                <div class="col">
                   <span>{{ user.pseudo }}</span>
                 </div>
                 <div class="col">
-                  <span>pseudo</span>
+                  <span>{{ user.email }}</span>
                 </div>
                 <div class="col">
-                  <span>email</span>
+                  <span>{{ user.is_verified ? 'verified' : 'unverified' }}</span>
                 </div>
                 <div class="col">
-                  <span>status</span>
-                </div>
-                <div class="col">
-                  <span>role</span>
+                  <span>{{ user.role }}</span>
                 </div>
                 <div class="col">
                   <span>colonies</span>
