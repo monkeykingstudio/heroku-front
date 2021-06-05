@@ -44,43 +44,43 @@
         <div style="margin-top: 2rem;" class="col-sm-12 col-md-9">
           <div class="custom-table user-table">
             <div class="head">
-              <div class="col">
+              <div class="one">
                 <span>date</span>
               </div>
-              <div class="col">
+              <div class="two">
                 <span>pseudo</span>
               </div>
-              <div class="col">
+              <div class="three">
                 <span>email</span>
               </div>
-              <div class="col">
+              <div class="four">
                 <span>status</span>
               </div>
-              <div class="col">
+              <div class="five">
                 <span>role</span>
               </div>
-              <div class="col">
+              <div class="six">
                 <span>colonies</span>
               </div>
             </div>
             <div class="body">
               <div *ngFor="let user of users; index as i" class="line">
-                <div class="col">
-                  <span>{{ user.created }}</span>
+                <div class="one">
+                  <span>{{ user.created | date: 'dd/MM/yyyy' }}</span>
                 </div>
-                <div class="col">
+                <div class="two">
                   <span>{{ user.pseudo }}</span>
                 </div>
-                <div class="col">
+                <div class="three">
                   <span>{{ user.email }}</span>
                 </div>
-                <div class="col">
+                <div class="four">
                   <span>{{ user.is_verified ? 'verified' : 'unverified' }}</span>
                 </div>
-                <div class="col">
+                <div class="five">
                   <span>{{ user.role }}</span>
                 </div>
-                <div class="col">
+                <div class="six">
                   <span>colonies</span>
                 </div>
               </div>
