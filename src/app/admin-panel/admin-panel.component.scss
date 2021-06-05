@@ -69,6 +69,7 @@
   flex-direction: column;
   width: 100%;
   border: .1rem solid #d1d1d1;
+  border-radius: .5rem;
 
   .one, .two, .three, .four, .five, .six {
     justify-content: center;
@@ -120,7 +121,7 @@
     align-items: center;
     border-radius: .5rem .5rem 0 0;
     font-weight: bold;
-    background-color: #d1d1d1;
+    background-color: #d3d3d3;
     text-transform: capitalize;
   }
 
