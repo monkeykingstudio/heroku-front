@@ -1,6 +1,8 @@
 import { UsersService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
 
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public usersService: UsersService) { }
+  constructor(public usersService: UsersService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 5000);
   }
 
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { UsersService } from './../services/user.service';
 import { User } from './../models/user.model';
-import { Observable } from 'rxjs';
+import { BreedingSheetsService } from './../services/breedingSheetsService';
+import { ColoniesService } from './../services/colonies.service';
 
 @Component({
   selector: 'app-admin-panel',
