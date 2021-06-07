@@ -4,6 +4,80 @@
   height: 100vh;
   width: 6rem
 }
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7rem;
+  width: 6rem;
+}
+
+.colony-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/menu/colony.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 5rem;
+      height: 5rem;
+  }
+}
+
+.browse-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/menu/browse.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 5rem;
+      height: 5rem;
+  }
+}
+
+.foundation-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/menu/foundation.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 5rem;
+      height: 5rem;
+  }
+}
+
+.letterbox-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/menu/letterbox.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 5rem;
+      height: 5rem;
+  }
+}
+
+.profile-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/menu/profile.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 5rem;
+      height: 5rem;
+  }
+}
+
 .version {
   bottom: 2px;
   position: absolute;
