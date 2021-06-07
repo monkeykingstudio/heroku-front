@@ -1,5 +1,5 @@
 <div class="row">
-  <div *ngIf='colony$ | async as colony' class="colony-container col-sm-12">
+  <div *ngIf='(colony$ | async) as colony; else loading' class="colony-container col-sm-12">
 
     <div id="colonyRef" class="colony">
       <app-colony-header [colony]='colony'></app-colony-header>
@@ -19,3 +19,12 @@
     </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <div class="spinner-container">
+    <div class="la-square-jelly-box la-3x">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</ng-template>

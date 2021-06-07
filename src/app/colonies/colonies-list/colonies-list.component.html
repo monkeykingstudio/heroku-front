@@ -1,4 +1,4 @@
-<div *ngIf='allColonies$ | async as colonies' class="row">
+<div *ngIf='(allColonies$ | async) as colonies; else loading' class="row">
   <div class="colonies-container col-sm-12">
     <div id="colonyRef" class="colonies">
         <div class="col-sm-12">
@@ -150,3 +150,5 @@
     </div>
   </div>
 </div>
+
+

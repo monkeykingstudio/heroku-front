@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UsersService } from '../../services/user.service';
 import { MailService } from '../../services/mail.service';
@@ -16,7 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   users: User[];
   user: User;
   userForm: FormGroup;
@@ -25,6 +25,7 @@ export class SignupComponent {
   // fileError: Error = null;
   errorMsg: string = null;
   registerSucces = false;
+  loading: boolean;
 
   constructor(
     private router: Router,
@@ -32,6 +33,10 @@ export class SignupComponent {
     private userService: UsersService,
     private mailService: MailService,
   ) { this.prepareForm(); }
+
+  ngOnInit() {
+    this.loading = false;
+  }
 
   get formControls() { return this.userForm.controls; }
   get email() { return this.userForm.controls['email']; }
@@ -54,6 +59,7 @@ export class SignupComponent {
   // }
 
   add() {
+    this.loading = true;
     this.errorMsg = null;
     const inputs = this.formControls;
     this.user = {
@@ -74,6 +80,7 @@ export class SignupComponent {
         if (this.errorMsg == null) {
           this.prepareForm();
           this.router.navigate(['/login']);
+          this.loading = false;
           this.registerSucces = true;
         }
     });
