@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,9 +27,6 @@ import { TaskListComponent } from './task-manager/task-list/task-list.component'
 import { TaskComponent } from './task-manager/task/task.component';
 import { BreedSheetCreatorComponent } from './breed-sheet-creator/breed-sheet-creator.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-
-// Import library module
-import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -61,10 +58,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     HttpClientModule,
     PopupModule,
     BrowserAnimationsModule,
-    NgbModule,
-    NgxSpinnerModule
+    NgbModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}

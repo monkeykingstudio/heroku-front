@@ -561,6 +561,19 @@ body { margin: 0; font-family: 'Roboto', "Helvetica Neue", 'verdana';font-size: 
  * Copyright 2015 Daniel Cardoso <@DanielCardoso>
  * Licensed under MIT
  */
+
+ .spinner-container {
+  position: absolute;
+  height: 100vh;
+  display: flex;
+  top: 0;
+  z-index: 99999;
+  background-color: #000000b8;
+  left: 0;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+ }
  .la-square-jelly-box,
  .la-square-jelly-box > div {
      position: relative;
