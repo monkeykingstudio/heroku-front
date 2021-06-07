@@ -1,6 +1,7 @@
 <div style="min-height: 100vh;" class="d-flex">
 
   <app-lateral-menu
+    [hoverStatus]="hover"
     (mouseover)="hover = true"
     (mouseleave)="hover = false"
     [ngStyle]="hover == true ? {

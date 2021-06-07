@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-lateral-menu',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lateral-menu.component.scss']
 })
 export class LateralMenuComponent implements OnInit {
-  hover;
+  @Input()
+  hoverStatus;
 
   constructor() { }
 
