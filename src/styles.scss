@@ -555,13 +555,20 @@ select {
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Roboto', "Helvetica Neue", 'verdana';font-size: 1.2rem }
 
-//spinner
-/*!
- * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)
- * Copyright 2015 Daniel Cardoso <@DanielCardoso>
- * Licensed under MIT
- */
 
+//loading
+
+.loading {
+  background-image: url('./app/icons/loading.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: center;
+  width: 418px;
+  height: 308px;
+}
+
+
+//spinner
  .spinner-container {
   position: absolute;
   height: 100vh;
