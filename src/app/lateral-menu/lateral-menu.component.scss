@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 6rem
+  width: 6rem;
+  cursor: pointer;
 }
 
 .item {
@@ -10,11 +11,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 7rem;
+  height: 8.6rem;
   width: 100%;
+  cursor: pointer;
   &:hover {
+    transition: all .1s;
     i {
+      transition: all .1s;
       &:before {
+        transition: all .1s;
         height: 5rem;
         width: 5rem;
       }
@@ -27,11 +32,12 @@
   font-weight: bold;
   font-size: 1rem;
   position: relative;
-  top: -6px;
 }
 
 .colony-icon {
+  transition: all .1s;
   &:before {
+      transition: all .1s;
       content: '';
       background-image: url('../../app/icons/menu/colony.svg');
       background-size: contain;
@@ -44,7 +50,9 @@
 }
 
 .settings-icon {
+  transition: all .1s;
   &:before {
+      transition: all .1s;
       content: '';
       background-image: url('../../app/icons/menu/settings.svg');
       background-size: contain;
@@ -57,7 +65,9 @@
 }
 
 .browse-icon {
+  transition: all .1s;
   &:before {
+      transition: all .1s;
       content: '';
       background-image: url('../../app/icons/menu/browse.svg');
       background-size: contain;
@@ -70,7 +80,9 @@
 }
 
 .foundation-icon {
+  transition: all .1s;
   &:before {
+      transition: all .1s;
       content: '';
       background-image: url('../../app/icons/menu/foundation.svg');
       background-size: contain;
@@ -83,7 +95,9 @@
 }
 
 .letterbox-icon {
+  transition: all .1s;
   &:before {
+      transition: all .1s;
       content: '';
       background-image: url('../../app/icons/menu/letterbox.svg');
       background-size: contain;
@@ -96,7 +110,9 @@
 }
 
 .profile-icon {
+  transition: all .1s;
   &:before {
+      transition: all .1s;
       content: '';
       background-image: url('../../app/icons/menu/profile.svg');
       background-size: contain;
