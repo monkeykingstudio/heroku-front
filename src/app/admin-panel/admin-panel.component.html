@@ -1,4 +1,5 @@
-<div *ngIf='allUsers$ | async as users' class="row">
+
+<div *ngIf='allUsers$ | async as users, else loading' class="row">
   <div class="admin-panel-container">
     <div id="adminRef" class="admin-panel">
       <div class="row">
@@ -92,7 +93,9 @@
   </div>
   <!-- <ngx-spinner *ngIf="(users | async)?.length" type="ball-scale-multiple" size="medium"></ngx-spinner> -->
 </div>
-<div *ngIf="allUsers$ | async" class="youssef">LOADING</div>
+<ng-template #loading>
+  Loading stuff...
+</ng-template>
 
 
 
