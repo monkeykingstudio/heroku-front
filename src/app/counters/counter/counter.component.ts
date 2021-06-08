@@ -20,7 +20,6 @@ export class CounterComponent implements OnInit {
   optionsForm: FormGroup;
   counterForm: FormGroup;
 
-  // multiCtrl: FormControl;
   polyCtrl: FormControl;
   breedCtrl: FormControl;
 
@@ -55,7 +54,6 @@ export class CounterComponent implements OnInit {
   ngOnInit(): void {
     this.polyCtrl = this.fb.control(this.counter.polymorph);
     this.breedCtrl = this.fb.control(this.counter.breed);
-    // this.multiCtrl = this.fb.control(0);
 
     this.isLoading = false;
 
@@ -117,14 +115,14 @@ export class CounterComponent implements OnInit {
   }
 
   changeMultiplicator(e) {
-    // this.multiValue = e.target.value;
-    this.multiValue = parseInt(e.target.value, 10);
+    this.multiValue = e.target.value;
+    // this.multiValue = parseInt(e.target.value, 10);
 
     console.log(this.multiValue);
   }
 
   add(typeRef): void {
-    console.log('computed value:', this.multiValue);
+    console.log('multiplicator value:', this.multiValue);
     switch (typeRef) {
       case 'minorRef':
         // this.minor.nativeElement.value =  parseInt(this.medium.nativeElement.value) + 1;
