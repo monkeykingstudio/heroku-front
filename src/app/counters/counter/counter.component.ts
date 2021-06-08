@@ -118,6 +118,7 @@ export class CounterComponent implements OnInit {
 
   changeMultiplicator(e) {
     this.multiValue = parseInt(e.target.value, 10) ;
+    console.log(this.multiValue);
   }
 
   add(typeRef): void {
