@@ -41,7 +41,6 @@ export class ColonyComponent implements OnInit, OnDestroy {
     this.breedingSheetSub = this.breedingSheetsService.getSheet(colony.species)
     .subscribe((sheet) => {
       this.breedSheet = sheet;
-      // console.log(this.breedSheet);
     });
     })).subscribe();
 

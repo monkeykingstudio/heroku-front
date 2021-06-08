@@ -22,7 +22,6 @@ export class LateralMenuComponent implements OnInit {
   onLogout() {
     this.authService.logout();
     this.router.navigate(['/login']);
-    // location.reload();
   }
 
 }

@@ -4,7 +4,7 @@
   display: flex;
   width: 100%;
   border-bottom: .3rem solid #4a4a4a;
-  height: 8rem;
+  height: 10rem;
 
   @include breakpoint('small') {
     height: auto;

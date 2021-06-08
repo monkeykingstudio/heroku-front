@@ -10,14 +10,6 @@ export class CounterService {
   private counterUrl = 'https://calm-waters-91692.herokuapp.com/api/colonies/counter';
   constructor(private http: HttpClient) {}
 
-  // loadCounter(): Observable<Counter> {
-  //   return this.http.get<Counter>('http://localhost:3000/api/colonies/counter')
-  //   .pipe(
-  //     map(res => res['counter']),
-  //     shareReplay()
-  //   );
-  // }
-
   updateCounter(
     minorCount: number,
     mediumCount: number,

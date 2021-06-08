@@ -23,11 +23,21 @@ export class CounterComponent implements OnInit {
   nameCtrl: FormControl;
   polyCtrl: FormControl;
   breedCtrl: FormControl;
+  multiplicatorCtrl: FormControl;
+
 
   totalPopulationPolyMorph: number;
   totalPopulationMonoMorph: number;
 
   isLoading: boolean;
+
+  optionsMultiplicators: Array<number> = [
+  0,
+  10,
+  25,
+  50,
+  100
+];
 
   @ViewChild('minorRef', { static: true }) minor: ElementRef;
   @ViewChild('mediumRef', { static: true }) medium: ElementRef;
@@ -44,6 +54,7 @@ export class CounterComponent implements OnInit {
   ngOnInit(): void {
     this.polyCtrl = this.fb.control(this.counter.polymorph);
     this.breedCtrl = this.fb.control(this.counter.breed);
+    this.multiplicatorCtrl = this.fb.control(null);
 
     this.isLoading = false;
 
@@ -51,7 +62,8 @@ export class CounterComponent implements OnInit {
 
     this.optionsForm = this.fb.group({
       polymorph: this.polyCtrl,
-      breed: this.breedCtrl
+      breed: this.breedCtrl,
+      multiplicator: this.multiplicatorCtrl
     });
   }
 
@@ -103,6 +115,7 @@ export class CounterComponent implements OnInit {
   }
 
   add(typeRef): void {
+    console.log('multiplicator control:', this.multiplicatorCtrl);
     switch (typeRef) {
       case 'minorRef':
         // this.minor.nativeElement.value =  parseInt(this.medium.nativeElement.value) + 1;

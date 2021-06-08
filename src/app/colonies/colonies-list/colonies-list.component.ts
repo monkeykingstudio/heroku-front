@@ -36,7 +36,7 @@ export class ColoniesListComponent implements OnInit {
 
   switch = false;
 
-  optionsSpecies: Array<string> = [ // TODO trouver un moyen d'externaliser la data en local
+  optionsSpecies: Array<string> = [
     // 'unknown (can be edited later)',
     'lasius niger',
     'myrmica rubra',
