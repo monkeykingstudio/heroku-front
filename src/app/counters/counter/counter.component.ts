@@ -57,7 +57,7 @@ export class CounterComponent implements OnInit {
     });
 
     this.counterForm = this.fb.group({
-      multiplicator: this.multiCtrl;
+      multiplicator: this.multiCtrl
     });
   }
 
