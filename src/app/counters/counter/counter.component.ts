@@ -18,6 +18,8 @@ export class CounterComponent implements OnInit {
   colonyId: string;
 
   optionsForm: FormGroup;
+  counterForm: FormGroup;
+
 
   nameCtrl: FormControl;
   polyCtrl: FormControl;
@@ -28,7 +30,6 @@ export class CounterComponent implements OnInit {
 
   isLoading: boolean;
 
-  @ViewChild('multiplicatorRef', { static: true }) multiplicator: ElementRef;
   @ViewChild('minorRef', { static: true }) minor: ElementRef;
   @ViewChild('mediumRef', { static: true }) medium: ElementRef;
   @ViewChild('majorRef', { static: true }) major: ElementRef;
@@ -101,9 +102,6 @@ export class CounterComponent implements OnInit {
   }
 
   add(typeRef): void {
-    console.log('multi 1:', this.multiplicator);
-    console.log('multi 2', this.multiplicator.nativeElement.value);
-
     switch (typeRef) {
       case 'minorRef':
         // this.minor.nativeElement.value =  parseInt(this.medium.nativeElement.value) + 1;

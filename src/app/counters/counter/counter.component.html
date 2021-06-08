@@ -5,7 +5,7 @@
 
   <div class="separator-module"></div>
 
-  <form class="form-group incrementors" style="display:flex; flex-direction: column;" #counterForm (ngSubmit)='saveCount()'>
+  <form class="form-group incrementors" style="display:flex; flex-direction: column;" #counterForm [formGroup]="counterForm" (ngSubmit)='saveCount()'>
     <div *ngIf="counter.polymorph" class="d-flex align-items-end mb-3">
       <div class="d-flex flex-column">
         <span class="types">Minor</span>
@@ -14,7 +14,7 @@
           <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('minorRef')">+</button>
         </div>
       </div>
-      <input class="form-control" type="number" name="multiplicator" #multiplicatorRef>
+      <input class="form-control" type="number" name="multiplicator">
       <input disabled='true' class="form-control" type="text" value='{{counter.minorCount}}' name="minor" #minorRef>
     </div>
 
