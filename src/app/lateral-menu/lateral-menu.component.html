@@ -32,12 +32,12 @@
   <span *ngIf="hoverStatus" class="name">Settings</span>
 </div>
 <div *ngIf="isUser !== undefined" class="separator"></div>
-<div routerLink="['/login']" *ngIf="isUser == undefined" class="item">
+<div routerLink="/login" *ngIf="isUser == undefined" class="item">
   <i class="login-icon"></i>
   <span *ngIf="hoverStatus" class="name">Login</span>
 </div>
 <div *ngIf="isUser == undefined" class="separator"></div>
-<div routerLink="['/signup']" *ngIf="isUser == undefined" class="item">
+<div routerLink="/signup" *ngIf="isUser == undefined" class="item">
   <i class="register-icon"></i>
   <span *ngIf="hoverStatus" class="name">Register</span>
 </div>
