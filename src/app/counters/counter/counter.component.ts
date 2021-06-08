@@ -54,7 +54,6 @@ export class CounterComponent implements OnInit {
   ngOnInit(): void {
     this.polyCtrl = this.fb.control(this.counter.polymorph);
     this.breedCtrl = this.fb.control(this.counter.breed);
-    this.multiplicatorCtrl = this.fb.control(null);
 
     this.isLoading = false;
 
@@ -63,7 +62,6 @@ export class CounterComponent implements OnInit {
     this.optionsForm = this.fb.group({
       polymorph: this.polyCtrl,
       breed: this.breedCtrl,
-      multiplicator: this.multiplicatorCtrl
     });
   }
 
