@@ -8,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class LateralMenuComponent implements OnInit {
   @Input()
   hoverStatus;
+  @Input()
+  isUser;
 
   constructor() { }
 

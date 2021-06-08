@@ -6,6 +6,11 @@
   cursor: pointer;
 }
 
+.inactive {
+  filter: grayscale(100%);
+  opacity: .8;
+}
+
 .item {
   display: flex;
   flex-direction: column;
@@ -40,6 +45,67 @@
       transition: all .1s;
       content: '';
       background-image: url('../../app/icons/menu/colony.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+  }
+}
+
+.forum-icon {
+  transition: all .1s;
+  &:before {
+      transition: all .1s;
+      content: '';
+      background-image: url('../../app/icons/menu/forum.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+  }
+}
+
+
+.login-icon {
+  transition: all .1s;
+  &:before {
+      transition: all .1s;
+      content: '';
+      background-image: url('../../app/icons/menu/login.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+  }
+}
+
+.register-icon {
+  transition: all .1s;
+  &:before {
+      transition: all .1s;
+      content: '';
+      background-image: url('../../app/icons/menu/register.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+  }
+}
+
+.logout-icon {
+  transition: all .1s;
+  &:before {
+      transition: all .1s;
+      content: '';
+      background-image: url('../../app/icons/menu/logout.svg');
       background-size: contain;
       background-repeat: no-repeat;
       display: inline-block;

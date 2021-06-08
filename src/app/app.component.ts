@@ -15,9 +15,7 @@ import { UsersService } from './services/user.service';
 })
 export class AppComponent implements OnInit {
   public authStatusSubscription: Subscription;
-  testUser: String;
   userSub: Subscription;
-
 
   title = 'antslab';
   hover = false;
@@ -26,22 +24,20 @@ export class AppComponent implements OnInit {
   user$: Observable<User>;
   currentUser: User;
 
-  constructor(private router: Router, public usersService: UsersService, public authService: AuthService) {}
+  constructor(
+    private router: Router,
+    public usersService: UsersService,
+    public authService: AuthService
+    ) {}
 
   ngOnInit(): void {
-    this.authStatusSubscription = this.authService.currentUser.pipe(
+    this.authStatusSubscription = this.authService.currentUser
+    .pipe(
       map(user => {
         if (user) {
           this.currentUser = user;
         }
       })
       ).subscribe();
-
-    // this.userSub = this.usersService.userGet('6091b24b1b29132a8036c970')
-    // .subscribe((user) => {
-    //   this.testUser = user.email;
-    //   console.log(user.user.email);
-    // });
-
   }
 }
