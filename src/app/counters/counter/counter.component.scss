@@ -126,6 +126,8 @@ h6 {
 }
 
 .incrementors {
+  display:flex;
+  flex-direction: column;
   flex-grow:1;
   // justify-content: space-between;
   margin-top: 2.5rem;

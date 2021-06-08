@@ -5,7 +5,7 @@
 
   <div class="separator-module"></div>
 
-  <form class="form-group incrementors" style="display:flex; flex-direction: column;" [formGroup]="counterForm" (ngSubmit)='saveCount()'>
+  <form class="form-group incrementors" [formGroup]="counterForm" (ngSubmit)='saveCount()'>
     <div *ngIf="counter.polymorph" class="d-flex align-items-end mb-3">
       <div class="d-flex flex-column">
         <span class="types">Minor</span>
