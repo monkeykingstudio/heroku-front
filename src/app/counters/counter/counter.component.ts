@@ -29,6 +29,8 @@ export class CounterComponent implements OnInit {
 
   isLoading: boolean;
 
+  multiValue = 0;
+
   multiplicators: Array<number> = [
     0,
     5,
@@ -65,7 +67,7 @@ export class CounterComponent implements OnInit {
     });
 
     this.counterForm = this.fb.group({
-      multiplicator: 0
+      multiplicator: this.multiValue
     });
   }
 
@@ -114,8 +116,12 @@ export class CounterComponent implements OnInit {
     this.popupService.open(id);
   }
 
+  changeMultiplicator(e) {
+    this.multiValue = e.target.value;
+  }
+
   add(typeRef): void {
-    console.log(this.counterForm.value);
+    console.log('computed value:', this.multiValue);
     switch (typeRef) {
       case 'minorRef':
         // this.minor.nativeElement.value =  parseInt(this.medium.nativeElement.value) + 1;
