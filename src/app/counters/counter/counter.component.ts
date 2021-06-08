@@ -116,9 +116,9 @@ export class CounterComponent implements OnInit {
     this.popupService.open(id);
   }
 
-  // changeMultiplicator(e) {
-  //   this.multiValue = e.target.value;
-  // }
+  changeMultiplicator(e) {
+    this.multiValue = parseInt(e.target.value, 10) ;
+  }
 
   add(typeRef): void {
     console.log('computed value:', this.multiValue);
