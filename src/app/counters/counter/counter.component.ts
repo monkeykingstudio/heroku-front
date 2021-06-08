@@ -30,13 +30,12 @@ export class CounterComponent implements OnInit {
 
   multiValue = 0;
 
-  multiplicators: Array<number> = [
-    0,
-    5,
-    10,
-    30,
-    50,
-    100
+  multiplicators: Array<object> = [
+    {id: 0, valeur: 0},
+    {id: 1, valeur: 10},
+    {id: 2, valeur: 25},
+    {id: 3, valeur: 50},
+    {id: 4, valeur: 100}
   ];
 
   @ViewChild('minorRef', { static: true }) minor: ElementRef;
