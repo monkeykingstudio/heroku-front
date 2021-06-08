@@ -28,14 +28,7 @@ export class CounterComponent implements OnInit {
 
   isLoading: boolean;
 
-  optionsMultiplicators: Array<number> = [
-  0,
-  10,
-  25,
-  50,
-  100
-];
-
+  @ViewChild('multiplicatorRef', { static: true }) multiplicator: ElementRef;
   @ViewChild('minorRef', { static: true }) minor: ElementRef;
   @ViewChild('mediumRef', { static: true }) medium: ElementRef;
   @ViewChild('majorRef', { static: true }) major: ElementRef;
@@ -108,6 +101,9 @@ export class CounterComponent implements OnInit {
   }
 
   add(typeRef): void {
+    console.log('multi 1:', this.multiplicator);
+    console.log('multi 2', this.multiplicator.nativeElement.value);
+
     switch (typeRef) {
       case 'minorRef':
         // this.minor.nativeElement.value =  parseInt(this.medium.nativeElement.value) + 1;
