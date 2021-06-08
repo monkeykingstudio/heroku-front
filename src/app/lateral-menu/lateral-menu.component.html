@@ -2,50 +2,50 @@
   <div class="logo"></div>
 </div>
 <div class="separator"></div>
-<div *ngIf="isUser !== undefined" class="item">
+<div class="inactive" *ngIf="isUser !== undefined" class="item">
   <i class="foundation-icon"></i>
   <span *ngIf="hoverStatus" class="name">Foundations</span>
 </div>
-<div class="separator"></div>
+<div *ngIf="isUser !== undefined" class="separator"></div>
 <div *ngIf="isUser !== undefined" class="item">
   <i class="colony-icon"></i>
   <span *ngIf="hoverStatus" class="name">Colonies</span>
 </div>
-<div class="separator"></div>
-<div *ngIf="isUser !== undefined" class="item">
+<div *ngIf="isUser !== undefined" class="separator"></div>
+<div class="inactive" *ngIf="isUser !== undefined" class="item">
   <i class="browse-icon"></i>
   <span *ngIf="hoverStatus" class="name">Browse</span>
 </div>
-<div class="separator"></div>
-<div *ngIf="isUser !== undefined" class="item">
+<div *ngIf="isUser !== undefined" class="separator"></div>
+<div class="inactive" *ngIf="isUser !== undefined" class="item">
   <i class="forum-icon"></i>
   <span *ngIf="hoverStatus" class="name">Forums</span>
 </div>
-<div class="separator"></div>
-<div *ngIf="isUser !== undefined" class="item">
+<div *ngIf="isUser !== undefined" class="separator"></div>
+<div class="inactive" *ngIf="isUser !== undefined" class="item">
   <i class="letterbox-icon"></i>
   <span *ngIf="hoverStatus" class="name">Mailbox</span>
 </div>
-<div class="separator"></div>
-<div *ngIf="isUser !== undefined" class="item">
+<div *ngIf="isUser !== undefined" class="separator"></div>
+<div class="inactive" *ngIf="isUser !== undefined" class="item">
   <i class="settings-icon"></i>
   <span *ngIf="hoverStatus" class="name">Settings</span>
 </div>
-<div class="separator"></div>
+<div *ngIf="isUser !== undefined" class="separator"></div>
 <div *ngIf="isUser == undefined" class="item">
   <i class="login-icon"></i>
   <span *ngIf="hoverStatus" class="name">Login</span>
 </div>
-<div class="separator"></div>
+<div *ngIf="isUser == undefined" class="separator"></div>
 <div *ngIf="isUser == undefined" class="item">
   <i class="register-icon"></i>
   <span *ngIf="hoverStatus" class="name">Register</span>
 </div>
-<div class="separator"></div>
+<div *ngIf="isUser == undefined" class="separator"></div>
 <div *ngIf="isUser !== undefined" class="item">
   <i class="logout-icon"></i>
   <span *ngIf="hoverStatus" class="name">Logout</span>
 </div>
-<div class="separator"></div>
+<div *ngIf="isUser !== undefined" class="separator"></div>
 <span class="version">Alpha 1.7</span>
 
