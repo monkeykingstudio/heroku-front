@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from './../services/auth.service';
 
 @Component({
   selector: 'app-lateral-menu',
@@ -11,9 +12,13 @@ export class LateralMenuComponent implements OnInit {
   @Input()
   isUser;
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 
 }
