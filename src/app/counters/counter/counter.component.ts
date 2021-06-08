@@ -23,21 +23,20 @@ export class CounterComponent implements OnInit {
   nameCtrl: FormControl;
   polyCtrl: FormControl;
   breedCtrl: FormControl;
-  multiplicatorCtrl: FormControl;
-
 
   totalPopulationPolyMorph: number;
   totalPopulationMonoMorph: number;
 
   isLoading: boolean;
 
-  optionsMultiplicators: Array<number> = [
-  0,
-  10,
-  25,
-  50,
-  100
-];
+  optionsMultiplicators = [
+    { id: 0, mult: 0 },
+    { id: 1, mult: 10 },
+    { id: 2, mult: 25 },
+    { id: 3, mult: 50 },
+    { id: 4, mult: 100 }
+  ];
+
 
   @ViewChild('minorRef', { static: true }) minor: ElementRef;
   @ViewChild('mediumRef', { static: true }) medium: ElementRef;
