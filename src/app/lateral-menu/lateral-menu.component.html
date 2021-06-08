@@ -42,7 +42,7 @@
   <span *ngIf="hoverStatus" class="name">Register</span>
 </div>
 <div *ngIf="isUser == undefined" class="separator"></div>
-<div (click)="onLogout()" *ngIf="isUser !== undefined" class="item">
+<div routerLink="/login" (click)="onLogout()" *ngIf="isUser !== undefined" class="item">
   <i class="logout-icon"></i>
   <span *ngIf="hoverStatus" class="name">Logout</span>
 </div>
