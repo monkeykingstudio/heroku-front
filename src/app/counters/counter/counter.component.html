@@ -14,7 +14,10 @@
           <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('minorRef')">+</button>
         </div>
       </div>
-      <input class="form-control" type="number" name="multiplicator">
+      <!-- <input class="form-control" type="number" name="multiplicator"> -->
+      <select formControlName='multiplicator' class="form-control" id="multiplicator">
+        <option *ngFor="let multiplicator of multiplicators" [ngValue]="multiplicator">{{multiplicator}}</option>
+      </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.minorCount}}' name="minor" #minorRef>
     </div>
 
