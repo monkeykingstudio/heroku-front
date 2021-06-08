@@ -2,8 +2,7 @@ import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Counter } from '../../models/counter.model';
 import { CounterService } from '../../services/counter.service';
 import { PopupService } from './../../services/popup.service';
-import {FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
-
+import {FormBuilder, FormGroup, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-counter',
@@ -29,14 +28,13 @@ export class CounterComponent implements OnInit {
 
   isLoading: boolean;
 
-  optionsMultiplicators = [
-    { id: 0, mult: 0 },
-    { id: 1, mult: 10 },
-    { id: 2, mult: 25 },
-    { id: 3, mult: 50 },
-    { id: 4, mult: 100 }
-  ];
-
+  optionsMultiplicators: Array<number> = [
+  0,
+  10,
+  25,
+  50,
+  100
+];
 
   @ViewChild('minorRef', { static: true }) minor: ElementRef;
   @ViewChild('mediumRef', { static: true }) medium: ElementRef;
@@ -82,12 +80,10 @@ export class CounterComponent implements OnInit {
   saveOptions(counter) {
     const changes = this.optionsForm.value;
 
-    counter.name = changes.name;
     counter.polymorph = changes.polymorph;
     counter.breed = changes.breed;
 
     this.counterService.updateCounter(
-
       this.counter.minorCount,
       this.counter.mediumCount,
       this.counter.majorCount,
