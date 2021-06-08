@@ -115,7 +115,7 @@ export class CounterComponent implements OnInit {
   }
 
   add(typeRef): void {
-    console.log('multiplicator control:', this.multiplicatorCtrl);
+    console.log('multiplicator control:', this.multiplicatorCtrl.value);
     switch (typeRef) {
       case 'minorRef':
         // this.minor.nativeElement.value =  parseInt(this.medium.nativeElement.value) + 1;
