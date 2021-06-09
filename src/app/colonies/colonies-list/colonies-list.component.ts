@@ -39,10 +39,10 @@ export class ColoniesListComponent implements OnInit {
   optionsSpecies: Array<string> = [
     // 'unknown (can be edited later)',
     'lasius niger',
-    'myrmica rubra',
-    'messor barbarus',
-    'tetramorium',
-    'solonepsis fugax'
+    'myrmica rubra'
+    // 'messor barbarus',
+    // 'tetramorium',
+    // 'solonepsis fugax'
   ];
 
   constructor(

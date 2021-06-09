@@ -76,10 +76,10 @@
                   <span>{{ user.email }}</span>
                 </div>
                 <div class="four">
-                  <span>{{ user.is_verified ? 'verified' : 'unverified' }}</span>
+                  <span [ngClass]="user.is_verified ? 'verified' : 'unverified'">{{ user.is_verified ? 'verified' : 'unverified' }}</span>
                 </div>
                 <div class="five">
-                  <span>{{ user.role }}</span>
+                  <span><i *ngIf="user.role === 'admin'" class="crown-icon"></i>{{ user.role }}</span>
                 </div>
                 <div class="six">
                   <span>colonies</span>

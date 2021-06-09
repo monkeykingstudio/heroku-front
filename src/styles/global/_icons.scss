@@ -90,6 +90,19 @@
   }
 }
 
+.crown-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/crown.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+      position: relative;
+      width: 3rem;
+      height: 3rem;
+  }
+}
+
 .breedsheet-icon {
   &:before {
       content: '';

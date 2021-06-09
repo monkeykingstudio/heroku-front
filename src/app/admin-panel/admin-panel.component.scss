@@ -64,6 +64,26 @@
   }
 }
 
+.crown-icon {
+  margin-right: 1rem;
+}
+
+.verified {
+  background-color: #7bc11f;
+  padding: .2rem 1rem;
+  border-radius: 5rem;
+  color: white;
+  border-bottom: .2rem solid #398d23;
+}
+
+.unverified {
+  background-color: #c11f1f;
+  padding: .2rem 1rem;
+  border-radius: 5rem;
+  color: white;
+  border-bottom: .2rem solid #7b1f1f;
+}
+
 .custom-table {
   display: flex;
   flex-direction: column;
@@ -114,7 +134,6 @@
     min-width: 15%;
     max-width: 15%;
   }
-
 
   .head {
     display: flex;
