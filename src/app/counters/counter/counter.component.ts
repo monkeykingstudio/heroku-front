@@ -28,7 +28,8 @@ export class CounterComponent implements OnInit {
 
   isLoading: boolean;
 
-  multiValue;
+  multiValue: 0;
+  powerMode = false;
 
   multiplicators: Array<object> = [
     {id: 0, valeur: 0},
@@ -37,10 +38,6 @@ export class CounterComponent implements OnInit {
     {id: 3, valeur: 50},
     {id: 4, valeur: 100}
   ];
-
-  // multiplicators: Array<number> = [
-  //   0, 10, 25, 100
-  // ];
 
   @ViewChild('minorRef', { static: true }) minor: ElementRef;
   @ViewChild('mediumRef', { static: true }) medium: ElementRef;
@@ -119,10 +116,10 @@ export class CounterComponent implements OnInit {
 
   changeMultiplicator(value) {
     this.multiValue = +value;
-    // this.multiValue = parseInt(e.target.value, 10);
+  }
 
-    console.log(this.multiValue);
-
+  powerModeChange() {
+    this.powerMode = !this.powerMode;
   }
 
   add(typeRef): void {

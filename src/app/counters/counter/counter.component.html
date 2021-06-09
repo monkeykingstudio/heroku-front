@@ -14,10 +14,11 @@
           <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('minorRef')">+</button>
         </div>
       </div>
-      <select #multi (change)="changeMultiplicator(multi.value)" formControlName='multiplicator' class="form-control" id="multiplicator">
+      <select *ngIf="powerMode" #multi (change)="changeMultiplicator(multi.value)" formControlName='multiplicator' class="form-control" id="multiplicator">
         <option *ngFor="let multiplicator of multiplicators" [value]="multiplicator.valeur">{{multiplicator.valeur}}</option>
       </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.minorCount}}' name="minor" #minorRef>
+      <button class='yellow-btn' type='button' (click)="powerModeChange()">+</button>
     </div>
 
     <div *ngIf="counter.polymorph" class="d-flex align-items-end mb-3">
