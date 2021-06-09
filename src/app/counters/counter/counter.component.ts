@@ -30,17 +30,17 @@ export class CounterComponent implements OnInit {
 
   multiValue;
 
-  // multiplicators: Array<object> = [
-  //   {id: 0, valeur: 0},
-  //   {id: 1, valeur: 10},
-  //   {id: 2, valeur: 25},
-  //   {id: 3, valeur: 50},
-  //   {id: 4, valeur: 100}
-  // ];
-
-  multiplicators: Array<number> = [
-    0, 10, 25, 100
+  multiplicators: Array<object> = [
+    {id: 0, valeur: 0},
+    {id: 1, valeur: 10},
+    {id: 2, valeur: 25},
+    {id: 3, valeur: 50},
+    {id: 4, valeur: 100}
   ];
+
+  // multiplicators: Array<number> = [
+  //   0, 10, 25, 100
+  // ];
 
   @ViewChild('minorRef', { static: true }) minor: ElementRef;
   @ViewChild('mediumRef', { static: true }) medium: ElementRef;
@@ -121,8 +121,7 @@ export class CounterComponent implements OnInit {
     this.multiValue = e.target.value;
     // this.multiValue = parseInt(e.target.value, 10);
 
-    console.log(Object.values(this.multiValue));
-    console.log(parseInt(this.multiValue, 10));
+    console.log(this.multiValue);
 
   }
 
