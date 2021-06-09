@@ -69,6 +69,7 @@ export class CounterComponent implements OnInit {
     });
   }
 
+
   saveCount() {
     this.isLoading = true;
     this.counterService.updateCounter(
