@@ -76,6 +76,19 @@
   }
 }
 
+.power-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/power.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+  }
+}
+
 .breedsheet-icon {
   &:before {
       content: '';
