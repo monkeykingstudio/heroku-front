@@ -36,6 +36,9 @@
           <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('mediumRef')">+</button>
         </div>
       </div>
+      <select *ngIf="powerMode" #multi (change)="changeMultiplicator(multi.value)" formControlName='multiplicator' class="multiplicator" id="multiplicator">
+        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicator.valeur">X {{multiplicator.valeur}}</option>
+      </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.mediumCount}}' name="medium" #mediumRef>
     </div>
 
@@ -47,6 +50,9 @@
           <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('majorRef')">+</button>
         </div>
       </div>
+      <select *ngIf="powerMode" #multi (change)="changeMultiplicator(multi.value)" formControlName='multiplicator' class="multiplicator" id="multiplicator">
+        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicator.valeur">X {{multiplicator.valeur}}</option>
+      </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.majorCount}}' name="major" #majorRef>
     </div>
 
