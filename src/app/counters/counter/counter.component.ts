@@ -125,28 +125,48 @@ export class CounterComponent implements OnInit {
 
   add(typeRef): void {
     console.log('multiplicator value:', this.multiValue);
-    switch (typeRef) {
-      case 'minorRef':
-        // this.minor.nativeElement.value =  parseInt(this.medium.nativeElement.value) + 1;
-        this.counter.minorCount++;
-        break;
-      case 'mediumRef':
-        // this.medium.nativeElement.value =  parseInt(this.medium.nativeElement.value) + 1;
-        this.counter.mediumCount++;
-        break;
-      case 'majorRef':
-        // this.major.nativeElement.value =  parseInt(this.major.nativeElement.value) + 1;
-        this.counter.majorCount++;
-        break;
-      case 'breedRef':
-        this.counter.breedCount++;
-        break;
-      case 'polyRef':
-        this.counter.polyCount++;
-        break;
-      default:
-        console.log(`Sorry, wrong type for counter ${typeRef}.`);
+    if (this.multiValue === 0) {
+      switch (typeRef) {
+        case 'minorRef':
+          this.counter.minorCount++;
+          break;
+        case 'mediumRef':
+          this.counter.mediumCount++;
+          break;
+        case 'majorRef':
+          this.counter.majorCount++;
+          break;
+        case 'breedRef':
+          this.counter.breedCount++;
+          break;
+        case 'polyRef':
+          this.counter.polyCount++;
+          break;
+        default:
+          console.log(`Sorry, wrong type for counter ${typeRef}.`);
+      }
+    } else {
+      switch (typeRef) {
+        case 'minorRef':
+          this.counter.minorCount += this.multiValue;
+          break;
+        case 'mediumRef':
+          this.counter.mediumCount += this.multiValue;
+          break;
+        case 'majorRef':
+          this.counter.majorCount += this.multiValue;
+          break;
+        case 'breedRef':
+          this.counter.breedCount += this.multiValue;
+          break;
+        case 'polyRef':
+          this.counter.polyCount += this.multiValue;
+          break;
+        default:
+          console.log(`Sorry, wrong type for counter ${typeRef}.`);
+      }
     }
+
     this.reloadPopulation();
   }
 
