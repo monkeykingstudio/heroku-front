@@ -28,7 +28,7 @@ export class CounterComponent implements OnInit {
 
   isLoading: boolean;
 
-  multiValue = 0;
+  multiValue;
 
   multiplicators: Array<object> = [
     {id: 0, valeur: 0},
@@ -117,7 +117,7 @@ export class CounterComponent implements OnInit {
     this.multiValue = e.target.value;
     // this.multiValue = parseInt(e.target.value, 10);
 
-    console.log(this.multiValue);
+    console.log(this.multiValue.valeur);
   }
 
   add(typeRef): void {
