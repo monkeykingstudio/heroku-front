@@ -79,7 +79,8 @@
                   <span [ngClass]="user.is_verified ? 'verified' : 'unverified'">{{ user.is_verified ? 'verified' : 'unverified' }}</span>
                 </div>
                 <div class="five">
-                  <span><i *ngIf="user.role === 'admin'" class="crown-icon"></i>{{ user.role }}</span>
+                  <i *ngIf="user.role === 'admin'" class="crown-icon"></i>
+                  <span>{{ user.role }}</span>
                 </div>
                 <div class="six">
                   <span>colonies</span>
