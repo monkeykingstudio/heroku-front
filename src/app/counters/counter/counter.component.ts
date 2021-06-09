@@ -144,22 +144,32 @@ export class CounterComponent implements OnInit {
         default:
           console.log(`Sorry, wrong type for counter ${typeRef}.`);
       }
-    } else if (this.multiValue !== 0 && this.powerMode) {
+    } else if (this.powerMode) {
       switch (typeRef) {
         case 'minorRef':
-          this.counter.minorCount += this.multiValue;
+          this.multiValue !== 0
+          ? this.counter.minorCount += this.multiValue
+          : this.counter.minorCount++;
           break;
         case 'mediumRef':
-          this.counter.mediumCount += this.multiValue;
+          this.multiValue !== 0
+          ? this.counter.mediumCount += this.multiValue
+          : this.counter.mediumCount++;
           break;
         case 'majorRef':
-          this.counter.majorCount += this.multiValue;
+          this.multiValue !== 0
+          ? this.counter.majorCount += this.multiValue
+          : this.counter.majorCount++;
           break;
         case 'breedRef':
-          this.counter.breedCount += this.multiValue;
+          this.multiValue !== 0
+          ? this.counter.breedCount += this.multiValue
+          : this.counter.breedCount++;
           break;
         case 'polyRef':
-          this.counter.polyCount += this.multiValue;
+          this.multiValue !== 0
+          ? this.counter.polyCount += this.multiValue
+          : this.counter.polyCount++;
           break;
         default:
           console.log(`Sorry, wrong type for counter ${typeRef}.`);
@@ -171,7 +181,6 @@ export class CounterComponent implements OnInit {
 
   sub(typeRef): void {
     if (!this.powerMode) {
-
       switch (typeRef) {
         case 'minorRef':
           this.counter.minorCount > 0 ? this.counter.minorCount-- : this.counter.minorCount = 0;
@@ -200,16 +209,24 @@ export class CounterComponent implements OnInit {
           : this.counter.minorCount > 0 ? this.counter.minorCount-- : this.counter.minorCount = 0;
           break;
         case 'mediumRef':
-          this.counter.mediumCount > 0 ? this.counter.mediumCount -= this.multiValue : this.counter.mediumCount = 0;
+          this.multiValue !== 0
+          ? this.counter.mediumCount > 0 ? this.counter.mediumCount -= this.multiValue : this.counter.mediumCount = 0
+          : this.counter.mediumCount > 0 ? this.counter.mediumCount-- : this.counter.mediumCount = 0;
           break;
         case 'majorRef':
-          this.counter.majorCount > 0 ? this.counter.majorCount -= this.multiValue : this.counter.majorCount = 0;
+          this.multiValue !== 0
+          ? this.counter.majorCount > 0 ? this.counter.majorCount -= this.multiValue : this.counter.majorCount = 0
+          : this.counter.majorCount > 0 ? this.counter.majorCount-- : this.counter.majorCount = 0;
           break;
         case 'breedRef':
-          this.counter.breedCount > 0 ? this.counter.breedCount -= this.multiValue : this.counter.breedCount = 0;
+          this.multiValue !== 0
+          ? this.counter.breedCount > 0 ? this.counter.breedCount -= this.multiValue : this.counter.breedCount = 0
+          : this.counter.breedCount > 0 ? this.counter.breedCount-- : this.counter.breedCount = 0;
           break;
         case 'polyRef':
-          this.counter.polyCount > 0 ? this.counter.polyCount -= this.multiValue : this.counter.polyCount = 0;
+          this.multiValue !== 0
+          ? this.counter.polyCount > 0 ? this.counter.polyCount -= this.multiValue : this.counter.polyCount = 0
+          : this.counter.polyCount > 0 ? this.counter.polyCount-- : this.counter.polyCount = 0;
           break;
         default:
           console.log(`Sorry, wrong type for counter ${typeRef}.`);
