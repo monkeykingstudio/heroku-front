@@ -23,7 +23,7 @@
         </div>
       </div>
       <select *ngIf="powerMode" #multiMinor (change)="changeMultiplicatorMinor(multiMinor.value)" formControlName='multiplicatorMinor' class="multiplicator" id="multiplicatorMinor">
-        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicatorMinor.valeur">X {{multiplicatorMinor.valeur}}</option>
+        <option *ngFor="let multiplicatorMinor of multiplicators" [value]="multiplicatorMinor.valeur">X {{multiplicatorMinor.valeur}}</option>
       </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.minorCount}}' name="minor" #minorRef>
     </div>
@@ -37,7 +37,7 @@
         </div>
       </div>
       <select *ngIf="powerMode" #multiMedium (change)="changeMultiplicatorMedium(multiMedium.value)" formControlName='multiplicatorMedium' class="multiplicator" id="multiplicatorMedium">
-        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicatorMedium.valeur">X {{multiplicatorMedium.valeur}}</option>
+        <option *ngFor="let multiplicatorMedium of multiplicators" [value]="multiplicatorMedium.valeur">X {{multiplicatorMedium.valeur}}</option>
       </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.mediumCount}}' name="medium" #mediumRef>
     </div>
@@ -51,7 +51,7 @@
         </div>
       </div>
       <select *ngIf="powerMode" #multiMajor (change)="changeMultiplicatorMajor(multiMajor.value)" formControlName='multiplicatorMajor' class="multiplicator" id="multiplicatorMajor">
-        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicatorMajor.valeur">X {{multiplicatorMajor.valeur}}</option>
+        <option *ngFor="let multiplicatorMajor of multiplicators" [value]="multiplicatorMajor.valeur">X {{multiplicatorMajor.valeur}}</option>
       </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.majorCount}}' name="major" #majorRef>
     </div>
@@ -65,7 +65,7 @@
         </div>
       </div>
       <select *ngIf="powerMode" #multiPoly (change)="changeMultiplicatorPoly(multiPoly.value)" formControlName='multiplicatorPoly' class="multiplicator" id="multiplicatorPoly">
-        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicatorPoly.valeur">X {{multiplicatorPoly.valeur}}</option>
+        <option *ngFor="let multiplicatorPoly of multiplicators" [value]="multiplicatorPoly.valeur">X {{multiplicatorPoly.valeur}}</option>
       </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.polyCount}}' name="poly" #polyRef>
     </div>
@@ -79,7 +79,7 @@
         </div>
       </div>
       <select *ngIf="powerMode" #multiBreed (change)="changeMultiplicatorBreed(multiBreed.value)" formControlName='multiplicatorBreed' class="multiplicator" id="multiplicatorBreed">
-        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicatorBreed.valeur">X {{multiplicatorBreed.valeur}}</option>
+        <option *ngFor="let multiplicatorBreed of multiplicators" [value]="multiplicatorBreed.valeur">X {{multiplicatorBreed.valeur}}</option>
       </select>
       <input disabled='true' class="form-control breed" type="text" value='{{counter.breedCount}}' name="breed" #breedRef>
     </div>
