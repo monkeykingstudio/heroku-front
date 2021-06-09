@@ -126,8 +126,28 @@ h6 {
 
   @include breakpoint('small') {
     left: 15rem;
-
   }
+
+  &:disabled {
+    background-color: #cccccb;
+    border-right: 1px solid #e9e9e9;
+    border-bottom: 0.2rem solid #999999;
+    color: #afafaf!important;
+    &:hover {
+      background-color: #cccccb;
+      border-right: 1px solid #e9e9e9;
+      border-bottom: 0.2rem solid #999999;
+      color: #afafaf!important;
+    }
+  }
+
+  &:hover {
+    transition: all .2s;
+    background-color: #e65656;
+    text-decoration: none;
+    color: white;
+  }
+}
 
 .breed {
   background-color: #8e8e8e !important;
