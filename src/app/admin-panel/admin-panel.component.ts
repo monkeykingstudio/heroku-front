@@ -36,5 +36,4 @@ export class AdminPanelComponent implements OnInit {
     const users$ = this.usersService.usersGet();
     this.allUsers$ = users$;
   }
-
 }
