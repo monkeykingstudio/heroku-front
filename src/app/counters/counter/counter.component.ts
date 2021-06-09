@@ -121,7 +121,10 @@ export class CounterComponent implements OnInit {
     this.multiValue = e.target.value;
     // this.multiValue = parseInt(e.target.value, 10);
 
-    console.log(this.multiValue.json());
+    console.log(this.multiValue);
+    console.log(parseInt(this.multiValue, 10));
+    console.log(this.multiValue.key);
+
   }
 
   add(typeRef): void {
