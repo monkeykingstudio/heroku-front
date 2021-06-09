@@ -28,7 +28,7 @@ export class CounterComponent implements OnInit {
 
   isLoading: boolean;
 
-  multiValue: 0;
+  multiValue = 0;
   powerMode = false;
 
   multiplicators: Array<object> = [
