@@ -1,6 +1,5 @@
 <div id="counterRef" class="counter-container animate__animated animate__flipInY">
-  <button class="align-self-end edit-btn" type="button" (click)="openPopup('counterPopup')">
-    <button
+  <button
       [ngStyle]="powerMode ? {
         'background-color': '#e65656'
       } : {
@@ -8,6 +7,7 @@
       }"
       class='power-btn' type='button' (click)="powerModeChange()"><i class="power-icon"></i>
     </button>
+  <button class="align-self-end edit-btn" type="button" (click)="openPopup('counterPopup')">
     <i class="options-icon"></i>
   </button>
 
