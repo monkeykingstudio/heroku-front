@@ -192,10 +192,12 @@ export class CounterComponent implements OnInit {
           console.log(`Sorry, wrong type for counter ${typeRef}.`);
       }
 
-    } else if (this.multiValue !== 0 && this.powerMode) {
+    } else if (this.powerMode) {
       switch (typeRef) {
         case 'minorRef':
-          this.counter.minorCount > 0 ? this.counter.minorCount -= this.multiValue : this.counter.minorCount = 0;
+          this.multiValue !== 0
+          ? this.counter.minorCount > 0 ? this.counter.minorCount -= this.multiValue : this.counter.minorCount = 0
+          : this.counter.minorCount > 0 ? this.counter.minorCount-- : this.counter.minorCount = 0;
           break;
         case 'mediumRef':
           this.counter.mediumCount > 0 ? this.counter.mediumCount -= this.multiValue : this.counter.mediumCount = 0;
