@@ -125,7 +125,7 @@ export class CounterComponent implements OnInit {
 
   add(typeRef): void {
     console.log('multiplicator value:', this.multiValue);
-    if (this.multiValue === 0) {
+    if (this.multiValue === 0 && !this.powerMode) {
       switch (typeRef) {
         case 'minorRef':
           this.counter.minorCount++;
@@ -145,7 +145,7 @@ export class CounterComponent implements OnInit {
         default:
           console.log(`Sorry, wrong type for counter ${typeRef}.`);
       }
-    } else {
+    } else if (this.multiValue !== 0 && this.powerMode) {
       switch (typeRef) {
         case 'minorRef':
           this.counter.minorCount += this.multiValue;
@@ -171,26 +171,48 @@ export class CounterComponent implements OnInit {
   }
 
   sub(typeRef): void {
-    switch (typeRef) {
-      case 'minorRef':
-        this.counter.minorCount > 0 ? this.counter.minorCount-- : this.counter.minorCount = 0;
-        break;
-      case 'mediumRef':
-        this.counter.mediumCount > 0 ? this.counter.mediumCount-- : this.counter.mediumCount = 0;
-        break;
-      case 'majorRef':
-        this.counter.majorCount > 0 ? this.counter.majorCount-- : this.counter.majorCount = 0;
-        break;
-      case 'breedRef':
-        this.counter.breedCount > 0 ? this.counter.breedCount-- : this.counter.breedCount = 0;
-        break;
-      case 'polyRef':
-        this.counter.polyCount > 0 ? this.counter.polyCount-- : this.counter.polyCount = 0;
-
-        break;
-      default:
-        console.log(`Sorry, wrong type for counter ${typeRef}.`);
+    if (this.multiValue === 0 && !this.powerMode) {
+      switch (typeRef) {
+        case 'minorRef':
+          this.counter.minorCount > 0 ? this.counter.minorCount -= this.multiValue : this.counter.minorCount = 0;
+          break;
+        case 'mediumRef':
+          this.counter.mediumCount > 0 ? this.counter.mediumCount -= this.multiValue : this.counter.mediumCount = 0;
+          break;
+        case 'majorRef':
+          this.counter.majorCount > 0 ? this.counter.majorCount -= this.multiValue : this.counter.majorCount = 0;
+          break;
+        case 'breedRef':
+          this.counter.breedCount > 0 ? this.counter.breedCount -= this.multiValue : this.counter.breedCount = 0;
+          break;
+        case 'polyRef':
+          this.counter.polyCount > 0 ? this.counter.polyCount -= this.multiValue : this.counter.polyCount = 0;
+          break;
+        default:
+          console.log(`Sorry, wrong type for counter ${typeRef}.`);
+      }
+    } else if (this.multiValue !== 0 && this.powerMode) {
+      switch (typeRef) {
+        case 'minorRef':
+          this.counter.minorCount > 0 ? this.counter.minorCount-- : this.counter.minorCount = 0;
+          break;
+        case 'mediumRef':
+          this.counter.mediumCount > 0 ? this.counter.mediumCount-- : this.counter.mediumCount = 0;
+          break;
+        case 'majorRef':
+          this.counter.majorCount > 0 ? this.counter.majorCount-- : this.counter.majorCount = 0;
+          break;
+        case 'breedRef':
+          this.counter.breedCount > 0 ? this.counter.breedCount-- : this.counter.breedCount = 0;
+          break;
+        case 'polyRef':
+          this.counter.polyCount > 0 ? this.counter.polyCount-- : this.counter.polyCount = 0;
+          break;
+        default:
+          console.log(`Sorry, wrong type for counter ${typeRef}.`);
+      }
     }
+
     this.reloadPopulation();
   }
 

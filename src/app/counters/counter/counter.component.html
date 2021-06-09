@@ -1,5 +1,13 @@
 <div id="counterRef" class="counter-container animate__animated animate__flipInY">
   <button class="align-self-end edit-btn" type="button" (click)="openPopup('counterPopup')">
+    <button
+      [ngStyle]="powerMode ? {
+        'background-color': '#e65656'
+      } : {
+        'background-color': 'white'
+      }"
+      class='power-btn' type='button' (click)="powerModeChange()"><i class="power-icon"></i>
+    </button>
     <i class="options-icon"></i>
   </button>
 
@@ -18,7 +26,6 @@
         <option *ngFor="let multiplicator of multiplicators" [value]="multiplicator.valeur">X {{multiplicator.valeur}}</option>
       </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.minorCount}}' name="minor" #minorRef>
-      <button class='power-btn' type='button' (click)="powerModeChange()"><i class="power-icon"></i></button>
     </div>
 
     <div *ngIf="counter.polymorph" class="d-flex align-items-end mb-3">
