@@ -22,8 +22,8 @@
           <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('minorRef')">+</button>
         </div>
       </div>
-      <select *ngIf="powerMode" #multi (change)="changeMultiplicator(multi.value)" formControlName='multiplicator' class="multiplicator" id="multiplicator">
-        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicator.valeur">X {{multiplicator.valeur}}</option>
+      <select *ngIf="powerMode" #multiMinor (change)="changeMultiplicatorMinor(multiMinor.value)" formControlName='multiplicatorMinor' class="multiplicator" id="multiplicatorMinor">
+        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicatorMinor.valeur">X {{multiplicatorMinor.valeur}}</option>
       </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.minorCount}}' name="minor" #minorRef>
     </div>
@@ -36,8 +36,8 @@
           <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('mediumRef')">+</button>
         </div>
       </div>
-      <select *ngIf="powerMode" #multi (change)="changeMultiplicator(multi.value)" formControlName='multiplicator' class="multiplicator" id="multiplicator">
-        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicator.valeur">X {{multiplicator.valeur}}</option>
+      <select *ngIf="powerMode" #multiMedium (change)="changeMultiplicatorMedium(multiMedium.value)" formControlName='multiplicatorMedium' class="multiplicator" id="multiplicatorMedium">
+        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicatorMedium.valeur">X {{multiplicatorMedium.valeur}}</option>
       </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.mediumCount}}' name="medium" #mediumRef>
     </div>
@@ -50,8 +50,8 @@
           <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('majorRef')">+</button>
         </div>
       </div>
-      <select *ngIf="powerMode" #multi (change)="changeMultiplicator(multi.value)" formControlName='multiplicator' class="multiplicator" id="multiplicator">
-        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicator.valeur">X {{multiplicator.valeur}}</option>
+      <select *ngIf="powerMode" #multiMajor (change)="changeMultiplicatorMajor(multiMajor.value)" formControlName='multiplicatorMajor' class="multiplicator" id="multiplicatorMajor">
+        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicatorMajor.valeur">X {{multiplicatorMajor.valeur}}</option>
       </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.majorCount}}' name="major" #majorRef>
     </div>
@@ -64,6 +64,9 @@
           <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('polyRef')">+</button>
         </div>
       </div>
+      <select *ngIf="powerMode" #multiPoly (change)="changeMultiplicatorPoly(multiPoly.value)" formControlName='multiplicatorPoly' class="multiplicator" id="multiplicatorPoly">
+        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicatorPoly.valeur">X {{multiplicatorPoly.valeur}}</option>
+      </select>
       <input disabled='true' class="form-control" type="text" value='{{counter.polyCount}}' name="poly" #polyRef>
     </div>
 
@@ -75,6 +78,9 @@
           <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('breedRef')">+</button>
         </div>
       </div>
+      <select *ngIf="powerMode" #multiBreed (change)="changeMultiplicatorBreed(multiBreed.value)" formControlName='multiplicatorBreed' class="multiplicator" id="multiplicatorBreed">
+        <option *ngFor="let multiplicator of multiplicators" [value]="multiplicatorBreed.valeur">X {{multiplicatorBreed.valeur}}</option>
+      </select>
       <input disabled='true' class="form-control breed" type="text" value='{{counter.breedCount}}' name="breed" #breedRef>
     </div>
 

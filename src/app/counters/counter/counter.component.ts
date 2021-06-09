@@ -28,7 +28,11 @@ export class CounterComponent implements OnInit {
 
   isLoading: boolean;
 
-  multiValue = 0;
+  multiMinorValue = 0;
+  multiMediumValue = 0;
+  multiMajorValue = 0;
+  multiPolyValue = 0;
+  multiBreedValue = 0;
   powerMode = false;
 
   multiplicators: Array<object> = [
@@ -65,10 +69,14 @@ export class CounterComponent implements OnInit {
     });
 
     this.counterForm = this.fb.group({
-      multiplicator: this.multiValue
+      multiplicatorMinor: this.multiMinorValue,
+      multiplicatorMedium: this.multiMediumValue,
+      multiplicatorMajor: this.multiMajorValue,
+      multiplicatorBreed: this.multiBreedValue,
+      multiplicatorPoly: this.multiPolyValue,
+
     });
   }
-
 
   saveCount() {
     this.isLoading = true;
@@ -115,8 +123,20 @@ export class CounterComponent implements OnInit {
     this.popupService.open(id);
   }
 
-  changeMultiplicator(value) {
-    this.multiValue = +value;
+  changeMultiplicatorMinor(value) {
+    this.multiMinorValue = +value;
+  }
+  changeMultiplicatorMedium(value) {
+    this.multiMediumValue = +value;
+  }
+  changeMultiplicatorMajor(value) {
+    this.multiMajorValue = +value;
+  }
+  changeMultiplicatorBreed(value) {
+    this.multiBreedValue = +value;
+  }
+  changeMultiplicatorPoly(value) {
+    this.multiPolyValue = +value;
   }
 
   powerModeChange() {
@@ -147,28 +167,28 @@ export class CounterComponent implements OnInit {
     } else if (this.powerMode) {
       switch (typeRef) {
         case 'minorRef':
-          this.multiValue !== 0
-          ? this.counter.minorCount += this.multiValue
+          this.multiMinorValue !== 0
+          ? this.counter.minorCount += this.multiMinorValue
           : this.counter.minorCount++;
           break;
         case 'mediumRef':
-          this.multiValue !== 0
-          ? this.counter.mediumCount += this.multiValue
+          this.multiMediumValue !== 0
+          ? this.counter.mediumCount += this.multiMediumValue
           : this.counter.mediumCount++;
           break;
         case 'majorRef':
-          this.multiValue !== 0
-          ? this.counter.majorCount += this.multiValue
+          this.multiMajorValue !== 0
+          ? this.counter.majorCount += this.multiMajorValue
           : this.counter.majorCount++;
           break;
         case 'breedRef':
-          this.multiValue !== 0
-          ? this.counter.breedCount += this.multiValue
+          this.multiBreedValue !== 0
+          ? this.counter.breedCount += this.multiBreedValue
           : this.counter.breedCount++;
           break;
         case 'polyRef':
-          this.multiValue !== 0
-          ? this.counter.polyCount += this.multiValue
+          this.multiPolyValue !== 0
+          ? this.counter.polyCount += this.multiPolyValue
           : this.counter.polyCount++;
           break;
         default:
@@ -204,28 +224,28 @@ export class CounterComponent implements OnInit {
     } else if (this.powerMode) {
       switch (typeRef) {
         case 'minorRef':
-          this.multiValue !== 0
-          ? this.counter.minorCount > 0 ? this.counter.minorCount -= this.multiValue : this.counter.minorCount = 0
+          this.multiMinorValue !== 0
+          ? this.counter.minorCount > 0 ? this.counter.minorCount -= this.multiMinorValue : this.counter.minorCount = 0
           : this.counter.minorCount > 0 ? this.counter.minorCount-- : this.counter.minorCount = 0;
           break;
         case 'mediumRef':
-          this.multiValue !== 0
-          ? this.counter.mediumCount > 0 ? this.counter.mediumCount -= this.multiValue : this.counter.mediumCount = 0
+          this.multiMediumValue !== 0
+          ? this.counter.mediumCount > 0 ? this.counter.mediumCount -= this.multiMediumValue : this.counter.mediumCount = 0
           : this.counter.mediumCount > 0 ? this.counter.mediumCount-- : this.counter.mediumCount = 0;
           break;
         case 'majorRef':
-          this.multiValue !== 0
-          ? this.counter.majorCount > 0 ? this.counter.majorCount -= this.multiValue : this.counter.majorCount = 0
+          this.multiMajorValue !== 0
+          ? this.counter.majorCount > 0 ? this.counter.majorCount -= this.multiMajorValue : this.counter.majorCount = 0
           : this.counter.majorCount > 0 ? this.counter.majorCount-- : this.counter.majorCount = 0;
           break;
         case 'breedRef':
-          this.multiValue !== 0
-          ? this.counter.breedCount > 0 ? this.counter.breedCount -= this.multiValue : this.counter.breedCount = 0
+          this.multiBreedValue !== 0
+          ? this.counter.breedCount > 0 ? this.counter.breedCount -= this.multiBreedValue : this.counter.breedCount = 0
           : this.counter.breedCount > 0 ? this.counter.breedCount-- : this.counter.breedCount = 0;
           break;
         case 'polyRef':
-          this.multiValue !== 0
-          ? this.counter.polyCount > 0 ? this.counter.polyCount -= this.multiValue : this.counter.polyCount = 0
+          this.multiPolyValue !== 0
+          ? this.counter.polyCount > 0 ? this.counter.polyCount -= this.multiPolyValue : this.counter.polyCount = 0
           : this.counter.polyCount > 0 ? this.counter.polyCount-- : this.counter.polyCount = 0;
           break;
         default:
