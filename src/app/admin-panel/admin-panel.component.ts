@@ -8,6 +8,7 @@ import { BreedingSheet } from './../models/breedingSheet.model';
 import { map } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
 
+
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
@@ -18,7 +19,7 @@ export class AdminPanelComponent implements OnInit {
   pendingUsers$: Observable<User[]>;
   allColonies$: Observable<Colony[]>;
   breedingSheet$: Observable<BreedingSheet[]>;
-
+  userColonies$: Observable<Colony[]>;
 
   constructor(
     public usersService: UsersService,
@@ -46,6 +47,10 @@ export class AdminPanelComponent implements OnInit {
   reloadColonies(): void {
     const colonies$ = this.colonyService.loadAllUsersColonies();
     this.allColonies$ = colonies$;
+  }
+
+  getUserColonies(id: string) {
+    return this.colonyService.loadAllUserColonies(id);
   }
 
   reloadBreedingSheets(): void {
