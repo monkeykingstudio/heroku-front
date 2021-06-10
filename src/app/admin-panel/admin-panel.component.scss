@@ -1,5 +1,3 @@
-@import '../../../styles/global/mixins';
-
 .admin-panel-container {
   height: calc(100vh - 10rem);
 }
@@ -176,14 +174,6 @@
     .line {
       display: flex;
       align-items: center;
-
-      @include breakpoint('small') {
-        flex-direction: column;
-
-        .one, .two, .three, .four, .five, .six {
-          border:none !important;
-        }
-      }
       &:nth-child(even) {
         background-color: white;
         font-weight: bold;
