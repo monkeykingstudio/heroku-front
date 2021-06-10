@@ -7,5 +7,6 @@ export interface User {
   // picture?: string;
   is_verified: boolean;
   role: string;
+  coloCount: number;
   newsletter?: boolean;
 }

@@ -68,7 +68,8 @@ export class SignupComponent implements OnInit {
       password: inputs.password.value,
       is_verified: false,
       role: 'user',
-      newsletter: inputs.newsletter.value
+      newsletter: inputs.newsletter.value,
+      coloCount: 0
     };
 
     console.log(this.user);

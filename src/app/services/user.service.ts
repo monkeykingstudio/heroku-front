@@ -9,6 +9,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UsersService {
+  usersUrl: 'https://calm-waters-91692.herokuapp.com/api/users';
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +21,7 @@ export class UsersService {
   }
 
   userGet(id: string) {
-    return this.http.get<any>(`https://calm-waters-91692.herokuapp.com/api/users/${id}`);
+    return this.http.get<any>(`/${id}`);
   }
 
   userAdd(user: User) {
@@ -28,11 +29,25 @@ export class UsersService {
       'email': user.email,
       'password': user.password,
       'pseudo': user.pseudo,
-      'newsletter': user.newsletter
+      'newsletter': user.newsletter,
+      'coloCount': user.coloCount
     };
     return this.http.post(`https://calm-waters-91692.herokuapp.com/api/auth/register`, userData);
   }
 
+  userColoAdd() {
+    return this.http.post<User>(`${this.usersUrl}`, {flag: 'inc'})
+    .pipe(
+      shareReplay()
+    );
+  }
+
+  userColoSub() {
+    return this.http.post<User>(`${this.usersUrl}`, {flag: 'dec'})
+    .pipe(
+      shareReplay()
+    );
+  }
   // userDelete(id: string) {
   //   return this.http.delete(`http://localhost:3000/users/${id}`);
   // }
