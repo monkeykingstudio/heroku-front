@@ -8,7 +8,7 @@ import { map, shareReplay, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ColoniesService {
-  private colonyUrl = 'https://calm-waters-91692.herokuapp.com/api/colonies';
+  private colonyUrl = 'https://calm-waters-91692.herokuapp.com/api/colonies'
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +21,10 @@ export class ColoniesService {
   }
 
   loadAllUsersColonies(): Observable<Colony[]> {
-    return this.http.get<Colony[]>(`${this.colonyUrl}/allcolonies`);
+    return this.http.get<Colony[]>(`${this.colonyUrl}/allcolonies`)
+    .pipe(
+      map(colonies => colonies['colonies']),
+      shareReplay());
   }
 
   loadColony(id: string): Observable<Colony> {
