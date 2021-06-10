@@ -1,3 +1,21 @@
+@import '../../styles/global/mixins';
+
+
+&::-webkit-scrollbar {
+  width: .5rem;
+}
+
+&::-webkit-scrollbar-track {
+  background: #6767675e;
+  border-radius: 0.5rem;
+}
+
+&::-webkit-scrollbar-thumb {
+  background-color: #63d745;
+  border-radius: 5rem;
+  border-bottom: 0.2rem solid #468f33;
+  cursor: pointer;
+}
 
 .admin-panel-container {
   height: calc(100vh - 10rem);
@@ -94,24 +112,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  // border: .1rem solid #d1d1d1;
   border-radius: .5rem;
-
-  &::-webkit-scrollbar {
-    width: .5rem;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #6767675e;
-    border-radius: 0.5rem;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #63d745;
-    border-radius: 5rem;
-    border-bottom: 0.2rem solid #468f33;
-    cursor: pointer;
-  }
 
   .one, .two, .three, .four, .five, .six {
     justify-content: center;
@@ -164,6 +165,10 @@
     font-weight: bold;
     background-color: #aeaeae;
     text-transform: capitalize;
+
+    @include breakpoint ('small') {
+      display: none;
+    }
   }
 
   .body {
@@ -171,10 +176,16 @@
     flex-direction: column;
     overflow-y: auto;
     border-radius: .5rem;
-    max-height: 38rem;
+    max-height: 44rem;
+
     .line {
       display: flex;
       align-items: center;
+
+      @include breakpoint ('small') {
+        border: none;
+        flex-direction: column;
+      }
       &:nth-child(even) {
         background-color: white;
         font-weight: bold;
