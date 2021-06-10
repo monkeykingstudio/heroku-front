@@ -1,22 +1,6 @@
 @import '../../styles/global/mixins';
 
 
-// &::-webkit-scrollbar {
-//   width: .5rem;
-// }
-
-// &::-webkit-scrollbar-track {
-//   background: #6767675e;
-//   border-radius: 0.5rem;
-// }
-
-// &::-webkit-scrollbar-thumb {
-//   background-color: #63d745;
-//   border-radius: 5rem;
-//   border-bottom: 0.2rem solid #468f33;
-//   cursor: pointer;
-// }
-
 .admin-panel-container {
   height: calc(100vh - 10rem);
 }
@@ -178,9 +162,25 @@
   .body {
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow-y: overlay;;
     border-radius: .5rem;
     max-height: 44rem;
+
+    &::-webkit-scrollbar {
+      width: .5rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #6767675e;
+      border-radius: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #63d745;
+      border-radius: 5rem;
+      border-bottom: 0.2rem solid #468f33;
+      cursor: pointer;
+    }
 
     .line {
       display: flex;
