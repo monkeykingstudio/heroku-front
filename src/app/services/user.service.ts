@@ -36,7 +36,8 @@ export class UsersService {
   }
 
   userColoAdd() {
-    return this.http.post<User>(`${this.usersUrl}`, {flag: 'inc'})
+    console.log('user colo add !');
+    return this.http.post<User>(`${this.usersUrl}/inc`, 'inc')
     .pipe(
       shareReplay()
     );
