@@ -83,7 +83,10 @@
                   <span>{{ user.role }}</span>
                 </div>
                 <div class="six">
-                  <span>{{ getUserColonies().length }}</span>
+                  <span>'user _id:',{{user._id}}</span>
+                  <span>'user id:',{{user.id}}</span>
+
+                  <span>{{ getUserColonies(user._id).length }}</span>
                 </div>
               </div>
             </div>
