@@ -50,7 +50,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   getUserColonies(id: string) {
-    return this.colonyService.loadAllUserColonies(id);
+    return this.colonyService.loadUserColonies(id);
   }
 
   reloadBreedingSheets(): void {

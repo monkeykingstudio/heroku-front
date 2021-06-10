@@ -27,7 +27,7 @@ export class ColoniesService {
       shareReplay());
   }
 
-  loadAllUserColonies(id: string): Observable<Colony[]> {
+  loadUserColonies(id: string): Observable<Colony[]> {
     return this.http.get<Colony[]>(`${this.colonyUrl}/allcolonies/${id}`)
     .pipe(
       map(colonies => colonies['colonies']),
