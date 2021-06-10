@@ -165,12 +165,7 @@
     font-weight: bold;
     background-color: #aeaeae;
     text-transform: capitalize;
-
-    @include breakpoint('small') {
-      display: none;
-    }
   }
-
 
   .body {
     display: flex;
