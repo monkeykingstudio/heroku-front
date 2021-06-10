@@ -17,6 +17,8 @@ export class AdminPanelComponent implements OnInit {
   allUsers$: Observable<User[]>;
   pendingUsers$: Observable<User[]>;
   allColonies$: Observable<Colony[]>;
+  breedingSheet$: Observable<BreedingSheet[]>;
+
 
   constructor(
     public usersService: UsersService,
@@ -27,6 +29,7 @@ export class AdminPanelComponent implements OnInit {
   ngOnInit(): void {
     this.reloadUsers();
     this.reloadColonies();
+    this.reloadBreedingSheets();
 
     this.pendingUsers$ = this.allUsers$
     .pipe(
@@ -43,5 +46,10 @@ export class AdminPanelComponent implements OnInit {
   reloadColonies(): void {
     const colonies$ = this.colonyService.loadAllUsersColonies();
     this.allColonies$ = colonies$;
+  }
+
+  reloadBreedingSheets(): void {
+    const breedingSheets$ = this.breedingSheetsService.getAll();
+    this.breedingSheet$ = breedingSheets$;
   }
 }

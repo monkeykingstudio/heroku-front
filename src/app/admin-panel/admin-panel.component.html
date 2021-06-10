@@ -30,12 +30,12 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12 col-md-3">
+        <div *ngIf='(breedingSheet$ | async) as breedingSheets;' class="col-sm-12 col-md-3">
           <div class="primal-stat">
             <div class="cont">
               <i class="breedsheet-icon"></i>
             <span class="number breedsheet">54</span>
-            <span class="description">breeding sheets</span>
+            <span class="description">{{ breedingSheets.length }}</span>
             </div>
           </div>
         </div>
