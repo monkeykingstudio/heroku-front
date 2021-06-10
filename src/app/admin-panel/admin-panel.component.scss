@@ -1,21 +1,21 @@
 @import '../../styles/global/mixins';
 
 
-&::-webkit-scrollbar {
-  width: .5rem;
-}
+// &::-webkit-scrollbar {
+//   width: .5rem;
+// }
 
-&::-webkit-scrollbar-track {
-  background: #6767675e;
-  border-radius: 0.5rem;
-}
+// &::-webkit-scrollbar-track {
+//   background: #6767675e;
+//   border-radius: 0.5rem;
+// }
 
-&::-webkit-scrollbar-thumb {
-  background-color: #63d745;
-  border-radius: 5rem;
-  border-bottom: 0.2rem solid #468f33;
-  cursor: pointer;
-}
+// &::-webkit-scrollbar-thumb {
+//   background-color: #63d745;
+//   border-radius: 5rem;
+//   border-bottom: 0.2rem solid #468f33;
+//   cursor: pointer;
+// }
 
 .admin-panel-container {
   height: calc(100vh - 10rem);
@@ -118,6 +118,10 @@
     justify-content: center;
     display: flex;
     padding: 1rem;
+
+    @include breakpoint ('small') {
+      border: none;
+    }
   }
 
   .one, .two, .three, .four, .five {
@@ -183,7 +187,6 @@
       align-items: center;
 
       @include breakpoint ('small') {
-        border: none;
         flex-direction: column;
       }
       &:nth-child(even) {
