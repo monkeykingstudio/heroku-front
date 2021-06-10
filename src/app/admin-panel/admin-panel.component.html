@@ -21,11 +21,11 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12 col-md-3">
+        <div *ngIf='(allColonies$ | async) as colonies;' class="col-sm-12 col-md-3">
           <div class="primal-stat">
             <div class="cont">
               <i class="colonies-icon"></i>
-            <span class="number colonies">827</span>
+            <span class="number colonies">{{ colonies.length }}</span>
             <span class="description">colonies created</span>
             </div>
           </div>

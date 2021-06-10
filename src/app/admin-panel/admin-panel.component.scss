@@ -102,9 +102,12 @@
     justify-content: center;
     display: flex;
     padding: 1rem;
+    min-height: 4.5rem;
+    display: flex;
+    align-items: center;
 
     @include breakpoint ('small') {
-      border: none;
+      border: none !important;
     }
   }
 

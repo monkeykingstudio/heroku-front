@@ -6,6 +6,7 @@ import { BreedingSheetsService } from './../services/breedingSheetsService';
 import { ColoniesService } from './../services/colonies.service';
 import { BreedingSheet } from './../models/breedingSheet.model';
 import { map } from 'rxjs/operators';
+import { Colony } from '../colonies/colony.model';
 
 @Component({
   selector: 'app-admin-panel',
@@ -15,15 +16,17 @@ import { map } from 'rxjs/operators';
 export class AdminPanelComponent implements OnInit {
   allUsers$: Observable<User[]>;
   pendingUsers$: Observable<User[]>;
+  allColonies$: Observable<Colony[]>;
 
   constructor(
     public usersService: UsersService,
-    public coloniesService: ColoniesService,
+    public colonyService: ColoniesService,
     public breedingSheetsService: BreedingSheetsService
     ) { }
 
   ngOnInit(): void {
     this.reloadUsers();
+    this.reloadColonies();
 
     this.pendingUsers$ = this.allUsers$
     .pipe(
@@ -35,5 +38,10 @@ export class AdminPanelComponent implements OnInit {
   reloadUsers(): void {
     const users$ = this.usersService.usersGet();
     this.allUsers$ = users$;
+  }
+
+  reloadColonies(): void {
+    const colonies$ = this.colonyService.loadAllColonies();
+    this.allColonies$ = colonies$;
   }
 }
