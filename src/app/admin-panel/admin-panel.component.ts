@@ -41,7 +41,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   reloadColonies(): void {
-    const colonies$ = this.colonyService.loadAllColonies();
+    const colonies$ = this.colonyService.loadAllUsersColonies();
     this.allColonies$ = colonies$;
   }
 }

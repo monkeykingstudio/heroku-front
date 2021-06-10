@@ -20,6 +20,10 @@ export class ColoniesService {
     );
   }
 
+  loadAllUsersColonies(): Observable<Colony[]> {
+    return this.http.get<Colony[]>(`${this.colonyUrl}/allcolonies`);
+  }
+
   loadColony(id: string): Observable<Colony> {
     return this.http.get<Colony>(`${this.colonyUrl}/${id}`)
     .pipe(
