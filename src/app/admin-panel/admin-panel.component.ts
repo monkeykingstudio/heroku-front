@@ -22,7 +22,7 @@ export class AdminPanelComponent implements OnInit {
   userColonies$: Observable<Colony[]>;
 
   title = 'Users';
-  type = 'PieChart';
+  type = 'Columns';
   data = [
      ['Name1', 5.0],
      ['Name2', 36.8],
