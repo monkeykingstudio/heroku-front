@@ -85,7 +85,7 @@
                 <div class="six">
                   <div class="d-flex"></div>
                   <span>{{ user.coloCount.length }}</span>
-                  <div *ngFor="let user of users; index as i" class="d-flex">
+                  <div class="d-flex">
                     <!-- <span>{{ user.coloCount[i].colo }}</span> -->
                     <span *ngFor="colony of user.coloCount">{{ colony.colo }}</span>
                   </div>
