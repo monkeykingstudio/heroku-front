@@ -86,7 +86,7 @@
                   <div class="d-flex"></div>
                   <span>{{ user.coloCount.length }}</span>
                   <div *ngFor="let user of users; index as i" class="d-flex">
-                    <span>{{ user.colo[i].colo }}</span>
+                    <span *ngFor="let coloCount of user">{{ coloCount.colo }}</span>
                   </div>
                 </div>
               </div>
