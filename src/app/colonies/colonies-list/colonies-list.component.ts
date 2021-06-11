@@ -6,7 +6,6 @@ import { PopupService } from './../../services/popup.service';
 import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import * as moment from 'moment';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { UsersService } from './../../services/user.service';
 
 @Component({
   selector: 'app-colonies-list',
@@ -17,7 +16,7 @@ export class ColoniesListComponent implements OnInit {
   allColonies$: Observable<Colony[]>;
   DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss ZZ';
 
-  userId: string;
+  // userId: string;
 
   colonyForm: FormGroup;
   nameCtrl: FormControl;
@@ -49,8 +48,7 @@ export class ColoniesListComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public colonyService: ColoniesService,
-    public popupService: PopupService,
-    public usersService: UsersService
+    public popupService: PopupService
   ) {}
 
   ngOnInit(): void {
@@ -116,7 +114,6 @@ export class ColoniesListComponent implements OnInit {
 
     console.log(newColony);
     this.colonyService.createColony(newColony).subscribe(() => { // subscribe pour reload le allcounter$ apres l'execution en BDD
-    this.usersService.userColoAdd();
     this.resetPopup();
     this.reloadColonies();
     });
