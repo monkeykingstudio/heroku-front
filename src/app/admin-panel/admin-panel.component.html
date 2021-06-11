@@ -85,9 +85,9 @@
                 <div class="six">
                   <div class="d-flex"></div>
                   <span>{{ user.coloCount.length }}</span>
-                  <div *ngif="user.coloCount.length > 0" class="d-flex">
+                  <div *ngIf="user.coloCount.length > 0" class="d-flex">
                     <!-- <span>{{ user.coloCount[i].colo }}</span> -->
-                    <span *ngFor="colony of user.coloCount">{{ colony | json}}</span>
+                    <span *ngFor="colony of user.coloCount"> youssef -> {{ colony | json}}</span>
                   </div>
                 </div>
               </div>
