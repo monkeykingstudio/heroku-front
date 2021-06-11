@@ -27,6 +27,7 @@ import { TaskListComponent } from './task-manager/task-list/task-list.component'
 import { TaskComponent } from './task-manager/task/task.component';
 import { BreedSheetCreatorComponent } from './breed-sheet-creator/breed-sheet-creator.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     HttpClientModule,
     PopupModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    GoogleChartsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

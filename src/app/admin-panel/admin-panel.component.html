@@ -93,6 +93,17 @@
             </div>
           </div>
         </div>
+        <div class="col-sm-6 col md-3">
+          <google-chart #chart
+            [title]="title"
+            [type]="type"
+            [data]="data"
+            [columnNames]="columnNames"
+            [options]="options"
+            [width]="width"
+            [height]="height">
+          </google-chart>
+        </div>
       </div>
     </div>
   </div>
