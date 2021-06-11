@@ -35,20 +35,17 @@ export class UsersService {
     return this.http.post(`https://calm-waters-91692.herokuapp.com/api/auth/register`, userData);
   }
 
-  userColoAdd() {
-    console.log('user colo add !');
-    return this.http.post<any>(`${this.usersUrl}/inc`, {flag: 'dec'})
-    .pipe(
-      shareReplay()
-    );
-  }
+  // userColoAdd() {
+  //   console.log('user colo add !');
+  //   return this.http.post<any>(`${this.usersUrl}/inc`, {});
+  // }
 
-  userColoSub() {
-    return this.http.post<User>(`${this.usersUrl}`, {flag: 'dec'})
-    .pipe(
-      shareReplay()
-    );
-  }
+  // userColoSub() {
+  //   return this.http.post<User>(`${this.usersUrl}`, {})
+  //   .pipe(
+  //     shareReplay()
+  //   );
+  // }
   // userDelete(id: string) {
   //   return this.http.delete(`http://localhost:3000/users/${id}`);
   // }
