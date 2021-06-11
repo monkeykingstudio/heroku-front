@@ -83,7 +83,11 @@
                   <span>{{ user.role }}</span>
                 </div>
                 <div class="six">
+                  <div class="d-flex"></div>
                   <span>{{ user.coloCount.length }}</span>
+                  <div *ngFor="let colo of coloCount; index as i" class="d-flex">
+                    <span>{{ colo.colo }}</span>
+                  </div>
                 </div>
               </div>
             </div>
