@@ -8,7 +8,7 @@ import { BreedingSheet } from './../models/breedingSheet.model';
 import { map } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
 
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 import { Label } from 'ng2-charts';
 
 
@@ -35,7 +35,7 @@ export class AdminPanelComponent implements OnInit {
   public barChartPlugins = [];
 
   public chartData = [];
-  public barChartData: ChartDataSets[] = [
+  public barChartData: ChartDataset[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];

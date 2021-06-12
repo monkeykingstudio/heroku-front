@@ -29,7 +29,7 @@
     "chart.js": "^3.3.2",
     "express": "^4.17.1",
     "moment": "^2.29.1",
-    "ng2-charts": "^3.0.0-rc.2",
+    "ng2-charts": "^2.4.2",
     "ngx-spinner": "^11.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
