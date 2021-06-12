@@ -27,7 +27,11 @@ import { TaskListComponent } from './task-manager/task-list/task-list.component'
 import { TaskComponent } from './task-manager/task/task.component';
 import { BreedSheetCreatorComponent } from './breed-sheet-creator/breed-sheet-creator.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+
+import { Chart } from 'chart.js';
 import { ChartsModule } from 'ng2-charts';
+// import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 
 
 @NgModule({
@@ -61,6 +65,7 @@ import { ChartsModule } from 'ng2-charts';
     PopupModule,
     BrowserAnimationsModule,
     NgbModule,
+    Chart,
     ChartsModule
   ],
   providers: [

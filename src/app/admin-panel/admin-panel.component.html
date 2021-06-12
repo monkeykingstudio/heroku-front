@@ -94,14 +94,17 @@
           </div>
         </div>
         <div class="col-sm-6 col md-3">
-          <canvas baseChart
-          [datasets]="barChartData"
-          [labels]="barChartLabels"
-          [options]="barChartOptions"
-          [plugins]="barChartPlugins"
-          [legend]="barChartLegend"
-          [chartType]="barChartType">
-        </canvas>
+          <div>
+            <div style="display: block">
+              <canvas baseChart
+                [data]="barChartData"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [type]="barChartType">
+              </canvas>
+            </div>
+            <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
+          </div>
         </div>
       </div>
     </div>
