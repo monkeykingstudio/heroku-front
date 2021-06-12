@@ -134,7 +134,9 @@ export class AdminPanelComponent implements OnInit {
   computeData() {
     const groups = this.myArray
     .reduce((r, o) => {
+      console.log('r variable:', r);
       const m = o.date.split(('-'))[1];
+      console.log('m variable:', m);
       (r[m])
       ? r[m].data.push(o)
       : r[m] = {group: String(this.groupKey++), data: [o]};
