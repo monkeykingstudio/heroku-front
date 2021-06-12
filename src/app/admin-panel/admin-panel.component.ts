@@ -8,6 +8,9 @@ import { BreedingSheet } from './../models/breedingSheet.model';
 import { map } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
 
+import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
+
 
 @Component({
   selector: 'app-admin-panel',
@@ -21,22 +24,22 @@ export class AdminPanelComponent implements OnInit {
   breedingSheet$: Observable<BreedingSheet[]>;
   userColonies$: Observable<Colony[]>;
 
-  // charts bar
-  title = 'Users';
-  type = 'ColumnChart';
-  data = [
-     ['Name1', 5.0],
-     ['Name2', 36.8],
-     ['Name3', 42.8],
-     ['Name4', 18.5],
-     ['Name5', 16.2]
-  ];
-  columnNames = ['Date', 'Amount'];
-  options = {
-    colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'], is3D: true
+
+
+  public barChartOptions: ChartOptions = {
+    responsive: true,
   };
-  width = 500;
-  height = 300;
+  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [];
+
+  public chartData = [];
+  public barChartData: ChartDataSets[] = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+  ];
+
 
   constructor(
     public usersService: UsersService,

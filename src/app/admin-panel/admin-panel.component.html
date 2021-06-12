@@ -94,15 +94,14 @@
           </div>
         </div>
         <div class="col-sm-6 col md-3">
-          <google-chart #chart
-            [title]="title"
-            [type]="type"
-            [data]="data"
-            [columnNames]="columnNames"
-            [options]="options"
-            [width]="width"
-            [height]="height">
-          </google-chart>
+          <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
         </div>
       </div>
     </div>
