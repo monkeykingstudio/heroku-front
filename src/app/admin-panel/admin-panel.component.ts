@@ -8,9 +8,8 @@ import { BreedingSheet } from './../models/breedingSheet.model';
 import { map } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
 
-import { ChartDataset, ChartOptions } from 'chart.js';
+import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
-// import { ChartDataSets } from 'chart.js';
 
 
 
@@ -21,7 +20,7 @@ import { Color, Label } from 'ng2-charts';
 })
 export class AdminPanelComponent implements OnInit {
 
-  lineChartData: ChartDataset[] = [
+  lineChartData: ChartDataSets[] = [
     { data: [85, 72, 78, 75, 77, 75], label: 'Crude oil prices' },
   ];
 
