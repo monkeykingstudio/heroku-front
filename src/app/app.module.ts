@@ -30,9 +30,6 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 import { Chart } from 'chart.js';
 import { ChartsModule } from 'ng2-charts';
-// import ChartDataLabels from 'chartjs-plugin-datalabels';
-
-
 
 @NgModule({
   declarations: [
