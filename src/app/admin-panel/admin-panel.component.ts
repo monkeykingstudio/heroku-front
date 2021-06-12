@@ -122,8 +122,8 @@ export class AdminPanelComponent implements OnInit {
       // console.log(res.getMonth());
       // this.userData.push(res);
       console.log(this.userData);
-      for (let i = 0; i < this.userData.length; i++) {
-        console.log('loop ' + i, this.userData[i]);
+      for (let i = 0; i < res.length; i++) {
+        console.log('loop ' + i, res[i]);
       }
     }
     );
