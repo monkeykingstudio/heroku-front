@@ -20,6 +20,17 @@ import { Color, Label } from 'ng2-charts';
 })
 export class AdminPanelComponent implements OnInit {
 
+    myArray = [
+    {date: '2017-01-01', num: '2'},
+    {date: '2017-01-02', num: '3'},
+    {date: '2017-02-04', num: '6'},
+    {date: '2017-02-05', num: '15'}
+    ];
+
+    groupKey = 0;
+
+  userData = [];
+
   lineChartData: ChartDataSets[] = [
     {
       data: [0, 0, 0, 0, 2, 9, 0, 0, 0, 0, 0, 0],
@@ -79,7 +90,9 @@ export class AdminPanelComponent implements OnInit {
       map(users => users
         .filter(user => user.is_verified === false))
     );
+    this.computeData();
   }
+
 
   reloadUsers(): void {
     const users$ = this.usersService.usersGet();
@@ -98,5 +111,15 @@ export class AdminPanelComponent implements OnInit {
   reloadBreedingSheets(): void {
     const breedingSheets$ = this.breedingSheetsService.getAll();
     this.breedingSheet$ = breedingSheets$;
+  }
+
+  computeData() {
+    const groups = this.myArray.reduce((r, o) => {
+      const m = o.date.split(('-'))[1];
+      (r[m]) ? r[m].data.push(o) : r[m] = {group: String(this.groupKey++), data: [o]};
+      return r;
+    }, {});
+    const result = Object.keys(groups).map((k) => groups[k]);
+    console.log(result);
   }
 }
