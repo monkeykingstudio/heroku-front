@@ -21,10 +21,26 @@ import { Color, Label } from 'ng2-charts';
 export class AdminPanelComponent implements OnInit {
 
   lineChartData: ChartDataSets[] = [
-    { data: [85, 72, 78, 75, 77, 75], label: 'Crude oil prices' },
+    {
+      data: [0, 0, 0, 0, 2, 9, 0, 0, 0, 0, 0, 0],
+      label: 'User registrations'
+    },
   ];
 
-  lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June'];
+  lineChartLabels: Label[] = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
 
   lineChartOptions = {
     responsive: true,
@@ -32,8 +48,8 @@ export class AdminPanelComponent implements OnInit {
 
   lineChartColors: Color[] = [
     {
-      borderColor: 'black',
-      backgroundColor: 'rgba(255,255,0,0.28)',
+      borderColor: 'rgb(99 215 69)',
+      backgroundColor: 'rgb(99 215 69)',
     },
   ];
 
