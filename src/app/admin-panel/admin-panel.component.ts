@@ -48,7 +48,7 @@ export class AdminPanelComponent implements OnInit {
 
   lineChartColors: Color[] = [
     {
-      borderColor: 'rgb(99 215 69)',
+      borderColor: 'rgb(31 31 31)',
       backgroundColor: 'rgb(99 215 69)',
     },
   ];
