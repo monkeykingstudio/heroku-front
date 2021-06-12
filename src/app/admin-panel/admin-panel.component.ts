@@ -120,8 +120,11 @@ export class AdminPanelComponent implements OnInit {
         .map(user => user.created))
     ).subscribe((res) => {
       // console.log(res.getMonth());
-      this.userData.push(res);
+      // this.userData.push(res);
       console.log(this.userData);
+      for (let i = 0; i < this.userData.length; i++) {
+        console.log('loop ' + i, this.userData[i]);
+      }
     }
     );
 
