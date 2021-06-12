@@ -21,8 +21,9 @@ export class AdminPanelComponent implements OnInit {
   breedingSheet$: Observable<BreedingSheet[]>;
   userColonies$: Observable<Colony[]>;
 
+  // charts bar
   title = 'Users';
-  type = 'BarChart';
+  type = 'ColumnChart';
   data = [
      ['Name1', 5.0],
      ['Name2', 36.8],
