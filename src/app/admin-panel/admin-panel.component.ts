@@ -10,6 +10,7 @@ import { Colony } from '../colonies/colony.model';
 
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -98,7 +99,8 @@ export class AdminPanelComponent implements OnInit {
   constructor(
     public usersService: UsersService,
     public colonyService: ColoniesService,
-    public breedingSheetsService: BreedingSheetsService
+    public breedingSheetsService: BreedingSheetsService,
+    private datePipe: DatePipe
     ) { }
 
   ngOnInit(): void {
@@ -117,7 +119,9 @@ export class AdminPanelComponent implements OnInit {
       map(users => users
         .map(user => user.created))
     ).subscribe((res) => {
-      console.log(res);
+      // console.log(res.getMonth());
+      this.userData.push(res);
+      console.log(this.userData);
     }
     );
 
