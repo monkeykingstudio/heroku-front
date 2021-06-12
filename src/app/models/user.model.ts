@@ -9,4 +9,5 @@ export interface User {
   role: string;
   coloCount: [];
   newsletter?: boolean;
+  created?: any;
 }

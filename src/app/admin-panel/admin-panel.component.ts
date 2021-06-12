@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { UsersService } from './../services/user.service';
 import { User } from './../models/user.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
@@ -8,7 +8,7 @@ import { BreedingSheet } from './../models/breedingSheet.model';
 import { map } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
 
-import { ChartDataSets, ChartOptions } from 'chart.js';
+import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
 
@@ -19,6 +19,10 @@ import { Color, Label } from 'ng2-charts';
   styleUrls: ['./admin-panel.component.scss']
 })
 export class AdminPanelComponent implements OnInit {
+  public chartSub: Subscription;
+
+  userData = [];
+
 
   myArray = [
   {date: '30-05-2021'},
@@ -46,8 +50,6 @@ export class AdminPanelComponent implements OnInit {
     {month: 6},
     {month: 6}
   ];
-
-  userData = [];
 
   lineChartData: ChartDataSets[] = [
     {
@@ -88,6 +90,7 @@ export class AdminPanelComponent implements OnInit {
 
   allUsers$: Observable<User[]>;
   pendingUsers$: Observable<User[]>;
+  chartUsers$: Observable<User[]>;
   allColonies$: Observable<Colony[]>;
   breedingSheet$: Observable<BreedingSheet[]>;
   userColonies$: Observable<Colony[]>;
@@ -108,6 +111,16 @@ export class AdminPanelComponent implements OnInit {
       map(users => users
         .filter(user => user.is_verified === false))
     );
+
+    this.chartSub = this.allUsers$
+    .pipe(
+      map(users => users
+        .map(user => user.created))
+    ).subscribe((res) => {
+      console.log(res);
+    }
+    );
+
     this.computeData();
   }
 
@@ -134,9 +147,7 @@ export class AdminPanelComponent implements OnInit {
   computeData() {
     const groups = this.myArray
     .reduce((r, o) => {
-      console.log('r variable:', r);
       const m = o.date.split(('-'))[1];
-      console.log('m variable:', m);
       (r[m])
       ? r[m].data.push(o)
       : r[m] = {group: String(this.groupKey++), data: [o]};
