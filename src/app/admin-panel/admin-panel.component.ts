@@ -20,14 +20,32 @@ import { Color, Label } from 'ng2-charts';
 })
 export class AdminPanelComponent implements OnInit {
 
-    myArray = [
-    {date: '2017-01-01', num: '2'},
-    {date: '2017-01-02', num: '3'},
-    {date: '2017-02-04', num: '6'},
-    {date: '2017-02-05', num: '15'}
-    ];
+  myArray = [
+  {date: '30-05-2021'},
+  {date: '30-05-2021'},
+  {date: '01-06-2021'},
+  {date: '01-06-2021'},
+  {date: '01-06-2021'},
+  {date: '01-06-2021'},
+  {date: '01-06-2021'},
+  {date: '09-06-2021'},
+  {date: '09-06-2021'}
+  ];
 
-    groupKey = 0;
+  groupKey = 0;
+
+  userSampleData = [
+    {month: 5},
+    {month: 5},
+    {month: 5},
+    {month: 6},
+    {month: 6},
+    {month: 6},
+    {month: 6},
+    {month: 6},
+    {month: 6},
+    {month: 6}
+  ];
 
   userData = [];
 
@@ -114,12 +132,17 @@ export class AdminPanelComponent implements OnInit {
   }
 
   computeData() {
-    const groups = this.myArray.reduce((r, o) => {
+    const groups = this.myArray
+    .reduce((r, o) => {
       const m = o.date.split(('-'))[1];
-      (r[m]) ? r[m].data.push(o) : r[m] = {group: String(this.groupKey++), data: [o]};
+      (r[m])
+      ? r[m].data.push(o)
+      : r[m] = {group: String(this.groupKey++), data: [o]};
       return r;
     }, {});
-    const result = Object.keys(groups).map((k) => groups[k]);
+    const result = Object.keys(groups)
+    .map((k) => groups[k]);
+
     console.log(result);
   }
 }

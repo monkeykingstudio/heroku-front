@@ -42,6 +42,19 @@
       </div>
 
       <div class="row">
+        <div class="mt-4 col-sm-6">
+          <div class="chart-wrapper">
+            <canvas baseChart
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                [plugins]="lineChartPlugins">
+            </canvas>
+          </div>
+        </div>
         <div style="margin-top: 2rem;" class="col-sm-12 col-md-9">
           <div class="custom-table user-table">
             <div class="head">
@@ -92,19 +105,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-6 col md-3">
-          <div class="chart-wrapper">
-            <canvas baseChart
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-                [colors]="lineChartColors"
-                [legend]="lineChartLegend"
-                [chartType]="lineChartType"
-                [plugins]="lineChartPlugins">
-            </canvas>
-        </div>
         </div>
       </div>
     </div>
