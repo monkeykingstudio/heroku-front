@@ -55,7 +55,26 @@ export class ColonyComponent implements OnInit, OnDestroy {
 
   barChartOptions = {
     responsive: true,
-    scales: { xAxes: [{}], yAxes: [{}] }
+    scales: {
+      xAxes: [{
+      display: true,
+        scaleLabel: {
+          display: true,
+          labelString: ''
+        }
+      }],
+      yAxes: [{
+      display: true,
+      scaleLabel: {
+        display: true,
+        labelString: 'Amount'
+      },
+      ticks: {
+        beginAtZero: true,
+        steps: 5,
+        stepValue: 50,
+      }
+  }] }
   };
 
   public colors = [
