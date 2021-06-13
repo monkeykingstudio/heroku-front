@@ -29,6 +29,7 @@ import { BreedSheetCreatorComponent } from './breed-sheet-creator/breed-sheet-cr
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 import { ChartsModule } from 'ng2-charts';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule
   ],
   providers: [
+    DatePipe,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
   ],
