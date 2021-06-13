@@ -118,7 +118,7 @@ export class AdminPanelComponent implements OnInit {
     .pipe(
       map(users => users
         .map(user => user.created))
-    ).subscribe((res: any) => {
+    ).subscribe((res) => {
       // console.log(res.data[0]);
       console.log(res);
       // for (const element of res) {
