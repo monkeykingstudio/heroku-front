@@ -22,38 +22,13 @@ export class AdminPanelComponent implements OnInit {
   public chartSub: Subscription;
 
   private userData = [];
-
-
-  myArray = [
-  {date: '30-05-2021'},
-  {date: '30-05-2021'},
-  {date: '01-06-2021'},
-  {date: '01-06-2021'},
-  {date: '01-06-2021'},
-  {date: '01-06-2021'},
-  {date: '01-06-2021'},
-  {date: '09-06-2021'},
-  {date: '09-06-2021'}
-  ];
+  private chartUserData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
   groupKey = 0;
 
-  userSampleData = [
-    {month: 5},
-    {month: 5},
-    {month: 5},
-    {month: 6},
-    {month: 6},
-    {month: 6},
-    {month: 6},
-    {month: 6},
-    {month: 6},
-    {month: 6}
-  ];
-
   lineChartData: ChartDataSets[] = [
     {
-      data: [0, 0, 0, 0, 2, 9, 0, 0, 0, 0, 0, 0],
+      data: this.chartUserData,
       label: 'User registrations'
     },
   ];
@@ -121,9 +96,10 @@ export class AdminPanelComponent implements OnInit {
     )
     .subscribe((res) => {
       for (const item of res) {
-        this.userData.push(item);
+        this.userData.push({month: this.datePipe.transform(item, 'dd-MM-YYY')});
       }
-      console.log(this.userData);
+      this.computeData();
+      this.dispatchData();
     });
   }
 
@@ -148,17 +124,23 @@ export class AdminPanelComponent implements OnInit {
   }
 
   computeData() {
-    const groups = this.myArray
+    const groups = this.userData
     .reduce((r, o) => {
-      const m = o.date.split(('-'))[1];
+      const m = o.month.split(('-'))[1];
       (r[m])
       ? r[m].data.push(o)
-      : r[m] = {group: String(this.groupKey++), data: [o]};
+      : r[m] = {group: Number(m), data: [o]};
       return r;
     }, {});
     const result = Object.keys(groups)
     .map((k) => groups[k]);
-
-    console.log(result);
+    this.userData = result;
+    console.log('Computed Data', this.userData);
+  }
+  dispatchData() {
+    this.userData.forEach((group, index) => {
+      this.chartUserData.splice(group.group - 1, 1, group.data.length);
+    });
+    console.log(this.chartUserData);
   }
 }
