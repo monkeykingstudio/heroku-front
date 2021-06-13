@@ -133,13 +133,13 @@ export class AdminPanelComponent implements OnInit {
 
   reloadUsers(): void {
     const users$ = this.usersService.usersGet();
+    // this.userData.push(users$);
+    // console.log('userData:', this.userData);
     this.allUsers$ = users$;
   }
 
   reloadColonies(): void {
     const colonies$ = this.colonyService.loadAllUsersColonies();
-    this.userData.push(colonies$);
-    console.log('userData:', this.userData);
     this.allColonies$ = colonies$;
   }
 
