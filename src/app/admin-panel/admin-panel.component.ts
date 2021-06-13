@@ -123,7 +123,7 @@ export class AdminPanelComponent implements OnInit {
       // for (const element of res) {
       //   console.log(element);
       // }
-      this.userData.push(res);
+      res.map(u => this.userData.push(u));
     }
     );
 
