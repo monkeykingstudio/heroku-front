@@ -72,7 +72,7 @@
 
     <div *ngIf="counter.breed" class="d-flex align-items-end mt-3">
       <div class="d-flex flex-column">
-        <span class="types">Breed</span>
+        <span class="types">Brood</span>
         <div class="d-flex">
           <button class='green-btn sub' [ngClass]="{disabled: counter.breedCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('breedRef')">-</button>
           <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('breedRef')">+</button>
@@ -120,7 +120,7 @@
               (change)='counter.breed = !counter.breed; $event.stopPropagation()'
               formControlName="breed"
               class="form-check-input"/>
-              <label class="form-check-label">Breed counter</label>
+              <label class="form-check-label">Brood counter</label>
             </div>
           </div>
         </div>

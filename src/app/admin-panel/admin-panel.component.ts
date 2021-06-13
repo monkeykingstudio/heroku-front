@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { UsersService } from './../services/user.service';
 import { User } from './../models/user.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
 import { ColoniesService } from './../services/colonies.service';
 import { BreedingSheet } from './../models/breedingSheet.model';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
 
 import { ChartDataSets } from 'chart.js';
@@ -18,8 +18,8 @@ import { DatePipe } from '@angular/common';
   templateUrl: './admin-panel.component.html',
   styleUrls: ['./admin-panel.component.scss']
 })
-export class AdminPanelComponent implements OnInit {
-  public chartSub: Subscription;
+export class AdminPanelComponent implements OnInit, OnDestroy {
+  private chartSub: Subscription;
 
   private userData = [];
   private chartUserData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -123,6 +123,7 @@ export class AdminPanelComponent implements OnInit {
     this.breedingSheet$ = breedingSheets$;
   }
 
+  // Charts logic
   computeData() {
     const groups = this.userData
     .reduce((r, o) => {
@@ -137,10 +138,15 @@ export class AdminPanelComponent implements OnInit {
     this.userData = result;
     console.log('Computed Data', this.userData);
   }
+
   dispatchData() {
     this.userData.forEach((group, index) => {
       this.chartUserData.splice(group.group - 1, 1, group.data.length);
     });
     console.log(this.chartUserData);
+  }
+
+  ngOnDestroy(): void {
+    this.chartSub.unsubscribe();
   }
 }

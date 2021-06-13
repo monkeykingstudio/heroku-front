@@ -5,14 +5,28 @@
       <app-colony-header [colony]='colony'></app-colony-header>
       <app-colony-species-banner [breedSheet]='breedSheet'></app-colony-species-banner>
       <div class="body row">
-        <div class="col-sm-12 col-md-4 col-lg-3">
+        <div class="col-sm-12 col-md-6 col-lg-3">
+          <div class="mb-4 chart-box">
+            <div class="chart-wrapper">
+              <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [plugins]="barChartPlugins"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              [colors]="colors">
+              </canvas>
+            </div>
+
+          </div>
           <app-counter [colonyId]='colony.id' [counter]='colony.counter'></app-counter>
         </div>
 
-        <div class="col-sm-12 col-md-4 col-lg-6">
+        <div class="col-sm-12 col-md-6 col-lg-6">
           <app-task-manager [colonyId]='colony.id'></app-task-manager>
         </div>
-        <div class="col-sm-12 col-md-4 col-lg-3">
+        <div class="col-sm-12 col-md-6 col-lg-3">
 
         </div>
       </div>
