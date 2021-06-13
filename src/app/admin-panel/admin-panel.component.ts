@@ -5,7 +5,7 @@ import { User } from './../models/user.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
 import { ColoniesService } from './../services/colonies.service';
 import { BreedingSheet } from './../models/breedingSheet.model';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
 
 import { ChartDataSets } from 'chart.js';
@@ -118,12 +118,11 @@ export class AdminPanelComponent implements OnInit {
     .pipe(
       map(users => users
         .map(user => user.created))
-    ).subscribe((res) => {
-      console.log(res);
+    ).subscribe((res: any) => {
+      console.log(res.data);
       // for (const element of res) {
       //   console.log(element);
       // }
-      res.map(u => this.userData.push(u));
     }
     );
 
