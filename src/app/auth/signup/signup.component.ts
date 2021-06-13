@@ -7,9 +7,6 @@ import { MailService } from '../../services/mail.service';
 
 import { User } from './../../models/user.model';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -111,7 +108,6 @@ export class SignupComponent implements OnInit {
     }, () => {
       console.log('mail is sent!');
     });
-
   }
 
   private prepareForm() {

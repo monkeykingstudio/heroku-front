@@ -1,0 +1,48 @@
+:host {
+  width: 100%;
+}
+.breedsheet-container {
+  height: calc(100vh - 10rem);
+  .breedsheet {
+    position: relative;
+    background-color: white;
+    border-radius: 0.5rem;
+    border-bottom: 0.2rem solid #bdbdbd;
+    padding: 2rem;
+    min-height: 100%;
+  }
+}
+
+.form-group {
+  button {
+  padding: 1rem 2rem;
+  max-width: 4rem;
+  text-transform: uppercase;
+  border-radius: 0 .5rem .5rem 0!important;
+  }
+}
+
+select {
+  min-height: 4rem;
+  color: #6c757d;
+  padding: 6px 9px !important;
+  width: 100%;
+}
+
+.btn-select {
+  border-radius: .5rem 0 0 .5rem !important;
+}
+
+form .custom-file-label,
+input[type=text],
+input[type=file],
+form input[type=email],
+form input[type=password],
+form input[type=tel],
+form input[type=search],
+form input[type=url],
+form input[type=number],
+form textarea,
+form select {
+  padding: 6px 14px!important;
+}
