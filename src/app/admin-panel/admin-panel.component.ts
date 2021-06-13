@@ -21,7 +21,7 @@ import { DatePipe } from '@angular/common';
 export class AdminPanelComponent implements OnInit {
   public chartSub: Subscription;
 
-  userData = [];
+  private userData = [];
 
 
   myArray = [
@@ -120,10 +120,10 @@ export class AdminPanelComponent implements OnInit {
         .map(user => user.created))
     ).subscribe((res) => {
       console.log(res);
-      this.userData = res;
-      for (const element of res) {
-        console.log(element);
-      }
+      // for (const element of res) {
+      //   console.log(element);
+      // }
+      this.userData.push(res);
     }
     );
 
