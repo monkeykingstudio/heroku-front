@@ -121,14 +121,13 @@ export class AdminPanelComponent implements OnInit {
     ).subscribe((res) => {
       console.log(res);
       // this.userData.push(res);
-      console.log(this.userData);
       // for (let i = 0; i < res.length; i++) {
       //   console.log('loop ' + i, res);
       // }
     }
     );
 
-    this.computeData();
+    // this.computeData();
   }
 
 
@@ -139,6 +138,8 @@ export class AdminPanelComponent implements OnInit {
 
   reloadColonies(): void {
     const colonies$ = this.colonyService.loadAllUsersColonies();
+    this.userData.push(colonies$);
+    console.log('userData:' this.userData);
     this.allColonies$ = colonies$;
   }
 
