@@ -72,7 +72,7 @@ export class ColonyComponent implements OnInit, OnDestroy {
       ticks: {
         beginAtZero: true,
         steps: 5,
-        stepValue: 50,
+        stepValue: 100,
       }
   }] }
   };
