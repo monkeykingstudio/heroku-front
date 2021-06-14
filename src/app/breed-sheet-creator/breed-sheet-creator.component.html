@@ -1,6 +1,11 @@
 <div class="row">
   <div class="breedsheet-container col-sm-12">
+
     <div class="breedsheet">
+      <div style="text-align: center;" class="mb-4">
+        <i class="breedsheetcreator-icon"></i>
+        <h2>Breedingsheet <span>Creator</span></h2>
+      </div>
       <form style='margin:auto' [formGroup]="breedSheetForm" (ngSubmit)="add()" autocomplete="off" class="form-group col-md-8 mt-4">
       <div class="form-row mb-4">
         <div class="form-group col-md-3">
@@ -15,21 +20,55 @@
         <select class="btn-select" formControlName='food' id="food">
           <option>select food</option>
         </select>
-        <button>add</button>
+        <button>+ add</button>
       </div>
 
       <div class="form-group flex-row mb-4">
         <select class="btn-select" formControlName='food' id="food">
           <option>select region</option>
         </select>
-        <button>add</button>
+        <button>+ add</button>
+      </div>
 
+      <div class="form-group flex-row mb-4">
+        <select formControlName='food' id="food">
+          <option>select difficulty</option>
+        </select>
       </div>
 
 
-      <div class="form-group mb-4">
-        <input placeholder="regions" type="text" class="form-control" formControlName="pseudo">
-      </div>
+
+        <div style="flex-wrap:wrap" class="d-flex">
+          <div style="margin-right:2rem;margin-left:.5rem" class="d-flex  switch mb-4 flex-row align-items-center">
+            <span style="margin-right:1rem">Polygyne</span>
+            <div class="on-off-toggle">
+              <input formControlName='polygyne' class="on-off-toggle__input" type="checkbox" id="polygyne" />
+              <label for="polygyne" class="on-off-toggle__slider"></label>
+            </div>
+          </div>
+          <div style="margin-right:2rem" class="d-flex  switch mb-4 flex-row align-items-center">
+            <span style="margin-right:1rem">Polymorphism</span>
+            <div class="on-off-toggle">
+              <input formControlName='polymorphism' class="on-off-toggle__input" type="checkbox" id="polymorphism" />
+              <label for="polymorphism" class="on-off-toggle__slider"></label>
+            </div>
+          </div>
+          <div style="margin-right:2rem" class="d-flex  switch mb-4 flex-row align-items-center">
+            <span style="margin-right:1rem">Semi-claustral</span>
+            <div class="on-off-toggle">
+              <input formControlName='polymorphism' class="on-off-toggle__input" type="checkbox" id="polymorphism" />
+              <label for="polymorphism" class="on-off-toggle__slider"></label>
+            </div>
+          </div>
+          <div style="margin-right:2rem" class="d-flex c switch mb-4 flex-row align-items-center">
+            <span style="margin-right:1rem">Need diapause</span>
+            <div class="on-off-toggle">
+              <input formControlName='polymorphism' class="on-off-toggle__input" type="checkbox" id="polymorphism" />
+              <label for="polymorphism" class="on-off-toggle__slider"></label>
+            </div>
+          </div>
+        </div>
+
       </form>
     </div>
   </div>

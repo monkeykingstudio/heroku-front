@@ -13,22 +13,6 @@
   }
 }
 
-.form-group {
-  button {
-  padding: 1rem 2rem;
-  max-width: 4rem;
-  text-transform: uppercase;
-  border-radius: 0 .5rem .5rem 0!important;
-  }
-}
-
-select {
-  min-height: 4rem;
-  color: #6c757d;
-  padding: 6px 9px !important;
-  width: 100%;
-}
-
 .btn-select {
   border-radius: .5rem 0 0 .5rem !important;
 }
@@ -44,5 +28,31 @@ form input[type=url],
 form input[type=number],
 form textarea,
 form select {
-  padding: 6px 14px!important;
+  padding: 6px 14px;
+}
+.form-group {
+  button {
+  padding: 1rem 2rem;
+  min-width: 8rem;
+  text-transform: uppercase;
+  border-radius: 0 .5rem .5rem 0!important;
+  }
+}
+
+i {
+  margin: 3rem 3rem 1rem 3rem!important;
+}
+
+h2 {
+  margin-bottom: 5rem;
+  span {
+    color: #62d744;
+  }
+}
+
+select {
+  min-height: 4rem;
+  color: #6c757d;
+  padding: 6px 9px !important;
+  width: 100%;
 }

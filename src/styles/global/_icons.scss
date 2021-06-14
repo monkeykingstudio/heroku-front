@@ -184,6 +184,20 @@
   }
 }
 
+.breedsheetcreator-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/breedsheetcreator.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 12rem;
+      height: 12rem;
+      margin: 3rem;
+  }
+}
+
 .success-icon {
   &:before {
       content: '';
