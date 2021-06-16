@@ -1,72 +1,338 @@
 <div class="row">
   <div class="breedsheet-container col-sm-12">
-
     <div class="breedsheet">
       <div style="text-align: center;" class="mb-4">
         <i class="breedsheetcreator-icon"></i>
-        <h2>Breedingsheet <span>Creator</span></h2>
+        <h2>Breedsheet <span>Creator</span></h2>
       </div>
+
       <form style='margin:auto' [formGroup]="breedSheetForm" (ngSubmit)="add()" autocomplete="off" class="form-group col-md-8 mt-4">
-      <div class="form-row mb-4">
-        <div class="form-group col-md-3">
-          <input placeholder="species" class="form-control" type="text" formControlName="species" />
+        <div style='padding:1rem 0' class="col-sm-12">
+          <span class="labels">Taxonomy</span>
         </div>
-        <div class="form-group col-md-3">
-          <input placeholder="subspecies" class="form-control" type="text" formControlName="subspecies"/>
+        <div class="form-row mb-4">
+          <div class="form-group col-md-3">
+            <span class="labels mb-2">Genre</span>
+            <input placeholder="genre" class="form-control" type="text" formControlName="genre"/>
+          </div>
+          <div class="form-group col-md-3">
+            <span class="labels mb-2">Species</span>
+            <input placeholder="select a species" class="form-control" type="text" formControlName="species" />
+          </div>
+          <div class="form-group col-md-3">
+            <span class="labels mb-2">Family</span>
+            <input placeholder="family" class="form-control" type="text" formControlName="family"/>
+          </div>
+          <div class="form-group col-md-3">
+            <span class="labels mb-2">Tribu</span>
+            <input placeholder="tribu" class="form-control" type="text" formControlName="tribu"/>
+          </div>
         </div>
-      </div>
+        <div style='padding:1rem 0' class="col-sm-12">
+          <span class="labels">Gyne Pictures</span>
+        </div>
+        <div class="form-group flex-row mb-4">
+          <input class="btn-select form-control" placeholder="paste gyne picture url"  type="text" formControlName="gynepicture"/>
+          <button (click)="addGynePicture()" type="button" class="green-btn btn-add">+ add</button>
+        </div>
+         <!-- // error url -->
+         <span class="animate__animated animate__fadeInDown badge-invalid mb-4" *ngIf='unvalidGynePictureUrl'>URL format is invalid!</span>
+        <div *ngIf="gynepictures.length > 0" class="d-flex align-items-center badges mb-4">
+          <span *ngFor="let gynePicture of gynepictures" class="badge">{{ gynePicture }}</span>
+        </div>
+        <div style='padding:1rem 0' class="col-sm-12">
+          <span class="labels">Other Pictures</span>
+        </div>
+        <div class="form-group flex-row mb-4">
+          <input class="btn-select form-control" placeholder="paste picture url"  type="text" formControlName="picture"/>
+          <button (click)="addOtherPicture()" type="button" class="green-btn btn-add">+ add</button>
+        </div>
+         <!-- // error url -->
+         <span class="animate__animated animate__fadeInDown badge-invalid mb-4" *ngIf='unvalidPictureUrl'>URL format is invalid!</span>
+        <div *ngIf="pictures.length > 0" class="d-flex align-items-center badges mb-4">
+          <span *ngFor="let picture of pictures" class="badge">{{ picture }}</span>
+        </div>
+        <div class="form-group flex-row">
+          <select #region [(ngModel)]="defaultRegionList" class="btn-select" formControlName='region' id="region">
+            <option *ngFor="let region of regionList" [value]="region.valeur">{{region.valeur}}</option>
+          </select>
+          <button (click)="addRegion()" type="button" class="green-btn btn-add">+ add</button>
+        </div>
+        <span class="help-legend  mb-4"><i>select up to 3 regions</i></span>
+        <div *ngIf="regions.length > 0" class="d-flex align-items-center badges mb-4">
+          <span *ngFor="let region of regions" class="badge">{{ region }}</span>
+        </div>
+        <div class="form-group flex-row">
+          <select [(ngModel)]="defaultFoodList" #food class="btn-select" formControlName='food' id="food">
+            <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
+          </select>
+          <button (click)="addFood()" type="button" class="green-btn btn-add">+ add</button>
+        </div>
+        <span class="help-legend  mb-4"><i>select up to 3 food types</i></span>
 
-      <div class="form-group flex-row mb-4">
-        <select class="btn-select" formControlName='food' id="food">
-          <option>select food</option>
-        </select>
-        <button>+ add</button>
-      </div>
+        <div *ngIf="foods.length > 0" class="d-flex align-items-center badges mb-4">
+          <span *ngFor="let food of foods" class="badge">{{ food }}</span>
+        </div>
 
-      <div class="form-group flex-row mb-4">
-        <select class="btn-select" formControlName='food' id="food">
-          <option>select region</option>
-        </select>
-        <button>+ add</button>
-      </div>
-
-      <div class="form-group flex-row mb-4">
-        <select formControlName='food' id="food">
-          <option>select difficulty</option>
-        </select>
-      </div>
-
-
-
+        <div class="form-group flex-column mb-4">
+          <select [(ngModel)]="defaultDifficultyList" #difficulty formControlName='difficulty' id="difficulty">
+            <option *ngFor="let difficulty of difficulties" [value]="difficulty.valeur">{{difficulty.valeur}}</option>
+          </select>
+          <span class="help-legend"><i>how difficult it is to breed this species</i></span>
+        </div>
         <div style="flex-wrap:wrap" class="d-flex">
-          <div style="margin-right:2rem;margin-left:.5rem" class="d-flex  switch mb-4 flex-row align-items-center">
+          <div style="margin-right:2rem" class="d-flex  switch mb-4 flex-row align-items-center">
             <span style="margin-right:1rem">Polygyne</span>
             <div class="on-off-toggle">
-              <input formControlName='polygyne' class="on-off-toggle__input" type="checkbox" id="polygyne" />
+              <input
+                type="checkbox"
+                formControlName="polygyne"
+                class="on-off-toggle__input"
+                id="polygyne"
+                [value]='false'
+                (change)="polySwitch()"
+              />
               <label for="polygyne" class="on-off-toggle__slider"></label>
             </div>
           </div>
           <div style="margin-right:2rem" class="d-flex  switch mb-4 flex-row align-items-center">
             <span style="margin-right:1rem">Polymorphism</span>
             <div class="on-off-toggle">
-              <input formControlName='polymorphism' class="on-off-toggle__input" type="checkbox" id="polymorphism" />
+              <input
+              type="checkbox"
+              formControlName="polymorphism"
+              class="on-off-toggle__input"
+              id="polymorphism"
+              [value]='false'
+              (change)="morphSwitch()"
+            />
               <label for="polymorphism" class="on-off-toggle__slider"></label>
             </div>
           </div>
           <div style="margin-right:2rem" class="d-flex  switch mb-4 flex-row align-items-center">
             <span style="margin-right:1rem">Semi-claustral</span>
             <div class="on-off-toggle">
-              <input formControlName='polymorphism' class="on-off-toggle__input" type="checkbox" id="polymorphism" />
-              <label for="polymorphism" class="on-off-toggle__slider"></label>
+              <input
+              type="checkbox"
+              formControlName="semiclaustral"
+              class="on-off-toggle__input"
+              id="semiclaustral"
+              [value]='false'
+              (change)="claustralSwitch()"
+            />
+              <label for="semiclaustral" class="on-off-toggle__slider"></label>
             </div>
           </div>
           <div style="margin-right:2rem" class="d-flex c switch mb-4 flex-row align-items-center">
             <span style="margin-right:1rem">Need diapause</span>
             <div class="on-off-toggle">
-              <input formControlName='polymorphism' class="on-off-toggle__input" type="checkbox" id="polymorphism" />
-              <label for="polymorphism" class="on-off-toggle__slider"></label>
+              <input
+              type="checkbox"
+              formControlName="needdiapause"
+              class="on-off-toggle__input"
+              id="needdiapause"
+              [value]='false'
+              (change)="diapauseSwitch()"
+            />
+              <label for="needdiapause" class="on-off-toggle__slider"></label>
             </div>
           </div>
+          <div style="margin-right:2rem" class="d-flex c switch mb-4 flex-row align-items-center">
+            <span style="margin-right:1rem">Trophalaxy</span>
+            <div class="on-off-toggle">
+              <input
+              type="checkbox"
+              formControlName="trophalaxy"
+              class="on-off-toggle__input"
+              id="trophalaxy"
+              [value]='false'
+              (change)="trophaSwitch()"
+            />
+              <label for="trophalaxy" class="on-off-toggle__slider"></label>
+            </div>
+          </div>
+          <div style="margin-right:2rem" class="d-flex c switch mb-4 flex-row align-items-center">
+            <span style="margin-right:1rem">HA drinker</span>
+            <div class="on-off-toggle">
+              <input
+              type="checkbox"
+              formControlName="drinker"
+              class="on-off-toggle__input"
+              id="drinker"
+              [value]='false'
+              (change)="drinkSwitch()"
+            />
+              <label for="drinker" class="on-off-toggle__slider"></label>
+            </div>
+          </div>
+          <div style="margin-right:2rem" class="d-flex c switch mb-4 flex-row align-items-center">
+            <span style="margin-right:1rem">Driller</span>
+            <div class="on-off-toggle">
+              <input
+              type="checkbox"
+              formControlName="driller"
+              class="on-off-toggle__input"
+              id="drinker"
+              [value]='false'
+              (change)="drillSwitch()"
+            />
+              <label for="driller" class="on-off-toggle__slider"></label>
+            </div>
+          </div>
+
+          <div class="form-row mb-4 col-sm-12">
+              <div style='padding:1rem' class="col-sm-12">
+                <span class="labels">Specimens size</span>
+              </div>
+              <div class="form-group col-md-3 flex-row align-items-center">
+                <input placeholder="gyne size" class="form-control" type="number" formControlName="gynesize" />
+                <span class="unit">mm</span>
+              </div>
+              <div class="form-group col-md-3 flex-row align-items-center">
+                <input placeholder="male size" class="form-control" type="number" formControlName="malesize" />
+                <span class="unit">mm</span>
+              </div>
+              <div class="form-group col-md-3 flex-row align-items-center">
+                <input placeholder="worker size" class="form-control" type="number" formControlName="workersize"/>
+                <span class="unit">mm</span>
+              </div>
+              <div class="form-group col-md-3 flex-row align-items-center">
+                <input placeholder="major size" class="form-control" type="number" formControlName="majorsize"/>
+                <span class="unit">mm</span>
+              </div>
+          </div>
+
+          <div class="form-row mb-4 col-sm-12">
+            <div style='padding:1rem' class="col-sm-12">
+              <span class="labels">Life expectancy</span>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <input placeholder="gyne life expectancy" class="form-control" type="number" formControlName="gynelives" />
+              <span class="unit">years</span>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <input placeholder="worker life expectancy" class="form-control" type="number" formControlName="workerlives"/>
+              <span class="unit">years</span>
+            </div>
+          </div>
+
+          <div class="form-row mb-4 col-sm-12">
+            <div style='padding:1rem' class="col-sm-12">
+              <span class="labels">Swarming period</span>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <select [(ngModel)]="defaultSwarmStart" #swarmstart formControlName='swarmstart' id="swarmstart">
+                <option *ngFor="let swarmstart of monthList" [value]="swarmstart.valeur">{{swarmstart.valeur}}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <select [(ngModel)]="defaultSwarmEnd" #swarmend formControlName='swarmend' id="swarmend">
+                <option *ngFor="let swarmend of monthList" [value]="swarmend.valeur">{{swarmend.valeur}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row mb-4 col-sm-12">
+            <div style='padding:1rem' class="col-sm-12">
+              <span class="labels">Diapause period</span>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <select [(ngModel)]="defaultDiapauseStart" #diapausestart formControlName='diapausestart' id="diapausestart">
+                <option *ngFor="let diapausestart of monthList" [value]="diapausestart.valeur">{{diapausestart.valeur}}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <select [(ngModel)]="defaultDiapauseEnd" #diapauseend formControlName='diapauseend' id="diapauseend">
+                <option *ngFor="let diapauseend of monthList" [value]="diapauseend.valeur">{{diapauseend.valeur}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row mb-4 col-sm-12">
+            <div style='padding:1rem' class="col-sm-12">
+              <span class="labels">Recommended temperatures</span>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <select [(ngModel)]="defaultTemperatureStart" #temperaturestart formControlName='temperaturestart' id="temperaturestart">
+                <option *ngFor="let temperaturestart of temperatureList" [value]="temperaturestart.valeur">{{temperaturestart.valeur}}</option>
+              </select>
+              <span class="unit">°C</span>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <select [(ngModel)]="defaultTemperatureEnd" #temperatureend formControlName='temperatureend' id="temperatureend">
+                <option *ngFor="let temperatureend of temperatureList" [value]="temperatureend.valeur">{{temperatureend.valeur}}</option>
+              </select>
+              <span class="unit">°C</span>
+            </div>
+          </div>
+
+          <div class="form-row mb-4 col-sm-12">
+            <div style='padding:.8rem' class="col-sm-12">
+              <span class="labels">Diapause recommended temperatures</span>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <select [(ngModel)]="defaultDiapauseTemperatureStart" #diapausetemperaturestart formControlName='diapausetemperaturestart' id="diapausetemperaturestart">
+                <option *ngFor="let diapausetemperaturestart of temperatureList" [value]="diapausetemperaturestart.valeur">{{diapausetemperaturestart.valeur}}</option>
+              </select>
+              <span class="unit">°C</span>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <select [(ngModel)]="defaultDiapauseTemperatureEnd" #diapausetemperatureend formControlName='diapausetemperatureend' id="diapausetemperatureend">
+                <option *ngFor="let diapausetemperatureend of temperatureList" [value]="diapausetemperatureend.valeur">{{diapausetemperatureend.valeur}}</option>
+              </select>
+              <span class="unit">°C</span>
+            </div>
+          </div>
+
+          <div class="form-row mb-4 col-sm-12">
+            <div style='padding:.8rem' class="col-sm-12">
+              <span class="labels">Recommended hygrometry</span>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <select [(ngModel)]="defaultHygrometryStart" #hygrometrystart formControlName='hygrometrystart' id="hygrometrystart">
+                <option *ngFor="let hygrometrystart of hygrometryList" [value]="hygrometrystart.valeur">{{hygrometrystart.valeur}}</option>
+              </select>
+              <span class="unit">%</span>
+            </div>
+            <div class="form-group col-md-6 flex-row align-items-center">
+              <select [(ngModel)]="defaultHygrometryEnd" #hygrometryend formControlName='hygrometryend' id="hygrometryend">
+                <option *ngFor="let hygrometryend of hygrometryList" [value]="hygrometryend.valeur">{{hygrometryend.valeur}}</option>
+              </select>
+              <span class="unit">%</span>
+            </div>
+            <div style='padding:.8rem' class="col-sm-12 mb-2">
+              <span class="labels">Nest type</span>
+            </div>
+            <div class="form-group col-sm-12 flex-row align-items-center mb-4">
+              <select [(ngModel)]="defaultNestType" #nesttype formControlName='nesttype' id="nesttype">
+                <option *ngFor="let nesttype of nestTypeList" [value]="nesttype.valeur">{{nesttype.valeur}}</option>
+              </select>
+            </div>
+            <div style='padding:.8rem' class="col-sm-12">
+              <span class="labels">Max population</span>
+            </div>
+            <div class="form-group col-sm-12 flex-row align-items-center mb-4">
+              <input placeholder="set a value" class="form-control" type="number" formControlName="maxpopulation"/>
+              <span class="unit">thousands</span>
+            </div>
+            <!-- <div style='padding:.8rem' class="col-sm-12">
+              <span class="labels">Sources citations</span>
+            </div> -->
+            <!-- <div class="form-group flex-row mb-4">
+              <div class="form-group col-md-4 flex-row align-items-center">
+                <input class="form-control" placeholder="paste link url"  type="text" formControlName="sourcelink"/>
+              </div>
+              <div style="padding-right:0" class="form-group col-md-4 flex-row align-items-center">
+                <input class="btn-select form-control" placeholder="website"  type="text" formControlName="sourcetext"/>
+              </div>
+              <button type="button" class="green-btn btn-add">+ add</button>
+            </div> -->
+          </div>
+
+        </div>
+        <div style="justify-content: space-evenly;margin-top:4rem" class="d-flex">
+          <button class="btn-send red-btn" type="button">cancel</button>
+          <button class="btn-send green-btn" type="submit">create breedsheet</button>
         </div>
 
       </form>

@@ -16,8 +16,8 @@ import { RoleGuard } from './guards/role.guard';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'adminpanel', component: AdminPanelComponent, canActivate: [RoleGuard] },
-  { path: 'adminpanel/breedsheetcreator', component: BreedSheetCreatorComponent, canActivate: [RoleGuard] },
+  { path: 'adminpanel', component: AdminPanelComponent, canActivate: [RoleGuard, AuthGuard] },
+  { path: 'adminpanel/breedsheetcreator', component: BreedSheetCreatorComponent, canActivate: [RoleGuard, AuthGuard] },
   { path: 'colonies', component: ColoniesListComponent, canActivate: [AuthGuard]},
   { path: 'colonies/:colonyId', component: ColonyComponent,  canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },

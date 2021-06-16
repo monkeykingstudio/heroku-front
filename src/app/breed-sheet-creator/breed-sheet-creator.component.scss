@@ -1,6 +1,10 @@
 :host {
   width: 100%;
 }
+.btn-send {
+  width: 20rem;
+  border-radius: .5rem!important;
+}
 .breedsheet-container {
   height: calc(100vh - 10rem);
   .breedsheet {
@@ -17,6 +21,15 @@
   border-radius: .5rem 0 0 .5rem !important;
 }
 
+.help-legend {
+  font-size: 1rem;
+  color: #adadad;
+  font-weight: bold;
+  i {
+    margin: 0!important;
+  }
+}
+
 form .custom-file-label,
 input[type=text],
 input[type=file],
@@ -31,11 +44,42 @@ form select {
   padding: 6px 14px;
 }
 .form-group {
-  button {
+  .btn-add {
   padding: 1rem 2rem;
   min-width: 8rem;
   text-transform: uppercase;
   border-radius: 0 .5rem .5rem 0!important;
+  }
+}
+
+.labels {
+  font-weight: bold;
+}
+
+.unit {
+  margin-left: 1rem;
+  font-size: 1.4rem;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  .badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    max-width: 14rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: #62d744;
+    vertical-align: baseline;
+    border-radius: 10rem;
+    margin-right: .5rem;
   }
 }
 
@@ -44,7 +88,7 @@ i {
 }
 
 h2 {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   span {
     color: #62d744;
   }
