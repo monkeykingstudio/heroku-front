@@ -24,4 +24,11 @@ export class BreedingSheetsService {
       map(result => result['sheet']),
     );
   }
+
+  createSheet(sheet) {
+    return this.http.post<BreedingSheet>(this.breedingSheetsUrl, sheet)
+    .pipe(
+      shareReplay()
+    );
+  }
 }

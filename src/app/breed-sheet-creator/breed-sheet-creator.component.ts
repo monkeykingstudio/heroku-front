@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { BreedingSheet } from './../models/breedingSheet.model';
+import { BreedingSheetsService } from './../services/breedingSheetsService';
 
 @Component({
   selector: 'app-breed-sheet-creator',
@@ -117,17 +118,16 @@ export class BreedSheetCreatorComponent implements OnInit {
   ];
 
 
-
-  defaultTribuList = 'oecophylla ';
-  tribusList: Array<object> = [
-    {id: 0, valeur: 'oecophylla '},
-    {id: 1, valeur: 'dolichoderus thoracicus'},
-    {id: 2, valeur: 'formica '},
-    {id: 3, valeur: 'Azteca'},
-    {id: 4, valeur: 'Wasmannia auropunctata'},
-    {id: 5, valeur: 'Anoplolepis'},
-    {id: 6, valeur: 'Solenopsis'}
-  ];
+  // defaultTribuList = 'oecophylla ';
+  // tribusList: Array<object> = [
+  //   {id: 0, valeur: 'oecophylla '},
+  //   {id: 1, valeur: 'dolichoderus thoracicus'},
+  //   {id: 2, valeur: 'formica '},
+  //   {id: 3, valeur: 'Azteca'},
+  //   {id: 4, valeur: 'Wasmannia auropunctata'},
+  //   {id: 5, valeur: 'Anoplolepis'},
+  //   {id: 6, valeur: 'Solenopsis'}
+  // ];
 
   public regions: any = [];
   defaultRegionList = 'europa (tempered)';
@@ -197,7 +197,7 @@ export class BreedSheetCreatorComponent implements OnInit {
   // get sourcetext() { return this.breedSheetForm.controls['sourcetext']; }
 
 
-  constructor() {
+  constructor(public breedingSheetsService: BreedingSheetsService) {
     this.prepareForm();
   }
 
@@ -332,6 +332,7 @@ export class BreedSheetCreatorComponent implements OnInit {
   add() {
     const inputs = this.formControls;
     this.breedData = {
+      creator: null,
       status: 'pending',
       genre: inputs.genre.value,
       species: inputs.species.value,
@@ -388,6 +389,10 @@ export class BreedSheetCreatorComponent implements OnInit {
       maxPopulation: inputs.maxpopulation.value
     };
     console.log(this.breedData);
+    this.breedingSheetsService.createSheet(this.breedData)
+    .subscribe((res) => {
+      console.log(res);
+    });
   }
 
 }

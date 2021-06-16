@@ -1,4 +1,5 @@
 export class BreedingSheet {
+  creator: string;
   status: string;
   genre: string;
   species: string;
