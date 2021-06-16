@@ -80,8 +80,9 @@
             </div>
 
             <label for="species">Select species</label>
-            <select formControlName='species' class="" id="species">
-              <option *ngFor="let optionsSpecie of optionsSpecies" [ngValue]="optionsSpecie">{{optionsSpecie}}</option>
+
+            <select style="height: inherit;padding: .8rem;max-height:inherit" [(ngModel)]="defaultSpecies" #species formControlName='species' class="mb-4" id="species">
+              <option *ngFor="let species of optionsSpecies" [value]="species.species">{{species.species}}</option>
             </select>
 
             <label for="date">Creation date <pre>*</pre></label>

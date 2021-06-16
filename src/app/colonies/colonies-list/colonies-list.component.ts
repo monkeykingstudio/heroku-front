@@ -6,17 +6,24 @@ import { PopupService } from './../../services/popup.service';
 import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import * as moment from 'moment';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { BreedingSheetsService } from './../../services/breedingSheetsService';
+import { BreedingSheet } from 'src/app/models/breedingSheet.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-colonies-list',
   templateUrl: './colonies-list.component.html',
   styleUrls: ['./colonies-list.component.scss']
 })
+
 export class ColoniesListComponent implements OnInit {
   allColonies$: Observable<Colony[]>;
-  DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss ZZ';
+  allbreedingSheets$: Observable<BreedingSheet[]>;
+  species$: Observable<string[]>;
 
-  // userId: string;
+  private sheetSub: Subscription;
+
+  DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss ZZ';
 
   colonyForm: FormGroup;
   nameCtrl: FormControl;
@@ -33,28 +40,22 @@ export class ColoniesListComponent implements OnInit {
   model: NgbDateStruct;
 
   dateCheck = true;
-
   switch = false;
 
-  optionsSpecies: Array<string> = [
-    // 'unknown (can be edited later)',
-    'lasius niger',
-    'myrmica rubra'
-    // 'messor barbarus',
-    // 'tetramorium',
-    // 'solonepsis fugax'
-  ];
+  defaultSpecies = 'lasius niger';
+  optionsSpecies: Array<object> = [];
 
   constructor(
     private fb: FormBuilder,
     public colonyService: ColoniesService,
-    public popupService: PopupService
+    public popupService: PopupService,
+    public breedingSheetsService: BreedingSheetsService
   ) {}
 
   ngOnInit(): void {
     this.nameCtrl = this.fb.control('', [Validators.required, Validators.minLength(5), Validators.maxLength(25)]);
     this.gyneNameCtrl = this.fb.control('', [Validators.minLength(3), Validators.maxLength(15)]);
-    this.speciesCtrl = this.fb.control('unknown species');
+    this.speciesCtrl = this.fb.control(null);
     this.polyCtrl = this.fb.control(true);
     this.breedCtrl = this.fb.control(false);
     this.polyGyneCtrl = this.fb.control(false);
@@ -71,13 +72,39 @@ export class ColoniesListComponent implements OnInit {
       polyGyneCount: this.polyGyneCountCtrl,
       datePicker: this.datePickerCtrl
     });
-
+    this.reloadSheets();
     this.reloadColonies();
+
+    // this.species$ = this.allbreedingSheets$
+    // .pipe(
+    //   map(breedsheets => breedsheets
+    //     .map(sheet => sheet.species))
+    // )
+    // .subscribe((res) => {
+    //   console.log(res);
+    // });
+
+    this.sheetSub = this.allbreedingSheets$
+    .pipe(
+      map(breedsheets => breedsheets
+        .map(sheet => sheet.species))
+    )
+    .subscribe((res) => {
+      for (const item of res) {
+        this.optionsSpecies.push({species: item});
+      }
+    });
+
   }
 
   reloadColonies(): void {
     const colonies$ = this.colonyService.loadAllColonies();
     this.allColonies$ = colonies$;
+  }
+
+  reloadSheets(): void {
+    const sheets$ = this.breedingSheetsService.getAll();
+    this.allbreedingSheets$ = sheets$;
   }
 
   saveColony(): void {
@@ -112,10 +139,10 @@ export class ColoniesListComponent implements OnInit {
       }
     };
 
-    console.log(newColony);
-    this.colonyService.createColony(newColony).subscribe(() => { // subscribe pour reload le allcounter$ apres l'execution en BDD
-    this.resetPopup();
-    this.reloadColonies();
+    this.colonyService.createColony(newColony)
+    .subscribe(() => { // subscribe pour reload le allcounter$ apres l'execution en BDD
+      this.resetPopup();
+      this.reloadColonies();
     });
   }
 
