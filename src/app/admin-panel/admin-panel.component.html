@@ -67,8 +67,9 @@
                     <span>species</span>
                   </div>
                   <div class="three">
-                    <span>action</span>
+                    <span>creator</span>
                   </div>
+
                 </div>
                 <div class="body">
                   <div *ngFor="let sheet of pendingBreedingSheets; index as i" class="line">
@@ -79,7 +80,7 @@
                       <span>{{ sheet.species }}</span>
                     </div>
                     <div class="three">
-                      <div class="review">review</div>
+                      <div class="review">{{sheet.creator?.pseudo}}</div>
                     </div>
                   </div>
                 </div>
