@@ -1,1 +1,12 @@
-*.scss
+
+/app/package-lock.json
+/app/e2e
+/app/.vscode
+/app/tslint.json
+/app/tsconfig.spec.json
+/app/tsconfig.json
+/app/tsconfig.app.json
+/app/README.md
+/app/.gitignore
+app/.editorconfig
+/app/.browserslistrc
