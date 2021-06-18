@@ -56,14 +56,33 @@
           </div>
         </div>
         <div class="col-sm-12">
-          <div class="col-md-5">
-            <div class="breedsheet-resume flex-column">
-              <span>4 breedsheets to approve</span>
-              <div class="d-flex flex-column">
-                <span>creator</span>
-                <span>creation date</span>
-                <span>species</span>
-                <span>alerts :  2</span>
+          <div *ngIf='(pendingBreedingSheet$ | async) as pendingBreedingSheets;' class="col-md-6">
+            <div style="margin-top: 2rem;" class="col-sm-12 col-md-9">
+              <div class="custom-table breed-table">
+                <div class="head">
+                  <div class="one">
+                    <span>date</span>
+                  </div>
+                  <div class="two">
+                    <span>species</span>
+                  </div>
+                  <div class="three">
+                    <span>action</span>
+                  </div>
+                </div>
+                <div class="body">
+                  <div *ngFor="let sheet of pendingBreedingSheets; index as i" class="line">
+                    <div class="one">
+                      <span>{{ sheet.created | date: 'dd/MM/yyyy' }}</span>
+                    </div>
+                    <div class="two">
+                      <span>{{ sheet.species }}</span>
+                    </div>
+                    <div class="three">
+                      <div class="review">review</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

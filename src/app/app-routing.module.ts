@@ -7,6 +7,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ActivationComponent } from './auth/activation/activation.component';
 import { BreedSheetCreatorComponent } from './breed-sheet-creator/breed-sheet-creator.component';
+import { BreedSheetViewerComponent } from './breed-sheet-viewer/breed-sheet-viewer.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'adminpanel', component: AdminPanelComponent, canActivate: [RoleGuard, AuthGuard] },
   { path: 'adminpanel/breedsheetcreator', component: BreedSheetCreatorComponent, canActivate: [RoleGuard, AuthGuard] },
+  { path: 'adminpanel/breedsheetviewer', component: BreedSheetViewerComponent, canActivate: [RoleGuard, AuthGuard] },
   { path: 'colonies', component: ColoniesListComponent, canActivate: [AuthGuard]},
   { path: 'colonies/:colonyId', component: ColonyComponent,  canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },

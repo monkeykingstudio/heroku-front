@@ -1,0 +1,28 @@
+:host {
+  width: 100%;
+}
+
+.breedsheet-container {
+  height: calc(100vh - 10rem);
+  .breedsheet {
+    position: relative;
+    background-color: white;
+    border-radius: 0.5rem;
+    border-bottom: 0.2rem solid #bdbdbd;
+    padding: 2rem;
+    min-height: 100%;
+  }
+}
+
+h2 {
+  margin-bottom: 3rem;
+  span {
+    color: #62d744;
+  }
+}
+
+.viewer {
+  border: .1rem solid black;
+  border-radius: .8rem;
+  padding: 1rem;
+}

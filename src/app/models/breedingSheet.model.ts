@@ -19,6 +19,7 @@ export class BreedingSheet {
   hygrometry: any[];
   maxPopulation: number;
   id?: string;
+  creatorPseudo?: string;
   difficulty?: number;
   gynePictures?: [];
   pictures?: [];

@@ -5,7 +5,7 @@ import { User } from './../models/user.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
 import { ColoniesService } from './../services/colonies.service';
 import { BreedingSheet } from './../models/breedingSheet.model';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
 
 import { ChartDataSets } from 'chart.js';
@@ -68,6 +68,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   chartUsers$: Observable<User[]>;
   allColonies$: Observable<Colony[]>;
   breedingSheet$: Observable<BreedingSheet[]>;
+  pendingBreedingSheet$: Observable<BreedingSheet[]>;
   userColonies$: Observable<Colony[]>;
 
   constructor(
@@ -89,6 +90,11 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
         .filter(user => user.is_verified === false))
     );
 
+    this.pendingBreedingSheet$ = this.breedingSheet$
+    .pipe(
+      map(sheets => sheets
+        .filter(sheet => sheet.status === 'pending'))
+    );
     this.chartSub = this.allUsers$
     .pipe(
       map(users => users

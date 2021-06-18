@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { BreedingSheet } from './../models/breedingSheet.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
 
@@ -117,18 +117,6 @@ export class BreedSheetCreatorComponent implements OnInit {
     {id: 4, valeur: 'seeds'}
   ];
 
-
-  // defaultTribuList = 'oecophylla ';
-  // tribusList: Array<object> = [
-  //   {id: 0, valeur: 'oecophylla '},
-  //   {id: 1, valeur: 'dolichoderus thoracicus'},
-  //   {id: 2, valeur: 'formica '},
-  //   {id: 3, valeur: 'Azteca'},
-  //   {id: 4, valeur: 'Wasmannia auropunctata'},
-  //   {id: 5, valeur: 'Anoplolepis'},
-  //   {id: 6, valeur: 'Solenopsis'}
-  // ];
-
   public regions: any = [];
   defaultRegionList = 'europa (tempered)';
   regionList: Array<object> = [
@@ -155,7 +143,6 @@ export class BreedSheetCreatorComponent implements OnInit {
   // public sources = [];
 
   public breedData: BreedingSheet;
-  // public breedDataTEST: object;
 
   get formControls() { return this.breedSheetForm.controls; }
 
@@ -246,7 +233,6 @@ export class BreedSheetCreatorComponent implements OnInit {
 
     console.log(this.breedSheetForm);
   }
-
   addGynePicture() {
     const entry = this.formControls.gynepicture.value;
     if (this.gynepictures.includes(entry)) {
@@ -264,7 +250,6 @@ export class BreedSheetCreatorComponent implements OnInit {
       }
     }
   }
-
   addOtherPicture() {
     const entry = this.formControls.picture.value;
     if (this.pictures.includes(entry)) {
@@ -282,7 +267,6 @@ export class BreedSheetCreatorComponent implements OnInit {
       }
     }
   }
-
   addRegion() {
     const entry = this.formControls.region.value;
     if (this.regions.includes(entry)) {
@@ -291,7 +275,6 @@ export class BreedSheetCreatorComponent implements OnInit {
       this.regions.push(entry);
     }
   }
-
   addFood() {
     const entry = this.formControls.food.value;
     if (this.foods.includes(entry)) {
@@ -333,6 +316,7 @@ export class BreedSheetCreatorComponent implements OnInit {
     const inputs = this.formControls;
     this.breedData = {
       creator: null,
+      // creatorPseudo: null,
       status: 'pending',
       genre: inputs.genre.value,
       species: inputs.species.value,
