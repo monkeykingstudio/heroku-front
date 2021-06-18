@@ -1,11 +1,8 @@
 <div class="col-sm-12 d-flex header-colony-container p-0">
-  <div
-  class="difficulty"
+  <!-- <div class="difficulty"
   placement="right"
   tooltipClass="antslab-tooltip"
-  ngbTooltip="
-
-  ">
+  ngbTooltip="">
     <div
     *ngFor="let difficulty of breedSheet?.difficulty"
     [ngClass]="{
@@ -13,7 +10,7 @@
       'empty': difficulty == 0
     }"
     class="bar"></div>
-  </div>
+  </div> -->
 
 <div class="d-flex flex-column align-items-center">
   <h2 class="colony-name">{{colony.name}}</h2>
@@ -52,7 +49,7 @@
     </div>
   </div>
 
-  <div class="diapause">
+  <div *ngIf="breedSheet?.needDiapause" class="diapause">
     <span>in diapause</span>
     <span class="badge-no">no</span>
   </div>

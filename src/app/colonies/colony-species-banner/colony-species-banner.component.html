@@ -9,7 +9,9 @@
   <div class="item">
     <i class="temperature-icon"></i>
     <div class="content">
-      <span>{{breedSheet?.temperature}}</span>
+      <span>~{{breedSheet?.temperature[0].temperatureStart}}-{{breedSheet?.temperature[0].temperatureEnd}}°C</span>
+      <span></span>
+
     </div>
   </div>
 
@@ -22,33 +24,34 @@
         'food-meat': aliment === 'meat',
         'food-sugar-water': aliment === 'sugar water',
         'food-fruits': aliment === 'fruits',
-        'food-sugar-water': aliment === 'sugar water'
+        'food-seeds': aliment === 'seeds'
       }"
       class="multiline"
-      *ngFor="let aliment of breedSheet?.food">{{aliment}}</span>
+      *ngFor="let aliment of breedSheet?.foods">{{aliment}}</span>
     </div>
   </div>
 
   <div class="item">
     <i class="geography-icon"></i>
     <div class="content fix-icon align-items-start">
-      <span class="multiline mb-0" *ngFor="let continents of breedSheet?.geography">{{continents}}</span>
+      <span class="multiline mb-0" *ngFor="let region of breedSheet?.regions">{{region}}</span>
     </div>
   </div>
 
   <div class="item">
-    <i *ngIf="!breedSheet?.polymorphism" class="polymorphism-icon"></i>
-    <i *ngIf="breedSheet?.polymorphism" class="nopolymorphism-icon"></i>
+    <i *ngIf="breedSheet?.polymorphism" class="polymorphism-icon"></i>
+    <i *ngIf="!breedSheet?.polymorphism" class="nopolymorphism-icon"></i>
 
     <div class="content fix-icon align-items-start">
-        <span class="mb-0 polymorphism" >{{ breedSheet?.polymorph ? 'Have polymorphism' : 'Inexistant polymorphism'}}</span>
+        <span class="mb-0 polymorphism" >{{ breedSheet?.polymorphism ? 'Have polymorphism' : 'Inexistant polymorphism'}}</span>
     </div>
   </div>
 
-  <div class="item">
+  <div *ngIf="breedSheet?.needDiapause" class="item">
     <i class="cold-icon"></i>
     <div class="content fix-icon ">
-      <span>{{breedSheet?.diapauseTemperature}}</span>
+      <span>
+        ~{{breedSheet?.diapauseTemperature[0].diapauseTemperatureStart}}-{{breedSheet?.diapauseTemperature[0].diapauseTemperatureEnd}}°C</span>
     </div>
   </div>
 </div>
