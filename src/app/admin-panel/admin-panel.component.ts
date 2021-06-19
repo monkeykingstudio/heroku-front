@@ -5,7 +5,7 @@ import { User } from './../models/user.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
 import { ColoniesService } from './../services/colonies.service';
 import { BreedingSheet } from './../models/breedingSheet.model';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
 
 import { ChartDataSets } from 'chart.js';
@@ -68,6 +68,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   chartUsers$: Observable<User[]>;
   allColonies$: Observable<Colony[]>;
   breedingSheet$: Observable<BreedingSheet[]>;
+  allBreedingSheets$: Observable<BreedingSheet[]>;
   pendingBreedingSheet$: Observable<BreedingSheet[]>;
   userColonies$: Observable<Colony[]>;
 
@@ -90,11 +91,12 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
         .filter(user => user.is_verified === false))
     );
 
-    this.pendingBreedingSheet$ = this.breedingSheet$
+    this.pendingBreedingSheet$ = this.allBreedingSheets$
     .pipe(
       map(sheets => sheets
         .filter(sheet => sheet.status === 'pending'))
     );
+
     this.chartSub = this.allUsers$
     .pipe(
       map(users => users
@@ -125,7 +127,12 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   }
 
   reloadBreedingSheets(): void {
-    const breedingSheets$ = this.breedingSheetsService.getAll();
+    this.allBreedingSheets$ = this.breedingSheetsService.getAll();
+    const breedingSheets$ = this.breedingSheetsService.getAll()
+    .pipe(
+      map(breedsheets => breedsheets
+        .filter(sheets => sheets.status === 'approved')
+    ));
     this.breedingSheet$ = breedingSheets$;
   }
 
