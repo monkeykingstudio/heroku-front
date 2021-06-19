@@ -136,6 +136,13 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.breedingSheet$ = breedingSheets$;
   }
 
+  deleteBreedSheet(id: string) {
+    return this.breedingSheetsService.deleteSheet(id)
+    .subscribe((res) => {
+      console.log(res);
+    });
+  }
+
   // Charts logic
   computeData() {
     const groups = this.userData

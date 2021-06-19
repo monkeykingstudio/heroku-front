@@ -31,4 +31,11 @@ export class BreedingSheetsService {
       shareReplay()
     );
   }
+
+  deleteSheet(id: string) {
+    return this.http.delete<BreedingSheet>(`${this.breedingSheetsUrl}/${id}`)
+    .pipe(
+      shareReplay()
+    );
+  }
 }
