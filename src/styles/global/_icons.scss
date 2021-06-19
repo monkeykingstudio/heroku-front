@@ -184,6 +184,32 @@
   }
 }
 
+.eye-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/eye.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
+.remove-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/remove.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
 .mail-icon {
   &:before {
       content: '';

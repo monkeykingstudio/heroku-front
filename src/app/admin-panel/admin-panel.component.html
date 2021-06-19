@@ -3,6 +3,8 @@
   <div class="admin-panel-container">
     <div id="adminRef" class="admin-panel">
       <div class="row">
+        <h6>global Overview</h6>
+
         <div class="col-sm-12 col-md-3">
           <div class="primal-stat">
             <div class="cont">
@@ -40,9 +42,54 @@
           </div>
         </div>
       </div>
+      <div class="col-sm-12">
+        <h6>Pendind breedsheets</h6>
+        <div *ngIf='(pendingBreedingSheet$ | async) as pendingBreedingSheets;' class="col-md-6">
+          <div class="">
+            <div class="custom-table breed-table">
+              <div class="head">
+                <div class="one">
+                  <span>date</span>
+                </div>
+                <div class="two">
+                  <span>species</span>
+                </div>
+                <div class="three">
+                  <span>creator</span>
+                </div>
+                <div class="four">
+                  <span>action</span>
+                </div>
+
+              </div>
+              <div class="body">
+                <div *ngFor="let sheet of pendingBreedingSheets; index as i" class="line">
+                  <div class="one">
+                    <span>{{ sheet.creationDate | date: 'dd/MM/yyyy' }}</span>
+                  </div>
+                  <div class="two">
+                    <span>{{ sheet.species }}</span>
+                  </div>
+                  <div class="three">
+                    <span class="">{{sheet.creator?.pseudo}}</span>
+                  </div>
+                  <div class="four">
+                    <div class="action-btn">
+                        <i class="eye-icon"></i>
+                        <i class="remove-icon"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="row">
         <div class="mt-4 col-sm-6">
+        <h6>Users registration statistics</h6>
+
           <div class="chart-wrapper">
             <canvas baseChart
                 [datasets]="lineChartData"
@@ -55,43 +102,16 @@
             </canvas>
           </div>
         </div>
-        <div class="col-sm-12">
-          <div *ngIf='(pendingBreedingSheet$ | async) as pendingBreedingSheets;' class="col-md-6">
-            <div style="margin-top: 2rem;" class="col-sm-12 col-md-9">
-              <div class="custom-table breed-table">
-                <div class="head">
-                  <div class="one">
-                    <span>date</span>
-                  </div>
-                  <div class="two">
-                    <span>species</span>
-                  </div>
-                  <div class="three">
-                    <span>creator</span>
-                  </div>
-                  <div class="four">
-                    <span>action</span>
-                  </div>
 
-                </div>
-                <div class="body">
-                  <div *ngFor="let sheet of pendingBreedingSheets; index as i" class="line">
-                    <div class="one">
-                      <span>{{ sheet.created | date: 'dd/MM/yyyy' }}</span>
-                    </div>
-                    <div class="two">
-                      <span>{{ sheet.species }}</span>
-                    </div>
-                    <div class="three">
-                      <div class="review">{{sheet.creator?.pseudo}}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="mt-4 col-sm-6">
+        <h6>Colonies creation statistics</h6>
+        <!-- species stats ? :) -->
+          <div class="chart-wrapper">
+
           </div>
         </div>
-        <div style="margin-top: 2rem;" class="col-sm-12 col-md-9">
+
+        <div style="margin-top: 2rem;" class="col-sm-12">
           <div class="custom-table user-table">
             <div class="head">
               <div class="one">

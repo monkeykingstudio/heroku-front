@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , OnDestroy} from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Colony } from '../colony.model';
 import { ColoniesService } from './../../services/colonies.service';
@@ -16,10 +16,11 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./colonies-list.component.scss']
 })
 
-export class ColoniesListComponent implements OnInit {
+export class ColoniesListComponent implements OnInit,  OnDestroy {
   allColonies$: Observable<Colony[]>;
   allbreedingSheets$: Observable<BreedingSheet[]>;
-  species$: Observable<string[]>;
+  // species$: Observable<string[]>;
+  species = [];
 
   private sheetSub: Subscription;
 
@@ -75,19 +76,12 @@ export class ColoniesListComponent implements OnInit {
     this.reloadSheets();
     this.reloadColonies();
 
-    // this.species$ = this.allbreedingSheets$
-    // .pipe(
-    //   map(breedsheets => breedsheets
-    //     .map(sheet => sheet.species))
-    // )
-    // .subscribe((res) => {
-    //   console.log(res);
-    // });
-
     this.sheetSub = this.allbreedingSheets$
     .pipe(
       map(breedsheets => breedsheets
-        .map(sheet => sheet.species))
+        .filter(sheets => sheets.status === 'approved')
+        .map(sheet => sheet.species)
+        )
     )
     .subscribe((res) => {
       for (const item of res) {
@@ -189,5 +183,9 @@ export class ColoniesListComponent implements OnInit {
     {
       this.polyGyneCountCtrl.patchValue(this.polyGyneCountCtrl.value - 1);
     }
+  }
+
+  ngOnDestroy() {
+    this.sheetSub.unsubscribe();
   }
 }

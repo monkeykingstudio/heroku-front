@@ -5,6 +5,21 @@
   width: 20rem;
   border-radius: .5rem!important;
 }
+
+.submitted-breed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .bloc {
+    margin-bottom: 2rem;
+    align-content: space-between;
+    height: 5.5rem;
+    justify-content: space-between;
+  }
+}
+
 .breedsheet-container {
   height: calc(100vh - 10rem);
   .breedsheet {
@@ -42,6 +57,7 @@ form input[type=number],
 form textarea,
 form select {
   padding: 6px 14px;
+  // text-transform: lowercase;
 }
 .form-group {
   .btn-add {

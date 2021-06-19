@@ -13,7 +13,10 @@ export class ActivationComponent implements OnInit {
   message: String = 'Activation in process please wait...';
   token: String = '';
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private mailService: MailService) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private mailService: MailService) { }
 
   ngOnInit() {
     const token = this.activatedRoute.snapshot.queryParams['key'];

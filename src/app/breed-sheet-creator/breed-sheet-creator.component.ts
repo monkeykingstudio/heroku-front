@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import * as moment from 'moment';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BreedingSheet } from './../models/breedingSheet.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-breed-sheet-creator',
   templateUrl: './breed-sheet-creator.component.html',
   styleUrls: ['./breed-sheet-creator.component.scss']
 })
-export class BreedSheetCreatorComponent implements OnInit {
+export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   breedSheetForm: FormGroup;
+  DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss ZZ';
+  submitted = false;
 
   //TODO deplacer en base de donnée mongo et recuperer les listes avec un service
 
@@ -21,6 +27,8 @@ export class BreedSheetCreatorComponent implements OnInit {
     {id: 3, valeur: 4},
     {id: 4, valeur: 5}
   ];
+
+  existingSpecies = false;
 
   defaultNestType = 'all';
   nestTypeList: Array<object> = [
@@ -143,6 +151,9 @@ export class BreedSheetCreatorComponent implements OnInit {
   // public sources = [];
 
   public breedData: BreedingSheet;
+  optionsSpecies = [];
+  private sheetSub: Subscription;
+  allbreedingSheets$: Observable<BreedingSheet[]>;
 
   get formControls() { return this.breedSheetForm.controls; }
 
@@ -183,17 +194,31 @@ export class BreedSheetCreatorComponent implements OnInit {
   // get sourcelink() { return this.breedSheetForm.controls['sourcelink']; }
   // get sourcetext() { return this.breedSheetForm.controls['sourcetext']; }
 
-
-  constructor(public breedingSheetsService: BreedingSheetsService) {
+  constructor(
+    public breedingSheetsService: BreedingSheetsService,
+    private router: Router
+    ) {
     this.prepareForm();
   }
 
   ngOnInit(): void {
-
-
+    this.reloadSheets();
+    this.sheetSub = this.allbreedingSheets$
+    .pipe(
+      map(breedsheets => breedsheets
+        .filter(sheets => sheets.status === 'approved')
+        .map(sheet => sheet.species))
+    )
+    .subscribe((res) => {
+      for (const item of res) {
+        this.optionsSpecies.push(item);
+      }
+      console.log(this.optionsSpecies);
+    });
   }
 
   private prepareForm() {
+    this.existingSpecies = false;
     this.breedSheetForm = new FormGroup({
       genre: new FormControl(null, {validators: [Validators.required]}),
       species: new FormControl(null, {validators: [Validators.required]}),
@@ -233,6 +258,12 @@ export class BreedSheetCreatorComponent implements OnInit {
 
     console.log(this.breedSheetForm);
   }
+
+  reloadSheets(): void {
+    const sheets$ = this.breedingSheetsService.getAll();
+    this.allbreedingSheets$ = sheets$;
+  }
+
   addGynePicture() {
     const entry = this.formControls.gynepicture.value;
     if (this.gynepictures.includes(entry)) {
@@ -250,6 +281,7 @@ export class BreedSheetCreatorComponent implements OnInit {
       }
     }
   }
+
   addOtherPicture() {
     const entry = this.formControls.picture.value;
     if (this.pictures.includes(entry)) {
@@ -267,6 +299,7 @@ export class BreedSheetCreatorComponent implements OnInit {
       }
     }
   }
+
   addRegion() {
     const entry = this.formControls.region.value;
     if (this.regions.includes(entry)) {
@@ -275,6 +308,7 @@ export class BreedSheetCreatorComponent implements OnInit {
       this.regions.push(entry);
     }
   }
+
   addFood() {
     const entry = this.formControls.food.value;
     if (this.foods.includes(entry)) {
@@ -316,12 +350,12 @@ export class BreedSheetCreatorComponent implements OnInit {
     const inputs = this.formControls;
     this.breedData = {
       creator: null,
-      // creatorPseudo: null,
+      creationDate: moment(new Date()).format(this.DATE_RFC2822),
       status: 'pending',
-      genre: inputs.genre.value,
-      species: inputs.species.value,
-      family: inputs.family.value,
-      tribu: inputs.tribu.value,
+      genre: inputs.genre.value.toLowerCase(),
+      species: inputs.species.value.toLowerCase(),
+      family: inputs.family.value.toLowerCase(),
+      tribu: inputs.tribu.value.toLowerCase(),
       gynePictures: this.gynepictures,
       pictures: this.pictures,
       regions: this.regions,
@@ -372,11 +406,30 @@ export class BreedSheetCreatorComponent implements OnInit {
       nestType: inputs.nesttype.value,
       maxPopulation: inputs.maxpopulation.value
     };
-    console.log(this.breedData);
+
+    // check if species already exists, if true, proceed
+    for (const species of this.optionsSpecies) {
+      if (species === this.breedData.species) {
+        window.scroll(0, 0);
+        this.existingSpecies = true;
+        return;
+      }
+    }
+
     this.breedingSheetsService.createSheet(this.breedData)
     .subscribe((res) => {
       console.log(res);
+      this.submitted = true;
     });
+  }
+
+  createNew() {
+    this.prepareForm();
+    this.submitted = false;
+  }
+
+  ngOnDestroy() {
+    this.sheetSub.unsubscribe();
   }
 
 }

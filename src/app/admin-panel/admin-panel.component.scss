@@ -5,6 +5,15 @@
   height: calc(100vh - 10rem);
 }
 
+h6, .h6 {
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #b0b0b0;
+  text-transform: uppercase;
+  font-size: 1.8rem!important;
+}
+
 .admin-panel {
   position: relative;
   background-color: white;
@@ -91,26 +100,48 @@
   color: white;
   border-bottom: .2rem solid #7b1f1f;
 }
-
+.user-table {
+  border: 1px solid #cdcdcd;
+}
 .breed-table {
+  border: 1px solid #cdcdcd;
+  .one, .two, .three, .four {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      white-space: nowrap;
+    }
+  }
   .one {
-    width: 10%!important;
-    max-width: 10%!important;
+    min-width: 20%!important;
+    max-width: 20%!important;
   }
 
   .two {
-    width: 30%!important;
+    min-width: 30%!important;
     max-width: 30%!important;
   }
 
   .three {
-    width: 30%!important;
+    min-width: 30%!important;
     max-width: 30%!important;
   }
 
   .four {
-    width: 30%!important;
-    max-width: 30%!important;
+    min-width: 20%!important;
+    max-width: 20%!important;
+    border-right: none!important;
+    .action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      justify-content: space-evenly;
+      width: 100%;
+      i {
+        cursor: pointer;
+      }
+    }
   }
 
 }

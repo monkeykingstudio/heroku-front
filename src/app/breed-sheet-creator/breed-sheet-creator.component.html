@@ -3,31 +3,33 @@
     <div class="breedsheet">
       <div style="text-align: center;" class="mb-4">
         <i class="breedsheetcreator-icon"></i>
-        <h2>Breedsheet <span>Creator</span></h2>
+        <h2 *ngIf="!submitted">Breedsheet <span>Creator</span></h2>
       </div>
 
-      <form style='margin:auto' [formGroup]="breedSheetForm" (ngSubmit)="add()" autocomplete="off" class="form-group col-md-8 mt-4">
+      <form *ngIf="!submitted" style='margin:auto' [formGroup]="breedSheetForm" (ngSubmit)="add()" autocomplete="off" class="form-group col-md-8 mt-4">
         <div style='padding:1rem 0' class="col-sm-12">
           <span class="labels">Taxonomy</span>
         </div>
         <div class="form-row mb-4">
           <div class="form-group col-md-3">
             <span class="labels mb-2">Genre</span>
-            <input placeholder="genre" class="form-control" type="text" formControlName="genre"/>
+            <input placeholder="genre" class="form-control" type="text" formControlName="genre" pattern="[a-zA-Z ]*"/>
           </div>
           <div class="form-group col-md-3">
             <span class="labels mb-2">Species</span>
-            <input placeholder="select a species" class="form-control" type="text" formControlName="species" />
+            <input placeholder="select a species" class="form-control" type="text" formControlName="species" pattern="[a-zA-Z ]*"/>
           </div>
           <div class="form-group col-md-3">
             <span class="labels mb-2">Family</span>
-            <input placeholder="family" class="form-control" type="text" formControlName="family"/>
+            <input placeholder="family" class="form-control" type="text" formControlName="family" pattern="[a-zA-Z ]*"/>
           </div>
           <div class="form-group col-md-3">
             <span class="labels mb-2">Tribu</span>
-            <input placeholder="tribu" class="form-control" type="text" formControlName="tribu"/>
+            <input placeholder="tribu" class="form-control" type="text" formControlName="tribu" pattern="[a-zA-Z ]*"/>
           </div>
         </div>
+        <span class="animate__animated animate__fadeInDown badge-invalid mb-4" *ngIf='existingSpecies'>error: The species <i style='margin:0!important;font-weight:bold'>"{{breedData.species}}"</i> already exists in the database!</span>
+
         <div style='padding:1rem 0' class="col-sm-12">
           <span class="labels">Gyne Pictures</span>
         </div>
@@ -336,6 +338,14 @@
         </div>
 
       </form>
+
+      <div *ngIf="submitted" class="submitted-breed">
+        <div class="d-flex flex-column align-items-center bloc">
+          <h6>Yous breedsheet has been successfully saved!</h6>
+          <span>An administrator will be notified and will review it soon!</span>
+        </div>
+        <button (click)='createNew()' class="green-btn" type="button">Create New</button>
+      </div>
     </div>
   </div>
 </div>
