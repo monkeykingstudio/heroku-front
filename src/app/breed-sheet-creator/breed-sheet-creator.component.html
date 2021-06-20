@@ -198,7 +198,7 @@
                 <input placeholder="worker size" class="form-control" type="number" formControlName="workersize"/>
                 <span class="unit">mm</span>
               </div>
-              <div class="form-group col-md-3 flex-row align-items-center">
+              <div *ngIf="polymorphismSwitch" class="form-group col-md-3 flex-row align-items-center">
                 <input placeholder="major size" class="form-control" type="number" formControlName="majorsize"/>
                 <span class="unit">mm</span>
               </div>
@@ -234,7 +234,7 @@
             </div>
           </div>
 
-          <div class="form-row mb-4 col-sm-12">
+          <div *ngIf="needDiapauseSwitch" class="form-row mb-4 col-sm-12">
             <div style='padding:1rem' class="col-sm-12">
               <span class="labels">Diapause period</span>
             </div>
@@ -268,7 +268,7 @@
             </div>
           </div>
 
-          <div class="form-row mb-4 col-sm-12">
+          <div *ngIf="needDiapauseSwitch" class="form-row mb-4 col-sm-12">
             <div style='padding:.8rem' class="col-sm-12">
               <span class="labels">Diapause recommended temperatures</span>
             </div>

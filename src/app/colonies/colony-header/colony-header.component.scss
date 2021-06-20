@@ -125,6 +125,19 @@
       ;
     }
 
+    .badge-required {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #333;
+      padding: 0.4rem 1rem 0.3rem 1rem;
+      color: white;
+      text-transform: uppercase;
+      margin-left: 1rem;
+      border-radius: .5rem;
+      border-bottom: .2rem solid #000000;
+    }
+
     .badge-no {
       display: flex;
       align-items: center;

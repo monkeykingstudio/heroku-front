@@ -354,8 +354,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       status: 'pending',
       genre: inputs.genre.value.toLowerCase(),
       species: inputs.species.value.toLowerCase(),
-      family: inputs.family.value.toLowerCase(),
-      tribu: inputs.tribu.value.toLowerCase(),
+      family: inputs.family.value?.toLowerCase(),
+      tribu: inputs.tribu.value?.toLowerCase(),
       gynePictures: this.gynepictures,
       pictures: this.pictures,
       regions: this.regions,
@@ -370,7 +370,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       gyneSize: inputs.gynesize.value,
       maleSize: inputs.malesize.value,
       workerSize: inputs.workersize.value,
-      majorSize: inputs.majorsize.value,
+      majorSize: inputs.polymorphism.value ? inputs.majorsize.value : null,
       gyneLives: inputs.gynelives.value,
       workerLives: inputs.workerlives.value,
       swarmingPeriod: [
@@ -381,20 +381,20 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       ],
       diapausePeriod: [
         {
-          diapauseStart: inputs.diapausestart.value,
-          diapauseEnd: inputs.diapauseend.value
+          diapauseStart: inputs.semiclaustral.value ? inputs.diapausestart.value : null,
+          diapauseEnd: inputs.semiclaustral.value ? inputs.diapauseend.value : null
         }
       ],
       temperature: [
         {
-          temperatureStart: inputs.temperaturestart.value,
-          temperatureEnd: inputs.temperatureend.value
+          temperatureStart:  inputs.temperaturestart.value,
+          temperatureEnd:  inputs.temperatureend.value
         }
       ],
       diapauseTemperature: [
         {
-          diapauseTemperatureStart: inputs.diapausetemperaturestart.value,
-          diapauseTemperatureEnd: inputs.diapausetemperatureend.value
+          diapauseTemperatureStart: inputs.semiclaustral.value ? inputs.diapausetemperaturestart.value : null,
+          diapauseTemperatureEnd: inputs.semiclaustral.value ? inputs.diapausetemperatureend.value : null
         }
       ],
       hygrometry: [

@@ -25,6 +25,12 @@ export class BreedingSheetsService {
     );
   }
 
+  getSheetById(id: string) {
+    return this.http.get<BreedingSheet>(`${this.breedingSheetsUrl}/${id}`).pipe(
+      map(result => result['sheet']),
+    );
+  }
+
   createSheet(sheet) {
     return this.http.post<BreedingSheet>(this.breedingSheetsUrl, sheet)
     .pipe(

@@ -112,7 +112,8 @@ export class ColonyComponent implements OnInit, OnDestroy {
     });
 
     this.colony$
-    .pipe(map((colony) => {
+    .pipe(
+      map((colony) => {
       this.breedingSheetSub = this.breedingSheetsService.getSheet(colony.species)
       .subscribe((sheet) => {
         this.breedSheet = sheet;

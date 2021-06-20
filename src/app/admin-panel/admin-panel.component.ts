@@ -7,6 +7,7 @@ import { ColoniesService } from './../services/colonies.service';
 import { BreedingSheet } from './../models/breedingSheet.model';
 import { filter, map, tap } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
+import { Router } from '@angular/router';
 
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
@@ -76,8 +77,8 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     public usersService: UsersService,
     public colonyService: ColoniesService,
     public breedingSheetsService: BreedingSheetsService,
-    private datePipe: DatePipe
-
+    private datePipe: DatePipe,
+    public router: Router
     ) { }
 
   ngOnInit(): void {
@@ -91,11 +92,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
         .filter(user => user.is_verified === false))
     );
 
-    this.pendingBreedingSheet$ = this.allBreedingSheets$
-    .pipe(
-      map(sheets => sheets
-        .filter(sheet => sheet.status === 'pending'))
-    );
+    this.reloadPendingSheets();
 
     this.chartSub = this.allUsers$
     .pipe(
@@ -136,11 +133,25 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.breedingSheet$ = breedingSheets$;
   }
 
+  reloadPendingSheets() {
+    this.pendingBreedingSheet$ = this.allBreedingSheets$
+    .pipe(
+      map(sheets => sheets
+        .filter(sheet => sheet.status === 'pending'))
+    );
+  }
+
   deleteBreedSheet(id: string) {
     return this.breedingSheetsService.deleteSheet(id)
     .subscribe((res) => {
       console.log(res);
+      this.reloadBreedingSheets();
+      this.reloadPendingSheets();
     });
+  }
+
+  reviewSheet(id: string): void {
+    this.router.navigate (['breedsheetviewer', id]);
   }
 
   // Charts logic

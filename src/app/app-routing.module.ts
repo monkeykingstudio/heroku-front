@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'adminpanel', component: AdminPanelComponent, canActivate: [RoleGuard, AuthGuard] },
   { path: 'adminpanel/breedsheetcreator', component: BreedSheetCreatorComponent, canActivate: [RoleGuard, AuthGuard] },
-  { path: 'adminpanel/breedsheetviewer', component: BreedSheetViewerComponent, canActivate: [RoleGuard, AuthGuard] },
+  { path: 'breedsheetviewer/:sheetId', component: BreedSheetViewerComponent, canActivate: [AuthGuard] },
   { path: 'colonies', component: ColoniesListComponent, canActivate: [AuthGuard]},
   { path: 'colonies/:colonyId', component: ColonyComponent,  canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
