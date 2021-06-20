@@ -42,8 +42,13 @@
           <div class="picture-container">
             <div [ngStyle]="{'background-image': 'url('+ actualGynePicture + ')'}" class="picture"></div>
           </div>
+
           <div class="picture-container">
             <div [ngStyle]="{'background-image': 'url('+ actualPicture + ')'}" class="picture"></div>
+          </div>
+
+          <div class="details">
+            <span *ngFor="let food of breedSheet?.foods">{{ food }}</span>
           </div>
         </div>
       </div>
