@@ -16,6 +16,16 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   private breedingSheetSub: Subscription;
   breedSheet: BreedingSheet;
 
+  public gynePictures = [];
+  public actualGynePicture;
+  changeGyneCounter = 0;
+
+  public pictures = [];
+  public actualPicture;
+  changeCounter = 0;
+
+  private interval;
+
   constructor(
     public breedingSheetsService: BreedingSheetsService,
     public route: ActivatedRoute
@@ -29,14 +39,18 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.breedingSheet$
-    .pipe(
+    this.breedingSheet$.pipe(
       map((sheet) => {
       this.breedingSheetSub = this.breedingSheetsService.getSheet(sheet.species)
       .subscribe((sheet) => {
         this.breedSheet = sheet;
+        this.loadGynePictures();
+        this.loadPictures();
+        this.switchGynePicture();
+        this.switchPicture();
       });
     })).subscribe();
+
   }
 
   loadSheet(species: string): Observable<BreedingSheet> {
@@ -44,9 +58,45 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     return this.breedingSheet$ = this.breedingSheetsService.getSheet(species);
   }
 
+  loadGynePictures() {
+    for (const pic of this.breedSheet?.gynePictures) {
+      this.gynePictures.push(pic);
+    }
+  }
+
+  switchGynePicture() {
+    this.actualGynePicture = this.gynePictures[0];
+    this.interval = setInterval(() => {
+      console.log(this.actualGynePicture);
+      this.changeGyneCounter++;
+      if (this.changeGyneCounter > this.gynePictures.length - 1) {
+        this.changeGyneCounter = 0;
+      }
+      this.actualGynePicture = this.gynePictures[this.changeGyneCounter];
+    }, 5000);
+  }
+
+  switchPicture() {
+    this.actualPicture = this.pictures[0];
+    this.interval = setInterval(() => {
+      console.log(this.actualPicture);
+      this.changeCounter++;
+      if (this.changeCounter > this.pictures.length - 1) {
+        this.changeCounter = 0;
+      }
+      this.actualPicture = this.pictures[this.changeCounter];
+    }, 5000);
+  }
+
+  loadPictures() {
+    for (const pic of this.breedSheet?.pictures) {
+      this.pictures.push(pic);
+    }
+  }
 
   ngOnDestroy() {
-    // this.breedingSheetSub.unsubscribe();
+    this.breedingSheetSub.unsubscribe();
+    clearInterval(this.interval);
   }
 
 }
