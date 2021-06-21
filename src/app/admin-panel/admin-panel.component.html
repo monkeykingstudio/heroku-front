@@ -42,7 +42,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-12">
+      <div *ngIf="(pendingBreedingSheet$ | async).length > 0" class="col-sm-12">
         <h6>Pendind breedsheets</h6>
         <div *ngIf='(pendingBreedingSheet$ | async) as pendingBreedingSheets;' class="col-md-6">
           <div class="">
@@ -57,7 +57,7 @@
                 <div class="three">
                   <span>creator</span>
                 </div>
-                <div class="four">
+                <div style="border-right:none!important" class="four">
                   <span>action</span>
                 </div>
 

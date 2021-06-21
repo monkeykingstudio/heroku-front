@@ -1,1 +1,57 @@
-<p>home component</p>
+<div (window:resize)="onResize($event)" class="row">
+  <div class="home-container col-sm-12">
+    <div class="home">
+      <div class="col-sm-12">
+        <h6>Home</h6>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-7">
+          <div #same class="d-flex antban">
+           <div class="d-flex flex-column justify-content-center align-items-center">
+            <h6 class="title">
+              WELCOME TO THE ALPHA <span class="release">V.0.9a</span> !
+            </h6>
+            <p class="disclaimer">
+              <span class="important">Thank you for accepting our invitation</span> to the alpha-testing phase of the development of <span class="important">Antslab.</span>
+            </p>
+            <p class="disclaimer">We hope you’ll enjoy our features and more are about to come!</p>
+            <p class="disclaimer">Don’t hesitate to <span class="important">contact us</span> to give us user experience feedback, share bugs or ask for new fonctionalities or modifications of the existant ones.</p>
+           </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 create-breedsheet-container">
+              <div #element class="breedhseet">
+                <i class="breedsheetcreator-icon"></i>
+                <h6>BREEDSHEET CREATOR IS RELEASED!</h6>
+                <span class="important">
+                  Your species is missing ?
+                  Start adding your own breedsheets to our database to be used by you and the Community!
+                </span>
+                <button (click)="goBreedSheet()" type="button" class="green-btn">create new species</button>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div #secondsame class="block">
+                  <div class="discord-container">
+                    <i class="discord-icon"></i>
+                    <p class='important'>Join our community to speak with the developer and follow the development.</p>
+                    <p>Or simply share your needs with the community!</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="spinner-container">
+    <div class="loading"></div>
+  </div>
+</ng-template>
