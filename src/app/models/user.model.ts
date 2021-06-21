@@ -10,4 +10,5 @@ export interface User {
   coloCount: [];
   newsletter?: boolean;
   created?: any;
+  lastLogin?: any;
 }

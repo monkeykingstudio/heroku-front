@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-
     this.authService.login(this.formControls.email.value, this.formControls.password.value)
     .pipe(
       first())
