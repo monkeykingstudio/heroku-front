@@ -71,11 +71,9 @@
           <button (click)="addFood()" type="button" class="green-btn btn-add">+ add</button>
         </div>
         <span class="help-legend  mb-4"><i>select up to 3 food types</i></span>
-
         <div *ngIf="foods.length > 0" class="d-flex align-items-center badges mb-4">
           <span *ngFor="let food of foods" class="badge">{{ food }}</span>
         </div>
-
         <div class="form-group flex-column mb-4">
           <select [(ngModel)]="defaultDifficultyList" #difficulty formControlName='difficulty' id="difficulty">
             <option *ngFor="let difficulty of difficulties" [value]="difficulty.valeur">{{difficulty.valeur}}</option>
@@ -174,7 +172,7 @@
               type="checkbox"
               formControlName="driller"
               class="on-off-toggle__input"
-              id="drinker"
+              id="driller"
               [value]='false'
               (change)="drillSwitch()"
             />

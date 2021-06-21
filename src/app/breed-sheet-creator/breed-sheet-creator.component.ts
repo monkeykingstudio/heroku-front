@@ -17,8 +17,6 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss ZZ';
   submitted = false;
 
-  //TODO deplacer en base de donnée mongo et recuperer les listes avec un service
-
   defaultDifficultyList = 1;
   difficulties: Array<object> = [
     {id: 0, valeur: 1},
@@ -88,9 +86,6 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 20, valeur: 28},
     {id: 21, valeur: 29},
     {id: 22, valeur: 30},
-
-
-
   ];
 
   hygrometryList: Array<object> = [
@@ -115,7 +110,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 18, valeur: 90},
   ];
 
-  public foods: any = [];
+  public foods: string[] = [];
   defaultFoodList = 'insects';
   foodList: Array<object> = [
     {id: 0, valeur: 'insects'},
@@ -125,14 +120,19 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 4, valeur: 'seeds'}
   ];
 
-  public regions: any = [];
+  public regions: string[] = [];
   defaultRegionList = 'europa (tempered)';
   regionList: Array<object> = [
     {id: 0, valeur: 'europa (tempered)'},
     {id: 1, valeur: 'usa'},
-    {id: 1, valeur: 'north usa'},
-    {id: 3, valeur: 'india'},
-    {id: 4, valeur: 'asia'}
+    {id: 2, valeur: 'north america'},
+    {id: 3, valeur: 'south america'},
+    {id: 4, valeur: 'india'},
+    {id: 5, valeur: 'asia'},
+    {id: 6, valeur: 'africa'},
+    {id: 7, valeur: 'north africa'},
+    {id: 8, valeur: 'south africa'},
+    {id: 9, valeur: 'australia'},
   ];
 
   polygyneSwitch = false;
@@ -146,8 +146,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   public unvalidPictureUrl = false;
   public unvalidGynePictureUrl = false;
 
-  public gynepictures: any = [];
-  public pictures: any = [];
+  public gynepictures: string[] = [];
+  public pictures: string[] = [];
   // public sources = [];
 
   public breedData: BreedingSheet;
@@ -156,13 +156,12 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   allbreedingSheets$: Observable<BreedingSheet[]>;
 
   get formControls() { return this.breedSheetForm.controls; }
-
   get genre() { return this.breedSheetForm.controls['genre']; }
   get species() { return this.breedSheetForm.controls['species']; }
   get family() { return this.breedSheetForm.controls['family']; }
   get tribu() { return this.breedSheetForm.controls['tribu']; }
-  get gynepicture() { return this.breedSheetForm.controls['gynepictures'];}
-  get picture() { return this.breedSheetForm.controls['pictures'];}
+  get gynepicture() { return this.breedSheetForm.controls['gynepicture']; }
+  get picture() { return this.breedSheetForm.controls['picture']; }
   get food() { return this.breedSheetForm.controls['food']; }
   get region() { return this.breedSheetForm.controls['region']; }
   get difficulty() { return this.breedSheetForm.controls['difficulty']; }
@@ -223,11 +222,11 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       genre: new FormControl(null, {validators: [Validators.required]}),
       species: new FormControl(null, {validators: [Validators.required]}),
       family: new FormControl(null, {validators: [Validators.required]}),
+      food: new FormControl(null),
       tribu: new FormControl(null),
       gynepicture: new FormControl(null),
       picture: new FormControl(null),
       region: new FormControl(null),
-      food: new FormControl(null),
       difficulty: new FormControl(null, {validators: [Validators.required]}),
       polygyne: new FormControl(false, {validators: [Validators.required]}),
       polymorphism: new FormControl(false, {validators: [Validators.required]}),
@@ -406,6 +405,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       nestType: inputs.nesttype.value,
       maxPopulation: inputs.maxpopulation.value
     };
+
+    console.log(this.breedData);
 
     // check if species already exists, if true, proceed
     for (const species of this.optionsSpecies) {

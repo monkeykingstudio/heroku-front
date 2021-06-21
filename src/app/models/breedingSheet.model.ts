@@ -5,8 +5,8 @@ export class BreedingSheet {
   genre: string;
   species: string;
   family: string;
-  regions: any[];
-  foods: any[];
+  regions: string[];
+  foods: string[];
   polygyne: boolean;
   polymorphism: boolean;
   semiClaustral: boolean;
@@ -22,8 +22,8 @@ export class BreedingSheet {
   id?: string;
   creatorPseudo?: string;
   difficulty?: number;
-  gynePictures?: [];
-  pictures?: [];
+  gynePictures?: string[];
+  pictures?: string[];
   tribu?: string;
   nestType?: string;
   trophalaxy?: boolean;

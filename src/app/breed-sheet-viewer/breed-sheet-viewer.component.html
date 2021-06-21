@@ -38,9 +38,18 @@
           </div>
         </div>
 
-        <div class="body">
+        <div class="body flex-column">
           <div class="picture-container">
             <div [ngStyle]="{'background-image': 'url('+ actualGynePicture + ')'}" class="picture"></div>
+          </div>
+
+          <div class="details">
+            <h6>food</h6>
+            <span>this species feeds mainly on <span *ngFor="let food of breedSheet?.foods">{{ food }}, </span></span>
+
+            <div class="foods">
+
+            </div>
           </div>
 
           <div class="picture-container">
