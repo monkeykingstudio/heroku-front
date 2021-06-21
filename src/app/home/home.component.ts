@@ -45,7 +45,10 @@ export class HomeComponent implements OnInit {
 
   goBreedSheet() {
     this.router.navigate(['/breedsheetcreator']);
+  }
 
+  goDiscord() {
+    window.open('https://discord.gg/yT3349Xt6v', '_blank');
   }
 
 }
