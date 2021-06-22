@@ -50,7 +50,10 @@ export class LoginComponent implements OnInit {
       first(),
       tap((user) => {
         console.log('youssef');
-        this.userService.setLastLogin(user._id, Date.now());
+        console.log(user._id);
+
+        this.userService.setLastLogin(user._id, Date.now())
+        .subscribe();
       })
     )
     .subscribe(
