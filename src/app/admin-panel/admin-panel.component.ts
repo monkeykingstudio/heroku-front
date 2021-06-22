@@ -21,9 +21,17 @@ import { DatePipe } from '@angular/common';
 })
 export class AdminPanelComponent implements OnInit, OnDestroy {
   private chartSub: Subscription;
-
   private userData = [];
   private chartUserData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  lastDays;
+  lastHours;
+
+  hoursDiff;
+  daysDiff;
+
+  stop = false;
+
 
   groupKey = 0;
 
@@ -175,6 +183,20 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       this.chartUserData.splice(group.group - 1, 1, group.data.length);
     });
     console.log(this.chartUserData);
+  }
+
+  getLastLogin(date: number) {
+    const last = new Date(date);
+    const now = new Date();
+    const getHours = now.getTime() - last.getTime();
+    const getDays = now.getDate() - last.getDate();
+    const days = Math.floor((now.getTime() - last.getTime()) / 1000 / 60 / 60 / 24);
+    const hours = Math.abs((now.getTime() - last.getTime())) / 3600000;
+
+    this.lastHours = last.toLocaleTimeString('fr-FR');
+    this.lastDays = last.toLocaleDateString('fr-FR');
+    this.daysDiff = Math.floor(getHours / (60 * 60 * 24 * 1000));
+    this.hoursDiff = Math.floor(getHours / ( 1000 * 60 * 60));
   }
 
   ngOnDestroy(): void {

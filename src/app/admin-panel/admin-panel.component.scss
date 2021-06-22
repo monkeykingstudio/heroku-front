@@ -5,6 +5,11 @@
   height: calc(100vh - 10rem);
 }
 
+.diff {
+  font-size: 1rem;
+  color: grey;
+}
+
 h6, .h6 {
   font-weight: bold;
   margin-top: 2rem;
@@ -207,7 +212,7 @@ h6, .h6 {
   width: 100%;
   border-radius: .5rem;
 
-  .one, .two, .three, .four, .five, .six {
+  .one, .two, .three, .four, .five, .six, .seven {
     justify-content: center;
     display: flex;
     padding: 1rem;
@@ -220,17 +225,17 @@ h6, .h6 {
     }
   }
 
-  .one, .two, .three, .four, .five {
+  .one, .two, .three, .four, .five, .six {
     border-right: .1rem solid #cacaca;
   }
 
-  .two, .three, .four, .five, .six {
+  .two, .three, .four, .five, .six, .seven {
     border-left: .1rem solid #fefefe;
   }
 
   .one {
-    min-width: 15%;
-    max-width: 15%;
+    min-width: 10%;
+    max-width: 10%;
   }
 
   .two {
@@ -239,8 +244,8 @@ h6, .h6 {
   }
 
   .three {
-    min-width: 25%;
-    max-width: 25%;
+    min-width: 20%;
+    max-width: 20%;
   }
 
   .four {
@@ -254,6 +259,11 @@ h6, .h6 {
   }
 
   .six {
+    min-width: 10%;
+    max-width: 10%;
+  }
+
+  .seven {
     min-width: 15%;
     max-width: 15%;
   }

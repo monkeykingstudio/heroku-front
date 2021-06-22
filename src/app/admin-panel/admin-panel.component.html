@@ -132,6 +132,9 @@
               <div class="six">
                 <span>colonies</span>
               </div>
+              <div class="seven">
+                <span>last visit</span>
+              </div>
             </div>
             <div class="body">
               <div *ngFor="let user of users; index as i" class="line">
@@ -157,6 +160,14 @@
                   <!-- <div *ngIf="user.coloCount.length > 0" class="d-flex">
                     <span *ngFor="let colony of user.coloCount"> {{ colony.colo }}</span>
                   </div> -->
+                </div>
+                <div class="seven">
+                  {{ getLastLogin(user.lastLogin) }}
+                  <div *ngIf="!user.lastLogin" class="d-flex flex-column align-items-center">-</div>
+                 <div *ngIf="user.lastLogin" class="d-flex flex-column align-items-center">
+                  <span>{{ user.lastLogin | date: 'dd/MM/yyyy' }}</span>
+                  <span class="diff">{{daysDiff}} days, {{hoursDiff}} hours</span>
+                 </div>
                 </div>
               </div>
             </div>
