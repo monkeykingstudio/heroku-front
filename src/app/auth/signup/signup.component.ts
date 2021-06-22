@@ -66,10 +66,12 @@ export class SignupComponent implements OnInit {
       is_verified: false,
       role: 'user',
       newsletter: inputs.newsletter.value,
-      coloCount: []
+      coloCount: [],
+      lastLogin: null
     };
 
     console.log(this.user);
+
 
     // picture: inputs.picture.value,
 

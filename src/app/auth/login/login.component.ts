@@ -1,9 +1,10 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-
+import { first, tap } from 'rxjs/operators';
 import { AuthService } from './../../services/auth.service';
+import { UsersService } from './../../services/user.service';
+import { User } from './../../models/user.model';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     public authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public userService: UsersService
   ) { }
 
   ngOnInit() {
@@ -45,7 +47,12 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.formControls.email.value, this.formControls.password.value)
     .pipe(
-      first())
+      first(),
+      tap((user) => {
+        console.log('youssef');
+        this.userService.setLastLogin(user._id, Date.now());
+      })
+    )
     .subscribe(
       data => {
         this.router.navigate(['/home']);
