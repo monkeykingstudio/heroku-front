@@ -8,7 +8,6 @@ import { BreedingSheet } from './../models/breedingSheet.model';
 import { filter, map, tap } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
 import { Router } from '@angular/router';
-
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { DatePipe } from '@angular/common';

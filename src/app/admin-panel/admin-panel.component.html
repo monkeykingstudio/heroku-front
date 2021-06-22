@@ -166,7 +166,7 @@
                   <div *ngIf="!user.lastLogin" class="d-flex flex-column align-items-center">-</div>
                  <div *ngIf="user.lastLogin" class="d-flex flex-column align-items-center">
                   <span>{{ user.lastLogin | date: 'dd/MM/yyyy' }}</span>
-                  <span class="diff">{{daysDiff}} days, {{hoursDiff}} hours</span>
+                  <span class="diff">{{daysDiff}} {{daysDiff < 2 ? 'day' : 'days'}}, {{hoursDiff}} {{hoursDiff < 2 ? 'hour' : 'hours'}}</span>
                  </div>
                 </div>
               </div>
