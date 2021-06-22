@@ -47,14 +47,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.formControls.email.value, this.formControls.password.value)
     .pipe(
-      first(),
-      tap((user) => {
-        console.log('youssef');
-        console.log(user._id);
-
-        this.userService.setLastLogin(user._id, Date.now())
-        .subscribe();
-      })
+      first()
     )
     .subscribe(
       data => {

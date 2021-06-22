@@ -35,8 +35,4 @@ export class UsersService {
     return this.http.post(`https://calm-waters-91692.herokuapp.com/api/auth/register`, userData);
   }
 
-  setLastLogin(id: string, date: any) {
-    return this.http.post<User>(`${this.usersUrl}/${id}`, {lastLogin: date});
-  }
-
 }
