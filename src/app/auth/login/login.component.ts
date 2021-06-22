@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
 
-    this.authService.logout();
+    // this.authService.logout();
     this.loading = false;
   }
 

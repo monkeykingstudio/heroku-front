@@ -42,12 +42,14 @@ export class AuthService {
       ));
   }
 
-  logout() {
+  logout(email: string) {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-
     this.router.navigate(['/login']);
+    console.log(email);
+
+    return this.http.post<any>(`${this.authRoute}/logout`, {email});
   }
 
   admin() {

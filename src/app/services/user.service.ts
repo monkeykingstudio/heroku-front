@@ -35,4 +35,10 @@ export class UsersService {
     return this.http.post(`https://calm-waters-91692.herokuapp.com/api/auth/register`, userData);
   }
 
+  isTokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    const currentTime = Math.floor(new Date().getTime() / 1000);
+    return currentTime >= expiry;
+  }
+
 }

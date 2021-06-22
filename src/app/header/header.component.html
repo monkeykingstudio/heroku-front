@@ -4,7 +4,7 @@
     <span>routeURL/</span>
     <span class="current">currentpage</span> -->
   </div>
-  <div *ngIf="(authService.currentUser | async)" class="user-container">
+  <div *ngIf="(authService.currentUser | async) as user" class="user-container">
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button (click)="onLogout()">Logout</button>
       <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>

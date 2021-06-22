@@ -11,4 +11,5 @@ export interface User {
   newsletter?: boolean;
   created?: any;
   lastLogin?: any;
+  isConnected?: boolean;
 }
