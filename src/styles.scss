@@ -166,7 +166,11 @@ form .custom-file-label, input[type=text], input[type=file] form input[type=emai
 }
 
 html {
+  // font-size: 62.5%;
   font-size: 78%;
+  @include breakpoint('small') {
+    font-size: 62.5%;
+  }
   height: 100vh;
 }
 
