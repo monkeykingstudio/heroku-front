@@ -165,9 +165,15 @@ form .custom-file-label, input[type=text], input[type=file] form input[type=emai
   color: #62d744;
 }
 
+.hide-sm {
+  @include breakpoint('small') {
+    display: none;
+  }
+}
+
 html {
-  // font-size: 62.5%;
-  font-size: 78%;
+  font-size: 62.5%;
+  // font-size: 78%;
   @include breakpoint('small') {
     font-size: 62.5%;
   }

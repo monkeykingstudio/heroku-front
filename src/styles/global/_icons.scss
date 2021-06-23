@@ -55,6 +55,19 @@
   }
 }
 
+.island-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/coconut-tree.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 8rem;
+      height: 8rem;
+  }
+}
+
 .news-icon {
   &:before {
       content: '';

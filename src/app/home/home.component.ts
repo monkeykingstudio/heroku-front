@@ -16,7 +16,10 @@ export class HomeComponent implements OnInit {
 
   height: number;
   width: number;
+  mobileWidth: number;
+
   @ViewChild('element', {read: ElementRef, static: false}) elementView: ElementRef;
+  @ViewChild('mobile', {read: ElementRef, static: false}) mobileView: ElementRef;
   @ViewChild('same', {read: ElementRef, static: false}) elementSameView: ElementRef;
   @ViewChild('secondsame', {read: ElementRef, static: false}) elementSecondSameView: ElementRef;
 
@@ -54,10 +57,15 @@ export class HomeComponent implements OnInit {
   }
 
   resize() {
+    this.mobileWidth = this.mobileView.nativeElement.offsetWidth;
+
     this.width = this.elementView.nativeElement.offsetWidth;
-    if (this.width < 200) {
+    if (this.width < 110 || this.mobileWidth < 475) {
+      console.log('mobile view', this.mobileWidth);
       return;
     } else {
+      console.log('this width', this.mobileWidth);
+
       this.height = this.elementView.nativeElement.offsetHeight;
       this.elementSameView.nativeElement.style.height = this.height + 'px';
       this.elementSecondSameView.nativeElement.style.height = this.height + 'px';
