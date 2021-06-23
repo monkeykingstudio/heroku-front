@@ -149,12 +149,22 @@ h6 {
   font-weight: bold;
   text-transform: capitalize;
   font-size: 1.2rem;
-  margin-right: 1rem;
+  margin-right: .5rem;
+  border: .1rem solid #d7d7d7;
+  border-radius: .5rem;
+  padding: .2rem .5rem;
+  margin-bottom: .5rem;
+  color: #4b4b4b;
+}
+
+.admin {
+  color: #d74444;
 }
 
 .users-cont {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
 .tiny-title {

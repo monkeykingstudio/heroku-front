@@ -62,7 +62,7 @@
                 </h6>
               </div>
               <div class="users-cont">
-                <span class="users" *ngFor="let user of onlineUsers; index as i">{{ user.pseudo }}</span>
+                <span [ngClass]="user.role === 'admin' ? 'admin' : '' " class="users" *ngFor="let user of onlineUsers; index as i">{{ user.pseudo }}</span>
               </div>
             </div>
           </div>
