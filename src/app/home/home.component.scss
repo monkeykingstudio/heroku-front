@@ -160,10 +160,13 @@ h6 {
   background-color: #e8e8e8;
   justify-content: center;
   align-items: center;
+  border-radius: .5rem;
 
   .text {
     max-width: 25rem;
     text-align: center;
+    font-weight: bold;
+    color: #333;
   }
 }
 
