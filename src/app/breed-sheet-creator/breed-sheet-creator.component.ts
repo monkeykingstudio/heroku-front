@@ -181,6 +181,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   get genre() { return this.breedSheetForm.controls['genre']; }
   get species() { return this.breedSheetForm.controls['species']; }
   get family() { return this.breedSheetForm.controls['family']; }
+  get subfamily() { return this.breedSheetForm.controls['subfamily']; }
   get tribu() { return this.breedSheetForm.controls['tribu']; }
   get gynepicture() { return this.breedSheetForm.controls['gynepicture']; }
   get picture() { return this.breedSheetForm.controls['picture']; }
@@ -244,6 +245,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       genre: new FormControl(null, {validators: [Validators.required]}),
       species: new FormControl(null, {validators: [Validators.required]}),
       family: new FormControl(null, {validators: [Validators.required]}),
+      subfamily: new FormControl(null),
       food: new FormControl(null),
       tribu: new FormControl(null),
       gynepicture: new FormControl(null),
@@ -376,6 +378,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       genre: inputs.genre.value.toLowerCase(),
       species: inputs.species.value.toLowerCase(),
       family: inputs.family.value?.toLowerCase(),
+      subfamily: inputs.subfamily.value?.toLowerCase(),
       tribu: inputs.tribu.value?.toLowerCase(),
       gynePictures: this.gynepictures,
       pictures: this.pictures,
