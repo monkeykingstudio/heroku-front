@@ -68,7 +68,7 @@ form {
 
 
 
-input, select, textarea {
+ select, textarea {
   background-color: #e8e8e8;
 }
 
@@ -82,7 +82,7 @@ select {
   }
 }
 
-input, textarea {
+textarea {
   &:focus {
     background-color: #e8e8e8!important;
   }

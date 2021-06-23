@@ -45,34 +45,37 @@
 
   <div *ngIf="recurent.value"  class="form-group ">
     <label>Routine is every:</label>
+
     <div style="justify-content: space-between;" class="d-flex">
+
+
       <div class="d-flex flex-wrap justify-content-between animate__animated animate__flipInX delay-03">
         <div class="form-check form-check-inline">
-          <input formControlName='day' class="form-check-input" type="radio" id="day">
+          <input formControlName='recurence' name='recurence' value='day' class="form-check-input" type="radio" id="day">
           <label class="form-check-label" for="day">Day</label>
         </div>
       </div>
       <div class="d-flex flex-wrap justify-content-between animate__animated animate__flipInX delay-05">
         <div class="form-check form-check-inline">
-          <input formControlName='week'  class="form-check-input" type="radio" id="week">
+          <input formControlName='recurence' name='recurence' value='week' class="form-check-input" type="radio" id="week">
           <label class="form-check-label" for="week">Week</label>
         </div>
       </div>
       <div class="d-flex flex-wrap justify-content-between animate__animated animate__flipInX delay-08">
         <div class="form-check form-check-inline">
-          <input formControlName='midMonth' class="form-check-input" type="radio" id="midMonth">
+          <input formControlName='recurence' name='recurence' value='15 days' class="form-check-input" type="radio" id="midMonth">
           <label class="form-check-label" for="midMonth">15 Days</label>
         </div>
       </div>
       <div class="d-flex flex-wrap justify-content-between animate__animated animate__flipInX delay-1-1">
         <div class="form-check form-check-inline">
-          <input formControlName='month' class="form-check-input" type="radio" id="month">
+          <input formControlName='recurence' name='recurence' value='month' class="form-check-input" type="radio" id="month">
           <label class="form-check-label" for="month">Month</label>
         </div>
       </div>
       <div class="d-flex flex-wrap justify-content-between animate__animated animate__flipInX delay-1.3">
         <div class="form-check form-check-inline">
-          <input formControlName='year' class="form-check-input" type="radio" id="year">
+          <input formControlName='recurence' name='recurence' value='year' class="form-check-input" type="radio" id="year">
           <label class="form-check-label" for="year">Year</label>
         </div>
       </div>

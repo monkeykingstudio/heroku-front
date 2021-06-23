@@ -59,11 +59,14 @@ export class TaskCreatorComponent implements OnInit {
   get recurent() { return this.taskForm.controls['recurent']; }
   get toDo() { return this.taskForm.controls['toDo']; }
 
-  get day() { return this.taskForm.controls['day']; }
-  get week() { return this.taskForm.controls['week']; }
-  get midMonth() { return this.taskForm.controls['midMonth']; }
-  get month() { return this.taskForm.controls['month']; }
-  get year() { return this.taskForm.controls['year']; }
+  get recurence() { return this.taskForm.controls['recurence']; }
+
+
+  // get day() { return this.taskForm.controls['day']; }
+  // get week() { return this.taskForm.controls['week']; }
+  // get midMonth() { return this.taskForm.controls['midMonth']; }
+  // get month() { return this.taskForm.controls['month']; }
+  // get year() { return this.taskForm.controls['year']; }
 
   ngOnInit(): void {
     this.prepareForm();
@@ -72,17 +75,17 @@ export class TaskCreatorComponent implements OnInit {
   addTask() {
     const formChanges = this.taskForm.value;
 
-    if (formChanges.day !== false) {
-      this.every = 'day';
-    } else if (formChanges.week !== false) {
-      this.every = 'week';
-    } else if (formChanges.midMonth !== false) {
-      this.every = '15 days';
-    } else if (formChanges.month !== false) {
-      this.every = 'month';
-    } else if (formChanges.year !== false) {
-      this.every = 'year';
-    }
+    // if (formChanges.day !== false) {
+    //   this.every = 'day';
+    // } else if (formChanges.week !== false) {
+    //   this.every = 'week';
+    // } else if (formChanges.midMonth !== false) {
+    //   this.every = '15 days';
+    // } else if (formChanges.month !== false) {
+    //   this.every = 'month';
+    // } else if (formChanges.year !== false) {
+    //   this.every = 'year';
+    // }
 
     const newTask = {
       colonyId: this.colonyId,
@@ -90,7 +93,7 @@ export class TaskCreatorComponent implements OnInit {
       duration: formChanges.duration,
       recurent: formChanges.recurent,
       description: formChanges.description,
-      every: this.every !== null ? this.every : null,
+      every: formChanges.recurence !== null ? formChanges.recurence : null,
       toDo: formChanges.toDo,
 
     };
@@ -107,6 +110,7 @@ export class TaskCreatorComponent implements OnInit {
       duration: new FormControl(5, { validators: [Validators.required]}),
       description: new FormControl(''),
       recurent: new FormControl(false),
+      recurence: new FormControl(null),
       toDo: new FormControl(false),
       day: new FormControl(false),
       week: new FormControl(false),
