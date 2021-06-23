@@ -136,3 +136,41 @@ h6 {
     max-width: 85%;
   }
 }
+
+.last-news {
+  background-color: #e6e6e6;
+}
+
+.users-online {
+  padding: 1.5rem;
+}
+
+.users {
+  font-weight: bold;
+  text-transform: capitalize;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+.users-cont {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tiny-title {
+  font-size: 1.6rem!important;
+  padding: 0;
+  margin-bottom: 0;
+  line-height: 2rem;
+  display: flex;
+  align-items: inherit;
+  width: 100%;
+}
+
+.users-icon {
+  &:before {
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-right: 1rem;
+  }
+}

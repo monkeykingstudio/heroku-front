@@ -55,6 +55,19 @@
   }
 }
 
+.users-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/users.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+  }
+}
+
 .user-icon {
   &:before {
       content: '';

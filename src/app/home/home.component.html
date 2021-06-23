@@ -45,6 +45,29 @@
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-7">
+          <div class="last-news">
+
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-5">
+          <div *ngIf='(onlineUsers$ | async) as onlineUsers' class="offset-md-6 col-md-6">
+            <div class="users-online">
+              <div class="d-flex align-items-center">
+                <h6 class="tiny-title">
+                  <i class="users-icon"></i>
+                  Connected users
+                </h6>
+              </div>
+              <div class="users-cont">
+                <span class="users" *ngFor="let user of onlineUsers; index as i">{{ user.pseudo }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
