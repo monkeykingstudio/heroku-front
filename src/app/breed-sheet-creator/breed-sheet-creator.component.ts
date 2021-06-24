@@ -271,6 +271,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       maxpopulation: new FormControl(null, {validators: [Validators.required]}),
     });
 
+
     console.log(this.breedSheetForm);
   }
 
