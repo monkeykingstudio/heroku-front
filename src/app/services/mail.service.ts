@@ -11,6 +11,10 @@ export class MailService {
     return this.http.post(url, data);
   }
 
+  sendBreedEmail(url, data) {
+    return this.http.post(url, data);
+  }
+
 activateMail(token) {
   let headers = new HttpHeaders()
   .set('Authorization', `JWT ${token}`);

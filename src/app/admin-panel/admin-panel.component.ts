@@ -141,13 +141,16 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   }
 
 
-  deleteBreedSheet(id: string, user: object, sheet: string) {
+  deleteBreedSheet(id: string, user: object, species: string) {
+    console.log(id, user, species);
     return this.breedingSheetsService.deleteSheet(id)
     .subscribe((res) => {
       console.log(res);
       this.reloadBreedingSheets();
       this.reloadPendingSheets();
-      this.mailService.sendEmail('https://calm-waters-91692.herokuapp.com/api/mail/breedtrash', { user, sheet})
+
+      // Mail part
+      this.mailService.sendBreedEmail('https://calm-waters-91692.herokuapp.com/api/mail/breedtrash', {user, species})
       .subscribe(data => {
         let res: any = data;
         console.log(`mail is sent for breedsheet deletion`);
