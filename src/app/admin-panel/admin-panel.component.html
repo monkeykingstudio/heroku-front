@@ -76,7 +76,8 @@
                   <div class="four">
                     <div class="action-btn">
                       <i (click)="reviewSheet(sheet.species)" class="eye-icon"></i>
-                      <i (click)="deleteBreedSheet(sheet.id)" class="remove-icon"></i>
+                      <i (click)="deleteBreedSheet(sheet.id, sheet.creator?._id)" class="remove-icon"></i>
+                      <span>{{sheet.creator}}</span>
                     </div>
                   </div>
                 </div>
@@ -85,6 +86,7 @@
           </div>
         </div>
       </div>
+
 
       <div class="row">
         <div class="mt-4 col-sm-6">

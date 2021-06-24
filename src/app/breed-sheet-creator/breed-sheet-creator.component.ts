@@ -16,6 +16,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   breedSheetForm: FormGroup;
   DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss ZZ';
   submitted = false;
+  existingSpecies = false;
 
   defaultDifficultyList = 1;
   difficulties: Array<object> = [
@@ -25,9 +26,6 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 3, valeur: 4},
     {id: 4, valeur: 5}
   ];
-
-  existingSpecies = false;
-
   defaultNestType = 'all';
   nestTypeList: Array<object> = [
     {id: 0, valeur: 'Aerated concrete'},
@@ -35,18 +33,6 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 2, valeur: 'all'},
     {id: 3, valeur: 'armored'},
   ];
-
-  defaultSwarmStart = 'july';
-  defaultSwarmEnd = 'july';
-  defaultDiapauseStart = 'november';
-  defaultDiapauseEnd = 'november';
-  defaultTemperatureStart = 13;
-  defaultTemperatureEnd = 17;
-  defaultDiapauseTemperatureStart = 8;
-  defaultDiapauseTemperatureEnd = 12;
-  defaultHygrometryStart = 5;
-  defaultHygrometryEnd = 10;
-
   monthList: Array<object> = [
     {id: 0, valeur: 'january'},
     {id: 1, valeur: 'february'},
@@ -61,7 +47,6 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 10, valeur: 'november'},
     {id: 11, valeur: 'december'},
   ];
-
   temperatureList: Array<object> = [
     {id: 0, valeur: 3},
     {id: 1, valeur: 5},
@@ -90,7 +75,6 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 24, valeur: 29},
     {id: 25, valeur: 30},
   ];
-
   hygrometryList: Array<object> = [
     {id: 0, valeur: 5},
     {id: 1, valeur: 10},
@@ -112,7 +96,6 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 17, valeur: 85},
     {id: 18, valeur: 90},
   ];
-
   public foods: string[] = [];
   defaultFoodList = 'insects';
   foodList: Array<object> = [
@@ -122,7 +105,6 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 3, valeur: 'fruits'},
     {id: 4, valeur: 'seeds'}
   ];
-
   public regions: string[] = [];
   defaultRegionList = 'europa (tempered)';
   regionList: Array<object> = [
@@ -154,8 +136,18 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 25, valeur: 'america (west)'},
     {id: 26, valeur: 'australia'},
     {id: 27, valeur: 'mediterranean basin'},
-
   ];
+
+  defaultSwarmStart = 'july';
+  defaultSwarmEnd = 'july';
+  defaultDiapauseStart = 'november';
+  defaultDiapauseEnd = 'november';
+  defaultTemperatureStart = 13;
+  defaultTemperatureEnd = 17;
+  defaultDiapauseTemperatureStart = 8;
+  defaultDiapauseTemperatureEnd = 12;
+  defaultHygrometryStart = 5;
+  defaultHygrometryEnd = 10;
 
   polygyneSwitch = false;
   polymorphismSwitch = false;
@@ -452,6 +444,10 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   createNew() {
     this.prepareForm();
     this.submitted = false;
+  }
+
+  moveToHome() {
+    this.router.navigate(['/home']);
   }
 
   ngOnDestroy() {

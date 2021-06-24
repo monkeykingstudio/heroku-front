@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { DatePipe } from '@angular/common';
-
+import { MailService } from '../services/mail.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -22,25 +22,15 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   private chartSub: Subscription;
   private userData = [];
   private chartUserData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-  lastDays;
-  lastHours;
-
-  hoursDiff;
-  daysDiff;
-
+  // Charts
   stop = false;
-
-
   groupKey = 0;
-
   lineChartData: ChartDataSets[] = [
     {
       data: this.chartUserData,
       label: 'User registrations'
     },
   ];
-
   lineChartLabels: Label[] = [
     'January',
     'February',
@@ -55,21 +45,23 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     'November',
     'December'
   ];
-
   lineChartOptions = {
     responsive: true,
   };
-
   lineChartColors: Color[] = [
     {
       borderColor: 'rgb(31 31 31)',
       backgroundColor: 'rgb(99 215 69)',
     },
   ];
-
   lineChartLegend = true;
   lineChartPlugins = [];
   lineChartType = 'line';
+  lastDays;
+  lastHours;
+  hoursDiff;
+  daysDiff;
+
 
   allUsers$: Observable<User[]>;
   pendingUsers$: Observable<User[]>;
@@ -82,6 +74,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
 
   constructor(
     public usersService: UsersService,
+    public mailService: MailService,
     public colonyService: ColoniesService,
     public breedingSheetsService: BreedingSheetsService,
     private datePipe: DatePipe,
@@ -115,7 +108,6 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     });
   }
 
-
   reloadUsers(): void {
     const users$ = this.usersService.usersGet();
     this.allUsers$ = users$;
@@ -148,12 +140,23 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     );
   }
 
-  deleteBreedSheet(id: string) {
+
+  deleteBreedSheet(id: string, user: object, sheet: string) {
     return this.breedingSheetsService.deleteSheet(id)
     .subscribe((res) => {
       console.log(res);
       this.reloadBreedingSheets();
       this.reloadPendingSheets();
+      this.mailService.sendEmail('https://calm-waters-91692.herokuapp.com/api/mail/breedtrash', { user, sheet})
+      .subscribe(data => {
+        let res: any = data;
+        console.log(`mail is sent for breedsheet deletion`);
+      },
+      err => {
+        console.log('error mail: ', err);
+      }, () => {
+        console.log('mail is sent!');
+      });
     });
   }
 
