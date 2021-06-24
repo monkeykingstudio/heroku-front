@@ -336,7 +336,7 @@
         </div>
         <div style="justify-content: space-evenly;margin-top:4rem" class="d-flex">
           <button (click)='moveToHome()' class="btn-send red-btn" type="button">cancel</button>
-          <button class="btn-send green-btn" type="submit">create breedsheet</button>
+          <button  [disabled]="breedSheetForm.invalid" class="btn-send green-btn" type="submit">create breedsheet</button>
         </div>
 
       </form>
@@ -346,7 +346,7 @@
           <h6>Yous breedsheet has been successfully saved!</h6>
           <span>An administrator will be notified and will review it soon!</span>
         </div>
-        <button [disabled]="breedSheetForm.invalid" (click)='createNew()' class="green-btn" type="button">Create New</button>
+        <button (click)='createNew()' class="green-btn" type="submit">Create New</button>
       </div>
     </div>
   </div>
