@@ -346,7 +346,7 @@
           <h6>Yous breedsheet has been successfully saved!</h6>
           <span>An administrator will be notified and will review it soon!</span>
         </div>
-        <button (click)='createNew()' class="green-btn" type="button">Create New</button>
+        <button [disabled]="breedSheetForm.invalid" (click)='createNew()' class="green-btn" type="button">Create New</button>
       </div>
     </div>
   </div>
