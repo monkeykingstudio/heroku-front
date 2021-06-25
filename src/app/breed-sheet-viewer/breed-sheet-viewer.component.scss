@@ -1,3 +1,5 @@
+@import '../../styles/global/mixins';
+
 :host {
   width: 100%;
 }
@@ -21,6 +23,9 @@
   border-radius: .5rem;
   color: white;
   padding: .4rem .6rem;
+  @include breakpoint('small') {
+    font-size: 1.6rem;
+  }
 }
 
 .taxonomy {
@@ -38,6 +43,57 @@
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
+  @include breakpoint('small') {
+    display: none;
+  }
+}
+
+.gene {
+  @include breakpoint('small') {
+    background-color: #44d7ab;
+    border-radius: 5rem;
+    padding: .8rem;
+    color: white;
+    min-width: 4.5rem;
+    font-size: .8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+  }
+}
+
+.tribe {
+  @include breakpoint('small') {
+    background-color: #449ed7;
+    border-radius: 5rem;
+    padding: .8rem;
+    color: white;
+    min-width: 4.5rem;
+    font-size: .8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+  }
+}
+
+.fame {
+  @include breakpoint('small') {
+    background-color: #d7447e;
+    border-radius: 5rem;
+    padding: .8rem;
+    color: white;
+    min-width: 4.5rem;
+    font-size: .8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+  }
 }
 
 .family {
@@ -51,6 +107,9 @@
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
+  @include breakpoint('small') {
+    display: none;
+  }
 }
 
 .tribu {
@@ -64,6 +123,9 @@
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
+  @include breakpoint('small') {
+    display: none;
+  }
 }
 
 .breedsheet-container {
@@ -75,6 +137,10 @@
     border-bottom: 0.2rem solid #bdbdbd;
     padding: 2rem;
     min-height: 100%;
+
+    @include breakpoint('small') {
+      padding: 1rem;
+    }
   }
 }
 
@@ -86,8 +152,13 @@ h2 {
 }
 
 h5 {
-  text-transform: capitalize;
+  text-transform: uppercase;
   text-align: center;
+  font-weight: bold;
+  @include breakpoint('small') {
+    margin: 2rem 0;
+    margin-bottom: 1rem;
+  }
 }
 
 .viewer {
@@ -98,12 +169,30 @@ h5 {
     top: 1.2rem;
     left: 1.2rem;
     position: absolute;
+    @include breakpoint('small') {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      left: 0rem;
+      margin-bottom: 1rem;
+    }
   }
 
   .important-container {
     top: 1.6rem;
     right: 1.6rem;
     position: absolute;
+    @include breakpoint('small') {
+      position: relative;
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      left:0;
+      margin-bottom: 1rem;
+    }
 
     .item {
       min-width: 8rem;
@@ -115,6 +204,10 @@ h5 {
     display: flex;
     align-items: center;
     margin: 1rem 0;
+
+    @include breakpoint('small') {
+      margin: 2rem 0;
+    }
   }
 
   .head {
@@ -127,6 +220,15 @@ h5 {
     border-radius: .8rem;
     padding: 1rem;
     height: 10rem;
+
+    @include breakpoint('small') {
+      align-items: center;
+      height: inherit;
+      flex-direction: column;
+      border: .1rem solid #c1c1c1;
+      border-radius: 1rem;
+      padding: 1rem;
+    }
 
     .temperature-icon {
       &:before {
@@ -151,22 +253,55 @@ h6 {
   color: #4f4f4f;
   border-bottom: .2rem solid #4f4f4f;
   text-transform: uppercase;
-  font-size: 1.6rem !important;
+  font-size: 2rem !important;
   margin-bottom: 2rem;
-}
 
-.foods {
-  display: flex;
-  flex-direction: column;
+  @include breakpoint('small') {
+    font-weight: bold;
+    color: #4f4f4f;
+    border-bottom: 0.2rem solid #4f4f4f;
+    text-transform: uppercase;
+    font-size: 2rem !important;
+    margin-bottom: 2rem;
+    width: 85%;
+    text-align: center;
+    line-height: 4rem;
+  }
+}
+.creator-cont {
+  @include breakpoint('small') {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  .creator {
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    color: #6e6e6e;
+  }
+
+  .creator-link {
+    color: #6e6e6e;
+    &:hover {
+      color: #62d744;
+    }
+  }
 }
 
 .details {
-  margin: 3rem 0;
+  margin-bottom: 3rem;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  // width: 100%;
   justify-content: center;
   align-items: center;
+
+  @include breakpoint('small') {
+  margin-bottom: 1rem;
+  }
+
+  &:first-child {
+    margin: 3rem 0;
+  }
 
   span {
     font-size: 1.3rem;
@@ -184,6 +319,9 @@ h6 {
   max-width: 55rem;
   border-radius: 1rem;
   border: .3rem solid #252424;
+  @include breakpoint('small') {
+    width: 98%;
+  }
   .picture {
     content: "";
     background-size: cover;
@@ -196,5 +334,26 @@ h6 {
     max-height: 30rem;
     min-height: 30rem;
     transition: all 0.8s;
+
+    @include breakpoint('small') {
+      height: 100%;
+      max-height: 30rem;
+      min-height: 20rem;
+      width: 60rem;
+      min-width: 30rem;
+    }
   }
+}
+
+.static-text {
+  font-size: 1.6rem !important;
+  margin-bottom: .5rem;
+}
+
+.text-data {
+  color:#000;
+  font-weight:bold;
+  text-align:center;
+  font-size: 1.6rem !important;
+  margin-bottom: .5rem;
 }
