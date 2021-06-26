@@ -250,11 +250,11 @@ h5 {
 
 h6 {
   font-weight: bold;
-  color: #4f4f4f;
-  border-bottom: .2rem solid #4f4f4f;
+  color: #ebebeb;
   text-transform: uppercase;
   font-size: 2rem !important;
   margin-bottom: 2rem;
+  text-align: center;
 
   @include breakpoint('small') {
     font-weight: bold;
@@ -287,20 +287,26 @@ h6 {
   }
 }
 
-.details {
-  margin-bottom: 3rem;
+.details-cont {
   display: flex;
   flex-direction: column;
   // width: 100%;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 
   @include breakpoint('small') {
   margin-bottom: 1rem;
   }
 
-  &:first-child {
-    margin: 3rem 0;
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    background-color: #959595;
+    border-radius: .5rem;
+    padding: 1rem;
+    width: 100%;
   }
 
   span {
