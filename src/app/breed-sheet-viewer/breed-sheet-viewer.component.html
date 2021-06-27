@@ -142,7 +142,27 @@
                     <h6 class="geography">Geographic Distribution</h6>
                   </div>
                   <div class="body-card">
-                    <span class="text-data" *ngFor="let region of breedSheet?.regions">{{ region }} </span>
+                    <span class="text-data d-flex" *ngFor="let region of breedSheet?.regions">
+                      <i style="margin-right:.5rem" [ngClass]="{
+                        'europa-icon' : region === 'europa' || region === 'europa (south)' || region === 'europa (north)' || region === 'europa (east)' || region === 'europa (west)' || region === 'europa (tempered)'
+                      }"></i>
+                      <i style="margin-right:.5rem" [ngClass]="{
+                        'asia-icon' : region === 'asia' || region === 'asia (south)' || region === 'asia (north)' || region === 'asia (east)' || region === 'asia (west)'
+                      }"></i>
+                      <i style="margin-right:.5rem" [ngClass]="{
+                        'china-icon' : region === 'china'
+                      }"></i>
+                      <i style="margin-right:.5rem" [ngClass]="{
+                        'america-icon' : region === 'america' || region === 'america (south)' || region === 'america (north)' || region === 'america (east)' || region === 'america (west)'
+                      }"></i>
+                      <i style="margin-right:.5rem" [ngClass]="{
+                        'australia-icon' : region === 'australia' || region === 'australia (south)' || region === 'australia (north)' || region === 'australia (east)' || region === 'australia (west)'
+                      }"></i>
+                      <i style="margin-right:.5rem" [ngClass]="{
+                        'india-icon' : region === 'india' || region === 'india (south)' || region === 'india (north)' || region === 'india (east)' || region === 'india (west)'
+                      }"></i>
+                      {{ region }}
+                    </span>
                   </div>
                 </div>
               </div>

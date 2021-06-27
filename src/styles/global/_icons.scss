@@ -202,6 +202,96 @@
   }
 }
 
+.europa-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/regions/europa.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
+.asia-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/regions/asia.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
+.china-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/regions/china.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
+.america-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/regions/america.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
+.australia-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/regions/australia.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
+.india-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/regions/australia.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
 .breedsheet-icon {
   &:before {
       content: '';
