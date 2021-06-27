@@ -23,50 +23,43 @@
           </div>
           <div class="d-flex flex-column">
             <h5>{{sheet.species}}</h5>
-            <span class="creator">Created by
-              <a class="creator-link" href="">{{ sheet.creator?.pseudo }}</a> |
-              {{ sheet.creationDate | date: 'dd/MM/yyyy' }} | 2 <i class="comments-icon"></i> |
-              <i
-              [ngClass]="{
-                'star-icon': breedSheet?.difficulty >= 1
-              }"
-              class="star-icon">{{diff}}</i>
-              <i
-              [ngClass]="{
-                'star-icon': breedSheet?.difficulty >= 2,
-                'star-icon-grey': breedSheet?.difficulty < 2
-              }"
-              class="star-icon">{{diff}}</i>
-              <i
-              [ngClass]="{
-                'star-icon': breedSheet?.difficulty >= 3,
-                'star-icon-grey': breedSheet?.difficulty < 3
-              }"
-              class="star-icon">{{diff}}</i>
-              <i
-              [ngClass]="{
-                'star-icon': breedSheet?.difficulty >= 4,
-                'star-icon-grey': breedSheet?.difficulty < 4
-              }"
-              class="star-icon">{{diff}}</i>
-              <i
-              [ngClass]="{
-                'star-icon': breedSheet?.difficulty >= 5,
-                'star-icon-grey': breedSheet?.difficulty < 5
-              }"
-              class="star-icon">{{diff}}</i>
+            <div class="fiche-info">
+              <span class="creator">Created by</span>
+              <a class="creator-link" href="">{{ sheet.creator?.pseudo }}</a> <span class="sep">|</span>
+              <span class="date">{{ sheet.creationDate | date: 'dd/MM/yyyy' }} <span class="sep">|</span> </span><span>2 <i class="comments-icon"></i> <span class="sep">|</span> </span>
+              <span class="d-flex align-items-center stars-cont">
+                <i
+                [ngClass]="{
+                  'star-icon': breedSheet?.difficulty >= 1
+                }"y
+                class="star-icon">{{diff}}</i>
+                <i
+                [ngClass]="{
+                  'star-icon': breedSheet?.difficulty >= 2,
+                  'star-icon-grey': breedSheet?.difficulty < 2
+                }"
+                class="star-icon">{{diff}}</i>
+                <i
+                [ngClass]="{
+                  'star-icon': breedSheet?.difficulty >= 3,
+                  'star-icon-grey': breedSheet?.difficulty < 3
+                }"
+                class="star-icon">{{diff}}</i>
+                <i
+                [ngClass]="{
+                  'star-icon': breedSheet?.difficulty >= 4,
+                  'star-icon-grey': breedSheet?.difficulty < 4
+                }"
+                class="star-icon">{{diff}}</i>
+                <i
+                [ngClass]="{
+                  'star-icon': breedSheet?.difficulty >= 5,
+                  'star-icon-grey': breedSheet?.difficulty < 5
+                }"
+                class="star-icon">{{diff}}</i>
+              </span>
+            </div>
 
-
-              <!-- <i *ngIf="breedSheet?.difficulty >= 2" class="star-icon">{{diff}}</i>
-              <i *ngIf="breedSheet?.difficulty >= 3" class="star-icon">{{diff}}</i>
-              <i *ngIf="breedSheet?.difficulty >= 4" class="star-icon">{{diff}}</i>
-              <i *ngIf="breedSheet?.difficulty >= 5" class="star-icon">{{diff}}</i> -->
-
-              <!-- <i style="filter:grayscale(100%);margin-left:.3rem"  *ngIf="breedSheet?.difficulty <= 4" class="star-icon"></i>
-              <i style="filter:grayscale(100%);margin-left:.3rem" *ngIf="breedSheet?.difficulty <= 3" class="star-icon"></i>
-              <i style="filter:grayscale(100%);margin-left:.3rem"  *ngIf="breedSheet?.difficulty <= 2" class="star-icon"></i>
-              <i style="filter:grayscale(100%);margin-left:.3rem" *ngIf="breedSheet?.difficulty <= 1" class="star-icon"></i> -->
-            </span>
           </div>
           <div class="important-container">
             <div class="d-flex align-items-center item">

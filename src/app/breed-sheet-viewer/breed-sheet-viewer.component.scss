@@ -283,16 +283,12 @@ h5 {
     }
 
     .comments-icon {
+      margin-right: .5rem;
       &:before {
-        top: .3rem;
+        width: 1rem!important;
+        height: 1rem!important;
       }
       cursor: pointer;
-    }
-
-    .star-icon {
-      &:before {
-        top: .1rem;
-      }
     }
   }
 }
@@ -333,7 +329,7 @@ h5 {
 .head-card {
   border-bottom: .1rem solid #e2e2e2;
   width: 100%;
-  padding: 1rem;
+  padding: 1.6rem 0 1rem 0;
 }
 
 .body-card {
@@ -378,14 +374,38 @@ h6 {
   }
 }
 
+.fiche-info {
+  display: flex;
+  align-items: center;
+  @include breakpoint('small') {
+    flex-direction: column;
+    span {
+      font-size: 1.4rem!important;
+      margin: .5rem 0;
+    }
+  }
+}
+
 .creator {
   font-size: 1.4rem;
   color: #6e6e6e;
   text-align: center;
+  margin-right:.5rem
+}
+
+.date {
+  margin: 0 .5rem;
 }
 
 .creator-link {
   color: #6e6e6e;
+  margin-right:.5rem;
+  font-weight: bold;
+  @include breakpoint('small') {
+    font-size: 1.6rem;
+    margin: 0 0 1rem;
+  }
+
   &:hover {
     color: #62d744;
   }
@@ -464,7 +484,18 @@ h6 {
 }
 
 .text-data {
-  color: #9b9b9b;
+  color: #393939;
   font-size: 1.6rem !important;
   margin-bottom: .5rem;
+}
+
+.stars-cont {
+  position: relative;
+  margin-left: .5rem;
+  top: .1rem;
+}
+.sep {
+  @include breakpoint('small') {
+    display: none;
+  }
 }
