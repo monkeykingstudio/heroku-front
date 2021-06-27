@@ -112,7 +112,7 @@
                         'nodiapause': !breedSheet?.needDiapause
                       }
                     " class="text-data">{{ breedSheet?.needDiapause ? 'required' : 'not required' }} </span>
-                    <div class="d-flex flex-column w-100 align-items-center mt-3 mb-3">
+                    <div *ngIf="breedSheet?.needDiapause" class="d-flex flex-column w-100 align-items-center mt-3 mb-3">
                       <span class="card-title">
                         For the diapause
                         {{sheet.species}}
@@ -124,7 +124,7 @@
                           <b style="font-size:1.4rem">{{sheet.diapauseTemperature[0].diapauseTemperatureEnd}} °C</b>
                         </span>
                     </div>
-                    <div class="d-flex flex-column w-100 align-items-center">
+                    <div *ngIf="breedSheet?.needDiapause" class="d-flex flex-column w-100 align-items-center">
                       <span class="card-title">
                         The best period for this species is to start the diapause in
                         <b style="font-size:1.4rem">{{sheet.diapausePeriod[0].diapauseStart}}</b>
@@ -160,6 +160,9 @@
                       }"></i>
                       <i style="margin-right:.5rem" [ngClass]="{
                         'india-icon' : region === 'india' || region === 'india (south)' || region === 'india (north)' || region === 'india (east)' || region === 'india (west)'
+                      }"></i>
+                      <i style="margin-right:.5rem" [ngClass]="{
+                        'africa-icon' : region === 'africa' || region === 'africa (south)' || region === 'africa (north)' || region === 'africa (east)' || region === 'africa (west)'
                       }"></i>
                       {{ region }}
                     </span>

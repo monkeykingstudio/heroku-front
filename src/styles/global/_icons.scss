@@ -217,6 +217,21 @@
   }
 }
 
+.africa-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/regions/africa.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
 .asia-icon {
   &:before {
       content: '';
