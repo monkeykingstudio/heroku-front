@@ -1,109 +1,140 @@
 <div class="row">
   <div *ngIf='(breedingSheet$ | async) as sheet' class="breedsheet-container col-sm-12">
     <div class="breedsheet">
-
-      <!-- <div style="text-align: center;" class="mb-4">
-        <i class="review-icon"></i>
-        <h2>Breedsheet <span>Review</span></h2>
-      </div> -->
-
       <div class="col-sm-12 viewer">
         <div class="head">
-          <h5>{{sheet.species}}</h5>
+          <div class="d-flex flex-column">
+            <h5>{{sheet.species}}</h5>
+            <span class="creator">Created by
+              <a class="creator-link" href="">{{ sheet.creator?.pseudo }}</a> |
+              {{ sheet.creationDate | date: 'dd/MM/yyyy' }} | 2 <i class="comments-icon"></i> |
+              <i class="star-icon"></i>
+              <i style="filter:grayscale(100%);margin-left:.3rem" class="star-icon"></i>
+              <i style="filter:grayscale(100%);margin-left:.3rem" class="star-icon"></i>
+              <i style="filter:grayscale(100%);margin-left:.3rem" class="star-icon"></i>
+            </span>
+          </div>
 
           <div class="taxonomy-container">
-            <div class="d-flex mb-2 align-items-center">
+            <div class="d-flex mb-3 align-items-center">
               <span class="entete genre">genre</span>
               <span class="data gene">{{sheet.genre}}</span>
             </div>
-            <div class="d-flex mb-2 align-items-center ">
+            <div class="d-flex mb-3 align-items-center ">
               <span class="entete family align-items-center">family</span>
               <span class="data fame">{{sheet.family}}</span>
             </div>
-            <div class="d-flex mb-2 align-items-center">
+            <div class="d-flex mb-3 align-items-center ">
+              <span class="entete subfamily align-items-center">sub-family</span>
+              <span class="data subfame">{{sheet.subfamily}}</span>
+            </div>
+            <div class="d-flex mb-3 align-items-center">
               <span class="entete tribu align-items-center">tribu</span>
               <span class="data tribe">{{sheet.tribu}}</span>
             </div>
           </div>
 
           <div class="important-container">
-            <div class="d-flex mb-2 align-items-center item">
+            <div class="d-flex mb-3 align-items-center item">
               <i class="temperature-icon"></i>
               <span class="black-data">~{{breedSheet?.temperature[0].temperatureStart}}-{{breedSheet?.temperature[0].temperatureEnd}}°C</span>
             </div>
-            <div class="d-flex mb-2 align-items-center item">
+            <div class="d-flex mb-0 align-items-center item">
               <i class="humidity-icon"></i>
               <span class="black-data">~{{breedSheet?.hygrometry[0].hygrometryStart}}-{{breedSheet?.hygrometry[0].hygrometryEnd}}%</span>
             </div>
           </div>
         </div>
 
-        <div class="creator-cont col-sm-12">
-          <span class="creator"><b>creator: </b> <i><a class="creator-link" href="">{{ sheet.creator?.pseudo }}</a></i></span>
-        </div>
+        <div class="body row">
+          <div class="col-sm-12 offset-md-1 col-md-10 p-0">
+            <div class="picture-container">
+              <div [ngStyle]="{'background-image': 'url('+ actualGynePicture + ')'}" class="picture"></div>
+            </div>
 
-        <div class="body flex-column">
-          <div class="picture-container">
-            <div [ngStyle]="{'background-image': 'url('+ actualGynePicture + ')'}" class="picture"></div>
-          </div>
+            <div class="row">
+              <div class="col-sm-4 details-cont">
+                <div class="details">
+                  <div style="align-items: center;" class="d-flex flex-column">
+                    <i class="food-icon"></i>
+                    <h6 class="food">Food Types</h6>
+                  </div>
+                  <span class="text-data" *ngFor="let food of breedSheet?.foods">{{ food }} </span>
+                </div>
+              </div>
 
-          <div class="row">
+              <div class="col-sm-4 details-cont">
+                <div class="details">
+                  <div style="align-items: center;" class="d-flex flex-column">
+                    <i class="geography-icon"></i>
+                    <h6 class="diapause">Diapause</h6>
+                  </div>
+                  <span class="text-data" *ngFor="let food of breedSheet?.foods">{{ food }} </span>
+                </div>
+              </div>
+
+              <div class="col-sm-4 details-cont">
+                <div class="details">
+                  <div style="align-items: center;" class="d-flex flex-column">
+                    <i class="geography-icon"></i>
+                    <h6 class="geography">Geographic distribution</h6>
+                  </div>
+                  <span class="text-data" *ngFor="let region of breedSheet?.regions">{{ region }} </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-sm-6 details-cont">
+                <div class="details">
+                  <h6 class="behaviors">behaviours</h6>
+                  <span class="text-data">trophalaxy, claustral, driller</span>
+                </div>
+              </div>
+
+              <div class="col-sm-6 details-cont">
+                <div class="details">
+                  <h6>Biology</h6>
+                  <span class="text-data">size, life expectancy</span>
+                </div>
+              </div>
+            </div>
+            <div class="picture-container">
+              <div [ngStyle]="{'background-image': 'url('+ actualPicture + ')'}" class="picture"></div>
+            </div>
+
+           <div class="row">
             <div class="col-sm-4 details-cont">
               <div class="details">
-                <h6>food</h6>
-                <span class="static-text">this species feeds mainly on</span>
+                <div style="align-items: center;" class="d-flex flex-column">
+                  <i class="food-icon"></i>
+                  <h6 class="Polymorphism">Polymorphism</h6>
+                </div>
                 <span class="text-data" *ngFor="let food of breedSheet?.foods">{{ food }} </span>
               </div>
             </div>
 
             <div class="col-sm-4 details-cont">
               <div class="details">
-                <h6>food</h6>
-                <span class="static-text">this species feeds mainly on</span>
+                <div style="align-items: center;" class="d-flex flex-column">
+                  <i class="food-icon"></i>
+                  <h6 class="Polymorphism">Polymorphism</h6>
+                </div>
                 <span class="text-data" *ngFor="let food of breedSheet?.foods">{{ food }} </span>
               </div>
             </div>
 
             <div class="col-sm-4 details-cont">
               <div class="details">
-                <h6>food</h6>
-                <span class="static-text">this species feeds mainly on</span>
+                <div style="align-items: center;" class="d-flex flex-column">
+                  <i class="food-icon"></i>
+                  <h6 class="Polymorphism">Polymorphism</h6>
+                </div>
                 <span class="text-data" *ngFor="let food of breedSheet?.foods">{{ food }} </span>
               </div>
             </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-4 details-cont">
-              <div class="details">
-                <h6>food</h6>
-                <span class="static-text">this species feeds mainly on</span>
-                <span class="text-data" *ngFor="let food of breedSheet?.foods">{{ food }} </span>
-              </div>
-            </div>
-
-            <div class="col-sm-4 details-cont">
-              <div class="details">
-                <h6>food</h6>
-                <span class="static-text">this species feeds mainly on</span>
-                <span class="text-data" *ngFor="let food of breedSheet?.foods">{{ food }} </span>
-              </div>
-            </div>
-
-            <div class="col-sm-4 details-cont">
-              <div class="details">
-                <h6>food</h6>
-                <span class="static-text">this species feeds mainly on</span>
-                <span class="text-data" *ngFor="let food of breedSheet?.foods">{{ food }} </span>
-              </div>
-            </div>
-          </div>
-          <div class="picture-container">
-            <div [ngStyle]="{'background-image': 'url('+ actualPicture + ')'}" class="picture"></div>
-          </div>
-
-          <div class="details">
-            <span *ngFor="let food of breedSheet?.foods">{{ food }}</span>
+           </div>
           </div>
         </div>
       </div>

@@ -147,6 +147,32 @@
   }
 }
 
+.comments-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/comments.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 1.5rem!important;
+      height: 1.5rem!important;
+  }
+}
+
+.star-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/star.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 1.4rem!important;
+      height: 1.4rem!important;
+  }
+}
+
 .crown-icon {
   &:before {
       content: '';
