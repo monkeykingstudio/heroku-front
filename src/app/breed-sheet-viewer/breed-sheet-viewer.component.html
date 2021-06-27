@@ -132,6 +132,11 @@
                         <b style="font-size:1.4rem">{{sheet.diapausePeriod[0].diapauseEnd}}</b>
                         </span>
                     </div>
+                    <div *ngIf="!breedSheet?.needDiapause" class="mt-3 d-flex flex-column w-100 align-items-center">
+                      <span class="card-title">
+                        But a pause of 1 or 2 months can be recommended.
+                        </span>
+                    </div>
                   </div>
                 </div>
               </div>
