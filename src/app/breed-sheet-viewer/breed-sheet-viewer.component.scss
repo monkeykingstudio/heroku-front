@@ -9,7 +9,7 @@
   text-transform: capitalize;
   display: flex;
   align-items: center;
-  min-width: 6.5rem!important;
+  min-width: 7rem!important;
 }
 .data {
   margin-left: 1rem;
@@ -35,11 +35,12 @@
 
 .genre {
   background-color: #44d7ab;
+  border-bottom: .2rem solid #309c7b;
   border-radius: 5rem;
-  padding: 0.2rem 0.6rem;
+  padding: 0.4rem 0.6rem;
   color: white;
   min-width: 4.5rem;
-  font-size: .8rem;
+  font-size: .9rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,11 +116,12 @@
 
 .family {
   background-color: #d7447e;
+  border-bottom: .2rem solid #932b54;
   border-radius: 5rem;
-  padding: 0.2rem 0.6rem;
+  padding: 0.4rem 0.6rem;
   color: white;
   min-width: 4.5rem;
-  font-size: .8rem;
+  font-size: .9rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -130,13 +132,13 @@
 }
 
 .subfamily {
-  background-color: #d79c44
-  ;
+  background-color: #d79c44;
+  border-bottom: .2rem solid #9e712e;
   border-radius: 5rem;
-  padding: 0.2rem 0.6rem;
+  padding: 0.4rem 0.6rem;
   color: white;
   min-width: 4.5rem;
-  font-size: .8rem;
+  font-size: .9rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,11 +150,12 @@
 
 .tribu {
   background-color: #449ed7;
+  border-bottom: .2rem solid #235a7d;
   border-radius: 5rem;
-  padding: 0.2rem 0.6rem;
+  padding: 0.4rem 0.6rem;
   color: white;
   min-width: 4.5rem;
-  font-size: .8rem;
+  font-size: .9rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -169,7 +172,7 @@
     background-color: white;
     border-radius: 0.5rem;
     border-bottom: 0.2rem solid #bdbdbd;
-    padding: 2rem;
+    padding: 1.4rem;
     min-height: 100%;
 
     @include breakpoint('small') {
@@ -200,9 +203,7 @@ h5 {
   flex-direction: column;
   width: 100%;
   .taxonomy-container {
-    top: 1.2rem;
-    left: 1.2rem;
-    position: absolute;
+    position: relative;
     @include breakpoint('small') {
       position: relative;
       width: 100%;
@@ -212,13 +213,13 @@ h5 {
       align-items: center;
       left: 0rem;
       margin-bottom: 1rem;
+      top: 1.2rem;
     }
   }
 
   .important-container {
-    top: 1rem;
-    right: 1.6rem;
-    position: absolute;
+    position: relative;
+    top: -23px;
     @include breakpoint('small') {
       position: relative;
       display: flex;
@@ -226,6 +227,7 @@ h5 {
       width: 100%;
       left:0;
       margin-bottom: 1rem;
+      top: 1rem;
     }
 
     .item {
@@ -254,7 +256,7 @@ h5 {
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     position: relative;
     border: .1rem solid #e8e8e8;
     border-radius: .8rem;
@@ -263,6 +265,7 @@ h5 {
 
     @include breakpoint('small') {
       align-items: center;
+      justify-content: inherit;
       height: inherit;
       flex-direction: column;
       border: .1rem solid #c1c1c1;
@@ -294,59 +297,78 @@ h5 {
   }
 }
 
-// .food {
-//   &:before {
-//   background-image: url(../icons/food.svg);
-//   }
-// }
+.card-title {
+  font-size: 1.2rem;
+  text-align: center;
+  text-transform: inherit!important;
+  margin-bottom: 0;
+}
 
-// .geography {
-//   &:before {
-//   background-image: url(../icons/geography.svg);
-//   }
-// }
+.yesdiapause {
+  background-color: #72d744;
+  color: white !important;
+  border-radius: .5rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  min-width: 10rem;
+  max-width: 10rem;
+  font-weight: bold;
+  text-transform: uppercase!important;
+}
 
-// .polymorph {
-//   &:before {
-//   background-image: url(../icons/polymorphism.svg);
-//   }
-// }
+.nodiapause {
+  background-color: #d74444;
+  color: white !important;
+  border-radius: .5rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  min-width: 15rem;
+  max-width: 15rem;
+  font-weight: bold;
+  text-transform: uppercase!important;
+}
 
+.head-card {
+  border-bottom: .1rem solid #e2e2e2;
+  width: 100%;
+  padding: 1rem;
+}
 
+.body-card {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  justify-content: center;
+}
 
 h6 {
   font-weight: bold;
   display: flex;
   align-items: center;
   font-size: 2rem !important;
-  margin-bottom: 1rem;
+  margin: .5rem 0 1rem 0;
   text-align: center;
   position: relative;
   white-space: nowrap;
+  color: #434343;
 
-  // &:before {
-  //   content: "";
-  //   background-size: contain;
-  //   background-repeat: no-repeat;
-  //   display: inline-block;
-  //   position: relative;
-  //   width: 3.5rem;
-  //   height: 3.5rem;
-  //   left: -4.5rem;
-  //   top: -10px;
-  //   position: absolute;
-  // }
 
   @include breakpoint('small') {
     font-weight: bold;
     color: #4f4f4f;
-    border-bottom: 0.2rem solid #4f4f4f;
     text-transform: uppercase;
     font-size: 2rem !important;
     margin-bottom: 2rem;
-    width: 85%;
     text-align: center;
-    line-height: 4rem;
+    line-height: 2rem;
+    white-space: normal;
+    margin-top: 1rem;
   }
 }
 .creator-cont {
@@ -384,14 +406,13 @@ h6 {
     display: flex;
     flex-direction: column;
     border-radius: .5rem;
-    padding: 1rem;
     width: 100%;
     align-items: center;
-    min-height: 100%;
-    height: 19rem;
-    border-radius: .5rem;
-    border-top: .2rem solid #cecece;
-    box-shadow: 0 1px 5px -1px rgb(0 0 0 / 60%);
+    min-height: 23rem;
+    height: 100%;
+    border-radius: 0.5rem;
+    border-top: 0.2rem solid #cecece00;
+    box-shadow: 0 0px 8px 0px rgb(0 0 0 / 22%);
   }
 
   span {

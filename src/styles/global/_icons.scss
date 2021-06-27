@@ -160,6 +160,22 @@
   }
 }
 
+
+.star-icon-grey {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/star.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 1.4rem!important;
+      height: 1.4rem!important;
+      filter:grayscale(100%);
+      margin-left:.3rem
+  }
+}
+
 .star-icon {
   &:before {
       content: '';
@@ -461,6 +477,46 @@
   &:before {
       content: '';
       background-image: url('../../app/icons/food.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+  }
+}
+
+.behavior-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/behavior.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3.5rem;
+      height: 3.5rem;
+  }
+}
+
+.diapause-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/winter.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3.5rem;
+      height: 3.5rem;
+  }
+}
+
+
+.meta-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/metabolism.svg');
       background-size: contain;
       background-repeat: no-repeat;
       display: inline-block;

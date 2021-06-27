@@ -517,55 +517,60 @@ select {
   background-color: #d74444;
   color: white!important;
   border-radius: 30rem;
-  padding: .1rem 0;
+  padding: .4rem 0;
   display: flex;
   justify-content: center;
   min-width: 8rem;
   border-bottom: 0.2rem solid #870000;
+  max-width: 8rem;
 }
 
 .food-seeds {
   background-color: #c5b021;
   color: white!important;
   border-radius: 30rem;
-  padding: .1rem 0;
+  padding: .4rem 0;
   display: flex;
   justify-content: center;
   min-width: 8rem;
   border-bottom: 0.2rem solid #8c7c11;
+  max-width: 8rem;
 }
 
 .food-insects {
   background-color: #9744d7;
   color: white!important;
   border-radius: 30rem;
-  padding: .1rem 0;
+  padding: .4rem 0;
   display: flex;
   justify-content: center;
   min-width: 8rem;
   border-bottom: .2rem solid #4c0087;
+  max-width: 9rem;
 }
 
 .food-sugar-water {
   background-color: #44bdd7;
   color: white!important;
   border-radius: 30rem;
-  padding: .1rem .8rem;
+  padding: .4rem .8rem;
   display: flex;
   justify-content: center;
   min-width: 8rem;
   border-bottom: .2rem solid #007287;
+  max-width: 13rem;
 }
 
 .food-fruits {
   background-color: #f37a00;
   color: white!important;
   border-radius: 30rem;
-  padding: .1rem 0;
+  padding: .4rem 0;
   display: flex;
   justify-content: center;
   min-width: 8rem;
   border-bottom: .2rem solid #873500;
+  max-width: 8rem;
 
 }
 
