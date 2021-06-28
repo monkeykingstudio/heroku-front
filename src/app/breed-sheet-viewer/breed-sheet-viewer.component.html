@@ -217,12 +217,21 @@
                       'false': !sheet?.polymorphism,
                       'true': sheet?.polymorphism
                     }" class="card-title"><b>{{sheet?.polymorphism ? 'high polymorphism.' : 'inexistant polymorphism.'}}</b></span></span>
-                    <span class="card-title">
-                      the Gyne size is around<b> {{sheet?.gyneSize}} mm</b>,
-                      {{ sheet?.maleSize ? 'Male size' : ''}} <b>{{ sheet?.maleSize ? sheet?.maleSize : ''}} mm</b>, and
-                      {{ !sheet?.polymorphism ? 'Worker size is' : 'Major size' }}
+                    <span class="card-title mt-3">
+                      Gyne size is around<b> {{sheet?.gyneSize}}mm</b>,
                     </span>
-                    <span class="card-title">Gyne's life expectancy can reach {{f}}, and the workers can live about</span>
+
+                    <span class="card-title">and
+                      {{!sheet?.polymorphism ? 'Worker size is' : '' }} <b>{{!sheet?.polymorphism ? sheet?.workerSize + 'mm' : '' }}</b>
+                      {{sheet?.polymorphism ? 'Major size is' : '' }} <b>{{sheet?.polymorphism ? sheet?.majorSize + 'mm': '' }}</b>
+                    </span>
+
+                    <span class="card-title">{{ sheet?.maleSize ? 'Male size' : ''}} <b>{{ sheet?.maleSize ? sheet?.maleSize : ''}}mm</b>,</span>
+
+                    <span class="card-title mt-3">Gyne's life expectancy can reach <b>{{sheet?.gyneLives}} years</b> ,</span>
+
+                    <span class="card-title">and the workers can live about  <b>{{sheet?.workerLives}} years</b></span>
+
                   </div>
                 </div>
               </div>
@@ -230,7 +239,7 @@
             <div class="picture-container">
               <div [ngStyle]="{'background-image': 'url('+ actualPicture + ')'}" class="picture"></div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-sm-4 details-cont">
                 <div class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
@@ -242,7 +251,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
