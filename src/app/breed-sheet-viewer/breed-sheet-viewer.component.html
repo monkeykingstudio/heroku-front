@@ -126,10 +126,10 @@
                     </div>
                     <div *ngIf="breedSheet?.needDiapause" class="d-flex flex-column w-100 align-items-center">
                       <span class="card-title">
-                        The best period for this species is to start the diapause in
-                        <b style="font-size:1.4rem">{{sheet.diapausePeriod[0].diapauseStart}}</b>
-                        and ends it in
-                        <b style="font-size:1.4rem">{{sheet.diapausePeriod[0].diapauseEnd}}</b>
+                        The best period to start the diapause is
+                        <b style="font-size:1.4rem;text-transform:capitalize">{{sheet.diapausePeriod[0].diapauseStart}}</b>
+                        to
+                        <b style="font-size:1.4rem;text-transform:capitalize">{{sheet.diapausePeriod[0].diapauseEnd}}</b>
                         </span>
                     </div>
                     <div *ngIf="!breedSheet?.needDiapause" class="mt-3 d-flex flex-column w-100 align-items-center">
@@ -180,10 +180,29 @@
                 <div class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
                     <i class="behavior-icon"></i>
-                    <h6 class="behaviors">Behaviours</h6>
+                    <h6 class="behaviors">Common Behaviours</h6>
                   </div>
                   <div class="body-card">
-                    <span class="text-data">trophalaxy, claustral, driller</span>
+                    <div class="d-flex flex-column w-100 align-items-center">
+                      <div class="align-items-center d-flex mb-3">
+                        <i class="polygyne-icon"></i>
+                        <span><b>{{sheet?.polygyne ? 'Polygyne': 'Monogygyne'}}</b></span>
+                      </div>
+                      <div class="align-items-center d-flex mb-3">
+                        <i class="claustral-icon"></i>
+                        <span><b>{{sheet?.semiClaustral ? 'yes semiClaustral': 'claustral'}}</b></span>
+                      </div>
+                      <div class="align-items-center d-flex mb-3">
+                        <i class="driller-icon"></i>
+                        <span [ngClass]="{
+                          'false': !sheet?.driller
+                        }"><b>{{sheet?.driller ? 'yes driller': 'non-driller'}}</b></span>
+                      </div>
+                      <div class="align-items-center d-flex mb-3">
+                        <i class="drinker-icon"></i>
+                        <span><b>{{sheet?.drinker ? 'drinker in HA is required': 'drinker in HA is non required or optional'}}</b></span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -191,10 +210,19 @@
                 <div class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
                     <i class="meta-icon"></i>
-                    <h6>Metabolism</h6>
+                    <h6>Morphism & Metabolism</h6>
                   </div>
                   <div class="body-card">
-                    <span class="text-data">size, life expectancy</span>
+                    <span class="card-title">This species have <span [ngClass]="{
+                      'false': !sheet?.polymorphism,
+                      'true': sheet?.polymorphism
+                    }" class="card-title"><b>{{sheet?.polymorphism ? 'high polymorphism.' : 'inexistant polymorphism.'}}</b></span></span>
+                    <span class="card-title">
+                      the Gyne size is around<b> {{sheet?.gyneSize}} mm</b>,
+                      {{ sheet?.maleSize ? 'Male size' : ''}} <b>{{ sheet?.maleSize ? sheet?.maleSize : ''}} mm</b>, and
+                      {{ !sheet?.polymorphism ? 'Worker size is' : 'Major size' }}
+                    </span>
+                    <span class="card-title">Gyne's life expectancy can reach {{f}}, and the workers can live about</span>
                   </div>
                 </div>
               </div>

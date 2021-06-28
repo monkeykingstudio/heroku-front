@@ -591,6 +591,63 @@
   }
 }
 
+.polygyne-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/polygyne.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3rem;
+      height: 3rem;
+      margin-right: 1rem;
+      top: .2rem;
+  }
+}
+
+.claustral-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/claustral.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+      margin-right: 1rem;
+  }
+}
+
+.drinker-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/drinker.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+      margin-right: .8rem;
+  }
+}
+
+.driller-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/driller.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+      margin-right: 1rem;
+  }
+}
+
 .behavior-icon {
   &:before {
       content: '';
