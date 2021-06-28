@@ -411,6 +411,12 @@ h6 {
   }
 }
 
+.cont-data {
+  @include breakpoint('small') {
+    flex-direction:column;
+  }
+}
+
 .details-cont {
   display: flex;
   flex-direction: column;
@@ -419,6 +425,9 @@ h6 {
 
   @include breakpoint('small') {
   margin-bottom: 1rem;
+  span {
+    text-align:center!important;
+  }
   }
 
 

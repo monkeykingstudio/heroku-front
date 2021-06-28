@@ -184,21 +184,21 @@
                   </div>
                   <div class="body-card">
                     <div class="d-flex flex-column w-100 align-items-center">
-                      <div class="align-items-center d-flex mb-3">
+                      <div class="cont-data align-items-center d-flex mb-3">
                         <i class="polygyne-icon"></i>
                         <span><b>{{sheet?.polygyne ? 'Polygyne': 'Monogygyne'}}</b></span>
                       </div>
-                      <div class="align-items-center d-flex mb-3">
+                      <div class="cont-data  align-items-center d-flex mb-3">
                         <i class="claustral-icon"></i>
                         <span><b>{{sheet?.semiClaustral ? 'yes semiClaustral': 'claustral'}}</b></span>
                       </div>
-                      <div class="align-items-center d-flex mb-3">
+                      <div class="cont-data  align-items-center d-flex mb-3">
                         <i class="driller-icon"></i>
                         <span [ngClass]="{
                           'false': !sheet?.driller
                         }"><b>{{sheet?.driller ? 'yes driller': 'non-driller'}}</b></span>
                       </div>
-                      <div class="align-items-center d-flex mb-3">
+                      <div class="cont-data  align-items-center d-flex mb-3">
                         <i class="drinker-icon"></i>
                         <span><b>{{sheet?.drinker ? 'drinker in HA is required': 'drinker in HA is non required or optional'}}</b></span>
                       </div>
