@@ -49,16 +49,16 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('window:beforeunload', ['$event'])
-  logout ($event) {
-    this.authService.unconnect(this.currentUser.email).subscribe();
+  async logout ($event) {
+    await this.authService.unconnect(this.currentUser.email).subscribe();
     $event.stopPropagation();
     $event.preventDefault();
     $event.returnValue = false;
   }
 
   @HostListener('window:unload', ['$event'])
-  unloadHandler(event) {
-    this.authService.logout(this.currentUser.email).subscribe();
+  async unloadHandler(event) {
+    await this.authService.logout(this.currentUser.email).subscribe();
     event.returnValue = false;
 
   }
