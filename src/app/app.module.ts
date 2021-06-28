@@ -31,6 +31,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ChartsModule } from 'ng2-charts';
 import { DatePipe } from '@angular/common';
 import { BreedSheetViewerComponent } from './breed-sheet-viewer/breed-sheet-viewer.component';
+import { BreedSheetListComponent } from './breed-sheet-list/breed-sheet-list.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { BreedSheetViewerComponent } from './breed-sheet-viewer/breed-sheet-view
     TaskComponent,
     BreedSheetCreatorComponent,
     AdminPanelComponent,
-    BreedSheetViewerComponent
+    BreedSheetViewerComponent,
+    BreedSheetListComponent
   ],
   imports: [
     BrowserModule,

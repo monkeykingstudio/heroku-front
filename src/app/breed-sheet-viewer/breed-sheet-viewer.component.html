@@ -190,7 +190,7 @@
                       </div>
                       <div class="cont-data  align-items-center d-flex mb-3">
                         <i class="claustral-icon"></i>
-                        <span><b>{{sheet?.semiClaustral ? 'yes semiClaustral': 'claustral'}}</b></span>
+                        <span><b>{{sheet?.semiClaustral ? 'Semi-Claustral': 'claustral'}}</b></span>
                       </div>
                       <div class="cont-data  align-items-center d-flex mb-3">
                         <i class="driller-icon"></i>
@@ -200,7 +200,7 @@
                       </div>
                       <div class="cont-data  align-items-center d-flex mb-3">
                         <i class="drinker-icon"></i>
-                        <span><b>{{sheet?.drinker ? 'drinker in HA is required': 'drinker in HA is non required or optional'}}</b></span>
+                        <span><b>{{sheet?.drinker ? 'drinker in HA is required': 'drinker in HA is non required/optional'}}</b></span>
                       </div>
                     </div>
                   </div>
@@ -218,7 +218,7 @@
                       'true': sheet?.polymorphism
                     }" class="card-title"><b>{{sheet?.polymorphism ? 'high polymorphism.' : 'inexistant polymorphism.'}}</b></span></span>
                     <span class="card-title mt-3">
-                      Gyne size is around<b> {{sheet?.gyneSize}}mm</b>,
+                      Gyne size is around<b> {{sheet?.gyneSize}}mm</b>
                     </span>
 
                     <span class="card-title">and
@@ -226,9 +226,9 @@
                       {{sheet?.polymorphism ? 'Major size is' : '' }} <b>{{sheet?.polymorphism ? sheet?.majorSize + 'mm': '' }}</b>
                     </span>
 
-                    <span class="card-title">{{ sheet?.maleSize ? 'Male size' : ''}} <b>{{ sheet?.maleSize ? sheet?.maleSize : ''}}mm</b>,</span>
+                    <span class="card-title">{{ sheet?.maleSize ? 'Male size' : ''}} <b>{{ sheet?.maleSize ? sheet?.maleSize : ''}}mm</b></span>
 
-                    <span class="card-title mt-3">Gyne's life expectancy can reach <b>{{sheet?.gyneLives}} years</b> ,</span>
+                    <span class="card-title mt-3">Gyne's life expectancy can reach <b>{{sheet?.gyneLives}} years</b></span>
 
                     <span class="card-title">and the workers can live about  <b>{{sheet?.workerLives}} years</b></span>
 
