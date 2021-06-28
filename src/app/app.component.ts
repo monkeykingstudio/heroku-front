@@ -47,21 +47,21 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
   }
+
   @HostListener('window:beforeunload', ['$event'])
   async logout ($event) {
-    await this.authService.logout(this.currentUser.email).subscribe();
+    await this.authService.unconnect(this.currentUser.email).subscribe();
     $event.preventDefault();
-    $event.returnValue = false;
+  }
+
+  @HostListener('window:unload', ['$event'])
+  unloadHandler(event) {
+    this.authService.logout(this.currentUser.email).subscribe();
   }
 
 
-
-
-
-  // @HostListener('window:beforeunload')
   async ngOnDestroy() {
-    // await this.authService.logout(this.currentUser.email)
-    // .subscribe();
+    this.authStatusSubscription.unsubscribe();
   }
 }
 
