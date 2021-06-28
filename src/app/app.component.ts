@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { User } from './models/user.model';
 import { interval, Observable } from 'rxjs';
@@ -13,7 +13,7 @@ import { UsersService } from './services/user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   public authStatusSubscription: Subscription;
   userSub: Subscription;
 
@@ -47,4 +47,22 @@ export class AppComponent implements OnInit {
       }
     });
   }
+  @HostListener('window:beforeunload', ['$event'])
+  async logout ($event) {
+    await this.authService.logout(this.currentUser.email).subscribe();
+    $event.preventDefault();
+    $event.returnValue = false;
+  }
+
+
+
+
+
+  // @HostListener('window:beforeunload')
+  async ngOnDestroy() {
+    // await this.authService.logout(this.currentUser.email)
+    // .subscribe();
+  }
 }
+
+

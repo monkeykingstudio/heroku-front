@@ -47,9 +47,11 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
-    console.log(email);
-
     return this.http.post<any>(`${this.authRoute}/logout`, {email});
+  }
+
+  unconnect(email: string) {
+    return this.http.post<any>(`${this.authRoute}/unconnect`, {email});
   }
 
   admin() {
