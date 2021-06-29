@@ -86,15 +86,14 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 7, valeur: 40},
     {id: 8, valeur: 45},
     {id: 9, valeur: 50},
-    {id: 10, valeur: 50},
-    {id: 11, valeur: 55},
-    {id: 12, valeur: 60},
-    {id: 13, valeur: 65},
-    {id: 14, valeur: 70},
-    {id: 15, valeur: 75},
-    {id: 16, valeur: 80},
-    {id: 17, valeur: 85},
-    {id: 18, valeur: 90},
+    {id: 10, valeur: 55},
+    {id: 11, valeur: 60},
+    {id: 12, valeur: 65},
+    {id: 13, valeur: 70},
+    {id: 14, valeur: 75},
+    {id: 15, valeur: 80},
+    {id: 16, valeur: 85},
+    {id: 17, valeur: 90},
   ];
   public foods: string[] = [];
   defaultFoodList = 'insects';
