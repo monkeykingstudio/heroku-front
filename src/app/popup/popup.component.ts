@@ -27,14 +27,20 @@ export class PopupComponent implements OnInit, OnDestroy {
       return;
     }
     // move element to bottom of page (just before </body>) so it can be displayed above everything else
-    if (document.getElementById('colonyRef')) { // TODO refactoriser en switch case au fur et a mesure
+
+
+    if (document.getElementById('colonyRef')) {
       document.getElementById('colonyRef').appendChild(this.element);
-      // TODO definir un container noir vide avec id et append a l'intérieur la popup
+    } else if (document.getElementById('foodRef')) {
+      document.getElementById('foodRef').appendChild(this.element);
     }
 
     if (this.element.classList[0] === 'counter-popup') {
       document.getElementById('counterRef').appendChild(this.element);
     }
+    // else if (this.element.classList[0] === 'food-popup') {
+    //   document.getElementById('foodRef').appendChild(this.element);
+    // }
 
     // close modal on background click
     this.element.addEventListener('click', el => {

@@ -1,9 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { FormGroup, Validators, FormControl, Form } from '@angular/forms';
 import { BreedingSheet } from './../models/breedingSheet.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { PopupService } from '../services/popup.service';
+import { AuthService } from '../services/auth.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-breed-sheet-viewer',
@@ -11,6 +15,11 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./breed-sheet-viewer.component.scss']
 })
 export class BreedSheetViewerComponent implements OnInit, OnDestroy {
+  public authStatusSubscription: Subscription;
+  currentUser: User;
+
+  foodForm: FormGroup;
+
   breedingSheet$: Observable<BreedingSheet>;
   private sheetId: string;
   private breedingSheetSub: Subscription;
@@ -26,12 +35,28 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   private interval;
 
+  get formControls() { return this.foodForm.controls; }
+
   constructor(
     public breedingSheetsService: BreedingSheetsService,
-    public route: ActivatedRoute
-  ) { }
+    public route: ActivatedRoute,
+    public popupService: PopupService,
+    public authService: AuthService
+  )
+  {
+    this.prepareFood();
+  }
 
   ngOnInit(): void {
+    this.authStatusSubscription = this.authService.currentUser
+    .pipe(
+      map(user => {
+        if (user) {
+          this.currentUser = user;
+        }
+      })
+      ).subscribe();
+
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('sheetId')) {
         this.sheetId = paramMap.get('sheetId');
@@ -92,6 +117,32 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     for (const pic of this.breedSheet?.pictures) {
       this.pictures.push(pic);
     }
+  }
+
+  edit() {
+    console.log('test');
+  }
+
+  saveFood(food: Form) {
+    console.log(this.foodForm);
+  }
+
+  private prepareFood() {
+    this.foodForm = new FormGroup({
+      genre: new FormControl(null, {validators: [Validators.required]}),
+    });
+
+
+    console.log(this.foodForm);
+  }
+
+  // Popup control
+  openPopup(id: string) {
+    this.popupService.open(id);
+  }
+
+  closePopup(id: string) {
+    this.popupService.close(id);
   }
 
   ngOnDestroy() {

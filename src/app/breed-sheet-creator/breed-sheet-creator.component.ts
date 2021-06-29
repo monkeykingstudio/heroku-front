@@ -381,7 +381,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       polygyne: inputs.polygyne.value,
       polymorphism: inputs.polymorphism.value,
       semiClaustral: inputs.semiclaustral.value,
-      needDiapause: inputs.semiclaustral.value,
+      needDiapause: inputs.needdiapause.value,
       drinker: inputs.drinker.value,
       driller: inputs.driller.value,
       gyneSize: inputs.gynesize.value,

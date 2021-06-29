@@ -81,8 +81,9 @@
 
             <div class="row">
               <div class="col-sm-4 details-cont">
-                <div class="details">
+                <div class="details" id="foodRef">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
+                    <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openPopup('foodPopup')" class="pen-black-icon position-absolute"></i>
                     <i class="food-icon"></i>
                     <h6 class="food">Food Types</h6>
                   </div>
@@ -98,6 +99,19 @@
                     </div>
                   </div>
                 </div>
+                <app-popup [data]="breedSheet?.foods" class="breed-popup animate__animated animate__zoomIn" id='foodPopup'>
+                  <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                    <h6>Edit food types</h6>
+                    <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood(food)'>
+
+                      <button [disabled]="foodForm.invalid" type="submit" (click)="closePopup('foodPopup'); $event.stopPropagation()" class='green-btn mt-4'>SAVE</button>
+
+                    </form>
+                    <button type="button" class='close-popup' (click)="closePopup('foodPopup'); $event.stopPropagation()">
+                      <i class="close-icon"></i>
+                    </button>
+                  </div>
+                </app-popup>
               </div>
               <div class="col-sm-4 details-cont">
                 <div class="details">

@@ -330,6 +330,7 @@ h5 {
   border-bottom: .1rem solid #e2e2e2;
   width: 100%;
   padding: 1.6rem 0 1rem 0;
+  position: relative;
 }
 
 .body-card {
@@ -432,6 +433,7 @@ h6 {
 
 
   .details {
+    position: relative;
     display: flex;
     flex-direction: column;
     border-radius: .5rem;
@@ -456,8 +458,8 @@ h6 {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  height: 30rem;
-  max-width: 55rem;
+  height: 45rem;
+  max-width: 80rem;
   margin: 1rem auto;
   border-radius: 1rem;
   border: .3rem solid #252424;
@@ -471,10 +473,10 @@ h6 {
     background-position-y: center;
     background-repeat: no-repeat;
     position: relative;
-    width: 60rem;
-    height: 30rem;
-    max-height: 30rem;
-    min-height: 30rem;
+    width: 100rem;
+    height: 60rem;
+    max-height: 60rem;
+    min-height: 60rem;
     transition: all 0.8s;
 
     @include breakpoint('small') {
@@ -520,4 +522,31 @@ h6 {
   color: #d74444;
   font-weight: bold;
 }
+
+.pen-black-icon {
+  z-index: 8;
+  border-radius: .5rem;
+  display: flex;
+  align-items: center;
+  right: .7rem;
+  justify-content: center;
+  top: .7rem;
+  &:hover {
+    &:before {
+      content: '';
+      background-image: url('../../app/icons/edit-green.svg');
+    }
+  }
+}
+
+.close-popup {
+  right: .5rem;
+  top: .5rem;
+  .close-icon:before {
+    top: 0rem!important;
+}
+}
+
+
+
 
