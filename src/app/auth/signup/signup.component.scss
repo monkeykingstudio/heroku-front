@@ -39,15 +39,14 @@
   }
 
   .ant-black {
-    background-image: url(../../../assets/black-ant.png);
-    transform: scaleX(-1);
-    width: 12rem;
-    margin: auto;
-    margin-bottom: 1rem;
-    background-size: contain;
-    height: 7rem;
+    background-image: url(../../../assets/banner-fb.png);
+    /* transform: scaleX(-1); */
+    width: 50rem;
+    background-size: cover;
+    height: 20rem;
     background-repeat: no-repeat;
-    margin-top: 2rem;
+    border-radius: 10px;
+    margin: 2rem auto 6rem;
   }
   .form-group {
     margin-bottom: .8rem;
