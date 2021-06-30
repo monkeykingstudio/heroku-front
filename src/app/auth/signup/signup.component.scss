@@ -1,3 +1,5 @@
+@import '../../../styles/global/mixins';
+
 .signup-container {
   height: calc(100vh - 10rem);
 
@@ -39,15 +41,23 @@
   }
 
   .ant-black {
-    background-image: url(../../../assets/black-ant.png);
-    transform: scaleX(-1);
-    width: 12rem;
-    margin: auto;
-    margin-bottom: 1rem;
-    background-size: contain;
-    height: 7rem;
+    background-image: url(../../../assets/banner-fb.png);
+    width: 50rem;
+    background-size: cover;
+    height: 20rem;
     background-repeat: no-repeat;
-    margin-top: 2rem;
+    border-radius: 10px;
+    margin: 2rem auto 5rem;
+
+    @include breakpoint('small') {
+      background-image: url(../../../assets/banner-fb.png);
+    width: auto;
+    background-size: contain;
+    height: 17rem;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    margin: 0rem auto -5rem;
+    }
   }
   .form-group {
     margin-bottom: .8rem;
