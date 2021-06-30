@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public authStatusSubscription: Subscription;
   userSub: Subscription;
 
-  title = 'antslab';
+  title = 'fourmislabs';
   hover = false;
   isVerified = false;
 
