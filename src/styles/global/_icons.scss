@@ -854,5 +854,19 @@
     height: 1.8rem;
     transition: all .1s;
     cursor: pointer;
+    z-index: 8;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    right: .7rem;
+    justify-content: center;
+    top: .7rem;
+
+    &:hover {
+      &:before {
+        content: '';
+        background-image: url('../../app/icons/edit-green.svg');
+      }
+    }
   }
 }

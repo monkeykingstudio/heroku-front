@@ -1,5 +1,4 @@
 @import '../../styles/global/mixins';
-
 :host {
   width: 100%;
 }
@@ -397,7 +396,6 @@ h6 {
 .date {
   margin: 0 .5rem;
 }
-
 .creator-link {
   color: #6e6e6e;
   margin-right:.5rem;
@@ -431,7 +429,6 @@ h6 {
   }
   }
 
-
   .details {
     position: relative;
     display: flex;
@@ -451,7 +448,6 @@ h6 {
     text-transform: capitalize;
   }
 }
-
 .picture-container {
   display: flex;
   align-items: center;
@@ -488,12 +484,10 @@ h6 {
     }
   }
 }
-
 .static-text {
   font-size: 1.6rem !important;
   margin-bottom: .5rem;
 }
-
 .text-data {
   color: #393939;
   font-size: 1.6rem !important;
@@ -501,42 +495,10 @@ h6 {
   align-items: center;
   position: relative;
 }
-
 .stars-cont {
   position: relative;
   margin-left: .5rem;
   top: .1rem;
-}
-.sep {
-  @include breakpoint('small') {
-    display: none;
-  }
-}
-
-.false {
-  color: #d74444;
-  font-weight: bold;
-}
-
-.true {
-  color: #d74444;
-  font-weight: bold;
-}
-
-.pen-black-icon {
-  z-index: 8;
-  border-radius: .5rem;
-  display: flex;
-  align-items: center;
-  right: .7rem;
-  justify-content: center;
-  top: .7rem;
-  &:hover {
-    &:before {
-      content: '';
-      background-image: url('../../app/icons/edit-green.svg');
-    }
-  }
 }
 
 .close-popup {
