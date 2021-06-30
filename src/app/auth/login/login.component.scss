@@ -34,6 +34,16 @@
     background-repeat: no-repeat;
     border-radius: 10px;
     margin: 2rem auto 6rem;
+
+    @include breakpoint('small') {
+    background-image: url(../../../assets/banner-fb.png);
+    width: auto;
+    background-size: contain;
+    height: 17rem;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    margin: 0rem auto -5rem;
+    }
   }
 
   .form-group {

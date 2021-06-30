@@ -40,13 +40,22 @@
 
   .ant-black {
     background-image: url(../../../assets/banner-fb.png);
-    /* transform: scaleX(-1); */
     width: 50rem;
     background-size: cover;
     height: 20rem;
     background-repeat: no-repeat;
     border-radius: 10px;
-    margin: 2rem auto 6rem;
+    margin: 2rem auto 5rem;
+
+    @include breakpoint('small') {
+      background-image: url(../../../assets/banner-fb.png);
+    width: auto;
+    background-size: contain;
+    height: 17rem;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    margin: 0rem auto -5rem;
+    }
   }
   .form-group {
     margin-bottom: .8rem;
