@@ -35,6 +35,14 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   private interval;
 
+  foodList: Array<object> = [
+    {id: 0, valeur: 'insects'},
+    {id: 1, valeur: 'meat'},
+    {id: 2, valeur: 'sugar water'},
+    {id: 3, valeur: 'fruits'},
+    {id: 4, valeur: 'seeds'}
+  ];
+
   get formControls() { return this.foodForm.controls; }
 
   constructor(

@@ -103,7 +103,17 @@
                   <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
                     <h6>Edit food types</h6>
                     <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood(food)'>
+                      <select *ngFor="let food of breedSheet?.foods" [(ngModel)]="breedSheet?.foods[0].value" #food1 class="btn-select" formControlName='food' id="food">
+                        <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
+                      </select>
 
+                      <!-- <select [(ngModel)]="breedSheet?.foods[1]" #food2 class="" formControlName='food' id="food">
+                        <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
+                      </select>
+
+                      <select [(ngModel)]="breedSheet?.foods[2]" #food3 class="" formControlName='food' id="food">
+                        <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
+                      </select> -->
                       <button [disabled]="foodForm.invalid" type="submit" (click)="closePopup('foodPopup'); $event.stopPropagation()" class='green-btn mt-4'>SAVE</button>
 
                     </form>

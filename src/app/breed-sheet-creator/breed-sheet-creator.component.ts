@@ -26,7 +26,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 3, valeur: 4},
     {id: 4, valeur: 5}
   ];
-  defaultNestType = 'all';
+  defaultNestType = 'tous';
   nestTypeList: Array<object> = [
     {id: 0, valeur: 'Aerated concrete'},
     {id: 1, valeur: 'plexiglass'},
