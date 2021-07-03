@@ -32,6 +32,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 1, valeur: 'plexiglass'},
     {id: 2, valeur: 'all'},
     {id: 3, valeur: 'armored'},
+    {id: 4, valeur: 'wood'},
   ];
   monthList: Array<object> = [
     {id: 0, valeur: 'january'},
