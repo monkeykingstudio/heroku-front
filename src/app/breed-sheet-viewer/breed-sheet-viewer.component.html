@@ -83,7 +83,7 @@
               <div class="col-sm-4 details-cont">
                 <div class="details" id="foodRef">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
-                    <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openPopup('foodPopup')" class="pen-black-icon position-absolute"></i>
+                    <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openPopup()" class="pen-black-icon position-absolute"></i>
                     <i class="food-icon"></i>
                     <h6 class="food">Food Types</h6>
                   </div>
@@ -98,22 +98,17 @@
                       }" *ngFor="let food of breedSheet?.foods">{{ food }} </span>
                     </div>
                   </div>
-                </div>
-                <app-popup [data]="breedSheet?.foods" class="breed-popup animate__animated animate__zoomIn" id='foodPopup'>
+                <div *ngIf="popupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
                   <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
                     <h6>Edit food types</h6>
+                    <!-- <span>data: {{ this.data[0] | json }}</span> -->
+
                     <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood(food)'>
-                      <select *ngFor="let food of breedSheet?.foods" [(ngModel)]="breedSheet?.foods[0].value" #food1 class="btn-select" formControlName='food' id="food">
+                      <select [(ngModel)]="sheet?.foods[0]" #food1 class="btn-select" formControlName='food' id="food">
                         <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                       </select>
 
-                      <!-- <select [(ngModel)]="breedSheet?.foods[1]" #food2 class="" formControlName='food' id="food">
-                        <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
-                      </select>
 
-                      <select [(ngModel)]="breedSheet?.foods[2]" #food3 class="" formControlName='food' id="food">
-                        <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
-                      </select> -->
                       <button [disabled]="foodForm.invalid" type="submit" (click)="closePopup('foodPopup'); $event.stopPropagation()" class='green-btn mt-4'>SAVE</button>
 
                     </form>
@@ -121,7 +116,12 @@
                       <i class="close-icon"></i>
                     </button>
                   </div>
-                </app-popup>
+                </div>
+
+                </div>
+                <!-- <app-popup [data]="sheet.foods" class="breed-popup animate__animated animate__zoomIn" id='foodPopup'>
+
+                </app-popup> -->
               </div>
               <div class="col-sm-4 details-cont">
                 <div class="details">

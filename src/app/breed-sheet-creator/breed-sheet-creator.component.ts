@@ -402,8 +402,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       ],
       diapausePeriod: [
         {
-          diapauseStart: inputs.semiclaustral.value ? inputs.diapausestart.value : null,
-          diapauseEnd: inputs.semiclaustral.value ? inputs.diapauseend.value : null
+          diapauseStart: inputs.needdiapause.value ? inputs.diapausestart.value : null,
+          diapauseEnd: inputs.needdiapause.value ? inputs.diapauseend.value : null
         }
       ],
       temperature: [
@@ -414,8 +414,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       ],
       diapauseTemperature: [
         {
-          diapauseTemperatureStart: inputs.semiclaustral.value ? inputs.diapausetemperaturestart.value : null,
-          diapauseTemperatureEnd: inputs.semiclaustral.value ? inputs.diapausetemperatureend.value : null
+          diapauseTemperatureStart: inputs.needdiapause.value ? inputs.diapausetemperaturestart.value : null,
+          diapauseTemperatureEnd: inputs.needdiapause.value ? inputs.diapausetemperatureend.value : null
         }
       ],
       hygrometry: [

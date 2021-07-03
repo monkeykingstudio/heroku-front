@@ -5,7 +5,7 @@ import { BreedingSheet } from './../models/breedingSheet.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { PopupService } from '../services/popup.service';
+// import { PopupService } from '../services/popup.service';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
 
@@ -35,6 +35,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   private interval;
 
+  popupOpen = false;
+
   foodList: Array<object> = [
     {id: 0, valeur: 'insects'},
     {id: 1, valeur: 'meat'},
@@ -48,7 +50,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   constructor(
     public breedingSheetsService: BreedingSheetsService,
     public route: ActivatedRoute,
-    public popupService: PopupService,
+    // public popupService: PopupService,
     public authService: AuthService
   )
   {
@@ -137,7 +139,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   private prepareFood() {
     this.foodForm = new FormGroup({
-      genre: new FormControl(null, {validators: [Validators.required]}),
+      food: new FormControl(null, {validators: [Validators.required]}),
     });
 
 
@@ -145,13 +147,11 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   }
 
   // Popup control
-  openPopup(id: string) {
-    this.popupService.open(id);
+  openPopup() {
+    this.popupOpen = true;
   }
 
-  closePopup(id: string) {
-    this.popupService.close(id);
-  }
+
 
   ngOnDestroy() {
     this.breedingSheetSub.unsubscribe();
