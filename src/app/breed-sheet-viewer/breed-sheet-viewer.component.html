@@ -260,7 +260,7 @@
                 </div>
               </div>
             </div>
-            <div class="picture-container">
+            <div *ngIf="sheet.pictures.length > 0" class="picture-container">
               <div [ngStyle]="{'background-image': 'url('+ actualPicture + ')'}" class="picture"></div>
             </div>
             <!-- <div class="row">
