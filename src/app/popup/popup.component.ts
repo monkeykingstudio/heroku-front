@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ElementRef, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { PopupService } from './../services/popup.service';
 
 
@@ -31,19 +31,16 @@ export class PopupComponent implements OnInit, OnDestroy {
 
     if (document.getElementById('colonyRef')) {
       document.getElementById('colonyRef').appendChild(this.element);
-    }
-    else if (document.getElementById('foodRef')) {
+    } else if (document.getElementById('foodRef')) {
       document.getElementById('foodRef').appendChild(this.element);
     }
 
     if (this.element.classList[0] === 'counter-popup') {
       document.getElementById('counterRef').appendChild(this.element);
     }
-    else if (this.element.classList[0] === 'food-popup') {
-      document.getElementById('foodRef').appendChild(this.element);
-    }
-
-    console.log('DATA', this.data[0]);
+    // else if (this.element.classList[0] === 'food-popup') {
+    //   document.getElementById('foodRef').appendChild(this.element);
+    // }
 
     // close modal on background click
     this.element.addEventListener('click', el => {

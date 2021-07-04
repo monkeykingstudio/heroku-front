@@ -541,10 +541,23 @@ h6 {
   margin-left: .5rem;
   top: .1rem;
 }
+select {
+  padding: 5px;
+}
 
 .close-popup {
+  position: absolute;
   right: .5rem;
   top: .5rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: .3rem!important;
+  transition: all 0.2s;
+  border-bottom: 0.2rem solid #4f9218;
+}
+
+.close-popup {
+
   .close-icon:before {
     top: 0rem!important;
 }
