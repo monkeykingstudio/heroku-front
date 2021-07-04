@@ -101,9 +101,7 @@
                 <div *ngIf="popupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
                   <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
                     <h6>Edit food types</h6>
-                    <!-- <span>data: {{ this.data[0] | json }}</span> -->
-
-                    <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood(food)'>
+                    <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood()'>
                       <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='foodOne'>
                         <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                       </select>
@@ -267,7 +265,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-12 details-cont">
+              <div *ngIf="sheet.characteristics" class="col-sm-12 details-cont">
                   <div class="details">
                     <div style="align-items: center;" class="head-card d-flex flex-column">
                       <i class="see-icon"></i>

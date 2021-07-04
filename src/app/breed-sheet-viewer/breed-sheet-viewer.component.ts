@@ -38,6 +38,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   popupOpen = false;
   errorFood = false;
 
+  private foods = [];
   foodList: Array<object> = [
     {id: 0, valeur: 'insects'},
     {id: 1, valeur: 'meat'},
@@ -140,7 +141,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     console.log('test');
   }
 
-  saveFood(food: Form) {
+  saveFood() {
     if (
       this.foodOne.value === this.foodTwo.value ||
       this.foodOne.value === this.foodThree.value ||
@@ -148,10 +149,14 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       ) {
       this.errorFood = true;
     } else {
-      console.log(this.foodForm);
+      const foods = [
+        this.foodOne.value,
+        this.foodTwo?.value,
+        this.foodThree?.value
+      ];
+      this.breedingSheetsService.updateSheet(this.breedSheet?.id, foods);
       this.popupOpen = false;
     }
-
   }
 
   private prepareFood() {

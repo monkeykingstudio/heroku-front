@@ -25,6 +25,12 @@ export class BreedingSheetsService {
     );
   }
 
+  updateSheet(id: string, foods: any) {
+    console.log(this.breedingSheetsUrl);
+    console.log('from service', id, foods);
+    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/${id}`, foods);
+  }
+
   getSheetById(id: string) {
     return this.http.get<BreedingSheet>(`${this.breedingSheetsUrl}/${id}`).pipe(
       map(result => result['sheet']),
