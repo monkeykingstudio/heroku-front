@@ -35,4 +35,5 @@ export class BreedingSheet {
   swarmingPeriod?: any[];
   maleSize?: string;
   majorSize?: string;
+  characteristics?: string;
 }

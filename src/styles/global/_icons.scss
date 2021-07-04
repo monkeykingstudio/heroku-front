@@ -661,6 +661,19 @@
   }
 }
 
+.see-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/see.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3.5rem;
+      height: 3.5rem;
+  }
+}
+
 .diapause-icon {
   &:before {
       content: '';

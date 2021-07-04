@@ -176,8 +176,8 @@ form .custom-file-label, input[type=text], input[type=file] form input[type=emai
 }
 
 html {
-  // font-size: 62.5%;
-  font-size: 78%;
+  font-size: 62.5%;
+  // font-size: 78%;
   @include breakpoint('small') {
     font-size: 62.5%;
   }
@@ -478,7 +478,6 @@ select {
    box-shadow: none!important;
    color: rgb(166 26 26);
     background: #ff00001f;
-
   }
 }
 

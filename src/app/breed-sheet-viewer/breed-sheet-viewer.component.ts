@@ -36,16 +36,24 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   private interval;
 
   popupOpen = false;
+  errorFood = false;
 
   foodList: Array<object> = [
     {id: 0, valeur: 'insects'},
     {id: 1, valeur: 'meat'},
     {id: 2, valeur: 'sugar water'},
     {id: 3, valeur: 'fruits'},
-    {id: 4, valeur: 'seeds'}
+    {id: 4, valeur: 'seeds'},
+    {id: 5, valeur: 'honeydew'},
+    {id: 6, valeur: 'ant bread'},
+    {id: 7, valeur: 'mushrooms'},
   ];
 
   get formControls() { return this.foodForm.controls; }
+  get foodOne() { return this.foodForm.controls['foodOne']; }
+  get foodTwo() { return this.foodForm.controls['foodTwo']; }
+  get foodThree() { return this.foodForm.controls['foodThree']; }
+
 
   constructor(
     public breedingSheetsService: BreedingSheetsService,
@@ -85,7 +93,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
         this.switchPicture();
       });
     })).subscribe();
-
   }
 
   loadSheet(species: string): Observable<BreedingSheet> {
@@ -134,12 +141,24 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   }
 
   saveFood(food: Form) {
-    console.log(this.foodForm);
+    if (
+      this.foodOne.value === this.foodTwo.value ||
+      this.foodOne.value === this.foodThree.value ||
+      this.foodTwo.value === this.foodThree.value
+      ) {
+      this.errorFood = true;
+    } else {
+      console.log(this.foodForm);
+      this.popupOpen = false;
+    }
+
   }
 
   private prepareFood() {
     this.foodForm = new FormGroup({
-      food: new FormControl(null, {validators: [Validators.required]}),
+      foodOne: new FormControl(this.breedSheet?.foods[0], {validators: [Validators.required]}),
+      foodTwo: new FormControl(this.breedSheet?.foods[1], {validators: [Validators.required]}),
+      foodThree: new FormControl(this.breedSheet?.foods[2], {validators: [Validators.required]})
     });
 
 
@@ -154,8 +173,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   closePopup() {
     this.popupOpen = false;
   }
-
-
 
   ngOnDestroy() {
     this.breedingSheetSub.unsubscribe();

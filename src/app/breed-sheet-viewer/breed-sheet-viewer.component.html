@@ -104,20 +104,20 @@
                     <!-- <span>data: {{ this.data[0] | json }}</span> -->
 
                     <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood(food)'>
-                      <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='food' id="food">
+                      <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='foodOne'>
                         <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                       </select>
 
-                      <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='food' id="food">
+                      <select *ngIf="sheet?.foods[1]" [(ngModel)]="sheet?.foods[1]" class="btn-select" formControlName='foodTwo'>
                         <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                       </select>
 
-                      <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='food' id="food">
+                      <select *ngIf="sheet?.foods[2]" [(ngModel)]="sheet?.foods[2]" class="btn-select" formControlName='foodThree'>
                         <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                       </select>
+                      <!-- [disabled]="foodForm.invalid"  -->
 
-
-                      <button [disabled]="foodForm.invalid" type="submit" (click)="closePopup('foodPopup'); $event.stopPropagation()" class='green-btn mt-4'>SAVE</button>
+                      <button type="submit" class='green-btn mt-4'>SAVE</button>
 
                     </form>
                     <button type="button" class='close-popup' (click)="closePopup(); $event.stopPropagation()">
@@ -266,6 +266,18 @@
 
                   </div>
                 </div>
+              </div>
+              <div class="col-sm-12 details-cont">
+                  <div class="details">
+                    <div style="align-items: center;" class="head-card d-flex flex-column">
+                      <i class="see-icon"></i>
+                      <h6>Characteristics and Observations</h6>
+                    </div>
+
+                    <div class="body-card">
+                      <span style="white-space: pre-line;" class="card-title">{{sheet?.characteristics}}</span>
+                    </div>
+                  </div>
               </div>
             </div>
             <div *ngIf="sheet.pictures.length > 0" class="picture-container">

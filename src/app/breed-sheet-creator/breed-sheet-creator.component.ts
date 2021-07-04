@@ -26,7 +26,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     {id: 3, valeur: 4},
     {id: 4, valeur: 5}
   ];
-  defaultNestType = 'tous';
+  defaultNestType = 'all';
   nestTypeList: Array<object> = [
     {id: 0, valeur: 'Aerated concrete'},
     {id: 1, valeur: 'plexiglass'},
@@ -188,7 +188,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   get polymorphism() { return this.breedSheetForm.controls['polymorphism']; }
   get semiclaustral() { return this.breedSheetForm.controls['semiclaustral']; }
   get needdiapause() { return this.breedSheetForm.controls['needdiapause']; }
-  get trophalaxy() { return this.breedSheetForm.controls['needdiapause']; }
+  get trophalaxy() { return this.breedSheetForm.controls['trophalaxy']; }
   get drinker() { return this.breedSheetForm.controls['drinker']; }
   get driller() { return this.breedSheetForm.controls['driller']; }
   get gynesize() { return this.breedSheetForm.controls['gynesize']; }
@@ -209,6 +209,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   get hygrometryend() { return this.breedSheetForm.controls['hygrometryend']; }
   get nesttype() { return this.breedSheetForm.controls['nesttype']; }
   get maxpopulation() { return this.breedSheetForm.controls['maxpopulation']; }
+  get characteristics() { return this.breedSheetForm.controls['characteristics']; }
+
   // get sourcelink() { return this.breedSheetForm.controls['sourcelink']; }
   // get sourcetext() { return this.breedSheetForm.controls['sourcetext']; }
 
@@ -273,9 +275,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       hygrometryend: new FormControl(null, {validators: [Validators.required]}),
       nesttype: new FormControl(null),
       maxpopulation: new FormControl(null, {validators: [Validators.required]}),
+      characteristics: new FormControl(null)
     });
-
-
     console.log(this.breedSheetForm);
   }
 
@@ -425,7 +426,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
         }
       ],
       nestType: inputs.nesttype.value,
-      maxPopulation: inputs.maxpopulation.value
+      maxPopulation: inputs.maxpopulation.value,
+      characteristics: inputs.characteristics.value
     };
 
     console.log(this.breedData);
