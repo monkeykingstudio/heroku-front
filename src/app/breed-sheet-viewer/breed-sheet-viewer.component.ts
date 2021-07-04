@@ -151,6 +151,10 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     this.popupOpen = true;
   }
 
+  closePopup() {
+    this.popupOpen = false;
+  }
+
 
 
   ngOnDestroy() {

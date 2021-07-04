@@ -81,7 +81,7 @@
 
             <div class="row">
               <div class="col-sm-4 details-cont">
-                <div class="details" id="foodRef">
+                <div class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
                     <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openPopup()" class="pen-black-icon position-absolute"></i>
                     <i class="food-icon"></i>
@@ -104,7 +104,15 @@
                     <!-- <span>data: {{ this.data[0] | json }}</span> -->
 
                     <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood(food)'>
-                      <select [(ngModel)]="sheet?.foods[0]" #food1 class="btn-select" formControlName='food' id="food">
+                      <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='food' id="food">
+                        <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
+                      </select>
+
+                      <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='food' id="food">
+                        <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
+                      </select>
+
+                      <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='food' id="food">
                         <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                       </select>
 
@@ -112,7 +120,7 @@
                       <button [disabled]="foodForm.invalid" type="submit" (click)="closePopup('foodPopup'); $event.stopPropagation()" class='green-btn mt-4'>SAVE</button>
 
                     </form>
-                    <button type="button" class='close-popup' (click)="closePopup('foodPopup'); $event.stopPropagation()">
+                    <button type="button" class='close-popup' (click)="closePopup(); $event.stopPropagation()">
                       <i class="close-icon"></i>
                     </button>
                   </div>
