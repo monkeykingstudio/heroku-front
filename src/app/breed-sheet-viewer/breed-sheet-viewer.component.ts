@@ -83,6 +83,10 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.reloadSheet();
+  }
+
+  reloadSheet() {
     this.breedingSheet$.pipe(
       map((sheet) => {
       this.breedingSheetSub = this.breedingSheetsService.getSheet(sheet.species)
@@ -142,19 +146,24 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   }
 
   saveFood() {
-    if (
+    if ((
       this.foodOne.value === this.foodTwo.value ||
       this.foodOne.value === this.foodThree.value ||
-      this.foodTwo.value === this.foodThree.value
-      ) {
+      this.foodTwo.value === this.foodThree.value) && (!this.foodTwo.value && !this.foodThree.value)) {
       this.errorFood = true;
+      console.log(this.errorFood);
+
     } else {
       const foods = [
         this.foodOne.value,
         this.foodTwo?.value,
         this.foodThree?.value
       ];
-      this.breedingSheetsService.updateSheet(this.breedSheet?.id, foods);
+      this.breedingSheetsService.updateSheet(this.breedSheet?.id, foods)
+      .subscribe(() => {
+        this.reloadSheet();
+        this.loadSheet(this.breedSheet.species);
+      });
       this.popupOpen = false;
     }
   }

@@ -572,7 +572,42 @@ select {
   min-width: 8rem;
   border-bottom: .2rem solid #873500;
   max-width: 8rem;
+}
 
+.food-honeydew {
+  background-color: #786c4b;
+  color: white!important;
+  border-radius: 30rem;
+  padding: .4rem 0;
+  display: flex;
+  justify-content: center;
+  min-width: 10rem;
+  border-bottom: .2rem solid #433c27;
+  max-width: 10rem;
+}
+
+.food-antbread {
+  background-color: #00f349;
+  color: white!important;
+  border-radius: 30rem;
+  padding: .4rem 0;
+  display: flex;
+  justify-content: center;
+  min-width: 9rem;
+  border-bottom: .2rem solid #07ad39;
+  max-width: 9rem;
+}
+
+.food-mushrooms {
+  background-color: #9b5f23;
+  color: white!important;
+  border-radius: 30rem;
+  padding: .4rem 0;
+  display: flex;
+  justify-content: center;
+  min-width: 11rem;
+  border-bottom: .2rem solid #704316;
+  max-width: 11rem;
 }
 
 html, body { height: 100%; }

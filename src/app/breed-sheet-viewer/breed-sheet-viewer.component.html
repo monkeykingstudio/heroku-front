@@ -94,7 +94,10 @@
                         'food-meat': food === 'meat',
                         'food-sugar-water': food === 'sugar water',
                         'food-fruits': food === 'fruits',
-                        'food-seeds': food === 'seeds'
+                        'food-seeds': food === 'seeds',
+                        'food-honeydew': food === 'honeydew',
+                        'food-antbread': food === 'ant bread',
+                        'food-mushrooms': food === 'mushrooms'
                       }" *ngFor="let food of breedSheet?.foods">{{ food }} </span>
                     </div>
                   </div>
@@ -106,11 +109,11 @@
                         <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                       </select>
 
-                      <select *ngIf="sheet?.foods[1]" [(ngModel)]="sheet?.foods[1]" class="btn-select" formControlName='foodTwo'>
+                      <select [(ngModel)]="sheet?.foods[1]" class="btn-select" formControlName='foodTwo'>
                         <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                       </select>
 
-                      <select *ngIf="sheet?.foods[2]" [(ngModel)]="sheet?.foods[2]" class="btn-select" formControlName='foodThree'>
+                      <select [(ngModel)]="sheet?.foods[2]" class="btn-select" formControlName='foodThree'>
                         <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                       </select>
                       <!-- [disabled]="foodForm.invalid"  -->
