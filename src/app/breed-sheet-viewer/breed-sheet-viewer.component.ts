@@ -40,6 +40,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   private foods = [];
   foodList: Array<object> = [
+    {id: 8, valeur: ''},
     {id: 0, valeur: 'insects'},
     {id: 1, valeur: 'meat'},
     {id: 2, valeur: 'sugar water'},
@@ -146,33 +147,33 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   }
 
   saveFood() {
-    if ((
-      this.foodOne.value === this.foodTwo.value ||
-      this.foodOne.value === this.foodThree.value ||
-      this.foodTwo.value === this.foodThree.value) && (!this.foodTwo.value && !this.foodThree.value)) {
+    if ((this.foodOne.value === this.foodTwo.value || this.foodOne.value === this.foodThree.value || (this.foodTwo.value === this.foodThree.value && (this.foodTwo.value !== '' && this.foodThree.value !== '')))
+      ||
+      ((this.foodTwo.value !== '' && this.foodThree.value !== '') && (this.foodTwo.value === this.foodThree.value))
+      )
+      {
       this.errorFood = true;
-      console.log(this.errorFood);
 
-    } else {
-      const foods = [
-        this.foodOne.value,
-        this.foodTwo?.value,
-        this.foodThree?.value
-      ];
-      this.breedingSheetsService.updateSheet(this.breedSheet?.id, foods)
-      .subscribe(() => {
-        this.reloadSheet();
-        this.loadSheet(this.breedSheet.species);
-      });
-      this.popupOpen = false;
-    }
+      } else {
+        const foods = [
+          this.foodOne.value,
+          this.foodTwo?.value,
+          this.foodThree?.value
+        ];
+        this.breedingSheetsService.updateSheet(this.breedSheet?.id, foods)
+        .subscribe(() => {
+          this.reloadSheet();
+          this.loadSheet(this.breedSheet.species);
+        });
+        this.popupOpen = false;
+      }
   }
 
   private prepareFood() {
     this.foodForm = new FormGroup({
-      foodOne: new FormControl(this.breedSheet?.foods[0], {validators: [Validators.required]}),
-      foodTwo: new FormControl(this.breedSheet?.foods[1], {validators: [Validators.required]}),
-      foodThree: new FormControl(this.breedSheet?.foods[2], {validators: [Validators.required]})
+      foodOne: new FormControl(this.breedSheet?.foods[0]),
+      foodTwo: new FormControl(this.breedSheet?.foods[1]),
+      foodThree: new FormControl(this.breedSheet?.foods[2])
     });
 
 

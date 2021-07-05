@@ -105,19 +105,24 @@
                   <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
                     <h6>Edit food types</h6>
                     <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood()'>
-                      <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='foodOne'>
-                        <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
-                      </select>
+                      <div class="d-flex flex-column">
+                        <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='foodOne'>
+                          <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
+                        </select>
 
-                      <select [(ngModel)]="sheet?.foods[1]" class="btn-select" formControlName='foodTwo'>
-                        <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
-                      </select>
+                        <select [(ngModel)]="sheet?.foods[1]" class="btn-select" formControlName='foodTwo'>
+                          <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
+                        </select>
 
-                      <select [(ngModel)]="sheet?.foods[2]" class="btn-select" formControlName='foodThree'>
-                        <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
-                      </select>
-                      <!-- [disabled]="foodForm.invalid"  -->
+                        <select [(ngModel)]="sheet?.foods[2]" class="btn-select" formControlName='foodThree'>
+                          <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
+                        </select>
 
+                        <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf="errorFood">
+                          You can't select same food types
+                        </span>
+
+                      </div>
                       <button type="submit" class='green-btn mt-4'>SAVE</button>
 
                     </form>
