@@ -147,7 +147,12 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   }
 
   saveFood() {
-    if ((this.foodOne.value === this.foodTwo.value || this.foodOne.value === this.foodThree.value || (this.foodTwo.value === this.foodThree.value && (this.foodTwo.value !== '' && this.foodThree.value !== '')))
+    if (
+      (this.foodOne.value === this.foodTwo.value
+        ||
+        this.foodOne.value === this.foodThree.value
+        || (this.foodTwo.value === this.foodThree.value && (this.foodTwo.value !== '' && this.foodThree.value !== ''))
+        )
       ||
       ((this.foodTwo.value !== '' && this.foodThree.value !== '') && (this.foodTwo.value === this.foodThree.value))
       )
@@ -187,6 +192,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   closePopup() {
     this.popupOpen = false;
+    this.prepareFood();
   }
 
   ngOnDestroy() {
