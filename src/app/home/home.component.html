@@ -10,7 +10,7 @@
           <div #same class="d-flex antban">
             <div class="d-flex flex-column justify-content-center align-items-center">
               <h6 class="title">
-                WELCOME TO THE ALPHA <span class="release">V.0.10a</span> !
+                WELCOME TO THE ALPHA <span class="release">V.0.10b</span> !
               </h6>
               <p class="disclaimer">
                 <span class="important">Thank you for accepting our invitation</span> to the alpha-testing phase of the development of <span class="important">FourmisLabs.</span>
@@ -47,7 +47,7 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-12 col-md-9">
+        <div class="col-sm-12 col-md-5">
           <div class="last-news">
             <div class="d-flex align-items-center">
               <h6 class="tiny-title">
@@ -66,17 +66,50 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12 col-md-3">
-          <div *ngIf='(onlineUsers$ | async) as onlineUsers' class="col-sm-12">
-            <div class="users-online">
-              <div class="d-flex align-items-center">
+        <div class="col-sm-12 col-md-7">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="donations-title">
                 <h6 class="tiny-title">
-                  <i class="users-icon"></i>
-                  Connected users ({{onlineUsers.length}})
+                  <i class="donation-icon"></i>
+                  Support us!
                 </h6>
               </div>
-              <div class="users-cont">
-                <span [ngClass]="user.role === 'admin' ? 'admin' : '' " class="users" *ngFor="let user of onlineUsers; index as i">{{ user.pseudo }}</span>
+
+              <a target="_blank" href="https://www.patreon.com/fourmislabs?fan_landing=true">
+                <div class="donation">
+                  <div class="d-flex align-items-center flex-column">
+                    <i class="patreon-logo"></i>
+                    <i class="piggybank-icon"></i>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-sm-4">
+              <div class="donations-title">
+                <h6 class="tiny-title">
+                  <i class="roadmap-icon"></i>
+                  Follow the roadmap
+                </h6>
+              </div>
+
+              <div class="roadmap">
+                <div class="d-flex align-items-center">
+                  <i class="trello-logo"></i>
+                </div>
+              </div>
+            </div>
+            <div *ngIf='(onlineUsers$ | async) as onlineUsers' class="col-sm-4">
+              <div class="users-online">
+                <div class="d-flex align-items-center">
+                  <h6 class="tiny-title">
+                    <i class="users-icon"></i>
+                    Connected users ({{onlineUsers.length}})
+                  </h6>
+                </div>
+                <div class="users-cont">
+                  <span [ngClass]="user.role === 'admin' ? 'admin' : '' " class="users" *ngFor="let user of onlineUsers; index as i">{{ user.pseudo }}</span>
+                </div>
               </div>
             </div>
           </div>

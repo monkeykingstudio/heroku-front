@@ -68,6 +68,73 @@
   }
 }
 
+.piggybank-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/piggybank.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 10rem;
+      height: 10rem;
+  }
+}
+
+.donation-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/donate.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2.8rem;
+      height: 2.8rem;
+      margin-right: .8rem;
+  }
+}
+
+.roadmap-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/direction.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2.8rem;
+      height: 2.8rem;
+      margin-right: .8rem;
+  }
+}
+
+.patreon-logo {
+  margin-bottom: 1rem;
+  margin: auto;
+  content: '';
+  background-image: url('../../assets/patreon-logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  width: 16rem;
+  height: 4rem;
+}
+
+.trello-logo {
+  margin-bottom: 1rem;
+  margin: auto;
+  content: '';
+  background-image: url('../../assets/trello-logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  width: 10rem;
+  height: 4rem;
+}
+
 .news-icon {
   &:before {
       content: '';
