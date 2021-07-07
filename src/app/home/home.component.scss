@@ -152,22 +152,93 @@ h6 {
   color: #62d744;
 }
 
-.no-news {
+.no-news, .go-news {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 28rem;
+  height: 30rem;
   background-color: #e8e8e8;
   justify-content: center;
   align-items: center;
   border-radius: .5rem;
 
+  .green-btn {
+    max-width: 12rem;
+    margin: auto;
+  }
+
   .text {
-    max-width: 25rem;
     text-align: center;
-    font-weight: bold;
     color: #333;
+  }
+}
+
+.go-news {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1rem;
+  @include breakpoint('small') {
+    height: auto;
+  }
+  .news {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @include breakpoint('small') {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+  .title {
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #62d744;
+    text-align: center;
+
+    @include breakpoint('small') {
+      line-height: 2.4rem;
+    }
+    .black {
+      color: #4a4a4a;
+    }
+  }
+
+  .cont-news {
+    display: flex;
+    flex-direction: column;
+
+    @include breakpoint('small') {
+    }
+  }
+
+  .pict {
+    background-image: url('../../assets/soldes.png');
+    background-repeat: no-repeat;
+    height: 7.5rem;
+    width: 16rem;
+    background-size: contain;
+    margin: .5rem auto 1rem auto;
+    @include breakpoint('small') {
+      width: 60%;
+      height: 9.6rem;
+      margin: 1rem auto;
+    }
+  }
+
+  .text {
+    color: #4a4a4a;
+    font-size: 1.4rem;
+    width: 100%;
+    text-align: center;
+    margin: 0rem 0 1rem 0;
+    @include breakpoint('small') {
+      font-size: 1.2rem;
+    }
   }
 }
 
@@ -194,7 +265,7 @@ h6 {
 .donation {
   cursor: pointer;
   padding: 1.5rem;
-  height: 28rem;
+  height: 30rem;
   background-color: #cb643a;
   border-bottom: .3rem solid #a14722;
   border-radius: .5rem;
@@ -235,7 +306,7 @@ h6 {
 .roadmap {
   cursor: pointer;
   padding: 1.5rem;
-  height: 28rem;
+  height: 30rem;
   background-color: #026AA7;
   border-bottom: .3rem solid #234e68;
   border-radius: .5rem;
