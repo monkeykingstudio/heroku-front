@@ -96,11 +96,16 @@
                 </h6>
               </div>
 
-              <div class="roadmap">
-                <div class="d-flex align-items-center">
-                  <i class="trello-logo"></i>
+              <a class="linked" target="_blank" href="https://www.patreon.com/fourmislabs?fan_landing=true">
+                <div class="roadmap">
+                  <div class="d-flex align-items-center  flex-column h-100 justify-content-between">
+                    <i class="trello-logo"></i>
+                    <span>Keep aware of the <b>development</b>.</span>
+                    <span>Simply check our current and upcomming tasks on our <b>public Trello board</b>.</span>
+                    <button class="blue-btn">CHECK</button>
+                  </div>
                 </div>
-              </div>
+              </a>
             </div>
             <div *ngIf='(onlineUsers$ | async) as onlineUsers' class="col-sm-4">
               <div class="users-online">

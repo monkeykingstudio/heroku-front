@@ -109,6 +109,26 @@
   }
 }
 
+.btn-blue {
+  background-color: #0382cc;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 0.2rem solid #234e68;
+    font-size: 1.4rem;
+
+    &:hover {
+    background-color: #0768a0;
+    border-bottom: 0.2rem solid #234e68;
+    }
+}
+
 .patreon-logo {
   margin-bottom: 1rem;
   margin: auto;
@@ -124,7 +144,6 @@
 
 .trello-logo {
   margin-bottom: 1rem;
-  margin: auto;
   content: '';
   background-image: url('../../assets/trello-logo.png');
   background-size: contain;
