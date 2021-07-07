@@ -205,9 +205,6 @@ h6 {
     color: white;
     line-height: 1.5rem;
   }
-  @include breakpoint('small') {
-    padding: 0;
-  }
 }
 
 .users {
