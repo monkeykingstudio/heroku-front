@@ -187,14 +187,24 @@ h6 {
   padding: 1.5rem 0 1rem 0;
 }
 
+.linked {
+  text-decoration: none!important;
+}
+
 .donation {
   cursor: pointer;
-  padding: 1.5rem 0;
-  padding-right: 0;
+  padding: 1.5rem;
   height: 24rem;
   background-color: #cb643a;
   border-bottom: .3rem solid #a14722;
   border-radius: .5rem;
+
+  span, a {
+    text-align: center;
+    font-size: 1rem;
+    color: white;
+    line-height: 1.5rem;
+  }
   @include breakpoint('small') {
     padding: 0;
   }
