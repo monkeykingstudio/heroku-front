@@ -35,7 +35,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   private interval;
 
-  popupOpen = false;
+  foodPopupOpen = false;
   errorFood = false;
 
   private foods = [];
@@ -170,7 +170,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
           this.reloadSheet();
           this.loadSheet(this.breedSheet.species);
         });
-        this.popupOpen = false;
+        this.foodPopupOpen = false;
       }
   }
 
@@ -186,12 +186,12 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   }
 
   // Popup control
-  openPopup() {
-    this.popupOpen = true;
+  openFoodPopup() {
+    this.foodPopupOpen = true;
   }
 
-  closePopup() {
-    this.popupOpen = false;
+  closeFoodPopup() {
+    this.foodPopupOpen = false;
     this.prepareFood();
   }
 

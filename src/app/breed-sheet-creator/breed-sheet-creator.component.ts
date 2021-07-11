@@ -103,12 +103,17 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   public foods: string[] = [];
   defaultFoodList = 'insects';
   foodList: Array<object> = [
+    {id: 8, valeur: ''},
     {id: 0, valeur: 'insects'},
     {id: 1, valeur: 'meat'},
     {id: 2, valeur: 'sugar water'},
     {id: 3, valeur: 'fruits'},
-    {id: 4, valeur: 'seeds'}
+    {id: 4, valeur: 'seeds'},
+    {id: 5, valeur: 'honeydew'},
+    {id: 6, valeur: 'ant bread'},
+    {id: 7, valeur: 'mushrooms'},
   ];
+
   public regions: string[] = [];
   defaultRegionList = 'europa (tempered)';
   regionList: Array<object> = [

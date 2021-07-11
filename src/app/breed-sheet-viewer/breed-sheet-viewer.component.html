@@ -83,7 +83,7 @@
               <div class="col-sm-4 details-cont">
                 <div class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
-                    <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openPopup()" class="pen-black-icon position-absolute"></i>
+                    <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openFoodPopup()" class="pen-black-icon position-absolute"></i>
                     <i class="food-icon"></i>
                     <h6 class="food">Food Types</h6>
                   </div>
@@ -101,7 +101,7 @@
                       }" *ngFor="let food of breedSheet?.foods">{{ food }} </span>
                     </div>
                   </div>
-                <div *ngIf="popupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
+                <div *ngIf="foodPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
                   <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
                     <h6>Edit food types</h6>
                     <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood()'>
@@ -126,20 +126,18 @@
                       <button type="submit" class='green-btn mt-4'>SAVE</button>
 
                     </form>
-                    <button type="button" class='close-popup' (click)="closePopup(); $event.stopPropagation()">
+                    <button type="button" class='close-popup' (click)="closeFoodPopup(); $event.stopPropagation()">
                       <i class="close-icon"></i>
                     </button>
                   </div>
                 </div>
 
                 </div>
-                <!-- <app-popup [data]="sheet.foods" class="breed-popup animate__animated animate__zoomIn" id='foodPopup'>
-
-                </app-popup> -->
               </div>
               <div class="col-sm-4 details-cont">
                 <div class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
+                    <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openDiapausePopup()" class="pen-black-icon position-absolute"></i>
                     <i class="diapause-icon"></i>
                     <h6 class="diapause">Diapause</h6>
                   </div>

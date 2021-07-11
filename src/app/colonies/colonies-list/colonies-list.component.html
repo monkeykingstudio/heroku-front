@@ -11,7 +11,7 @@
             </div>
           </div>
 
-         <div class="d-flex no-colony align-items-center" *ngIf='colonies.length === 0'>
+        <div class="d-flex no-colony align-items-center col-sm-12 col-md-8 col-lg-10" *ngIf='colonies.length === 0'>
           <div class="colony-icon-container">
             <i class="colony-icon"></i>
           </div>
@@ -19,7 +19,7 @@
             <span class="title">You don't have any colonies yet!</span>
             <span>Start managing your first colony by clicking the <span class="green font-weight-bold">Add</span> button</span>
           </div>
-         </div>
+        </div>
 
         <app-colony-card
           (colonyChange)='reloadColonies()'
