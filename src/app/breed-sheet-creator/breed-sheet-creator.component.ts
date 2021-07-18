@@ -439,7 +439,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
 
     // check if species already exists, if true, proceed
     for (const species of this.optionsSpecies) {
-      if (species === this.breedData.species) {
+      if (species.replace(/ /g, '') === this.breedData.species.replace(/ /g, '')) {
         window.scroll(0, 0);
         this.existingSpecies = true;
         return;
