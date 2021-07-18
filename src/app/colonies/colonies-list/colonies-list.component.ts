@@ -69,7 +69,7 @@ export class ColoniesListComponent implements OnInit,  OnDestroy {
       species: this.speciesCtrl,
       polymorph: this.polyCtrl,
       breed: this.breedCtrl,
-      polyGyne: this.polyCtrl,
+      polyGyne: this.polyGyneCtrl,
       polyGyneCount: this.polyGyneCountCtrl,
       datePicker: this.datePickerCtrl
     });
