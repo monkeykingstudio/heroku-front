@@ -44,7 +44,8 @@ export class ColoniesListComponent implements OnInit,  OnDestroy {
   switch = false;
 
   defaultSpecies = 'lasius niger';
-  optionsSpecies: Array<object> = [];
+  optionsSpecies: Array<string> = [];
+  sortedSpecies: Array<object> = [];
 
   constructor(
     private fb: FormBuilder,
@@ -85,8 +86,14 @@ export class ColoniesListComponent implements OnInit,  OnDestroy {
     )
     .subscribe((res) => {
       for (const item of res) {
-        this.optionsSpecies.push({species: item});
+        this.optionsSpecies.push(item);
       }
+
+      this.optionsSpecies.sort((a, b) => {
+        const textA = a.toUpperCase();
+        const textB = b.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
     });
 
   }

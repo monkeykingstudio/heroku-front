@@ -82,7 +82,7 @@
             <label for="species">Select species</label>
 
             <select style="height: inherit;padding: .8rem;max-height:inherit" [(ngModel)]="defaultSpecies" #species formControlName='species' class="mb-4" id="species">
-              <option *ngFor="let species of optionsSpecies" [value]="species.species">{{species.species}}</option>
+              <option *ngFor="let species of optionsSpecies" [value]="species">{{species}}</option>
             </select>
 
             <label for="date">Creation date <pre>*</pre></label>
