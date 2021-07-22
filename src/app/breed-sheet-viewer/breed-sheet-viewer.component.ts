@@ -262,17 +262,11 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       console.log('error: ', err.message);
     }, () => {
       console.log('ok!');
+      this.reloadSheet();
+      this.loadSheet(this.breedSheet.species);
+      this.diapausePopupOpen = false;
     });
-
-
-
-      // .subscribe(() => {
-      //   this.reloadSheet();
-      //   this.loadSheet(this.breedSheet.species);
-      // });
-    // this.diapausePopupOpen = false;
   }
-
   private prepareFood() {
     this.foodForm = new FormGroup({
       foodOne: new FormControl(),
