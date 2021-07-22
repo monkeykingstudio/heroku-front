@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BreedingSheet } from '../models/breedingSheet.model';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,10 +25,13 @@ export class BreedingSheetsService {
     );
   }
 
-  updateSheet(id: string, foods: any) {
-    console.log(this.breedingSheetsUrl);
-    console.log('from service', id, foods);
-    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/${id}`, {foods});
+  updateFood(id: string, foods: any) {
+    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upfood/${id}`, {foods});
+  }
+
+  updateDiapause(id: string, needs: any, temperatures: any, months: any): Observable<BreedingSheet> {
+    console.log('from service', id, needs, temperatures, months);
+    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/updiapause/${id}`, {needs, temperatures, months});
   }
 
   getSheetById(id: string) {

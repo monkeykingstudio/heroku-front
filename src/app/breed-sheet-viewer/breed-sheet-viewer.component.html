@@ -174,7 +174,65 @@
                         </span>
                     </div>
                   </div>
+                  <div *ngIf="diapausePopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
+                    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                      <h6>Edit diapause</h6>
+                      <form class="form-group options-popup" [formGroup]="diapauseForm" (ngSubmit)='saveDiapause()'>
+
+                        <div class="d-flex c switch mb-4 flex-row align-items-center">
+                          <span style="flex-grow: 1">Need diapause</span>
+                          <div class="on-off-toggle">
+                            <input
+                            type="checkbox"
+                            formControlName="needdiapause"
+                            class="on-off-toggle__input"
+                            id="needdiapause"
+                            [(ngModel)]='sheet.needDiapause'
+                            (change)="diapauseSwitch()"
+                          />
+                            <label for="needdiapause" class="on-off-toggle__slider"></label>
+                          </div>
+                        </div>
+
+                        <div class="form-row mb-2">
+                          <div class="d-flex flex-column form-group">
+                            <label for="">Min °C</label>
+                            <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart" class="btn-select mb-0" formControlName='diapauseTemperatureStart'>
+                              <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                            </select>
+                          </div>
+
+                          <div class="d-flex flex-column form-group">
+                            <label for="">Max °C</label>
+                            <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureEnd" class="btn-select mb-0" formControlName='diapauseTemperatureEnd'>
+                              <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="d-flex form-group">
+                          <label for="">Start month</label>
+                            <select style="text-transform: capitalize;" [(ngModel)]="sheet?.diapausePeriod[0].diapauseStart" class="btn-select mb-0" formControlName='diapauseStart'>
+                              <option *ngFor="let month of monthList" [value]="month.valeur">{{month.valeur}}</option>
+                            </select>
+                        </div>
+                        <div class="d-flex form-group">
+                          <label for="">End month</label>
+                            <select style="text-transform: capitalize;" [(ngModel)]="sheet?.diapausePeriod[0].diapauseEnd" class="btn-select mb-0" formControlName='diapauseEnd'>
+                              <option *ngFor="let month of monthList" [value]="month.valeur">{{month.valeur}}</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class='green-btn mt-4'>SAVE</button>
+
+                      </form>
+                      <button type="button" class='close-popup' (click)="closeDiapausePopup(); $event.stopPropagation()">
+                        <i class="close-icon"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
+
               </div>
               <div class="col-sm-4 details-cont">
                 <div class="details">
