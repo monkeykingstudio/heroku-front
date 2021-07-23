@@ -472,12 +472,12 @@ select {
 .form-control.ng-invalid {
   border: transparent!important;
   color: rgb(166 26 26);
-  background: #ff00001f;
+  background-color: #ffbebe !important;
   &:focus {
    border: transparent!important;
    box-shadow: none!important;
    color: rgb(166 26 26);
-    background: #ff00001f;
+    background: #ffbebe ;
   }
 }
 

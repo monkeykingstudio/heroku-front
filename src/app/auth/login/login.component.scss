@@ -1,22 +1,145 @@
 @import '../../../styles/global/mixins';
 
-.login-container {
-  height: calc(100vh - 10rem);
+.form-control.ng-invalid {
+  border: transparent!important;
+  color: rgb(166 26 26);
+  background: #ffffff!important;
+  &:focus {
+   border: transparent!important;
+   box-shadow: none!important;
+   color: rgb(166 26 26);
+    background: #ffffff!important;
+  }
+}
 
-  .foot {
-    .link {
-      margin: 0 .5rem;
-      cursor: pointer;
-      transition: all .2s;
-      color: #262626;
-      text-decoration: underline;
+.separator {
+  height: 2px;
+  background-color: #1e1e1e;
+  border-bottom: 1px solid #3e3e3e;
+  width: 100%;
+}
 
-      &:hover {
-        transition: all .2s;
-        color: #62d744;
-      }
+.log {
+  display: flex;
+  align-items: center;
+  span {
+    font-size: 34px;
+    color: white;
+    margin-left: 1rem;
+    @include breakpoint('small') {
+      font-size: 30px;
+    }
+
+  }
+}
+
+.login-block {
+  background-color: #1f1f1fd9;
+  border-radius: .8rem;
+  border-bottom: .3rem solid #1b1b1b;
+  max-width: 450px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.body {
+  padding: 3rem 3rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.foot {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem;
+  .href {
+    color: white;
+    margin-top: 1rem;
+  }
+}
+
+.log-button {
+  background-color: #49a232!important;
+  text-transform: capitalize!important;
+  border-bottom: 3px #205512!important;
+  font-size: 34px!important;
+  font-weight: 400!important
+}
+
+input {
+  height: 4rem!important;
+  padding: 1rem!important;
+  color: #1f1f1f;
+  font-size: 1.6rem;
+}
+
+::-webkit-input-placeholder {
+  color: #1f1f1f!important;
+  font-size: 1.6rem!important;
+}
+
+
+.banner {
+  content: '';
+  background-image: url('../../../assets/banner.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  width: 569px;
+  height: 124px;
+  margin: 7rem auto 0;
+
+  @include breakpoint('small') {
+    background-image: url('../../../assets/ban-mobile.png');
+    width: 289px;
+    height: 187px;
+    margin: 0 auto;
+    margin-top: 2rem;
+  }
+}
+
+.loguser {
+  &:before {
+      content: '';
+      background-image: url('../../icons/loguser.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 50px;
+      height: 50px;
+  }
+  @include breakpoint('small') {
+    &:before {
+      width: 40px;
+      height: 40px;
     }
   }
+}
+.link {
+  margin: 0 .5rem;
+  cursor: pointer;
+  transition: all .2s;
+  color: #62d744;
+  text-decoration: underline;
+
+  &:hover {
+    transition: all .2s;
+    color: #6ce24f;
+  }
+}
+.login-container {
+  height: calc(100vh - 10rem);
 
   pre {
     display: inline-block;
@@ -27,33 +150,14 @@
     position: relative;
   }
 
-  .ant-black {
-    background-image: url(../../../assets/banner-fb.png);
-    /* transform: scaleX(-1); */
-    width: 50rem;
-    background-size: cover;
-    height: 20rem;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    margin: 2rem auto 6rem;
-
-    @include breakpoint('small') {
-    background-image: url(../../../assets/banner-fb.png);
-    width: auto;
-    background-size: contain;
-    height: 17rem;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    margin: 0rem auto -5rem;
-    }
-  }
-
   .form-group {
     margin-bottom: .8rem;
   }
 
   label {
-    font-size: 1.6rem;
+    font-size: 1.8rem!important;
+    color: white !important;
+    margin-bottom: .5rem;
   }
 
   .form-control {
@@ -61,9 +165,11 @@
     font-size: 1.6rem;
     box-shadow: inset 0 2px 0 rgb(84 94 111 / 20%);
     border:none!important;
+    background-color: white;
+    border-radius: 8px!important;
     &:focus {
       box-shadow: inset 0 2px 0 rgb(84 94 111 / 20%);
-      background-color: #f8f9f9!important;
+      background-color: white!important;
     }
   }
 
@@ -71,19 +177,30 @@
     top: 1.2rem;
   }
 
+  form {
+    max-height: 45rem;
+    @include breakpoint('small') {
+      margin: 4rem auto!important;
+    }
+  }
+
   .login {
-    background-color: white;
-    border-radius: .5rem;
-    border-bottom: .2rem solid #bdbdbd;
-    padding: 2rem;
-    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 
     button {
       letter-spacing: 0.15rem;
       font-size: 1.4rem;
       bottom: 0;
       margin: 0 auto;
+      height: 5.4rem;
       width: 100%;
+      border-bottom: .2rem solid #144607!important;
+      border-radius: 8px!important;
+      @include breakpoint('small') {
+        font-size: 32px!important
+      }
     }
   }
 }

@@ -1,22 +1,28 @@
 <div class="row">
   <div class="login-container col-sm-12">
   <div class="login">
-    <div class="ant-black"></div>
-    <form style='margin:auto' [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-group col-md-8 col-lg-5">
-      <label for="email">E-mail</label>
-      <input name="email" placeholder="E-mail" class="form-control mb-4" type="email" formControlName="email" />
-
-      <label for="password">Password</label>
-      <input name="password" placeholder="password" class="form-control mb-4" type="password" formControlName="password" />
-
-      <button class="green-btn mt-4" type="submit">Login</button>
-
-      <div class="foot d-flex justify-content-center mt-4">
-        <span class="link">Forgot password?</span>
-        <span>-</span>
-        <span class="link">Legal Notice</span>
-        <span>-</span>
-        <span class="link">Contact us</span>
+    <div class="banner animate__animated animate__flipInX animate__delay-1s"></div>
+    <form style='margin:auto' [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="animate__animated animate__fadeInDownBig login-block form-group col-md-8 col-lg-5">
+      <div class="head">
+        <div class="log">
+          <i class="loguser"></i>
+          <span>Login</span>
+        </div>
+      </div>
+      <div class="separator"></div>
+      <div class="body">
+       <div class="d-flex flex-column w-100">
+        <label for="email">E-mail</label>
+        <input name="email" placeholder="E-mail" class="form-control mb-4" type="email" formControlName="email" />
+       </div>
+       <div class="d-flex flex-column w-100">
+        <label for="password">Password</label>
+        <input name="password" placeholder="password" class="form-control mb-4 custom-field" type="password" formControlName="password" />
+       </div>
+      </div>
+      <div class="foot w-100">
+        <button class="green-btn log-button mt-4" type="submit">Connect</button>
+        <span class="href">Not registered ? <span class="link">Create an account</span></span>
       </div>
     </form>
   </div>

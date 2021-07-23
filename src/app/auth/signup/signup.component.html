@@ -1,65 +1,137 @@
 <div class="row">
   <div class="signup-container col-sm-12">
-  <div class="signup">
-    <div *ngIf='!registerSucces' class="ant-black"></div>
-    <form *ngIf='!registerSucces' style='margin:auto' [formGroup]="userForm" (ngSubmit)="add()" autocomplete="off" class="form-group col-md-8 col-lg-5">
-      <div class="form-row mb-4">
-        <div class="form-group col-md-6">
-          <label for="email">E-mail<pre>*</pre></label>
-          <input placeholder="E-mail" class="form-control" type="email" formControlName="email" />
-        </div>
-        <div class="form-group col-md-6">
-          <label for="password">Password<pre>*</pre></label>
-          <input placeholder="password" class="form-control" type="password" formControlName="password"/>
-        </div>
-      </div>
-      <div class="form-group mb-4">
-        <label for="pseudo">Pseudo</label>
-        <input placeholder="Pseudo" type="text" class="form-control" formControlName="pseudo">
-      </div>
-      <!-- <label for="">Profile picture</label> -->
-      <!-- <input class='hide-input' (change)="onImagePicked($event)" type="file"  #filePicker> -->
-      <!-- <div class="file-input">
-        <button (click)="filePicker.click()" type="button" class="green-btn">pick image</button>
-        <div class="fake-field">
-          <span *ngIf="imagePreview !== '' && userForm.get('picture').valid">{{imageName}}</span>
-        </div>
-      </div> -->
-      <!-- <div *ngIf="imagePreview !== '' && imagePreview && userForm.get('picture').valid" class="image-preview">
-        <img [src]="imagePreview" [alt]="userForm.value.title">
-      </div> -->
-      <span *ngIf='errorMsg !== null' class="animate__animated animate__fadeInUp badge-invalid">{{ errorMsg | json }}</span>
-      <!-- <span *ngIf='picture.invalid' class="animate__animated animate__fadeInUp badge-invalid">File must be a valid image format</span> -->
-      <div class="form-group mt-3">
-        <div class="form-check">
-          <input class="form-check-input"
-          id="newsLetter"
-          formControlName="newsletter"
-          type="checkbox">
-          <label style="margin-top:1.5rem!important" class="form-check-label" for="newsLetter">
-            i want receive emails about the ongoing development
-          </label>
-        </div>
-      </div>
-      <span><pre style='top:1rem'>*</pre> Fields are required</span>
-      <button [disabled]="
-      (email.value == '' || email.value == null) ||
-      (password.value == '' || password.value == null)"
-      class="green-btn mt-4" type="submit">Signup</button>
+    <div class="signup flex-column">
+      <div class="banner animate__animated animate__flipInX animate__delay-1s"></div>
 
-      <div class="foot d-flex justify-content-center mt-4">
-        <span class="link">Legal Notice</span>
-        <span>-</span>
-        <span class="link">Contact us</span>
+     <div class="row">
+      <div class="col-sm-12 info col-md-7 offset-md-1 col-lg-7 offset-lg-1 animate__animated animate__bounceInUp">
+        <div #left class="info-block">
+          <h3>Hello myrmécophile,</h3>
+          <p>
+            And welcome to <b style="text-decoration: underline">Fourmilabs.com</b>, an online, <span class="green">totally free</span>, <span class="green">modern</span>
+            and <span class="green">configurable tool</span> to follow you up through your <span class="green">ant farming experience</span>.
+            <br/>
+            Everything you need to make a fresh start on your old colonies or newest foundations!
+          </p>
+          <br/>
+          <p>
+            For each, you will be able to see <span class="green">detailed statistics, to manage your ants, feed them, and create custom to-do lists, logs everything, open your own blog, get on-demand graphics from your datas...</span>
+            <br/>
+            <br/>
+            But also interact with other users to get help, trade gynes and furnitures and many more!
+          </p>
+          <br/>
+          <p>
+            This <span class="green">application is collaborative</span>, and users can <span class="green">suggest modifications</span> on datas, create their <span class="green">own breedingsheets</span> if a species is not listed in the system, that means <span class="green">the application will grow in accuracy</span> with the users.
+          </p>
+          <br/>
+          <p class="last">Give it a try it's <span class="green">Awesome!</span></p>
+        </div>
       </div>
-    </form>
-    <div *ngIf='registerSucces' class="register-success">
-      <i class="mail-icon"></i>
-        <span style="font-size: 2rem;margin-bottom: 1rem;">Register complete</span>
-      <span style="margin: 1rem 0;">Please check your emails to <span class="green">activate your account</span> before accessing Fourmislabs</span>
-      <button (click)='moveToLogin()' class="green-btn mt-4" type="button">Login</button>
+
+      <div class="col-sm-12 col-md-3 register animate__animated animate__bounceInDown">
+        <div #right class="register-block">
+          <form *ngIf='!registerSucces' [formGroup]="userForm" (ngSubmit)="add()" autocomplete="off" class="form-group">
+            <div class="d-flex flex-column w-100">
+              <label for="email">E-mail<pre>*</pre></label>
+              <input placeholder="mail@domain.com" class="form-control" type="email" formControlName="email"/>
+            </div>
+
+            <div class="d-flex flex-column w-100 mb-2">
+              <label for="password">Password<pre>*</pre></label>
+              <input placeholder="*******" class="form-control" type="password" formControlName="password"/>
+            </div>
+
+            <!-- <div class="d-flex flex-column w-100 mb-4">
+              <label for="password">Region<pre>*</pre></label>
+              <input placeholder="*******" class="form-control" type="password" formControlName="password"/>
+            </div> -->
+            <div class="d-flex flex-column">
+              <label for="email">Localisation</label>
+              <select name="country" class="countries" id="countryId">
+                <option value="">Select Country</option>
+              </select>
+              <select name="state" class="states" id="stateId">
+                  <option value="">Select State</option>
+              </select>
+              <select name="city" class="cities" id="cityId">
+                  <option value="">Select City</option>
+              </select>
+            </div>
+
+            <div class="d-flex flex-column w-100 mt-2">
+              <label for="pseudo">Pseudo</label>
+              <input style="background-color: white" placeholder="" type="text" class="form-control" formControlName="pseudo">
+            </div>
+<!--
+            <div style="justify-content: center;" class="d-flex w-100">
+              <div class="form-check">
+                <input class="form-check-input"
+                id="newsLetter"
+                formControlName="newsletter"
+                type="checkbox">
+                <label style="margin-top:1.5rem!important" class="form-check-label" for="newsLetter">
+                  Newsletter
+                </label>
+
+
+              </div>
+            </div> -->
+            <button [disabled]="
+            (email.value == '' || email.value == null) ||
+            (password.value == '' || password.value == null)"
+            class="green-btn mt-4" type="submit">Signup</button>
+          </form>
+        </div>
+      </div>
+
+     </div>
+      <!-- <form *ngIf='!registerSucces' style='margin:auto' [formGroup]="userForm" (ngSubmit)="add()" autocomplete="off" class="form-group col-md-8 col-lg-5">
+        <div class="form-row mb-4">
+          <div class="form-group col-md-6">
+            <label for="email">E-mail<pre>*</pre></label>
+            <input placeholder="E-mail" class="form-control" type="email" formControlName="email" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="password">Password<pre>*</pre></label>
+            <input placeholder="password" class="form-control" type="password" formControlName="password"/>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="pseudo">Pseudo</label>
+          <input placeholder="Pseudo" type="text" class="form-control" formControlName="pseudo">
+        </div>
+
+        <div class="form-group mt-3">
+          <div class="form-check">
+            <input class="form-check-input"
+            id="newsLetter"
+            formControlName="newsletter"
+            type="checkbox">
+            <label style="margin-top:1.5rem!important" class="form-check-label" for="newsLetter">
+              i want receive emails about the ongoing development
+            </label>
+          </div>
+        </div>
+        <span><pre style='top:1rem'>*</pre> Fields are required</span>
+        <button [disabled]="
+        (email.value == '' || email.value == null) ||
+        (password.value == '' || password.value == null)"
+        class="green-btn mt-4" type="submit">Signup</button>
+
+        <div class="foot d-flex justify-content-center mt-4">
+          <span class="link">Legal Notice</span>
+          <span>-</span>
+          <span class="link">Contact us</span>
+        </div>
+      </form> -->
+      <!-- <div *ngIf='registerSucces' class="register-success">
+        <i class="mail-icon"></i>
+          <span style="font-size: 2rem;margin-bottom: 1rem;">Register complete</span>
+        <span style="margin: 1rem 0;">Please check your emails to <span class="green">activate your account</span> before accessing Fourmislabs</span>
+        <button (click)='moveToLogin()' class="green-btn mt-4" type="button">Login</button>
+      </div> -->
     </div>
-  </div>
   </div>
 </div>
 
@@ -68,6 +140,8 @@
     <div class="loading"></div>
   </div>
 </ng-template>
+
+
 
 
 

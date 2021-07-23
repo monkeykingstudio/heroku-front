@@ -3,7 +3,7 @@ import { AuthService } from './services/auth.service';
 import { User } from './models/user.model';
 import { interval, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, RoutesRecognized } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersService } from './services/user.service';
 
@@ -14,6 +14,8 @@ import { UsersService } from './services/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
+  public currentRoute: string;
+  public visitorMode = false;
   public authStatusSubscription: Subscription;
   userSub: Subscription;
 
@@ -31,6 +33,22 @@ export class AppComponent implements OnInit, OnDestroy {
     ) {}
 
   ngOnInit(): void {
+    this.router.events
+    .subscribe(event => {
+      if (event instanceof RoutesRecognized ) {
+        if (event.url === '/login') {
+          this.currentRoute = event.url;
+          console.log('CURRENT', this.currentRoute);
+          this.visitorMode = true;
+        } else if (event.url === '/signup') {
+          this.currentRoute = event.url;
+          console.log('CURRENT', this.currentRoute);
+          this.visitorMode = true;
+        } else {
+          this.visitorMode = false;
+        }
+      }
+    });
     this.authStatusSubscription = this.authService.currentUser
     .pipe(
       map(user => {

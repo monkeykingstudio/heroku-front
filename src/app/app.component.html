@@ -17,11 +17,15 @@
   </app-lateral-menu>
 
 
-  <div class="container-fluid">
+  <div [ngClass]="
+  {
+  'apicalis': visitorMode
+  }"
+  class="container-fluid">
     <div
     [ngStyle]="hover == true ? {'margin-left': '6rem', 'transition' : 'all .2s'} : {'margin-left' : '6rem', 'transition' : 'all .2s'}"
     class="d-flex flex-column">
-      <app-header></app-header>
+      <app-header *ngIf="!visitorMode"></app-header>
       <div
       style="display:flex;align-items:center"
       class="status-error animate__animated animate__fadeIn" *ngIf='!(authService.currentUser | async)?.is_verified && (authService.currentUser | async)?.is_verified !== null'>

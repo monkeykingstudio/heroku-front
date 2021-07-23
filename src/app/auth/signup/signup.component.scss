@@ -1,7 +1,113 @@
 @import '../../../styles/global/mixins';
 
+select, input {
+  height: 3.5rem;
+  font-size: 1.6rem;
+  box-shadow: inset 0 2px 0 rgb(84 94 111 / 20%);
+  border: none !important;
+  background-color: white;
+  margin-bottom: 1rem;
+}
+
+.form-control.ng-invalid {
+  border: transparent!important;
+  color: rgb(166 26 26);
+  background: #ffffff!important;
+  &:focus {
+   border: transparent!important;
+   box-shadow: none!important;
+   color: rgb(166 26 26);
+    background: #ffffff!important;
+  }
+}
+
+.banner {
+  content: '';
+  background-image: url('../../../assets/banner.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  width: 569px;
+  height: 124px;
+  margin: 7rem auto 5rem;
+
+  @include breakpoint('small') {
+    background-image: url('../../../assets/ban-mobile.png');
+    width: 289px;
+    height: 187px;
+    margin: 0 auto;
+    margin-top: 2rem;
+  }
+}
+
 .signup-container {
   height: calc(100vh - 10rem);
+
+  .last {
+    font-size: 1.7rem!important;
+  }
+
+  .col-sm-12 {
+
+  }
+
+  .info {
+    margin-right: -1px;
+    padding-right: 0;
+  }
+
+  .register {
+      margin-left: -1px;
+      padding-left: 0;
+  }
+  .info-block {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    background-color: #1f1f1fe8;
+    border-bottom: .2rem solid #060606e6;
+    border-radius: 8px 0 0 8px;
+    color: white;
+    min-height: 100%;
+
+    @include breakpoint('small') {
+      display: none;
+    }
+
+    h3 {
+      font-size: 2.8rem!important;
+      margin-bottom: 2.5rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 2.2rem;
+    }
+  }
+  label {
+    font-size: 1.8rem!important;
+    color: white !important;
+    margin-bottom: .5rem;
+  }
+
+  .register-block {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: #439a2d;
+    border-bottom: .2rem solid #1e4913;
+    border-radius: 0 8px 8px 0;
+    min-height: 100%;
+
+    @include breakpoint('small') {
+      border-radius: 8px!important;
+      margin-top: 2rem;
+
+    }
+  }
 
   .register-success {
     display: flex;
@@ -21,44 +127,16 @@
     }
   }
 
-  .image-preview {
-    img {
-      height: 8rem;
-      border: .2rem dashed #51941a;
-      border-radius: .5rem;
-      padding: .5rem;
-      margin: 1rem 0 0;
-    }
-  }
-
   pre {
     display: inline-block;
     font-size: 87.5%;
-    color: #f62525;
+    color: #ffffff;
+    font-weight: bold;
     top: .5rem;
     left: .3rem;
     position: relative;
   }
 
-  .ant-black {
-    background-image: url(../../../assets/banner-fb.png);
-    width: 50rem;
-    background-size: cover;
-    height: 20rem;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    margin: 2rem auto 5rem;
-
-    @include breakpoint('small') {
-      background-image: url(../../../assets/banner-fb.png);
-    width: auto;
-    background-size: contain;
-    height: 17rem;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    margin: 0rem auto -5rem;
-    }
-  }
   .form-group {
     margin-bottom: .8rem;
   }
@@ -79,11 +157,19 @@
 
   .form-check {
     padding-left:0;
-    lebel {
-      margin-top: 1.5rem!important;
+    align-items: center;
+    display: flex;
+    label {
+      margin: 0 !important;
+      left: 1rem;
+      position: relative;
     }
     input {
-      margin-left:0;
+      margin-left: 0;
+      height: 2rem;
+      width: 2rem;
+      top: 11px;
+      position: relative;
     }
   }
 
@@ -92,11 +178,12 @@
   }
 
   .signup {
-    background-color: white;
-    border-radius: .5rem;
-    border-bottom: .2rem solid #bdbdbd;
-    padding: 2rem;
-    min-height: 100%;
+    @include breakpoint('large') {
+      display: flex;
+      align-items: center;
+      min-height: 100%;
+  }
+
 
     button {
       letter-spacing: 0.15rem;
@@ -159,17 +246,11 @@
     }
   }
 
-  .foot {
-    .link {
-      margin: 0 .5rem;
-      cursor: pointer;
-      transition: all .2s;
-      color: #262626;
-      text-decoration: underline;
-      &:hover {
-        transition: all .2s;
-        color: #62d744;
-      }
-    }
+  .green {
+    // margin: 0 .5rem;
+    cursor: pointer;
+    transition: all .2s;
+    color: #62d744;
+    line-height: 2.2rem;
   }
 }
