@@ -65,6 +65,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 3rem;
+
+  @include breakpoint('small') {
+    padding: 2.5rem;
+  }
   .href {
     color: white;
     margin-top: 1rem;
@@ -111,8 +115,8 @@ input {
 
   @include breakpoint('small') {
     background-image: url('../../../assets/ban-mobile.png');
-    width: 289px;
-    height: 187px;
+    width: 245px;
+    height: 160px;
     margin: 0 auto;
     margin-top: 2rem;
   }

@@ -12,6 +12,7 @@
   }
 }
 
+
 :host {
   height: 100vh;
 }
@@ -36,7 +37,7 @@
   text-transform: uppercase!important;
   font-weight: bold!important;
   letter-spacing: 0.15rem;
-  font-size: 18px!important;
+  font-size: 17px!important;
   bottom: 0;
   margin: 0 auto;
   width: 100%;
@@ -50,9 +51,14 @@
 }
 
 .body {
-  padding: 3rem;
+  padding: 0 2rem;
   display: flex;
   flex-grow: 1;
+
+  @include breakpoint('small') {
+  padding: 0 2rem;
+
+  }
 }
 
 select, input {
@@ -105,8 +111,8 @@ select, input {
 
   @include breakpoint('small') {
     background-image: url('../../../assets/ban-mobile.png');
-    width: 289px;
-    height: 187px;
+    width: 245px;
+    height: 160px;
     margin: 0 auto;
     margin-top: 2rem;
   }
@@ -186,7 +192,8 @@ select, input {
     @include breakpoint('small') {
       border-radius: 8px!important;
       margin-top: 4rem;
-
+      max-width: 450px;
+      margin: 2rem 1.5rem 0;
     }
   }
 
