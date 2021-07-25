@@ -1,5 +1,9 @@
 @import '../../../styles/global/mixins';
 
+:host {
+  height: 100vh;
+}
+
 .form-control.ng-invalid {
   border: transparent!important;
   color: rgb(166 26 26);
@@ -71,13 +75,13 @@
   background-color: #49a232!important;
   text-transform: capitalize!important;
   border-bottom: 3px #205512!important;
-  font-size: 22px !important;
+  font-size: 22px!important;
   text-transform: uppercase!important;
   font-weight: bold!important;
   height: 5rem;
 
   @include breakpoint('small') {
-    font-size: 17px !important;
+    font-size: 16px !important;
   }
 }
 
