@@ -31,53 +31,62 @@
 
       <div class="col-sm-12 col-md-3 register animate__animated animate__bounceInDown">
         <div #right class="register-block">
-          <form *ngIf='!registerSucces' [formGroup]="userForm" (ngSubmit)="add()" autocomplete="off" class="form-group">
-            <div class="d-flex flex-column w-100">
-              <label for="email">E-mail<pre>*</pre></label>
-              <input placeholder="mail@domain.com" class="form-control" type="email" formControlName="email"/>
+          <div class="head">
+            <div class="log">
+              <i class="add-user-icon"></i>
+              <span>Register</span>
             </div>
-
-            <div class="d-flex flex-column w-100 mb-2">
-              <label for="password">Password<pre>*</pre></label>
-              <input placeholder="*******" class="form-control" type="password" formControlName="password"/>
-            </div>
-
-            <!-- <div class="d-flex flex-column">
-              <label for="email">Localisation</label>
-              <select name="country" class="countries" id="countryId">
-                <option value="">Select Country</option>
-              </select>
-              <select name="state" class="states" id="stateId">
-                  <option value="">Select State</option>
-              </select>
-              <select name="city" class="cities" id="cityId">
-                  <option value="">Select City</option>
-              </select>
-            </div> -->
-
-            <div class="d-flex flex-column w-100 mt-2">
-              <label for="pseudo">Pseudo</label>
-              <input style="background-color: white" placeholder="" type="text" class="form-control" formControlName="pseudo">
-            </div>
-
-            <div style="justify-content: center;flex-grow:1 " class="d-flex w-100">
-              <div class="form-check">
-                <input class="form-check-input"
-                id="newsLetter"
-                formControlName="newsletter"
-                type="checkbox">
-                <label style="margin-top:1.5rem!important" class="form-check-label" for="newsLetter">
-                  Newsletter
-                </label>
-
-
+          </div>
+          <div class="separator"></div>
+          <div class="body">
+            <form *ngIf='!registerSucces' [formGroup]="userForm" (ngSubmit)="add()" autocomplete="off" class="form-group">
+              <div class="d-flex flex-column w-100">
+                <label for="email">E-mail<pre>*</pre></label>
+                <input placeholder="mail@domain.com" class="form-control" type="email" formControlName="email"/>
               </div>
-            </div>
-            <button [disabled]="
-            (email.value == '' || email.value == null) ||
-            (password.value == '' || password.value == null)"
-            class="green-btn mt-4" type="submit">Signup</button>
-          </form>
+
+              <div class="d-flex flex-column w-100 mb-2">
+                <label for="password">Password<pre>*</pre></label>
+                <input placeholder="*******" class="form-control" type="password" formControlName="password"/>
+              </div>
+
+              <!-- <div class="d-flex flex-column">
+                <label for="email">Localisation</label>
+                <select name="country" class="countries" id="countryId">
+                  <option value="">Select Country</option>
+                </select>
+                <select name="state" class="states" id="stateId">
+                    <option value="">Select State</option>
+                </select>
+                <select name="city" class="cities" id="cityId">
+                    <option value="">Select City</option>
+                </select>
+              </div> -->
+
+              <div class="d-flex flex-column w-100 mt-2">
+                <label for="pseudo">Pseudo</label>
+                <input style="background-color: white" placeholder="" type="text" class="form-control" formControlName="pseudo">
+              </div>
+
+              <div style="justify-content: center;flex-grow:1 " class="d-flex w-100">
+                <div class="form-check">
+                  <input class="form-check-input"
+                  id="newsLetter"
+                  formControlName="newsletter"
+                  type="checkbox">
+                  <label style="margin-top:1.5rem!important" class="form-check-label" for="newsLetter">
+                    Newsletter
+                  </label>
+
+
+                </div>
+              </div>
+              <button [disabled]="
+              (email.value == '' || email.value == null) ||
+              (password.value == '' || password.value == null)"
+              class="green-btn mt-4" type="submit">Signup</button>
+            </form>
+          </div>
         </div>
       </div>
 
