@@ -36,9 +36,11 @@ export class LateralMenuComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    console.log('bwaah', this.currentUser?.email);
-    this.authService.logout(this.currentUser?.email).subscribe();
-    this.router.navigate(['/login']);
+    this.authService.logout(this.currentUser?.email)
+    .subscribe(() => {
+      this.router.navigate(['/login']);
+      this.currentUser = undefined;
+    });
   }
 
   ngOnDestroy(): void {

@@ -2,51 +2,51 @@
   <div class="logo"></div>
 </div>
 <div class="separator"></div>
-<div *ngIf="isUser !== undefined" class="item inactive">
+<div *ngIf="currentUser !== undefined" class="item inactive">
   <i class="foundation-icon"></i>
   <span *ngIf="hoverStatus" class="name">Foundations</span>
 </div>
-<div *ngIf="isUser !== undefined" class="separator"></div>
-<div [routerLink]="['colonies']" *ngIf="isUser !== undefined" class="item">
+<div *ngIf="currentUser !== undefined" class="separator"></div>
+<div [routerLink]="['colonies']" *ngIf="currentUser !== undefined" class="item">
   <i class="colony-icon"></i>
   <span *ngIf="hoverStatus" class="name">Colonies</span>
 </div>
-<div *ngIf="isUser !== undefined" class="separator"></div>
-<div *ngIf="isUser !== undefined" class="item inactive">
+<div *ngIf="currentUser !== undefined" class="separator"></div>
+<div *ngIf="currentUser !== undefined" class="item inactive">
   <i class="browse-icon"></i>
   <span *ngIf="hoverStatus" class="name">Breed sheets (soon)</span>
 </div>
-<div *ngIf="isUser !== undefined" class="separator"></div>
-<div *ngIf="isUser !== undefined" class="item inactive">
+<div *ngIf="currentUser !== undefined" class="separator"></div>
+<div *ngIf="currentUser !== undefined" class="item inactive">
   <!-- [routerLink]="['products']" -->
   <i class="products-icon"></i>
   <span *ngIf="hoverStatus" class="name">Ants & Products</span>
 </div>
-<div *ngIf="isUser !== undefined" class="separator"></div>
-<div *ngIf="isUser !== undefined" class="item inactive">
+<div *ngIf="currentUser !== undefined" class="separator"></div>
+<div *ngIf="currentUser !== undefined" class="item inactive">
   <i class="letterbox-icon"></i>
   <span *ngIf="hoverStatus" class="name">Mailbox</span>
 </div>
-<div *ngIf="isUser !== undefined" class="separator"></div>
-<div *ngIf="isUser !== undefined" class="item inactive">
+<div *ngIf="currentUser !== undefined" class="separator"></div>
+<div *ngIf="currentUser !== undefined" class="item inactive">
   <i class="settings-icon"></i>
   <span *ngIf="hoverStatus" class="name">Settings</span>
 </div>
-<div *ngIf="isUser !== undefined" class="separator"></div>
-<div routerLink="/login" *ngIf="isUser == undefined" class="item">
+<div *ngIf="currentUser !== undefined" class="separator"></div>
+<div routerLink="/login" *ngIf="currentUser == undefined" class="item">
   <i class="login-icon"></i>
   <span *ngIf="hoverStatus" class="name">Login</span>
 </div>
-<div *ngIf="isUser == undefined" class="separator"></div>
-<div routerLink="/signup" *ngIf="isUser == undefined" class="item">
+<div *ngIf="currentUser == undefined" class="separator"></div>
+<div routerLink="/signup" *ngIf="currentUser == undefined" class="item">
   <i class="register-icon"></i>
   <span *ngIf="hoverStatus" class="name">Register</span>
 </div>
-<div *ngIf="isUser == undefined" class="separator"></div>
-<div (click)="onLogout()" *ngIf="isUser !== undefined" class="item">
+<div *ngIf="currentUser == undefined" class="separator"></div>
+<div (click)="onLogout()" *ngIf="currentUser !== undefined" class="item">
   <i class="logout-icon"></i>
   <span *ngIf="hoverStatus" class="name">Logout</span>
 </div>
-<div *ngIf="isUser !== undefined" class="separator"></div>
+<div *ngIf="currentUser !== undefined" class="separator"></div>
 <span class="version">Alpha 0.10b</span>
 

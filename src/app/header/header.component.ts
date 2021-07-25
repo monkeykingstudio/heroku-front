@@ -3,6 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { AuthService } from './../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isShown = false;
   currentUser: User;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.authStatusSubscription = this.authService.currentUser.pipe(
@@ -33,9 +34,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    console.log('head', this.currentUser?.email);
     this.authService.logout(this.currentUser?.email)
-    .subscribe();
+    .subscribe(() => {
+      this.router.navigate(['/login']);
+      this.ngOnInit();
+    });
     this.toggleShow();
   }
 

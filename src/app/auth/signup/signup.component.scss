@@ -58,8 +58,10 @@ select, input {
   }
 
   .register {
+    @include breakpoint("large") {
       margin-left: -1px;
       padding-left: 0;
+    }
   }
   .info-block {
     display: flex;
