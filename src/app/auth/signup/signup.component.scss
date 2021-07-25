@@ -106,7 +106,7 @@ select, input {
 
     @include breakpoint('small') {
       border-radius: 8px!important;
-      margin-top: 2rem;
+      margin-top: 4rem;
 
     }
   }
@@ -180,6 +180,9 @@ select, input {
   }
 
   .signup {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     @include breakpoint('large') {
       display: flex;
       align-items: center;

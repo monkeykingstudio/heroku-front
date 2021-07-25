@@ -56,7 +56,9 @@ export class AppComponent implements OnInit, OnDestroy {
           this.currentUser = user;
         }
       })
-      ).subscribe();
+      ).subscribe(() => {
+        this.hover = false;
+      });
 
     interval(1000).subscribe(() => {
       const user = this.authService.getIsAuth;

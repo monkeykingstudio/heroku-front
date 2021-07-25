@@ -43,6 +43,11 @@ export class LateralMenuComponent implements OnInit, OnDestroy {
     });
   }
 
+  hoverStatusChange() {
+    this.hoverStatus = false;
+  }
+
+
   ngOnDestroy(): void {
     this.authStatusSubscription.unsubscribe();
   }

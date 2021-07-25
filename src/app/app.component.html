@@ -1,6 +1,7 @@
 <div style="min-height: 100vh;" class="d-flex">
 
   <app-lateral-menu
+    (click)="hover = false"
     [isUser]="currentUser"
     [hoverStatus]="hover"
     (mouseover)="hover = true"
