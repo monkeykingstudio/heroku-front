@@ -14,8 +14,8 @@
 
 .separator {
   height: 2px;
-  background-color: #1e1e1e;
-  border-bottom: 1px solid #3e3e3e;
+  background-color: #000000;
+  border-bottom: 1px solid #414141;
   width: 100%;
 }
 
@@ -71,8 +71,10 @@
   background-color: #49a232!important;
   text-transform: capitalize!important;
   border-bottom: 3px #205512!important;
-  font-size: 34px!important;
-  font-weight: 400!important
+  font-size: 16px !important;
+  text-transform: uppercase!important;
+  font-weight: bold!important;
+  height: 5rem;
 }
 
 input {
@@ -198,9 +200,6 @@ input {
       width: 100%;
       border-bottom: .2rem solid #144607!important;
       border-radius: 8px!important;
-      @include breakpoint('small') {
-        font-size: 32px!important
-      }
     }
   }
 }

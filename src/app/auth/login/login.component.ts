@@ -37,6 +37,10 @@ export class LoginComponent implements OnInit {
     this.loading = false;
   }
 
+  register() {
+    this.router.navigate(['/signup']);
+  }
+
   get formControls() { return this.loginForm.controls; }
 
   onSubmit() {

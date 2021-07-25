@@ -1,4 +1,16 @@
 @import '../../../styles/global/mixins';
+.log-button {
+  text-transform: capitalize!important;
+  border-bottom: 3px #205512;
+  text-transform: uppercase!important;
+  font-weight: bold!important;
+  letter-spacing: 0.15rem;
+  font-size: 18px!important;
+  bottom: 0;
+  margin: 0 auto;
+  width: 100%;
+  height: 5rem!important;
+}
 
 .head {
   padding: 2rem;
@@ -7,7 +19,7 @@
 }
 
 .body {
-  padding: 2rem;
+  padding: 3rem;
   display: flex;
   flex-grow: 1;
 }
@@ -30,6 +42,22 @@ select, input {
    box-shadow: none!important;
    color: rgb(166 26 26);
     background: #ffffff!important;
+  }
+}
+
+.add-user-icon {
+  content: "";
+  background-image: url('../../icons/add-user.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+
+  @include breakpoint('small') {
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -130,9 +158,10 @@ select, input {
     flex-direction: column;
     font-size: 1.4rem;
 
-    button {
-      max-width: 11rem;
-    }
+    // button {
+    //   max-width: 11rem;
+    // }
+
 
     span {
       font-weight: bold;
@@ -220,15 +249,6 @@ select, input {
       align-items: center;
       min-height: 100%;
   }
-
-
-    button {
-      letter-spacing: 0.15rem;
-      font-size: 1.4rem;
-      bottom: 0;
-      margin: 0 auto;
-      width: 100%;
-    }
   }
 
   .custom-file-input {
