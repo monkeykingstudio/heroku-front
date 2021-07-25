@@ -1,4 +1,32 @@
 @import '../../../styles/global/mixins';
+
+.form-control.ng-invalid {
+  border: transparent!important;
+  color: rgb(166 26 26);
+  background: #ffffff!important;
+  &:focus {
+   border: transparent!important;
+   box-shadow: none!important;
+   color: rgb(166 26 26);
+    background: #ffffff!important;
+  }
+}
+
+
+
+.form-control {
+  height: 4rem !important;
+
+  font-size: 1.6rem;
+  box-shadow: inset 0 2px 0 rgb(84 94 111 / 20%);
+  border:none!important;
+  background-color: white;
+  border-radius: 8px!important;
+  &:focus {
+    box-shadow: inset 0 2px 0 rgb(84 94 111 / 20%);
+    background-color: white!important;
+  }
+}
 .log-button {
   text-transform: capitalize!important;
   border-bottom: 3px #205512;
@@ -135,10 +163,19 @@ select, input {
     margin-bottom: .5rem;
   }
 
+  .green-btn {
+    &:hover {
+      transition: all .2s;;
+      background-color: #e8f0fe;
+      text-align: center;
+      color: #51b400;
+    }
+  }
+
   .register-block {
     display: flex;
     flex-direction: column;
-    background-color: #439a2d;
+    background-color: #439a2dd6;
     border-bottom: .2rem solid #1e4913;
     border-radius: 0 8px 8px 0;
     height: 100%;
