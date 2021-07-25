@@ -75,6 +75,10 @@
   text-transform: uppercase!important;
   font-weight: bold!important;
   height: 5rem;
+
+  @include breakpoint('small') {
+    font-size: 17px !important;
+  }
 }
 
 input {
