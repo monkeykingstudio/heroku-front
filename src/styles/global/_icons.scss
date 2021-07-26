@@ -943,7 +943,7 @@
 
 .pen-black-icon {
   &:before {
-    z-index:0;
+    z-index:1;
     content: '';
     background-image: url('../../app/icons/edit-black.svg');
     background-size: contain;
@@ -954,7 +954,6 @@
     height: 1.8rem;
     transition: all .1s;
     cursor: pointer;
-    z-index: 8;
     border-radius: .5rem;
     display: flex;
     align-items: center;
