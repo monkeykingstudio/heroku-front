@@ -106,15 +106,15 @@
                     <h6>Edit food types</h6>
                     <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood()'>
                       <div class="d-flex flex-column">
-                        <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='foodOne'>
+                        <select [(ngModel)]="sheet?.foods[0]" class="btn-select animate__animated animate__flipInX animate__delay-1s" formControlName='foodOne'>
                           <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                         </select>
 
-                        <select [(ngModel)]="sheet?.foods[1]" class="btn-select" formControlName='foodTwo'>
+                        <select [(ngModel)]="sheet?.foods[1]" class="btn-select animate__animated animate__flipInX animate__delay-2s" formControlName='foodTwo'>
                           <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                         </select>
 
-                        <select [(ngModel)]="sheet?.foods[2]" class="btn-select" formControlName='foodThree'>
+                        <select [(ngModel)]="sheet?.foods[2]" class="btn-select animate__animated animate__flipInX animate__delay-3s" formControlName='foodThree'>
                           <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                         </select>
 
@@ -194,7 +194,7 @@
                           </div>
                         </div>
 
-                        <div class="form-row mb-2">
+                        <div *ngIf="needDiapauseSwitch" class="form-row mb-2 animate__animated animate__flipInX">
                           <div class="d-flex flex-column form-group">
                             <label for="">Min °C</label>
                             <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart" class="btn-select mb-0" formControlName='diapauseTemperatureStart'>
@@ -202,7 +202,7 @@
                             </select>
                           </div>
 
-                          <div class="d-flex flex-column form-group">
+                          <div *ngIf="needDiapauseSwitch" class="d-flex flex-column form-group animate__animated animate__flipInX animate__delay-1s">
                             <label for="">Max °C</label>
                             <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureEnd" class="btn-select mb-0" formControlName='diapauseTemperatureEnd'>
                               <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
@@ -210,13 +210,13 @@
                           </div>
                         </div>
 
-                        <div class="d-flex form-group">
+                        <div *ngIf="needDiapauseSwitch" class="d-flex form-group animate__animated animate__flipInX animate__delay-2s">
                           <label for="">Start month</label>
                             <select style="text-transform: capitalize;" [(ngModel)]="sheet?.diapausePeriod[0].diapauseStart" class="btn-select mb-0" formControlName='diapauseStart'>
                               <option *ngFor="let month of monthList" [value]="month.valeur">{{month.valeur}}</option>
                             </select>
                         </div>
-                        <div class="d-flex form-group">
+                        <div *ngIf="needDiapauseSwitch" class="d-flex form-group animate__animated animate__flipInX animate__delay-3s">
                           <label for="">End month</label>
                             <select style="text-transform: capitalize;" [(ngModel)]="sheet?.diapausePeriod[0].diapauseEnd" class="btn-select mb-0" formControlName='diapauseEnd'>
                               <option *ngFor="let month of monthList" [value]="month.valeur">{{month.valeur}}</option>
@@ -237,6 +237,7 @@
               <div class="col-sm-4 details-cont">
                 <div class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
+                    <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openGeographyPopup()" class="pen-black-icon position-absolute"></i>
                     <i class="geography-icon"></i>
                     <h6 class="geography">Geographic Distribution</h6>
                   </div>
@@ -265,6 +266,36 @@
                       }"></i>
                       {{ region }}
                     </span>
+                    <div *ngIf="geographyPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
+                      <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                        <h6>Edit geography</h6>
+                        <form class="form-group options-popup" [formGroup]="geographyForm" (ngSubmit)='saveGeography()'>
+                          <div class="d-flex flex-column">
+                            <select [(ngModel)]="sheet?.regions[0]" class="btn-select animate__animated animate__flipInX animate__delay-1s" formControlName='geographyOne'>
+                              <option *ngFor="let geography of geographyList" [value]="geography.valeur">{{geography.valeur}}</option>
+                            </select>
+
+                            <select [(ngModel)]="sheet?.regions[1]" class="btn-select animate__animated animate__flipInX animate__delay-2s" formControlName='geographyTwo'>
+                              <option *ngFor="let geography of geographyList" [value]="geography.valeur">{{geography.valeur}}</option>
+                            </select>
+
+                            <select [(ngModel)]="sheet?.regions[2]" class="btn-select animate__animated animate__flipInX animate__delay-3s" formControlName='geographyThree'>
+                              <option *ngFor="let geography of geographyList" [value]="geography.valeur">{{geography.valeur}}</option>
+                            </select>
+
+                            <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf="errorGeography">
+                              You can't select same regions
+                            </span>
+
+                          </div>
+                          <button type="submit" class='green-btn mt-4'>SAVE</button>
+
+                        </form>
+                        <button type="button" class='close-popup' (click)="closeGeographyPopup(); $event.stopPropagation()">
+                          <i class="close-icon"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -273,6 +304,7 @@
               <div class="col-sm-6 details-cont">
                 <div class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
+                    <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openBehaviorPopup()" class="pen-black-icon position-absolute"></i>
                     <i class="behavior-icon"></i>
                     <h6 class="behaviors">Common Behaviours</h6>
                   </div>
@@ -298,11 +330,86 @@
                       </div>
                     </div>
                   </div>
+                  <div *ngIf="behaviorPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
+                    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                      <h6>Edit behaviors</h6>
+                      <form class="form-group options-popup" [formGroup]="behaviorForm" (ngSubmit)='saveBehavior()'>
+                        <div style="justify-content: space-around;height:100%" class="d-flex flex-column">
+
+                          <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-1s">
+                            <span style="flex-grow: 1">Polygyne</span>
+                            <div class="on-off-toggle">
+                              <input
+                              type="checkbox"
+                              formControlName="polyGyne"
+                              class="on-off-toggle__input"
+                              id="polyGyne"
+                              [(ngModel)]='sheet.polygyne'
+                              (change)="polyGyneSwitch()"
+                            />
+                              <label for="polyGyne" class="on-off-toggle__slider"></label>
+                            </div>
+                          </div>
+
+                          <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-2s">
+                            <span style="flex-grow: 1">Semi-claustral</span>
+                            <div class="on-off-toggle">
+                              <input
+                              type="checkbox"
+                              formControlName="semiClaustral"
+                              class="on-off-toggle__input"
+                              id="semiClaustral"
+                              [(ngModel)]='sheet.semiClaustral'
+                              (change)="claustralSwitch()"
+                            />
+                              <label for="semiClaustral" class="on-off-toggle__slider"></label>
+                            </div>
+                          </div>
+
+                          <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-3s">
+                            <span style="flex-grow: 1">Driller</span>
+                            <div class="on-off-toggle">
+                              <input
+                              type="checkbox"
+                              formControlName="driller"
+                              class="on-off-toggle__input"
+                              id="driller"
+                              [(ngModel)]='sheet.driller'
+                              (change)="drillerSwitch()"
+                            />
+                              <label for="driller" class="on-off-toggle__slider"></label>
+                            </div>
+                          </div>
+
+                          <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-4s">
+                            <span style="flex-grow: 1">Drinker</span>
+                            <div class="on-off-toggle">
+                              <input
+                              type="checkbox"
+                              formControlName="drinker"
+                              class="on-off-toggle__input"
+                              id="drinker"
+                              [(ngModel)]='sheet.drinker'
+                              (change)="drinkerSwitch()"
+                            />
+                              <label for="drinker" class="on-off-toggle__slider"></label>
+                            </div>
+                          </div>
+                        </div>
+                        <button type="submit" class='green-btn mt-4'>SAVE</button>
+
+                      </form>
+                      <button type="button" class='close-popup' (click)="closeBehaviorPopup(); $event.stopPropagation()">
+                        <i class="close-icon"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-sm-6 details-cont">
                 <div class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
+                    <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openMorphismPopup()" class="pen-black-icon position-absolute"></i>
                     <i class="meta-icon"></i>
                     <h6>Morphism & Metabolism</h6>
                   </div>
@@ -327,37 +434,57 @@
                     <span class="card-title">and the workers can live about  <b>{{sheet?.workerLives}} years</b></span>
 
                   </div>
+                  <div *ngIf="morphismPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
+                    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                      <h6>Edit morphism</h6>
+                      <form class="form-group options-popup" [formGroup]="morphismForm" (ngSubmit)='saveMorphism()'>
+                        <div class="d-flex flex-column">
+
+
+                        </div>
+                        <button type="submit" class='green-btn mt-4'>SAVE</button>
+
+                      </form>
+                      <button type="button" class='close-popup' (click)="closeMorphismPopup(); $event.stopPropagation()">
+                        <i class="close-icon"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div *ngIf="sheet.characteristics" class="col-sm-12 details-cont">
-                  <div class="details">
-                    <div style="align-items: center;" class="head-card d-flex flex-column">
-                      <i class="see-icon"></i>
-                      <h6>Characteristics and Observations</h6>
-                    </div>
+                <div class="details">
+                  <div style="align-items: center;" class="head-card d-flex flex-column">
+                  <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openCharacteristicsPopup()" class="pen-black-icon position-absolute"></i>
+                    <i class="see-icon"></i>
+                    <h6>Characteristics and Observations</h6>
+                  </div>
 
-                    <div class="body-card">
-                      <span style="white-space: pre-line;" class="card-title">{{sheet?.characteristics}}</span>
+                  <div class="body-card">
+                    <span style="white-space: pre-line;" class="card-title">{{sheet?.characteristics}}</span>
+                  </div>
+                  <div *ngIf="characteristicsPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
+                    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                      <h6>Edit characteristics</h6>
+                      <form class="form-group options-popup" [formGroup]="characteristicsForm" (ngSubmit)='saveCharacteristics()'>
+                        <div class="d-flex flex-column">
+
+
+                        </div>
+                        <button type="submit" class='green-btn mt-4'>SAVE</button>
+
+                      </form>
+                      <button type="button" class='close-popup' (click)="closeCharacteristicsPopup(); $event.stopPropagation()">
+                        <i class="close-icon"></i>
+                      </button>
                     </div>
                   </div>
+                </div>
               </div>
             </div>
             <div *ngIf="sheet.pictures.length > 0" class="picture-container">
               <div [ngStyle]="{'background-image': 'url('+ actualPicture + ')'}" class="picture"></div>
             </div>
-            <!-- <div class="row">
-              <div class="col-sm-4 details-cont">
-                <div class="details">
-                  <div style="align-items: center;" class="head-card d-flex flex-column">
-                    <i class="geography-icon"></i>
-                    <h6 class="geography">Geographic Distribution</h6>
-                  </div>
-                  <div class="body-card">
-                    <span class="text-data" *ngFor="let region of breedSheet?.regions">{{ region }} </span>
-                  </div>
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>

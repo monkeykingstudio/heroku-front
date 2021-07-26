@@ -943,6 +943,7 @@
 
 .pen-black-icon {
   &:before {
+    z-index:0;
     content: '';
     background-image: url('../../app/icons/edit-black.svg');
     background-size: contain;

@@ -54,7 +54,38 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   errorMorphism = false;
   errorCharacteristics = false;
 
-  private foods = [];
+  geographyList: Array<object> = [
+    {id: 28, valeur: ''},
+    {id: 0, valeur: 'europa (tempered)'},
+    {id: 1, valeur: 'europa'},
+    {id: 2, valeur: 'europa (north)'},
+    {id: 3, valeur: 'europa (south)'},
+    {id: 4, valeur: 'europa (east)'},
+    {id: 5, valeur: 'europa (west)'},
+    {id: 6, valeur: 'asia'},
+    {id: 7, valeur: 'asia (north)'},
+    {id: 8, valeur: 'asia (south)'},
+    {id: 9, valeur: 'asia (east)'},
+    {id: 10, valeur: 'asia (west)'},
+    {id: 11, valeur: 'africa'},
+    {id: 12, valeur: 'africa (north)'},
+    {id: 13, valeur: 'africa (south)'},
+    {id: 14, valeur: 'africa (east)'},
+    {id: 15, valeur: 'africa (west)'},
+    {id: 16, valeur: 'india'},
+    {id: 17, valeur: 'india (north)'},
+    {id: 18, valeur: 'india (south)'},
+    {id: 19, valeur: 'india (east)'},
+    {id: 20, valeur: 'india (west)'},
+    {id: 21, valeur: 'america'},
+    {id: 22, valeur: 'america (north)'},
+    {id: 23, valeur: 'america (south)'},
+    {id: 24, valeur: 'america (east)'},
+    {id: 25, valeur: 'america (west)'},
+    {id: 26, valeur: 'australia'},
+    {id: 27, valeur: 'mediterranean basin'},
+  ];
+
   foodList: Array<object> = [
     {id: 0, valeur: ''},
     {id: 1, valeur: 'insects'},
@@ -67,7 +98,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     {id: 8, valeur: 'mushrooms'},
   ];
 
-  private months = [];
   monthList: Array<object> = [
     {id: 0, valeur: 'january'},
     {id: 1, valeur: 'february'},
@@ -83,7 +113,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     {id: 11, valeur: 'december'},
   ];
 
-  private temperatures = [];
   temperatureList: Array<object> = [
     {id: 0, valeur: 3},
     {id: 1, valeur: 5},
@@ -114,12 +143,22 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     {id: 26, valeur: 30},
   ];
 
-  needDiapauseSwitch = false;
+  needDiapauseSwitch;
+  polySwitch;
+  clausSwitch;
+  drillSwitch;
+  drinkSwitch;
+
 
   get foodControls() { return this.foodForm.controls; }
   get foodOne() { return this.foodForm.controls['foodOne']; }
   get foodTwo() { return this.foodForm.controls['foodTwo']; }
   get foodThree() { return this.foodForm.controls['foodThree']; }
+
+  get geographyControls() { return this.geographyForm.controls; }
+  get geographyOne() { return this.geographyForm.controls['geographyOne']; }
+  get geographyTwo() { return this.geographyForm.controls['geographyTwo']; }
+  get geographyThree() { return this.geographyForm.controls['geographyThree']; }
 
   get diapauseControls() { return this.diapauseForm.controls; }
   get needdiapause() { return this.diapauseForm.controls['needdiapause']; }
@@ -128,14 +167,18 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   get diapauseStart() { return this.diapauseForm.controls['diapauseStart']; }
   get diapauseEnd() { return this.diapauseForm.controls['diapauseEnd']; }
 
+  get behaviorControls() { return this.behaviorForm.controls; }
+  get polyGyne() { return this.diapauseForm.controls['polyGyne']; }
+  get semiClaustral() { return this.diapauseForm.controls['semiClaustral']; }
+  get driller() { return this.diapauseForm.controls['driller']; }
+  get drinker() { return this.diapauseForm.controls['drinker']; }
 
   constructor(
     public breedingSheetsService: BreedingSheetsService,
     public route: ActivatedRoute,
     public authService: AuthService
   ) {
-    this.prepareFood();
-    this.prepareDiapause();
+
   }
 
   ngOnInit(): void {
@@ -156,6 +199,10 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     });
 
     this.reloadSheet();
+    this.prepareFood();
+    this.prepareDiapause();
+    this.prepareGeography();
+    this.prepareBehavior();
   }
 
   reloadSheet() {
@@ -241,6 +288,34 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       }
   }
 
+  saveGeography() {
+    if (
+      (this.geographyOne.value === this.geographyTwo.value
+        ||
+        this.geographyOne.value === this.geographyThree.value
+        || (this.geographyTwo.value === this.geographyThree.value && (this.geographyTwo.value !== '' && this.geographyThree.value !== ''))
+        )
+      ||
+      ((this.geographyTwo.value !== '' && this.geographyThree.value !== '') && (this.geographyTwo.value === this.geographyThree.value))
+      )
+      {
+      this.errorGeography = true;
+
+      } else {
+        const geography = [
+          this.geographyOne.value,
+          this.geographyTwo?.value,
+          this.geographyThree?.value
+        ];
+        this.breedingSheetsService.updateGeography(this.breedSheet?.id, geography)
+        .subscribe(() => {
+          this.reloadSheet();
+          this.loadSheet(this.breedSheet.species);
+        });
+        this.geographyPopupOpen = false;
+      }
+  }
+
   saveDiapause() {
     const needs = this.needdiapause.value;
     const temperatures = {
@@ -267,6 +342,32 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       this.diapausePopupOpen = false;
     });
   }
+
+  saveBehavior() {
+    const polyGyne = this.polySwitch;
+    const claustral = this.clausSwitch;
+    const driller = this.drillSwitch;
+    const drinker = this.drinkSwitch;
+
+    console.log(polyGyne, claustral, driller, drinker);
+
+    this.breedingSheetsService.updateBehavior(this.breedSheet?.id, polyGyne, claustral, driller, drinker)
+    .subscribe(data => {
+      const res: any = data;
+      console.log('res', res);
+      this.reloadSheet();
+      this.loadSheet(this.breedSheet.species);
+    },
+    err => {
+      console.log('error: ', err.message);
+    }, () => {
+      console.log('ok!');
+      this.reloadSheet();
+      this.loadSheet(this.breedSheet.species);
+      this.behaviorPopupOpen = false;
+    });
+  }
+
   private prepareFood() {
     this.foodForm = new FormGroup({
       foodOne: new FormControl(),
@@ -286,19 +387,55 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   }
 
   public diapauseSwitch() {
-    this.needDiapauseSwitch = !this.needDiapauseSwitch;
+    if (this.needDiapauseSwitch === undefined) {
+      this.needDiapauseSwitch = !this.breedSheet?.needDiapause;
+    } else {
+      this.needDiapauseSwitch = !this.needDiapauseSwitch;
+    }
+  }
+
+  public polyGyneSwitch() {
+    if (this.polySwitch === undefined) {
+      this.polySwitch = !this.breedSheet?.polygyne;
+    } else {
+      this.polySwitch = !this.polySwitch;
+    }
+  }
+
+  public claustralSwitch() {
+    if (this.clausSwitch === undefined) {
+      this.clausSwitch = !this.breedSheet?.semiClaustral;
+    } else {
+      this.clausSwitch = !this.clausSwitch;
+    }
+  }
+
+  public drillerSwitch() {
+    if (this.drillSwitch === undefined) {
+      this.drillSwitch = !this.breedSheet?.driller;
+    } else {
+      this.drillSwitch = !this.drillSwitch;
+    }
+  }
+
+  public drinkerSwitch() {
+    this.drinkSwitch = !this.breedSheet?.drinker;
   }
 
   private prepareGeography() {
     this.geographyForm = new FormGroup({
-
+      geographyOne: new FormControl(),
+      geographyTwo: new FormControl(),
+      geographyThree: new FormControl()
     });
-    console.log(this.geographyForm);
   }
 
   private prepareBehavior() {
     this.behaviorForm = new FormGroup({
-
+      polyGyne: new FormControl(this.breedSheet?.polygyne),
+      semiClaustral: new FormControl(this.breedSheet?.semiClaustral),
+      driller: new FormControl(this.breedSheet?.driller),
+      drinker: new FormControl(this.breedSheet?.drinker),
     });
     console.log(this.behaviorForm);
   }
@@ -328,6 +465,9 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   }
 
   openDiapausePopup() {
+    if (this.needDiapauseSwitch === undefined) {
+      this.needDiapauseSwitch = this.breedSheet?.needDiapause;
+    }
     this.diapausePopupOpen = true;
   }
 
@@ -340,12 +480,28 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     this.geographyPopupOpen = true;
   }
 
-  closeGeogaphyPopup() {
+  closeGeographyPopup() {
     this.geographyPopupOpen = false;
     this.prepareGeography();
   }
 
   openBehaviorPopup() {
+    if (this.polySwitch === undefined) {
+      this.polySwitch = this.breedSheet?.polygyne;
+    }
+
+    if (this.clausSwitch === undefined) {
+    this.clausSwitch = this.breedSheet?.semiClaustral;
+    }
+
+    if (this.drillSwitch === undefined) {
+      this.drillSwitch = this.breedSheet?.driller;
+    }
+
+    if (this.drinkSwitch === undefined) {
+      this.drinkSwitch = this.breedSheet?.drinker;
+    }
+
     this.behaviorPopupOpen = true;
   }
 
@@ -355,6 +511,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   }
 
   openMorphismPopup() {
+
+
     this.morphismPopupOpen = true;
   }
 

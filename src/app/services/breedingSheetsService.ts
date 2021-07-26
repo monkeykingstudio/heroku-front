@@ -29,9 +29,18 @@ export class BreedingSheetsService {
     return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upfood/${id}`, {foods});
   }
 
+  updateGeography(id: string, geography: any) {
+    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upgeo/${id}`, {geography});
+  }
+
   updateDiapause(id: string, needs: any, temperatures: any, months: any): Observable<BreedingSheet> {
-    console.log('from service', id, needs, temperatures, months);
     return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/updiapause/${id}`, {needs, temperatures, months});
+  }
+
+  updateBehavior(id: string, polyGyne: any, claustral: any, driller: any, drinker: any): Observable<BreedingSheet> {
+    console.log('from service', id, polyGyne, claustral, driller, drinker);
+
+    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upbehaviors/${id}`, {polyGyne, claustral, driller, drinker});
   }
 
   getSheetById(id: string) {
