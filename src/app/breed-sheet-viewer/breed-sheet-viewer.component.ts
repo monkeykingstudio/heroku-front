@@ -148,7 +148,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   clausSwitch;
   drillSwitch;
   drinkSwitch;
-
+  morphSwitch;
 
   get foodControls() { return this.foodForm.controls; }
   get foodOne() { return this.foodForm.controls['foodOne']; }
@@ -172,6 +172,15 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   get semiClaustral() { return this.diapauseForm.controls['semiClaustral']; }
   get driller() { return this.diapauseForm.controls['driller']; }
   get drinker() { return this.diapauseForm.controls['drinker']; }
+
+  get morphismControls() { return this.morphismForm.controls; }
+  get polyMorphism() { return this.morphismForm.controls['polyMorphism']; }
+  get gyneSize() { return this.morphismForm.controls['gyneSize']; }
+  get maleSize() { return this.morphismForm.controls['maleSize']; }
+  get workerSize() { return this.morphismForm.controls['workerSize']; }
+  get majorSize() { return this.morphismForm.controls['majorSize']; }
+  get gyneLives() { return this.morphismForm.controls['gynelives']; }
+  get workerLives() { return this.morphismForm.controls['workerLives']; }
 
   constructor(
     public breedingSheetsService: BreedingSheetsService,
@@ -203,6 +212,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     this.prepareDiapause();
     this.prepareGeography();
     this.prepareBehavior();
+    this.prepareMorphism();
   }
 
   reloadSheet() {
@@ -368,6 +378,35 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     });
   }
 
+  saveMorphism() {
+    const polyMorphism = this.morphSwitch;
+    const gyneSize = this.gyneSize;
+    const workerSize = this.workerSize;
+    const maleSize = this.maleSize;
+    const majorSize = this.majorSize;
+    const gyneLives = this.gyneLives;
+    const workerLives = this.workerLives;
+
+
+    console.log(polyMorphism);
+
+    this.breedingSheetsService.updateMorphism(this.breedSheet?.id, polyMorphism)
+    .subscribe(data => {
+      const res: any = data;
+      console.log('res', res);
+      this.reloadSheet();
+      this.loadSheet(this.breedSheet.species);
+    },
+    err => {
+      console.log('error: ', err.message);
+    }, () => {
+      console.log('ok!');
+      this.reloadSheet();
+      this.loadSheet(this.breedSheet.species);
+      this.morphismPopupOpen = false;
+    });
+  }
+
   private prepareFood() {
     this.foodForm = new FormGroup({
       foodOne: new FormControl(),
@@ -386,6 +425,26 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     });
   }
 
+  private prepareMorphism() {
+    this.morphismForm = new FormGroup({
+      polyMorphism: new FormControl(this.breedSheet?.polymorphism),
+      gyneSize: new FormControl(this.breedSheet?.gyneSize),
+      maleSize: new FormControl(this.breedSheet?.maleSize),
+      workerSize: new FormControl(this.breedSheet?.workerSize),
+      majorSize: new FormControl(this.breedSheet?.majorSize),
+      gyneLives: new FormControl(this.breedSheet?.gyneLives),
+      workerLives: new FormControl(this.breedSheet?.workerLives)
+    });
+    console.log('prepare polyMorphism form', this.polyMorphism);
+    console.log('prepare gyneSize form', this.gyneSize);
+    console.log('prepare maleSize form', this.maleSize);
+    console.log('prepare workerSize form', this.workerSize);
+    console.log('prepare majorSize form', this.majorSize);
+    console.log('prepare gyneLives form', this.gyneLives);
+    console.log('prepare workerLives form', this.workerLives);
+
+  }
+
   public diapauseSwitch() {
     if (this.needDiapauseSwitch === undefined) {
       this.needDiapauseSwitch = !this.breedSheet?.needDiapause;
@@ -399,6 +458,14 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       this.polySwitch = !this.breedSheet?.polygyne;
     } else {
       this.polySwitch = !this.polySwitch;
+    }
+  }
+
+  public polyMorphismSwitch() {
+    if (this.morphSwitch === undefined) {
+      this.morphSwitch = !this.breedSheet?.polymorphism;
+    } else {
+      this.morphSwitch = !this.morphSwitch;
     }
   }
 
@@ -438,13 +505,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       drinker: new FormControl(this.breedSheet?.drinker),
     });
     console.log(this.behaviorForm);
-  }
-
-  private prepareMorphism() {
-    this.morphismForm = new FormGroup({
-
-    });
-    console.log(this.morphismForm);
   }
 
   private prepareCharacteristics() {
@@ -489,19 +549,15 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     if (this.polySwitch === undefined) {
       this.polySwitch = this.breedSheet?.polygyne;
     }
-
     if (this.clausSwitch === undefined) {
     this.clausSwitch = this.breedSheet?.semiClaustral;
     }
-
     if (this.drillSwitch === undefined) {
       this.drillSwitch = this.breedSheet?.driller;
     }
-
     if (this.drinkSwitch === undefined) {
       this.drinkSwitch = this.breedSheet?.drinker;
     }
-
     this.behaviorPopupOpen = true;
   }
 
@@ -511,8 +567,9 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   }
 
   openMorphismPopup() {
-
-
+    if (this.morphSwitch === undefined) {
+      this.morphSwitch = this.breedSheet?.polymorphism;
+    }
     this.morphismPopupOpen = true;
   }
 

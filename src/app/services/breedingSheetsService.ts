@@ -38,9 +38,13 @@ export class BreedingSheetsService {
   }
 
   updateBehavior(id: string, polyGyne: any, claustral: any, driller: any, drinker: any): Observable<BreedingSheet> {
-    console.log('from service', id, polyGyne, claustral, driller, drinker);
-
     return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upbehaviors/${id}`, {polyGyne, claustral, driller, drinker});
+  }
+
+  updateMorphism(id: string, polyMorphism: any): Observable<BreedingSheet> {
+    console.log('from service', id, polyMorphism);
+
+    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upmorphism/${id}`, {polyMorphism});
   }
 
   getSheetById(id: string) {
