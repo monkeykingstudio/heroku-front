@@ -180,7 +180,7 @@
                       <form class="form-group options-popup" [formGroup]="diapauseForm" (ngSubmit)='saveDiapause()'>
 
                         <div class="d-flex c switch mb-4 flex-row align-items-center">
-                          <span style="flex-grow: 1">Need diapause</span>
+                          <span style="flex-grow: 1;text-align: left!important;">Need diapause</span>
                           <div class="on-off-toggle">
                             <input
                             type="checkbox"
@@ -195,14 +195,14 @@
                         </div>
 
                         <div *ngIf="needDiapauseSwitch" class="form-row mb-2 animate__animated animate__flipInX">
-                          <div class="d-flex flex-column form-group">
+                          <div class="d-flex flex-column col-sm-6  form-group">
                             <label for="">Min °C</label>
                             <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart" class="btn-select mb-0" formControlName='diapauseTemperatureStart'>
                               <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
                             </select>
                           </div>
 
-                          <div *ngIf="needDiapauseSwitch" class="d-flex flex-column form-group animate__animated animate__flipInX animate__delay-1s">
+                          <div *ngIf="needDiapauseSwitch" class="d-flex flex-column form-group col-sm-6 animate__animated animate__flipInX animate__delay-1s">
                             <label for="">Max °C</label>
                             <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureEnd" class="btn-select mb-0" formControlName='diapauseTemperatureEnd'>
                               <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
@@ -337,7 +337,7 @@
                         <div style="justify-content: space-around;height:100%" class="d-flex flex-column">
 
                           <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-1s">
-                            <span style="flex-grow: 1">Polygyne</span>
+                            <span style="flex-grow: 1;text-align: left!important;">Polygyne</span>
                             <div class="on-off-toggle">
                               <input
                               type="checkbox"
@@ -352,7 +352,7 @@
                           </div>
 
                           <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-2s">
-                            <span style="flex-grow: 1">Semi-claustral</span>
+                            <span style="flex-grow: 1;text-align: left!important;">Semi-claustral</span>
                             <div class="on-off-toggle">
                               <input
                               type="checkbox"
@@ -367,7 +367,7 @@
                           </div>
 
                           <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-3s">
-                            <span style="flex-grow: 1">Driller</span>
+                            <span style="flex-grow: 1;text-align: left!important;">Driller</span>
                             <div class="on-off-toggle">
                               <input
                               type="checkbox"
@@ -382,7 +382,7 @@
                           </div>
 
                           <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-4s">
-                            <span style="flex-grow: 1">Drinker</span>
+                            <span style="flex-grow: 1;text-align: left!important;">Drinker</span>
                             <div class="on-off-toggle">
                               <input
                               type="checkbox"
@@ -407,7 +407,7 @@
                 </div>
               </div>
               <div class="col-sm-6 details-cont">
-                <div class="details">
+                <div style="min-height: 40rem;" class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
                     <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openMorphismPopup()" class="pen-black-icon position-absolute"></i>
                     <i class="meta-icon"></i>
@@ -436,32 +436,33 @@
                   </div>
                   <div *ngIf="morphismPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
                     <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
-                      <h6>Edit morphism & metabolism</h6>
+                      <h6 class="fix-h6">Edit morphism & metabolism</h6>
                       <form class="form-group options-popup" [formGroup]="morphismForm" (ngSubmit)='saveMorphism()'>
-                        <div class="d-flex flex-column">
-                          <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn">
-                            <span style="flex-grow: 1">Polymorphism</span>
-                            <div class="on-off-toggle">
-                              <input
-                              type="checkbox"
-                              formControlName="polyMorphism"
-                              class="on-off-toggle__input"
-                              id="polyMorphism"
-                              [(ngModel)]='sheet.polymorphism'
-                              (change)="polyMorphismSwitch()"
-                            />
-                              <label for="polyMorphism" class="on-off-toggle__slider"></label>
-                            </div>
-                          </div>
-
-                          <div class="form-row mb-2">
-                            <div class="d-flex flex-column form-group col-md-6 animate__animated  animate__flipInX animate__delay-1s">
+                        <div class="form-row">
+                          <span style="flex-grow: 1;text-align: left!important;">Polymorphism</span>
+                        <div class="on-off-toggle">
+                          <input
+                          type="checkbox"
+                          formControlName="polyMorphism"
+                          class="on-off-toggle__input"
+                          id="polyMorphism"
+                          [(ngModel)]='sheet.polymorphism'
+                          (change)="polyMorphismSwitch()"
+                        />
+                          <label for="polyMorphism" class="on-off-toggle__slider"></label>
+                        </div>
+                        </div>
+                        <div class="form-row mt-4">
+                          <div class="col-6 mb-2">
+                            <div class="d-flex flex-column form-group">
                               <label style="display: block" for="">Gyne size <span class="unit">(mm)</span></label>
                               <div class="flex-row align-items-center">
                                 <input [(ngModel)]="sheet.gyneSize" class="form-control" type="number" formControlName="gyneSize" />
                               </div>
                             </div>
-                            <div class="d-flex flex-column form-group col-md-6 animate__animated  animate__flipInX animate__delay-1s">
+                          </div>
+                          <div class="col-6 mb-2">
+                            <div class="d-flex flex-column form-group">
                               <label style="display: block" for="">Male size <span class="unit">(mm)</span></label>
                               <div class="flex-row align-items-center">
                                 <input [(ngModel)]="sheet.maleSize" class="form-control" type="number" formControlName="maleSize" />
@@ -469,41 +470,76 @@
                             </div>
                           </div>
 
-                          <div class="form-row mt-2 mb-2">
-                            <div class="d-flex flex-column form-group col-md-6 animate__animated  animate__flipInX animate__delay-2s">
-                              <label style="display: block" for="">Worker size <span class="unit">(mm)</span></label>
-                              <div class="flex-row align-items-center">
-                                <input [(ngModel)]="sheet.gyneSize" class="form-control" type="number" formControlName="gyneSize" />
+                          <div class="col-6 mb-2">
+                              <div class="d-flex flex-column form-group">
+                                <label style="display: block" for="">Worker size <span class="unit">(mm)</span></label>
+                                <div class="flex-row align-items-center">
+                                  <input [(ngModel)]="sheet.workerSize" class="form-control" type="number" formControlName="workerSize" />
+                                </div>
                               </div>
-                            </div>
-
-                            <div class="d-flex flex-column form-group col-md-6 animate__animated  animate__flipInX animate__delay-2s">
-                              <label style="display: block" for="">Major size <span class="unit">(mm)</span></label>
-                              <div class="flex-row align-items-center">
-                                <input [(ngModel)]="sheet.gyneSize" class="form-control" type="number" formControlName="gyneSize" />
-                              </div>
+                          </div>
+                          <div class="col-6 mb-2">
+                              <div class="d-flex flex-column form-group">
+                                <label style="display: block" for="">Major size <span class="unit">(mm)</span></label>
+                                <div class="flex-row align-items-center">
+                                  <input [(ngModel)]="sheet.majorSize" class="form-control" type="number" formControlName="majorSize" />
+                                </div>
                             </div>
                           </div>
 
-                          <div class="form-row mt-2 mb-2">
-                            <div class="d-flex flex-column form-group col-md-6 animate__animated  animate__flipInX animate__delay-3s">
-                              <label style="display: block" for="">Worker size <span class="unit">(mm)</span></label>
+                          <div class="col-6">
+                            <div class="d-flex flex-column form-group">
+                              <label style="display: block" for="">Gyne lives</label>
                               <div class="flex-row align-items-center">
-                                <input [(ngModel)]="sheet.gyneSize" class="form-control" type="number" formControlName="gyneSize" />
+                                <input [(ngModel)]="sheet.gyneLives" class="form-control" type="number" formControlName="gyneLives" />
                               </div>
-                            </div>
-
-                            <div class="d-flex flex-column form-group col-md-6 animate__animated  animate__flipInX animate__delay-3s">
-                              <label style="display: block" for="">Major size <span class="unit">(mm)</span></label>
-                              <div class="flex-row align-items-center">
-                                <input [(ngModel)]="sheet.gyneSize" class="form-control" type="number" formControlName="gyneSize" />
-                              </div>
-                            </div>
                           </div>
-
-
-
+                        </div><div class="col-6">
+                          <div class="d-flex flex-column form-group">
+                            <label style="display: block" for="">Worker lives</label>
+                            <div class="flex-row align-items-center">
+                              <input [(ngModel)]="sheet.workerLives" class="form-control" type="number" formControlName="workerLives" />
+                            </div>
                         </div>
+                      </div>
+                    </div>
+
+                    <div style="flex-grow:1"></div>
+                        <!-- <div class="d-flex flex-column">
+                          <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn">
+
+                          </div>
+
+                          <div class="form-row mb-2 animate__animated animate__flipInX">
+
+
+
+                          </div>
+
+                          <div class="form-row mt-2 mb-2">
+
+
+                          </div>
+
+                          <div class="form-row mt-2 mb-2">
+                            <div class="d-flex flex-column form-group col-md-6 animate__animated  animate__flipInX animate__delay-3s">
+                              <label style="display: block" for="">Worker size <span class="unit">(mm)</span></label>
+                              <div class="flex-row align-items-center">
+                                <input [(ngModel)]="sheet.gyneSize" class="form-control" type="number" formControlName="gyneSize" />
+                              </div>
+                            </div>
+
+                            <div class="d-flex flex-column form-group col-md-6 animate__animated  animate__flipInX animate__delay-3s">
+                              <label style="display: block" for="">Major size <span class="unit">(mm)</span></label>
+                              <div class="flex-row align-items-center">
+                                <input [(ngModel)]="sheet.gyneSize" class="form-control" type="number" formControlName="gyneSize" />
+                              </div>
+                            </div>
+                          </div>
+
+
+
+                        </div> -->
                         <button type="submit" class='green-btn mt-4'>SAVE</button>
 
                       </form>

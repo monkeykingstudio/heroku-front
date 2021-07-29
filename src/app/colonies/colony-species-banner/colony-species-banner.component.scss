@@ -1,5 +1,15 @@
 @import '../../../styles/global/mixins';
-
+.separator {
+  display: none;
+  @include breakpoint('small') {
+    width: 100%;
+    display: flex;
+    width: 100%;
+    display: flex;
+    height: 2px;
+    background-color: #cacaca;
+  }
+ }
 :host {
   display: flex;
   width: 100%;
@@ -25,14 +35,24 @@
     flex-direction: column;
   }
 
-
-
   .item {
     display: flex;
     justify-content: center;
     align-items: center;
     min-width: 8rem;
     height: 100%;
+
+    @include breakpoint('small') {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 8rem;
+      width: 100%;
+      align-items: center;
+      justify-content: space-around;
+      height: 100%;
+      margin: 2rem 0;
+    }
 
     .polymorphism {
       max-width: 10rem;

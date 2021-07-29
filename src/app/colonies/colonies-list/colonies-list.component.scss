@@ -1,3 +1,5 @@
+@import '../../../styles/global/mixins';
+
 .colonies-container {
   height: calc(100vh - 10rem);
 
@@ -6,6 +8,11 @@
       padding: 0 1rem;
       width: 100%;
       justify-content: space-between;
+
+      @include breakpoint('small') {
+        flex-direction: column!important;
+        align-items: flex-start!important;
+      }
     }
     .form-check-input {
       position: absolute;
@@ -114,6 +121,10 @@
     border-bottom: .2rem solid #bdbdbd;
     padding: 2rem;
     min-height: 100%;
+
+    @include breakpoint('small') {
+      padding: 0;
+    }
   }
 
 
@@ -157,8 +168,11 @@
 
 .popup {
   width: 60rem!important;
-  // max-height: 90%;
-  // max-height: 53rem;
+
+  @include breakpoint('small') {
+    width: auto!important;
+  }
+
   h6 {
     min-height: 4.3rem;
   }

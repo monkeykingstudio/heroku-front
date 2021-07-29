@@ -60,9 +60,6 @@ $grid-breakpoints: (xxxs: 0, xxs: 320px, xs: 568px, sm: 667px, md: 1068px, lg: 9
 
 
 
-html {
-  min-height: 100vh;
-}
 
 span {
   color: #393939;
@@ -182,12 +179,13 @@ html {
     font-size: 62.5%;
   }
   height: 100vh;
+  min-height: 100vh;
+  background-color: white;
 }
 
 
-
 html, body {
-  background-color: #f2ecff;
+  background-color: #fff;
   &::-webkit-scrollbar {
     width: .5rem;
   }

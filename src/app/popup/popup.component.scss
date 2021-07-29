@@ -1,3 +1,5 @@
+@import '../../styles/global/mixins';
+
 app-popup {
   display: none;
   position: absolute;
@@ -10,6 +12,9 @@ app-popup {
   padding: .5rem;
   top: 0px;
   left: 0px;
+  @include breakpoint('small') {
+    width: auto!important;
+  }
 
   .popup {
     display: flex;
@@ -20,6 +25,10 @@ app-popup {
     padding: 2rem;
     border-radius: .3rem;
     position: relative;
+
+    @include breakpoint('small') {
+      width: auto!important;
+    }
 
     input, select {
       border:none;

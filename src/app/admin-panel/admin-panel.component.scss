@@ -1,6 +1,5 @@
 @import '../../styles/global/mixins';
 
-
 .admin-panel-container {
   height: calc(100vh - 10rem);
 }
@@ -26,6 +25,9 @@ h6, .h6 {
   border-bottom: .2rem solid #bdbdbd;
   padding: 2rem;
   min-height: 100%;
+  @include breakpoint('small') {
+    padding: 0;
+  }
 }
 
 .primal-stat {
@@ -39,6 +41,10 @@ h6, .h6 {
   border-radius: .5rem;
   border-bottom: .2rem solid #bdbdbd;
   position: relative;
+
+  @include breakpoint('small') {
+    margin-bottom: 1rem;
+  }
 
   .cont {
     display: flex;

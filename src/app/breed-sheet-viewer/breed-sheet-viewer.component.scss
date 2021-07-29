@@ -7,8 +7,8 @@
   text-transform: lowercase!important;
   font-weight: bold;
   font-size: 1rem!important;
+  margin-left: .5rem;
 }
-
 
 .green-btn {
   width: 13rem;
@@ -27,6 +27,8 @@
 
 .options-popup {
   justify-content: space-between;
+  flex-grow: 0;
+  height: 100%;
 }
 
 .badge-invalid {
@@ -56,6 +58,10 @@
     padding: 1.5rem;
     border-radius: .3rem;
     position: relative;
+
+    @include breakpoint('small') {
+    padding: 1rem;
+    }
   }
 }
 
@@ -94,10 +100,12 @@
     border-bottom: 0.2rem solid #bdbdbd;
     padding: 1.4rem;
     min-height: 100%;
-
     @include breakpoint('small') {
-      padding: 1rem;
+      padding: 0;
     }
+  }
+  @include breakpoint('small') {
+    height: inherit;
   }
 }
 
@@ -162,7 +170,7 @@ h5 {
     margin: 1rem 0;
 
     @include breakpoint('small') {
-      margin: 2rem 0;
+      margin: .5rem 0;
     }
   }
 
@@ -214,7 +222,7 @@ h5 {
 }
 
 .card-title {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   text-align: center;
   text-transform: inherit!important;
   margin-bottom: 0;
@@ -478,14 +486,23 @@ h6 {
   }
 }
 
+.fix-h6 {
+  @include breakpoint('small') {
+    margin: 1.5rem 0 1rem 0;
+  }
+  text-align: left;
+  line-height: 2.2rem;
+}
+
 .details-cont {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  padding: .8rem;
+  font-size: 1.6rem;
 
   @include breakpoint('small') {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   span {
     text-align:center!important;
   }
@@ -506,7 +523,7 @@ h6 {
   }
 
   span {
-    font-size: 1.3rem;
+    // font-size: 1.3rem;
     text-transform: capitalize;
   }
 }

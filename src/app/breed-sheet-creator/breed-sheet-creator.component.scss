@@ -1,3 +1,8 @@
+@import '../../styles/global/mixins';
+.labels {
+  font-size: 1.6rem;
+  margin-top:2rem
+}
 :host {
   width: 100%;
 }
@@ -35,6 +40,9 @@
     border-bottom: 0.2rem solid #bdbdbd;
     padding: 2rem;
     min-height: 100%;
+    @include breakpoint('small') {
+      padding: 0;
+    }
   }
 }
 
