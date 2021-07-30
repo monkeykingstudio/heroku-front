@@ -33,6 +33,9 @@
 
 .breedsheet-container {
   height: calc(100vh - 10rem);
+  @include breakpoint('small') {
+    margin-top: 7rem;
+  }
   .breedsheet {
     position: relative;
     background-color: white;

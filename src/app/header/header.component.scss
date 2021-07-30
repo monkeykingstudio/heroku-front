@@ -16,11 +16,15 @@
   @include breakpoint('small') {
   background-color: white;
   margin-bottom: .5rem;
+  position: fixed;
+  right: 10px;
+  display: flex;
+  margin-left: 7rem;
   }
 
 
   .admin-btn {
-    border-bottom: .2rem solid #921818;
+    border-bottom: .2rem solid #921818!important;
     background-color: #d74444;
     height: 4rem;
     width: 7rem;

@@ -6,6 +6,10 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/functions";
 // @import 'styles/global/animate';
+
+p, span, h1, h2, h3, h4, h5, h6, button {
+  word-spacing: .1rem;
+}
 .container-fluid {
   @include breakpoint('small') {
     padding: 1rem!important;

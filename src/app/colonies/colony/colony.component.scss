@@ -5,6 +5,9 @@
 }
 .colony-container {
   height: calc(100vh - 19rem);
+  @include breakpoint('small') {
+    margin-top: 6rem;
+  }
 }
 .chart-wrapper {
   display: flex;

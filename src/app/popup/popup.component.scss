@@ -14,6 +14,7 @@ app-popup {
   left: 0px;
   @include breakpoint('small') {
     width: auto!important;
+    margin-top: 6rem;
   }
 
   .popup {
