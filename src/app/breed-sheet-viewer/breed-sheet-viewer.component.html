@@ -24,8 +24,10 @@
           <div class="d-flex flex-column">
             <h5>{{sheet.species}}</h5>
             <div class="fiche-info">
+             <div class="created-by">
               <span class="creator">Created by</span>
               <a class="creator-link" href="">{{ sheet.creator?.pseudo }}</a> <span class="sep">|</span>
+             </div>
               <span class="date">{{ sheet.creationDate | date: 'dd/MM/yyyy' }} <span class="sep">|</span> </span><span>2 <i class="comments-icon"></i> <span class="sep">|</span> </span>
               <span class="d-flex align-items-center stars-cont">
                 <i

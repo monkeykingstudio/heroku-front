@@ -2,6 +2,22 @@
 :host {
   width: 100%;
 }
+.sep {
+  @include breakpoint('small') {
+    display: none;
+  }
+}
+.created-by {
+  display: flex;
+  align-items: center;
+  a {
+    margin: 0;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    margin-bottom: .1rem;
+  }
+}
+
 .unit {
   color: #444444;
   text-transform: lowercase!important;
