@@ -99,6 +99,11 @@ h6 {
   line-height: 3.8rem;
 }
 
+.create-breedhseet-container {
+  min-height: 266px;
+
+}
+
 .breedsheetcreator-icon:before {
   width: 6rem;
   height: 6rem;
@@ -108,7 +113,7 @@ h6 {
 .block {
   background-color: #fefefe;
   display: flex;
-  // padding: 1rem;
+  min-height: 266px;
   border-radius: .5rem;
 }
 
@@ -122,6 +127,8 @@ h6 {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-height: 266px;
+
   align-items: center;
   border-bottom: .2rem solid #d8d8d8;
   border-left: .1rem solid #d8d8d8;
