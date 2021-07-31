@@ -8,7 +8,7 @@
 // @import 'styles/global/animate';
 
 p, span, h1, h2, h3, h4, h5, h6, button {
-  word-spacing: .1rem;
+  word-spacing: .15rem;
 }
 .container-fluid {
   @include breakpoint('small') {
