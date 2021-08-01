@@ -179,16 +179,18 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   get maleSize() { return this.morphismForm.controls['maleSize']; }
   get workerSize() { return this.morphismForm.controls['workerSize']; }
   get majorSize() { return this.morphismForm.controls['majorSize']; }
-  get gyneLives() { return this.morphismForm.controls['gynelives']; }
+  get gyneLives() { return this.morphismForm.controls['gyneLives']; }
   get workerLives() { return this.morphismForm.controls['workerLives']; }
+
+  get characteristicsControls() { return this.characteristicsForm.controls; }
+  get characteristics() { return this.characteristicsForm.controls['characteristics']; }
+
 
   constructor(
     public breedingSheetsService: BreedingSheetsService,
     public route: ActivatedRoute,
     public authService: AuthService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.authStatusSubscription = this.authService.currentUser
@@ -213,6 +215,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     this.prepareGeography();
     this.prepareBehavior();
     this.prepareMorphism();
+    this.prepareCharacteristics();
   }
 
   reloadSheet() {
@@ -380,31 +383,50 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   saveMorphism() {
     const polyMorphism = this.morphSwitch;
-    const gyneSize = this.gyneSize;
-    const workerSize = this.workerSize;
-    const maleSize = this.maleSize;
-    const majorSize = this.majorSize;
-    const gyneLives = this.gyneLives;
-    const workerLives = this.workerLives;
+    const gyneSize = this.gyneSize?.value;
+    const maleSize = this.maleSize?.value;
+    const majorSize = this.majorSize?.value;
+    const workerSize = this.workerSize?.value;
+    const gyneLives = this.gyneLives?.value;
+    const workerLives = this.workerLives?.value;
 
+    this.breedingSheetsService.updateMorphism(
+      this.breedSheet?.id, polyMorphism, gyneSize, maleSize, majorSize, workerSize, gyneLives, workerLives
+      )
+      .subscribe(data => {
+        const res: any = data;
+        console.log('res', res);
+        this.reloadSheet();
+        this.loadSheet(this.breedSheet.species);
+      },
+      err => {
+        console.log('error: ', err.message);
+      }, () => {
+        console.log('ok!');
+        this.reloadSheet();
+        this.loadSheet(this.breedSheet.species);
+        this.morphismPopupOpen = false;
+      });
+  }
 
-    console.log(polyMorphism);
+  saveCharacteristics() {
+    const characteristics = this.characteristics?.value;
 
-    this.breedingSheetsService.updateMorphism(this.breedSheet?.id, polyMorphism)
-    .subscribe(data => {
-      const res: any = data;
-      console.log('res', res);
-      this.reloadSheet();
-      this.loadSheet(this.breedSheet.species);
-    },
-    err => {
-      console.log('error: ', err.message);
-    }, () => {
-      console.log('ok!');
-      this.reloadSheet();
-      this.loadSheet(this.breedSheet.species);
-      this.morphismPopupOpen = false;
-    });
+    this.breedingSheetsService.updateCharacteristics(this.breedSheet?.id, characteristics)
+      .subscribe(data => {
+        const res: any = data;
+        console.log('res', res);
+        this.reloadSheet();
+        this.loadSheet(this.breedSheet.species);
+      },
+      err => {
+        console.log('error: ', err.message);
+      }, () => {
+        console.log('ok!');
+        this.reloadSheet();
+        this.loadSheet(this.breedSheet.species);
+        this.characteristicsPopupOpen = false;
+      });
   }
 
   private prepareFood() {
@@ -435,14 +457,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       gyneLives: new FormControl(this.breedSheet?.gyneLives),
       workerLives: new FormControl(this.breedSheet?.workerLives)
     });
-    console.log('prepare polyMorphism form', this.polyMorphism);
-    console.log('prepare gyneSize form', this.gyneSize);
-    console.log('prepare maleSize form', this.maleSize);
-    console.log('prepare workerSize form', this.workerSize);
-    console.log('prepare majorSize form', this.majorSize);
-    console.log('prepare gyneLives form', this.gyneLives);
-    console.log('prepare workerLives form', this.workerLives);
-
   }
 
   public diapauseSwitch() {
@@ -509,7 +523,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   private prepareCharacteristics() {
     this.characteristicsForm = new FormGroup({
-
+      characteristics: new FormControl(this.breedSheet?.characteristics),
     });
     console.log(this.characteristicsForm);
   }

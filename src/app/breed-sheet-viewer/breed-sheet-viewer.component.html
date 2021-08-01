@@ -425,11 +425,12 @@
                     </span>
 
                     <span class="card-title">and
-                      {{!sheet?.polymorphism ? 'Worker size is' : '' }} <b>{{!sheet?.polymorphism ? sheet?.workerSize + 'mm' : '' }}</b>
-                      {{sheet?.polymorphism ? 'Major size is' : '' }} <b>{{sheet?.polymorphism ? sheet?.majorSize + 'mm': '' }}</b>
+                      Worker size is <b>{{sheet?.workerSize + 'mm'}}</b>
                     </span>
-
-                    <span class="card-title">{{ sheet?.maleSize ? 'Male size' : ''}} <b>{{ sheet?.maleSize ? sheet?.maleSize : ''}}mm</b></span>
+                    <span> {{sheet?.polymorphism ? 'Major size is' : '' }}
+                      <b *ngIf="sheet.majorSize !== null">{{sheet?.polymorphism ? sheet?.majorSize + 'mm' : '' }}</b>
+                      <b *ngIf="sheet.majorSize === null">{{sheet?.polymorphism ? 'unknown' : '' }}</b></span>
+                    <span class="card-title">{{ sheet?.maleSize ? 'Male size' : ''}} <b>{{ sheet?.maleSize ? sheet?.maleSize + 'mm' : ''}}</b></span>
 
                     <span class="card-title mt-3">Gyne's life expectancy can reach <b>{{sheet?.gyneLives}} years</b></span>
 
@@ -481,7 +482,7 @@
                               </div>
                           </div>
                           <div class="col-6 mb-2">
-                              <div class="d-flex flex-column form-group">
+                              <div *ngIf="morphSwitch" class="d-flex flex-column form-group">
                                 <label style="display: block" for="">Major size <span class="unit">(mm)</span></label>
                                 <div class="flex-row align-items-center">
                                   <input [(ngModel)]="sheet.majorSize" class="form-control" type="number" formControlName="majorSize" />
@@ -507,43 +508,7 @@
                     </div>
 
                     <div style="flex-grow:1"></div>
-                        <!-- <div class="d-flex flex-column">
-                          <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn">
-
-                          </div>
-
-                          <div class="form-row mb-2 animate__animated animate__flipInX">
-
-
-
-                          </div>
-
-                          <div class="form-row mt-2 mb-2">
-
-
-                          </div>
-
-                          <div class="form-row mt-2 mb-2">
-                            <div class="d-flex flex-column form-group col-md-6 animate__animated  animate__flipInX animate__delay-3s">
-                              <label style="display: block" for="">Worker size <span class="unit">(mm)</span></label>
-                              <div class="flex-row align-items-center">
-                                <input [(ngModel)]="sheet.gyneSize" class="form-control" type="number" formControlName="gyneSize" />
-                              </div>
-                            </div>
-
-                            <div class="d-flex flex-column form-group col-md-6 animate__animated  animate__flipInX animate__delay-3s">
-                              <label style="display: block" for="">Major size <span class="unit">(mm)</span></label>
-                              <div class="flex-row align-items-center">
-                                <input [(ngModel)]="sheet.gyneSize" class="form-control" type="number" formControlName="gyneSize" />
-                              </div>
-                            </div>
-                          </div>
-
-
-
-                        </div> -->
                         <button type="submit" class='green-btn mt-4'>SAVE</button>
-
                       </form>
                       <button type="button" class='close-popup' (click)="closeMorphismPopup(); $event.stopPropagation()">
                         <i class="close-icon"></i>
@@ -553,23 +518,51 @@
                 </div>
               </div>
               <div *ngIf="sheet.characteristics" class="col-sm-12 details-cont">
-                <div class="details">
+                <div style="min-height:55rem;height: auto;" class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
                   <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openCharacteristicsPopup()" class="pen-black-icon position-absolute"></i>
                     <i class="see-icon"></i>
                     <h6>Characteristics and Observations</h6>
                   </div>
 
-                  <div class="body-card">
-                    <span style="white-space: pre-line;" class="card-title">{{sheet?.characteristics}}</span>
+                  <div style="
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 2rem;
+                  " [innerHtml]="sheet.characteristics | safeHtml" class="body-card">
                   </div>
                   <div *ngIf="characteristicsPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
                     <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
                       <h6>Edit characteristics</h6>
                       <form class="form-group options-popup" [formGroup]="characteristicsForm" (ngSubmit)='saveCharacteristics()'>
                         <div class="d-flex flex-column">
-
-
+                          <!-- <div class="form-group col-sm-12 flex-row align-items-center mb-4">
+                            <textarea style="font-size: 1.4rem;"   rows="8" class="form-control" type="text" ></textarea>
+                          </div> -->
+                          <div class="form-group">
+                            <editor
+                            outputFormat="html"
+                            formControlName="characteristics"
+                            [(ngModel)]="sheet.characteristics"
+                            apiKey="kq93fbi0k83wmsumgg7h2x3xr60gsgc8oidsesqgehwfxerp"
+                            [init]="{
+                              height: 400,
+                              menubar: insert,
+                              plugins: [
+                                'autoresize',
+                                'advlist autolink lists link image charmap print preview anchor',
+                                'searchreplace visualblocks code fullscreen',
+                                'insertdatetime media table paste code help wordcount',
+                                'image'
+                              ],
+                              toolbar:
+                                'image | undo redo | formatselect | bold italic backcolor | \
+                                alignleft aligncenter alignright alignjustify | \
+                                bullist numlist outdent indent | removeformat | help'
+                            }"
+                            ></editor>
+                          </div>
                         </div>
                         <button type="submit" class='green-btn mt-4'>SAVE</button>
 

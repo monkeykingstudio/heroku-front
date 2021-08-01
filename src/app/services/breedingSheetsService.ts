@@ -41,10 +41,23 @@ export class BreedingSheetsService {
     return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upbehaviors/${id}`, {polyGyne, claustral, driller, drinker});
   }
 
-  updateMorphism(id: string, polyMorphism: any): Observable<BreedingSheet> {
-    console.log('from service', id, polyMorphism);
+  updateMorphism(
+    id: string,
+    polyMorphism: any,
+    gyneSize: any,
+    maleSize: any,
+    workerSize: any,
+    majorSize: any,
+    gyneLives: any,
+    workerLives: any
+    ): Observable<BreedingSheet> {
+    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upmorphism/${id}`,
+      {polyMorphism, gyneSize, maleSize, majorSize, workerSize, workerLives, gyneLives}
+    );
+  }
 
-    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upmorphism/${id}`, {polyMorphism});
+  updateCharacteristics(id: string, characteristics: any): Observable<BreedingSheet> {
+    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upchara/${id}`, {characteristics});
   }
 
   getSheetById(id: string) {

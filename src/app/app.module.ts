@@ -34,6 +34,10 @@ import { BreedSheetViewerComponent } from './breed-sheet-viewer/breed-sheet-view
 import { BreedSheetListComponent } from './breed-sheet-list/breed-sheet-list.component';
 import { ProductsComponent } from './products/products.component';
 
+import { EditorModule } from '@tinymce/tinymce-angular';
+
+import DemoPipe from './html.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +61,8 @@ import { ProductsComponent } from './products/products.component';
     AdminPanelComponent,
     BreedSheetViewerComponent,
     BreedSheetListComponent,
-    ProductsComponent
+    ProductsComponent,
+    DemoPipe
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,8 @@ import { ProductsComponent } from './products/products.component';
     PopupModule,
     BrowserAnimationsModule,
     NgbModule,
-    ChartsModule
+    ChartsModule,
+    EditorModule
   ],
   providers: [
     DatePipe,
