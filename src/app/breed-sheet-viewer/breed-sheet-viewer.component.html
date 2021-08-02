@@ -24,10 +24,10 @@
           <div class="d-flex flex-column">
             <h5>{{sheet.species}}</h5>
             <div class="fiche-info">
-             <div class="created-by">
-              <span class="creator">Created by</span>
-              <a class="creator-link" href="">{{ sheet.creator?.pseudo }}</a> <span class="sep">|</span>
-             </div>
+              <div class="created-by">
+                <span class="creator">Created by</span>
+                <a class="creator-link" href="">{{ sheet.creator?.pseudo }}</a> <span class="sep">|</span>
+              </div>
               <span class="date">{{ sheet.creationDate | date: 'dd/MM/yyyy' }} <span class="sep">|</span> </span><span>2 <i class="comments-icon"></i> <span class="sep">|</span> </span>
               <span class="d-flex align-items-center stars-cont">
                 <i
@@ -78,7 +78,18 @@
         <div class="body row">
           <div class="col-sm-12 offset-md-1 col-md-10 p-0">
             <div class="picture-container">
+              <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openGynePicturesPopup()" class="pen-black-icon pen-black-icon-big position-absolute"></i>
+
               <div [ngStyle]="{'background-image': 'url('+ actualGynePicture + ')'}" class="picture"></div>
+              <div *ngIf="gynePicturesPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
+                <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+
+                  <img src="{{sheet?.gynePictures[i]}}" *ngFor="let gynePicture of sheet?.gynePictures; index as i">
+                    <!-- {{ sheet?.gynePictures[i] }} -->
+
+
+                </div>
+              </div>
             </div>
 
             <div class="row">
@@ -578,6 +589,8 @@
               </div>
             </div>
             <div *ngIf="sheet.pictures.length > 0" class="picture-container">
+              <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openGynePicturesPopup()" class="pen-black-icon pen-black-icon-big position-absolute"></i>
+
               <div [ngStyle]="{'background-image': 'url('+ actualPicture + ')'}" class="picture"></div>
             </div>
           </div>

@@ -3,6 +3,33 @@
   width: 100%;
 }
 
+.pen-black-icon-big {
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  top: 10px;
+  right: 10px;
+  background-color: #ffffff85;
+  width: 3.5rem;
+  height: 3.5rem;
+  z-index: 2;
+  border-radius: 36rem;
+  border: .2rem solid #434343;
+  display: flex;
+  transition: all .2s;
+
+  &:hover {
+    background-color: white;
+  transition: all .2s;
+  }
+  &:before {
+    width: 2rem!important;
+    height: 2rem!important;
+    top: -1px;
+    right: 0;
+  }
+}
+
 .p-fix {
   padding-bottom: 1rem;
 }

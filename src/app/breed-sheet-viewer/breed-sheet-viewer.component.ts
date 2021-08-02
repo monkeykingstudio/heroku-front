@@ -25,6 +25,9 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   behaviorForm: FormGroup;
   morphismForm: FormGroup;
   characteristicsForm: FormGroup;
+  gynePicturesForm: FormGroup;
+  picturesForm: FormGroup;
+
 
   breedingSheet$: Observable<BreedingSheet>;
   private sheetId: string;
@@ -47,6 +50,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   behaviorPopupOpen = false;
   morphismPopupOpen = false;
   characteristicsPopupOpen = false;
+  gynePicturesPopupOpen = false;
+
 
   errorFood = false;
   errorDiapause = false;
@@ -186,6 +191,9 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   get characteristicsControls() { return this.characteristicsForm.controls; }
   get characteristics() { return this.characteristicsForm.controls['characteristics']; }
 
+  get gynePicturesControls() { return this.gynePicturesForm.controls; }
+
+
 
   constructor(
     public breedingSheetsService: BreedingSheetsService,
@@ -217,6 +225,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     this.prepareBehavior();
     this.prepareMorphism();
     this.prepareCharacteristics();
+    this.prepareGynePictures();
   }
 
   reloadSheet() {
@@ -529,6 +538,11 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     console.log(this.characteristicsForm);
   }
 
+  private prepareGynePictures() {
+    this.gynePicturesForm = new FormGroup({
+    });
+  }
+
   // Popup control
   openFoodPopup() {
     this.foodPopupOpen = true;
@@ -600,6 +614,15 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   closeCharacteristicsPopup() {
     this.characteristicsPopupOpen = false;
     this.prepareCharacteristics();
+  }
+
+  openGynePicturesPopup() {
+    this.gynePicturesPopupOpen = true;
+  }
+
+  closeGynePicturesPopup() {
+    this.gynePicturesPopupOpen = false;
+    this.prepareGynePictures();
   }
 
   ngOnDestroy() {

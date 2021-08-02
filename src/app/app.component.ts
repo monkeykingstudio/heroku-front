@@ -60,12 +60,12 @@ export class AppComponent implements OnInit, OnDestroy {
         this.hover = false;
       });
 
-    interval(1000).subscribe(() => {
-      const user = this.authService.getIsAuth;
-      if (user && this.usersService.isTokenExpired(user.token)) {
-        this.authService.logout(user.email).subscribe();
-      }
-    });
+    // interval(1000).subscribe(() => {
+    //   const user = this.authService.getIsAuth;
+    //   if (user && this.usersService.isTokenExpired(user.token)) {
+    //     this.authService.logout(user.email).subscribe();
+    //   }
+    // });
   }
 
   // @HostListener('window:beforeunload', ['$event'])
