@@ -529,15 +529,15 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="sheet.characteristics" class="col-sm-12 details-cont">
-                <div style="min-height:100%;height: 100%;" class="details">
+              <div class="col-sm-12 details-cont">
+                <div style="min-height: 24rem;;height: 100%;" class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
                   <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openCharacteristicsPopup()" class="pen-black-icon position-absolute"></i>
                     <i class="see-icon"></i>
                     <h6>Characteristics and Observations</h6>
                   </div>
 
-                  <div style="
+                  <div *ngIf="sheet.characteristics" style="
                     display: flex;
                     justify-content: flex-start;
                     align-items: flex-start;
@@ -549,9 +549,6 @@
                       <h6>Edit characteristics</h6>
                       <form class="form-group options-popup" [formGroup]="characteristicsForm" (ngSubmit)='saveCharacteristics()'>
                         <div class="d-flex flex-column">
-                          <!-- <div class="form-group col-sm-12 flex-row align-items-center mb-4">
-                            <textarea style="font-size: 1.4rem;"   rows="8" class="form-control" type="text" ></textarea>
-                          </div> -->
                           <div class="form-group">
                             <editor
                             outputFormat="html"

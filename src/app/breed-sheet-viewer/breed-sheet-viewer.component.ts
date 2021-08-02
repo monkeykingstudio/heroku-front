@@ -313,30 +313,44 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   saveGeography() {
     if (
-      (this.geographyOne.value === this.geographyTwo.value
-        ||
-        this.geographyOne.value === this.geographyThree.value
-        || (this.geographyTwo.value === this.geographyThree.value && (this.geographyTwo.value !== '' && this.geographyThree.value !== ''))
-        )
+      (this.geographyOne.value === this.geographyTwo.value) && (this.geographyTwo.value !== null)
       ||
-      ((this.geographyTwo.value !== '' && this.geographyThree.value !== '') && (this.geographyTwo.value === this.geographyThree.value))
-      )
-      {
+      (this.geographyTwo.value === this.geographyThree.value) && (this.geographyThree.value !== null)
+      ||
+      (this.geographyThree.value === this.geographyOne.value) && (this.geographyOne.value !== null)
+      ) {
       this.errorGeography = true;
+    } else {
+      const geography = [
+        this.geographyOne.value,
+        this.geographyTwo?.value,
+        this.geographyThree?.value
+      ];
+      this.breedingSheetsService.updateGeography(this.breedSheet?.id, geography)
+      .subscribe(() => {
+        this.reloadSheet();
+        this.loadSheet(this.breedSheet.species);
+      });
+      this.geographyPopupOpen = false;
+    }
 
-      } else {
-        const geography = [
-          this.geographyOne.value,
-          this.geographyTwo?.value,
-          this.geographyThree?.value
-        ];
-        this.breedingSheetsService.updateGeography(this.breedSheet?.id, geography)
-        .subscribe(() => {
-          this.reloadSheet();
-          this.loadSheet(this.breedSheet.species);
-        });
-        this.geographyPopupOpen = false;
-      }
+
+    // if (
+    //   (this.geographyOne.value === this.geographyTwo.value
+    //     ||
+    //     this.geographyOne.value === this.geographyThree.value
+    //     ||
+    //     (this.geographyTwo.value === this.geographyThree.value && (this.geographyTwo.value !== null && this.geographyThree.value !== null))
+    //     )
+    //   ||
+    //   ((this.geographyTwo.value !== null && this.geographyThree.value !== null) && (this.geographyTwo.value === this.geographyThree.value))
+    //   )
+    //   {
+    //   this.errorGeography = true;
+
+    //   } else {
+
+    //   }
   }
 
   saveDiapause() {
