@@ -108,15 +108,15 @@
                     <h6>Edit food types</h6>
                     <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood()'>
                       <div class="d-flex flex-column">
-                        <select [(ngModel)]="sheet?.foods[0]" class="btn-select animate__animated animate__flipInX animate__delay-1s" formControlName='foodOne'>
+                        <select [(ngModel)]="sheet?.foods[0]" class="btn-select" formControlName='foodOne'>
                           <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                         </select>
 
-                        <select [(ngModel)]="sheet?.foods[1]" class="btn-select animate__animated animate__flipInX animate__delay-2s" formControlName='foodTwo'>
+                        <select [(ngModel)]="sheet?.foods[1]" class="btn-select" formControlName='foodTwo'>
                           <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                         </select>
 
-                        <select [(ngModel)]="sheet?.foods[2]" class="btn-select animate__animated animate__flipInX animate__delay-3s" formControlName='foodThree'>
+                        <select [(ngModel)]="sheet?.foods[2]" class="btn-select" formControlName='foodThree'>
                           <option *ngFor="let food of foodList" [value]="food.valeur">{{food.valeur}}</option>
                         </select>
 
@@ -196,7 +196,7 @@
                           </div>
                         </div>
 
-                        <div *ngIf="needDiapauseSwitch" class="form-row mb-2 animate__animated animate__flipInX">
+                        <div *ngIf="needDiapauseSwitch" class="form-row mb-2">
                           <div class="d-flex flex-column col-sm-6  form-group">
                             <label for="">Min °C</label>
                             <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart" class="btn-select mb-0" formControlName='diapauseTemperatureStart'>
@@ -204,7 +204,7 @@
                             </select>
                           </div>
 
-                          <div *ngIf="needDiapauseSwitch" class="d-flex flex-column form-group col-sm-6 animate__animated animate__flipInX animate__delay-1s">
+                          <div *ngIf="needDiapauseSwitch" class="d-flex flex-column form-group col-sm-6">
                             <label for="">Max °C</label>
                             <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureEnd" class="btn-select mb-0" formControlName='diapauseTemperatureEnd'>
                               <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
@@ -212,13 +212,14 @@
                           </div>
                         </div>
 
-                        <div *ngIf="needDiapauseSwitch" class="d-flex form-group animate__animated animate__flipInX animate__delay-2s">
+                        <div *ngIf="needDiapauseSwitch" class="d-flex form-group">
                           <label for="">Start month</label>
                             <select style="text-transform: capitalize;" [(ngModel)]="sheet?.diapausePeriod[0].diapauseStart" class="btn-select mb-0" formControlName='diapauseStart'>
                               <option *ngFor="let month of monthList" [value]="month.valeur">{{month.valeur}}</option>
                             </select>
                         </div>
-                        <div *ngIf="needDiapauseSwitch" class="d-flex form-group animate__animated animate__flipInX animate__delay-3s">
+                        <div *ngIf="needDiapauseSwitch" class="d-flex form-group
+                        ">
                           <label for="">End month</label>
                             <select style="text-transform: capitalize;" [(ngModel)]="sheet?.diapausePeriod[0].diapauseEnd" class="btn-select mb-0" formControlName='diapauseEnd'>
                               <option *ngFor="let month of monthList" [value]="month.valeur">{{month.valeur}}</option>
@@ -273,15 +274,15 @@
                         <h6>Edit geography</h6>
                         <form class="form-group options-popup" [formGroup]="geographyForm" (ngSubmit)='saveGeography()'>
                           <div class="d-flex flex-column">
-                            <select [(ngModel)]="sheet?.regions[0]" class="btn-select animate__animated animate__flipInX animate__delay-1s" formControlName='geographyOne'>
+                            <select [(ngModel)]="sheet?.regions[0]" class="btn-select" formControlName='geographyOne'>
                               <option *ngFor="let geography of geographyList" [value]="geography.valeur">{{geography.valeur}}</option>
                             </select>
 
-                            <select [(ngModel)]="sheet?.regions[1]" class="btn-select animate__animated animate__flipInX animate__delay-2s" formControlName='geographyTwo'>
+                            <select [(ngModel)]="sheet?.regions[1]" class="btn-select" formControlName='geographyTwo'>
                               <option *ngFor="let geography of geographyList" [value]="geography.valeur">{{geography.valeur}}</option>
                             </select>
 
-                            <select [(ngModel)]="sheet?.regions[2]" class="btn-select animate__animated animate__flipInX animate__delay-3s" formControlName='geographyThree'>
+                            <select [(ngModel)]="sheet?.regions[2]" class="btn-select" formControlName='geographyThree'>
                               <option *ngFor="let geography of geographyList" [value]="geography.valeur">{{geography.valeur}}</option>
                             </select>
 
@@ -338,7 +339,7 @@
                       <form class="form-group options-popup" [formGroup]="behaviorForm" (ngSubmit)='saveBehavior()'>
                         <div style="justify-content: space-around;height:100%" class="d-flex flex-column">
 
-                          <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-1s">
+                          <div class="d-flex c switch mb-4 flex-row align-items-center">
                             <span style="flex-grow: 1;text-align: left!important;">Polygyne</span>
                             <div class="on-off-toggle">
                               <input
@@ -353,7 +354,7 @@
                             </div>
                           </div>
 
-                          <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-2s">
+                          <div class="d-flex c switch mb-4 flex-row align-items-center">
                             <span style="flex-grow: 1;text-align: left!important;">Semi-claustral</span>
                             <div class="on-off-toggle">
                               <input
@@ -368,7 +369,7 @@
                             </div>
                           </div>
 
-                          <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-3s">
+                          <div class="d-flex c switch mb-4 flex-row align-items-center">
                             <span style="flex-grow: 1;text-align: left!important;">Driller</span>
                             <div class="on-off-toggle">
                               <input
@@ -383,7 +384,7 @@
                             </div>
                           </div>
 
-                          <div class="d-flex c switch mb-4 flex-row align-items-center animate__animated  animate__fadeIn animate__delay-4s">
+                          <div class="d-flex c switch mb-4 flex-row align-items-center">
                             <span style="flex-grow: 1;text-align: left!important;">Drinker</span>
                             <div class="on-off-toggle">
                               <input
