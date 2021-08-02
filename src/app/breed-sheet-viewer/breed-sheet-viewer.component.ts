@@ -15,6 +15,7 @@ import { User } from '../models/user.model';
   styleUrls: ['./breed-sheet-viewer.component.scss']
 })
 export class BreedSheetViewerComponent implements OnInit, OnDestroy {
+
   public authStatusSubscription: Subscription;
   currentUser: User;
 

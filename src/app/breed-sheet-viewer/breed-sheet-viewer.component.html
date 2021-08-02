@@ -518,7 +518,7 @@
                 </div>
               </div>
               <div *ngIf="sheet.characteristics" class="col-sm-12 details-cont">
-                <div style="min-height:55rem;height: auto;" class="details">
+                <div style="min-height:100%;height: 100%;" class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
                   <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openCharacteristicsPopup()" class="pen-black-icon position-absolute"></i>
                     <i class="see-icon"></i>
@@ -549,6 +549,7 @@
                             [init]="{
                               height: 400,
                               menubar: insert,
+                              branding: false,
                               plugins: [
                                 'autoresize',
                                 'advlist autolink lists link image charmap print preview anchor',
@@ -565,7 +566,7 @@
                           </div>
                         </div>
                         <button type="submit" class='green-btn mt-4'>SAVE</button>
-
+                        <div class="p-fix"></div>
                       </form>
                       <button type="button" class='close-popup' (click)="closeCharacteristicsPopup(); $event.stopPropagation()">
                         <i class="close-icon"></i>

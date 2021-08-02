@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+.p-fix {
+  padding-bottom: 1rem;
+}
+
 .tox-tinymce {
   max-height: 420px!important;
 }
@@ -78,6 +82,9 @@
     padding: 1.5rem;
     border-radius: .3rem;
     position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+    min-height: 100%;
 
     @include breakpoint('small') {
     padding: 1rem;
