@@ -1,9 +1,13 @@
 
-<div [style.background-image]="'url('+breedingSheet.gynePictures[0]+')'" class="breed-card">
-  <!-- <div *ngIf="bubbleTools" class="d-flex buttons">
-    <div (click)="deleteColony(colony.id)" class="delete-icon icon animate__animated animate__bounceIn animate__delay-2s"></div>
+<div [style.background-image]="
+breedingSheet.gynePictures[0] !== undefined
+? 'url('+breedingSheet.gynePictures[0]+')'
+: 'url('+breedingSheet.pictures[0]+')'
+" class="breed-card">
+  <div *ngIf="bubbleTools" class="d-flex buttons">
+    <!-- <div (click)="deleteColony(colony.id)" class="delete-icon icon animate__animated animate__bounceIn animate__delay-2s"></div> -->
     <div (click)="switchBubbles()" class="close-icon-white icon animate__animated animate__bounceIn"></div>
-  </div> -->
+  </div>
   <div class="dots-container">
     <i (click)="switchBubbles()" class="dots-icon position-absolute"></i>
   </div>

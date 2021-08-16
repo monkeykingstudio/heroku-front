@@ -43,7 +43,7 @@
   .dots-icon {
     min-height:2rem;
     min-width:3rem;
-    z-index: 8;
+    z-index: 6;
   }
 
 
@@ -164,7 +164,7 @@
 .buttons {
   position: absolute;
   width: 10rem;
-  right: 2rem;
+  right: -23px;
   top: -2rem;
 
 
@@ -175,9 +175,13 @@
     height: 3rem;
     width: 3rem;
     border-radius: 36rem;
-    z-index: 9;
+    z-index: 6;
     cursor: pointer;
   }
+}
+
+.animate__delay-2s {
+  animation-delay: .15s!important;
 }
 
 
