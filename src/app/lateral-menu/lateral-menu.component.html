@@ -12,9 +12,9 @@
   <span *ngIf="hoverStatus" class="name">Colonies</span>
 </div>
 <div *ngIf="currentUser !== undefined" class="separator"></div>
-<div *ngIf="currentUser !== undefined" class="item inactive">
+<div [routerLink]="['breedsheetlist']" *ngIf="currentUser !== undefined" class="item">
   <i class="browse-icon"></i>
-  <span *ngIf="hoverStatus" class="name">Breed sheets (soon)</span>
+  <span *ngIf="hoverStatus" class="name">Breedsheets</span>
 </div>
 <div *ngIf="currentUser !== undefined" class="separator"></div>
 <div *ngIf="currentUser !== undefined" class="item inactive">

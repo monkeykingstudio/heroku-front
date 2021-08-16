@@ -37,6 +37,8 @@ import { ProductsComponent } from './products/products.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
 import DemoPipe from './html.pipe';
+import { BreedListComponent } from './breed-list/breed-list.component';
+import { BreedCardComponent } from './breed-card/breed-card.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import DemoPipe from './html.pipe';
     BreedSheetViewerComponent,
     BreedSheetListComponent,
     ProductsComponent,
-    DemoPipe
+    DemoPipe,
+    BreedListComponent,
+    BreedCardComponent
   ],
   imports: [
     BrowserModule,

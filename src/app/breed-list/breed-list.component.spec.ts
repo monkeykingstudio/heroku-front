@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BreedSheetListComponent } from './breed-sheet-list.component';
+import { BreedListComponent } from './breed-list.component';
 
-describe('BreedSheetListComponent', () => {
-  let component: BreedSheetListComponent;
-  let fixture: ComponentFixture<BreedSheetListComponent>;
+describe('BreedListComponent', () => {
+  let component: BreedListComponent;
+  let fixture: ComponentFixture<BreedListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BreedSheetListComponent ]
+      declarations: [ BreedListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BreedSheetListComponent);
+    fixture = TestBed.createComponent(BreedListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
