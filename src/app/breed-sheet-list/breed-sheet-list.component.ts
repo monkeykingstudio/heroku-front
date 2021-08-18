@@ -66,22 +66,22 @@ families: string[] = [];
 
     // console.group(this.sortedSpecies);
 
-    const result = this.familySort(this.dataFamily);
-    console.log(result);
+    // const result = this.familySort(this.dataFamily);
+    // console.log(result);
 
   }
 
-  familySort(array) {
-    for (const item of this.dataFamily) {
-      if (!this.families.includes(item)) {
-        this.families.push(item);
-      } else {
-        console.log('duplicate detected');
-      }
-    }
+  // familySort(array) {
+  //   for (const item of this.dataFamily) {
+  //     if (!this.families.includes(item)) {
+  //       this.families.push(item);
+  //     } else {
+  //       console.log('duplicate detected');
+  //     }
+  //   }
 
-    return this.families;
-  }
+  //   return this.families;
+  // }
 
 
   reloadBreedingSheets(): void {
