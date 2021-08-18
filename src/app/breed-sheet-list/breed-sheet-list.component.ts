@@ -13,6 +13,19 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
 
   allBreedingSheets$: Observable<BreedingSheet[]>;
 
+// FAMILY --> ['messor', 'lasius', 'camponotus', 'camponotus', 'lasius', 'messor', 'messor', 'camponotus', 'lasius', 'lasius']
+//        --> ['lasius', 'messor', 'camponotus']
+
+dataFamily: string[] = ['messor', 'lasius', 'camponotus', 'camponotus', 'lasius', 'messor', 'messor', 'camponotus', 'lasius', 'lasius'];
+families: string[] = [];
+
+
+  // this.pendingUsers$ = this.allUsers$
+  // .pipe(
+  //   map(users => users
+  //     .filter(user => user.is_verified === false))
+  // );
+
   species = [];
 
   private sheetSub: Subscription;
@@ -40,10 +53,10 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
       map(breedsheets => breedsheets
         .filter(sheets => sheets.status === 'approved')
         .map(sheet => sheet)
-        ),
-        tap(res => {
-          res.sort(compareFn);
-        })
+      ),
+      tap(res => {
+        res.sort(compareFn);
+      })
     )
     .subscribe((res) => {
       for (const item of res) {
@@ -51,9 +64,25 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
       }
     });
 
-    console.group(this.sortedSpecies);
+    // console.group(this.sortedSpecies);
+
+    const result = this.familySort(this.dataFamily);
+    console.log(result);
 
   }
+
+  familySort(array) {
+    for (const item of this.dataFamily) {
+      if (!this.families.includes(item)) {
+        this.families.push(item);
+      } else {
+        console.log('duplicate detected');
+      }
+    }
+
+    return this.families;
+  }
+
 
   reloadBreedingSheets(): void {
     const sheets$ = this.breedingSheetsService.getAll();

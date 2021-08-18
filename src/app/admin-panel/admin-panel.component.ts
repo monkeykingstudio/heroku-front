@@ -62,7 +62,6 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   hoursDiff;
   daysDiff;
 
-
   allUsers$: Observable<User[]>;
   pendingUsers$: Observable<User[]>;
   chartUsers$: Observable<User[]>;
