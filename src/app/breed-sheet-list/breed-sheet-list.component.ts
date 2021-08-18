@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy, Pipe } from '@angular/core';
+import { of } from 'rxjs';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { BreedingSheet } from '../models/breedingSheet.model';
 import { BreedingSheetsService } from '../services/breedingSheetsService';
@@ -11,51 +12,38 @@ import { BreedingSheetsService } from '../services/breedingSheetsService';
 })
 export class BreedSheetListComponent implements OnInit, OnDestroy {
 
-  allBreedingSheets$: Observable<BreedingSheet[]>;
+  private allBreedingSheetsSubject: BehaviorSubject<any>;
+  allSheets$: Observable<BreedingSheet[]>;
 
-// FAMILY --> ['messor', 'lasius', 'camponotus', 'camponotus', 'lasius', 'messor', 'messor', 'camponotus', 'lasius', 'lasius']
-//        --> ['lasius', 'messor', 'camponotus']
+  species: string[] = [];
+  sortedSpecies: Array<object> = [];
 
-dataFamily: string[] = ['messor', 'lasius', 'camponotus', 'camponotus', 'lasius', 'messor', 'messor', 'camponotus', 'lasius', 'lasius'];
-families: string[] = [];
-
-
-  // this.pendingUsers$ = this.allUsers$
-  // .pipe(
-  //   map(users => users
-  //     .filter(user => user.is_verified === false))
-  // );
-
-  species = [];
+  allFamilies: string[] = [];
+  sortedFamilies: string[] = [];
 
   private sheetSub: Subscription;
-
-  sortedSpecies: Array<object> = [];
+  private familySub: Subscription;
 
   constructor(
     public breedingSheetsService: BreedingSheetsService
-  ) { }
+  ) {
+    this.allBreedingSheetsSubject =  new BehaviorSubject<BreedingSheet[]>(null);
+    this.allSheets$ = this.allBreedingSheetsSubject.asObservable();
+  }
 
   ngOnInit(): void {
-    const compareFn = (a, b) => {
-    if (a.species < b.species) {
-      return -1;
-    }
-    if (a.species > b.species) {
-      return 1;
-    }
-    return 0;
-    };
+
     this.reloadBreedingSheets();
 
-    this.sheetSub = this.allBreedingSheets$
+    // All breedingSheets
+    this.sheetSub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
         .filter(sheets => sheets.status === 'approved')
         .map(sheet => sheet)
       ),
       tap(res => {
-        res.sort(compareFn);
+        res.sort(this.compareFn);
       })
     )
     .subscribe((res) => {
@@ -64,33 +52,94 @@ families: string[] = [];
       }
     });
 
-    // console.group(this.sortedSpecies);
-
-    // const result = this.familySort(this.dataFamily);
-    // console.log(result);
-
+    // All families
+    this.familySub = this.allSheets$
+    .pipe(
+      map(breedsheets => breedsheets
+        .filter(sheets => sheets.status === 'approved')
+        .map(sheet => sheet.family)
+      ),
+      tap(res => {
+        res.sort(this.compareFn);
+      })
+    )
+    .subscribe((res) => {
+      for (const item of res) {
+        this.allFamilies.push(item);
+      }
+      const sortFamilies = this.familySort(this.allFamilies);
+    });
   }
 
-  // familySort(array) {
-  //   for (const item of this.dataFamily) {
-  //     if (!this.families.includes(item)) {
-  //       this.families.push(item);
-  //     } else {
-  //       console.log('duplicate detected');
-  //     }
-  //   }
+  familySort(array) {
+    for (const item of array) {
+      if (!this.sortedFamilies.includes(item.toLowerCase())) {
+        this.sortedFamilies.push(item.toLowerCase());
+      }
+    }
+    return this.sortedFamilies;
+  }
 
-  //   return this.families;
-  // }
-
+  familySelect(value) {
+    // LOAD ALL
+    if (value === 'all') {
+      this.sheetSub = this.allSheets$
+      .pipe(
+        map(
+          breedingSheet => breedingSheet
+          .filter(sheets => sheets.status === 'approved')
+        ),
+        tap(res => {
+          res.sort(this.compareFn);
+        })
+      )
+      .subscribe((res) => {
+        this.sortedSpecies = [];
+        res.forEach((value) => {
+          this.sortedSpecies.push(value);
+        });
+      });
+    } else {
+      // LOAD SELECTED
+      this.sheetSub = this.allSheets$
+      .pipe(
+        map(
+          breedingSheet => breedingSheet
+          .filter(sheets => sheets.status === 'approved')
+          .filter(sheet => sheet.family === value)
+        ),
+        tap(res => {
+          res.sort(this.compareFn);
+        })
+      )
+      .subscribe((res) => {
+        this.sortedSpecies = [];
+        res.forEach((value) => {
+          this.sortedSpecies.push(value);
+        });
+      });
+    }
+  }
 
   reloadBreedingSheets(): void {
     const sheets$ = this.breedingSheetsService.getAll();
-    this.allBreedingSheets$ = sheets$;
+    this.allSheets$ = sheets$;
+  }
+
+  compareFn = (a, b) => {
+    if (a.species < b.species) {
+      return -1;
+    }
+    if (a.species > b.species) {
+      return 1;
+    }
+    return 0;
   }
 
   ngOnDestroy() {
     this.sheetSub.unsubscribe();
+    this.familySub.unsubscribe();
+
   }
 
 }
