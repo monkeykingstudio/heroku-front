@@ -12,9 +12,10 @@
               <option *ngFor="let family of sortedFamilies" [value]="family">{{family}}</option>
             </select>
 
-            <select disabled style="max-width:120px" class="btn-select filter-select" id="family">
+            <select style="max-width:130px" (change)="subFamilySelect($event.target.value)" class="btn-select filter-select" id="family">
               <option value="" disabled selected>SUB-FAMILY</option>
-              <option *ngFor="let family of sortedFamilies" [value]="family">{{family}}</option>
+              <option value="all">all</option>
+              <option *ngFor="let subFamily of sortedSubFamilies" [value]="subFamily">{{subFamily}}</option>
             </select>
 
             <select disabled style="max-width:80px" class="btn-select filter-select" id="family">
