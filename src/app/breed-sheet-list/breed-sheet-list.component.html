@@ -2,55 +2,66 @@
   <div class="breedsheet-list-container  col-sm-12">
     <div id="breedingSheetRef" class="breedsheets row">
         <div class="col-sm-12">
-          <h6>Breeding Sheets <h7>({{sortedSpecies.length}})</h7></h6>
+          <h6>Breeding Sheets <h7>({{breedSheets.length}})</h7></h6>
 
           <div class="filters d-flex">
-            <span class="filter-title">Filter by:</span>
+          <div class="d-flex flex-column select-box">
+            <label for="family">Family</label>
             <select (change)="updateFamilyFilter($event.target.value)" class="btn-select filter-select" id="family">
               <option value="" disabled selected>FAMILY</option>
-              <option value="all">all</option>
+              <option selected value="all">all</option>
               <option *ngFor="let family of sortedFamilies" [value]="family">{{family}}</option>
             </select>
-
-            <select style="max-width:130px" (change)="subFamilySelect($event.target.value)" class="btn-select filter-select" id="family">
+          </div>
+          <div class="d-flex flex-column select-box">
+            <label for="subfamily">SUB-FAMILY</label>
+            <select (change)="updateSubFamilyFilter($event.target.value)" class="btn-select filter-select" id="subfamily">
               <option value="" disabled selected>SUB-FAMILY</option>
-              <option value="all">all</option>
+              <option selected value="all">all</option>
               <option *ngFor="let subFamily of sortedSubFamilies" [value]="subFamily">{{subFamily}}</option>
             </select>
-
-            <select disabled style="max-width:80px" class="btn-select filter-select" id="family">
+          </div>
+          <div class="d-flex flex-column select-box">
+            <label for="genre">GENRE</label>
+            <select (change)="updateGenreFilter($event.target.value)" class="btn-select filter-select" id="genre">
               <option value="" disabled selected>GENRE</option>
-              <option *ngFor="let family of sortedFamilies" [value]="family">{{family}}</option>
+              <option selected value="all">all</option>
+              <option *ngFor="let genre of sortedGenres" [value]="genre">{{genre}}</option>
             </select>
-
-            <select disabled style="max-width:75px" class="btn-select filter-select" id="family">
-              <option value="" disabled selected>TRIBU</option>
-              <option *ngFor="let family of sortedFamilies" [value]="family">{{family}}</option>
+          </div>
+          <div class="d-flex flex-column select-box">
+            <label for="tribe">TRIBE</label>
+            <select (change)="updateTribuFilter($event.target.value)" class="btn-select filter-select" id="tribe">
+              <option selected value="all">all</option>
+              <option *ngFor="let tribe of sortedTribus" [value]="tribe">{{tribe}}</option>
             </select>
-
-            <select disabled class="btn-select filter-select" id="family">
-              <option value="" disabled selected>DIFFICULTY</option>
-              <option *ngFor="let family of sortedFamilies" [value]="family">{{family}}</option>
+          </div>
+          <div class="d-flex flex-column select-box">
+            <label for="difficulty">DIFFICULTY</label>
+            <select (change)="updateDifficultyFilter($event.target.value)" style="min-width:100px" class="btn-select filter-select" id="difficulty">
+              <option selected value="all">all</option>
+              <option *ngFor="let difficulty of sortedDifficulties" [value]="difficulty">{{difficulty}}</option>
             </select>
-
-            <select disabled class="btn-select filter-select" id="family">
-              <option value="" disabled selected>REGION</option>
-              <option *ngFor="let family of sortedFamilies" [value]="family">{{family}}</option>
+          </div>
+          <div class="d-flex flex-column select-box">
+            <label for="region">REGION</label>
+            <select style="min-width:100px" disabled class="btn-select filter-select" id="region">
+              <option selected value="all">all</option>
+              <option *ngFor="let region of sortedRegions" [value]="region">{{region}}</option>
             </select>
+          </div>
 
           </div>
           <!-- <button (click)='sortFamilies()'>SORT!</button> -->
           <div class="row">
             <app-breed-card
             (breedingSheetChange)='reloadBreedingSheets()'
-            *ngFor="let breedingSheet of sortedSpecies; index as i"
+            *ngFor="let breedingSheet of breedSheets | alphabetical | approved; index as i"
             [breedingSheet]='breedingSheet'
             class="col-sm-12 col-md-4 col-lg-4">>
             </app-breed-card>
           </div>
         </div>
-
-
     </div>
   </div>
 </div>

@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, Pipe } from '@angular/core';
-import { of } from 'rxjs';
 import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { BreedingSheet } from '../models/breedingSheet.model';
@@ -15,10 +14,10 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   private allBreedingSheetsSubject: BehaviorSubject<any>;
   allSheets$: Observable<BreedingSheet[]>;
 
-  filters: string[] = ['all', 'all', 'all', 'all']; // Family, SubFamily, Genre, Tribu
+  filters: string[] = ['all', 'all', 'all', 'all', 'all', 'all']; // Family, SubFamily, Genre, Tribu, Difficulty, Region
 
   species: string[] = [];
-  sortedSpecies: Array<object> = [];
+  // sortedSpecies: Array<object> = [];
 
   allFamilies: string[] = [];
   sortedFamilies: string[] = [];
@@ -26,9 +25,25 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   allSubFamilies: string[] = [];
   sortedSubFamilies: string[] = [];
 
+  allGenres: string[] = [];
+  sortedGenres: string[] = [];
+
+  allTribus: string[] = [];
+  sortedTribus: string[] = [];
+
+  allDifficulties: number[] = [];
+  sortedDifficulties: number[] = [];
+
+  allRegions: string[] = [];
+  sortedRegions: string[] = [];
+
   private sheetSub: Subscription;
   private familySub: Subscription;
   private subFamilySub: Subscription;
+  private genreSub: Subscription;
+  private tribuSub: Subscription;
+  private difficultySub: Subscription;
+  private regionSub: Subscription;
 
   constructor(
     public breedingSheetsService: BreedingSheetsService
@@ -51,15 +66,12 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
       map(breedsheets => breedsheets
         .filter(sheets => sheets.status === 'approved')
         .map(sheet => sheet)
-      ),
-      tap(res => {
-        res.sort(this.compareFn);
-      })
+      )
     )
     .subscribe((res) => {
-      for (const item of res) {
-        this.sortedSpecies.push(item);
-      }
+      // for (const item of res) {
+      //   this.sortedSpecies.push(item);
+      // }
     });
 
     // Getting all families
@@ -97,6 +109,60 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
       }
       this.subFamilyStore(this.allSubFamilies);
     });
+
+    // Getting all genres
+    this.genreSub = this.allSheets$
+    .pipe(
+      map(breedsheets => breedsheets
+        .filter(sheets => sheets.status === 'approved')
+        .map(sheet => sheet.genre)
+      ),
+      tap(res => {
+        res.sort(this.compareFn);
+      })
+    )
+    .subscribe((res) => {
+      for (const item of res) {
+        this.allGenres.push(item);
+      }
+      this.genreStore(this.allGenres);
+    });
+
+    // Getting all tribus
+    this.tribuSub = this.allSheets$
+    .pipe(
+      map(breedsheets => breedsheets
+        .filter(sheets => sheets.status === 'approved')
+        .map(sheet => sheet.tribu)
+      ),
+      tap(res => {
+        res.sort(this.compareFn);
+      })
+    )
+    .subscribe((res) => {
+      for (const item of res) {
+        this.allTribus.push(item);
+      }
+      this.tribuStore(this.allTribus);
+    });
+
+    // Getting all difficulties
+    this.difficultySub = this.allSheets$
+    .pipe(
+      map(breedsheets => breedsheets
+        .filter(sheets => sheets.status === 'approved')
+        .map(sheet => sheet.difficulty)
+      ),
+      tap(res => {
+        res.sort(this.compareFn);
+      })
+    )
+    .subscribe((res) => {
+      for (const item of res) {
+        this.allDifficulties.push(item);
+      }
+      this.difficultyStore(this.allDifficulties);
+    });
   }
 
   // Store each unique occurences for re use in taxonomy filters
@@ -109,7 +175,6 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     }
     return this.sortedFamilies;
   }
-
   subFamilyStore(array) {
     for (const item of array) {
       if (!this.sortedSubFamilies.includes(item.toLowerCase())) {
@@ -118,6 +183,40 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
       }
     }
     return this.sortedFamilies;
+  }
+  genreStore(array) {
+    for (const item of array) {
+      if (!this.sortedGenres.includes(item.toLowerCase())) {
+        this.sortedGenres.push(item.toLowerCase());
+        this.sortedGenres.sort();
+      }
+    }
+    return this.sortedGenres;
+  }
+  tribuStore(array) {
+    for (const item of array) {
+      if (!this.sortedTribus.includes(item.toLowerCase())) {
+        this.sortedTribus.push(item.toLowerCase());
+        this.sortedTribus.sort();
+      }
+    }
+    return this.sortedTribus;
+  }
+  difficultyStore(array) {
+    for (const item of array) {
+      if (!this.sortedDifficulties.includes(item)) {
+        this.sortedDifficulties.push(item);
+        this.sortedDifficulties.sort();
+      }
+    }
+    return this.sortedDifficulties;
+  }
+
+  flattenRegions(array) {
+    for (const item of array) {
+      this.sortedRegions.push(item);
+    }
+    console.log('sorted regions: ',  this.sortedRegions);
   }
 
   // ############# \\
@@ -130,9 +229,33 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     console.log('spliced array filter: ', this.filters);
   }
 
-  filterSheets() {
-    console.log(this.filters);
+  updateSubFamilyFilter(subfamily) {
+    console.log('sub-family filter: ', subfamily);
+    this.filters.splice(1, 1, subfamily);
+    console.log('spliced array filter: ', this.filters);
   }
+
+  updateGenreFilter(genre) {
+    console.log('genre filter: ', genre);
+    this.filters.splice(2, 1, genre);
+    console.log('spliced array filter: ', this.filters);
+  }
+
+  updateTribuFilter(tribu) {
+    console.log('tribu filter: ', tribu);
+    this.filters.splice(3, 1, tribu);
+    console.log('spliced array filter: ', this.filters);
+  }
+
+  updateDifficultyFilter(difficulty) {
+    console.log('difficulty filter: ', difficulty);
+    this.filters.splice(4, 1, difficulty);
+    console.log('spliced array filter: ', this.filters);
+  }
+
+  // filterSheets() {
+  //   console.log(this.filters);
+  // }
 
   reloadBreedingSheets(): void {
     const sheets$ = this.breedingSheetsService.getAll();
