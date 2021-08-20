@@ -15,6 +15,8 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   private allBreedingSheetsSubject: BehaviorSubject<any>;
   allSheets$: Observable<BreedingSheet[]>;
 
+  filters: string[] = ['all', 'all', 'all', 'all']; // Family, SubFamily, Genre, Tribu
+
   species: string[] = [];
   sortedSpecies: Array<object> = [];
 
@@ -37,9 +39,13 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    // ################## \\
+    // # INITIALISATION # \\
+    // ################## \\
+
     this.reloadBreedingSheets();
 
-    // All breedingSheets
+    // Getting all breedingSheets
     this.sheetSub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
@@ -56,7 +62,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
       }
     });
 
-    // All families
+    // Getting all families
     this.familySub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
@@ -74,7 +80,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
       this.familyStore(this.allFamilies);
     });
 
-    // All sub-families
+    // Getting all sub-families
     this.subFamilySub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
@@ -93,6 +99,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Store each unique occurences for re use in taxonomy filters
   familyStore(array) {
     for (const item of array) {
       if (!this.sortedFamilies.includes(item.toLowerCase())) {
@@ -113,86 +120,18 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     return this.sortedFamilies;
   }
 
-  familySelect(value) {
-    // LOAD ALL
-    if (value === 'all') {
-      this.sheetSub = this.allSheets$
-      .pipe(
-        map(
-          breedingSheet => breedingSheet
-          .filter(sheets => sheets.status === 'approved')
-        ),
-        tap(res => {
-          res.sort(this.compareFn);
-        })
-      )
-      .subscribe((res) => {
-        this.sortedSpecies = [];
-        res.forEach((value) => {
-          this.sortedSpecies.push(value);
-        });
-      });
-    } else {
-      // LOAD SELECTED
-      this.sheetSub = this.allSheets$
-      .pipe(
-        map(
-          breedingSheet => breedingSheet
-          .filter(sheets => sheets.status === 'approved')
-          .filter(sheet => sheet.family === value)
-        ),
-        tap(res => {
-          res.sort(this.compareFn);
-        })
-      )
-      .subscribe((res) => {
-        this.sortedSpecies = [];
-        res.forEach((value) => {
-          this.sortedSpecies.push(value);
-        });
-      });
-    }
+  // ############# \\
+  // # FILTERING # \\
+  // ############# \\
+
+  updateFamilyFilter(family) {
+    console.log('family filter: ', family);
+    this.filters.splice(0, 1, family);
+    console.log('spliced array filter: ', this.filters);
   }
 
-  subFamilySelect(value) {
-    // LOAD ALL
-    if (value === 'all') {
-      this.sheetSub = this.allSheets$
-      .pipe(
-        map(
-          breedingSheet => breedingSheet
-          .filter(sheets => sheets.status === 'approved')
-        ),
-        tap(res => {
-          res.sort(this.compareFn);
-        })
-      )
-      .subscribe((res) => {
-        this.sortedSpecies = [];
-        res.forEach((value) => {
-          this.sortedSpecies.push(value);
-        });
-      });
-    } else {
-      // LOAD SELECTED
-      this.sheetSub = this.allSheets$
-      .pipe(
-        map(
-          breedingSheet => breedingSheet
-          .filter(sheets => sheets.status === 'approved')
-          .filter(sheet => sheet.subfamily === value)
-        ),
-        tap(res => {
-          res.sort(this.compareFn);
-        })
-      )
-      .subscribe((res) => {
-        this.sortedSpecies = [];
-        res.forEach((value) => {
-          this.sortedSpecies.push(value);
-        });
-      });
-    }
+  filterSheets() {
+    console.log(this.filters);
   }
 
   reloadBreedingSheets(): void {

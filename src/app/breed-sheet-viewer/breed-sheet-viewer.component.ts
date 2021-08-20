@@ -333,24 +333,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       });
       this.geographyPopupOpen = false;
     }
-
-
-    // if (
-    //   (this.geographyOne.value === this.geographyTwo.value
-    //     ||
-    //     this.geographyOne.value === this.geographyThree.value
-    //     ||
-    //     (this.geographyTwo.value === this.geographyThree.value && (this.geographyTwo.value !== null && this.geographyThree.value !== null))
-    //     )
-    //   ||
-    //   ((this.geographyTwo.value !== null && this.geographyThree.value !== null) && (this.geographyTwo.value === this.geographyThree.value))
-    //   )
-    //   {
-    //   this.errorGeography = true;
-
-    //   } else {
-
-    //   }
   }
 
   saveDiapause() {

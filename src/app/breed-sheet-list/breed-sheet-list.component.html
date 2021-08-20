@@ -6,7 +6,7 @@
 
           <div class="filters d-flex">
             <span class="filter-title">Filter by:</span>
-            <select (change)="familySelect($event.target.value)" class="btn-select filter-select" id="family">
+            <select (change)="updateFamilyFilter($event.target.value)" class="btn-select filter-select" id="family">
               <option value="" disabled selected>FAMILY</option>
               <option value="all">all</option>
               <option *ngFor="let family of sortedFamilies" [value]="family">{{family}}</option>
