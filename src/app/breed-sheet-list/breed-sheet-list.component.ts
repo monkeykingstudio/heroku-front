@@ -15,9 +15,9 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   allSheets$: Observable<BreedingSheet[]>;
 
   filters: string[] = ['all', 'all', 'all', 'all', 'all', 'all']; // Family, SubFamily, Genre, Tribu, Difficulty, Region
+  filteredSheets: BreedingSheet[];
 
   species: string[] = [];
-  // sortedSpecies: Array<object> = [];
 
   allFamilies: string[] = [];
   sortedFamilies: string[] = [];
@@ -37,7 +37,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   allRegions: string[] = [];
   sortedRegions: string[] = [];
 
-  private sheetSub: Subscription;
+  public sheetSub: Subscription;
   private familySub: Subscription;
   private subFamilySub: Subscription;
   private genreSub: Subscription;
@@ -49,7 +49,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     public breedingSheetsService: BreedingSheetsService
   ) {
     this.allBreedingSheetsSubject =  new BehaviorSubject<BreedingSheet[]>(null);
-    this.allSheets$ = this.allBreedingSheetsSubject.asObservable();
+    // this.allSheets$ = this.allBreedingSheetsSubject.asObservable();
   }
 
   ngOnInit(): void {
@@ -64,26 +64,18 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.sheetSub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
-        .filter(sheets => sheets.status === 'approved')
         .map(sheet => sheet)
       )
     )
-    .subscribe((res) => {
-      // for (const item of res) {
-      //   this.sortedSpecies.push(item);
-      // }
-    });
+    .subscribe();
 
     // Getting all families
     this.familySub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
-        .filter(sheets => sheets.status === 'approved')
+
         .map(sheet => sheet.family)
-      ),
-      tap(res => {
-        res.sort(this.compareFn);
-      })
+      )
     )
     .subscribe((res) => {
       for (const item of res) {
@@ -96,12 +88,8 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.subFamilySub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
-        .filter(sheets => sheets.status === 'approved')
         .map(sheet => sheet.subfamily)
-      ),
-      tap(res => {
-        res.sort(this.compareFn);
-      })
+      )
     )
     .subscribe((res) => {
       for (const item of res) {
@@ -114,12 +102,8 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.genreSub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
-        .filter(sheets => sheets.status === 'approved')
         .map(sheet => sheet.genre)
-      ),
-      tap(res => {
-        res.sort(this.compareFn);
-      })
+      )
     )
     .subscribe((res) => {
       for (const item of res) {
@@ -132,12 +116,8 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.tribuSub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
-        .filter(sheets => sheets.status === 'approved')
         .map(sheet => sheet.tribu)
-      ),
-      tap(res => {
-        res.sort(this.compareFn);
-      })
+      )
     )
     .subscribe((res) => {
       for (const item of res) {
@@ -150,12 +130,8 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.difficultySub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
-        .filter(sheets => sheets.status === 'approved')
         .map(sheet => sheet.difficulty)
-      ),
-      tap(res => {
-        res.sort(this.compareFn);
-      })
+      )
     )
     .subscribe((res) => {
       for (const item of res) {
@@ -168,7 +144,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   // Store each unique occurences for re use in taxonomy filters
   familyStore(array) {
     for (const item of array) {
-      if (!this.sortedFamilies.includes(item.toLowerCase())) {
+      if ((!this.sortedFamilies.includes(item)) && item !== undefined) {
         this.sortedFamilies.push(item.toLowerCase());
         this.sortedFamilies.sort();
       }
@@ -177,7 +153,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   }
   subFamilyStore(array) {
     for (const item of array) {
-      if (!this.sortedSubFamilies.includes(item.toLowerCase())) {
+      if ((!this.sortedSubFamilies.includes(item)) && item !== undefined) {
         this.sortedSubFamilies.push(item.toLowerCase());
         this.sortedSubFamilies.sort();
       }
@@ -186,7 +162,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   }
   genreStore(array) {
     for (const item of array) {
-      if (!this.sortedGenres.includes(item.toLowerCase())) {
+      if ((!this.sortedGenres.includes(item)) && item !== undefined) {
         this.sortedGenres.push(item.toLowerCase());
         this.sortedGenres.sort();
       }
@@ -195,7 +171,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   }
   tribuStore(array) {
     for (const item of array) {
-      if (!this.sortedTribus.includes(item.toLowerCase())) {
+      if ((!this.sortedTribus.includes(item)) && item !== undefined) {
         this.sortedTribus.push(item.toLowerCase());
         this.sortedTribus.sort();
       }
@@ -204,7 +180,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   }
   difficultyStore(array) {
     for (const item of array) {
-      if (!this.sortedDifficulties.includes(item)) {
+      if ((!this.sortedDifficulties.includes(item)) && item !== undefined) {
         this.sortedDifficulties.push(item);
         this.sortedDifficulties.sort();
       }
@@ -212,70 +188,58 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     return this.sortedDifficulties;
   }
 
-  flattenRegions(array) {
-    for (const item of array) {
-      this.sortedRegions.push(item);
-    }
-    console.log('sorted regions: ',  this.sortedRegions);
-  }
+  // flattenRegions(array) {
+  //   for (const item of array) {
+  //     this.sortedRegions.push(item);
+  //   }
+  //   console.log('sorted regions: ',  this.sortedRegions);
+  // }
 
   // ############# \\
   // # FILTERING # \\
   // ############# \\
 
   updateFamilyFilter(family) {
-    console.log('family filter: ', family);
     this.filters.splice(0, 1, family);
-    console.log('spliced array filter: ', this.filters);
+    this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
   }
 
   updateSubFamilyFilter(subfamily) {
-    console.log('sub-family filter: ', subfamily);
     this.filters.splice(1, 1, subfamily);
-    console.log('spliced array filter: ', this.filters);
+    this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
+
   }
 
   updateGenreFilter(genre) {
-    console.log('genre filter: ', genre);
     this.filters.splice(2, 1, genre);
-    console.log('spliced array filter: ', this.filters);
+    this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
+
   }
 
   updateTribuFilter(tribu) {
-    console.log('tribu filter: ', tribu);
     this.filters.splice(3, 1, tribu);
-    console.log('spliced array filter: ', this.filters);
+    this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
+
   }
 
   updateDifficultyFilter(difficulty) {
-    console.log('difficulty filter: ', difficulty);
     this.filters.splice(4, 1, difficulty);
-    console.log('spliced array filter: ', this.filters);
-  }
+    this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
 
-  // filterSheets() {
-  //   console.log(this.filters);
-  // }
+  }
 
   reloadBreedingSheets(): void {
     const sheets$ = this.breedingSheetsService.getAll();
     this.allSheets$ = sheets$;
   }
 
-  compareFn = (a, b) => {
-    if (a.species < b.species) {
-      return -1;
-    }
-    if (a.species > b.species) {
-      return 1;
-    }
-    return 0;
-  }
-
   ngOnDestroy() {
     this.sheetSub.unsubscribe();
     this.familySub.unsubscribe();
     this.subFamilySub.unsubscribe();
+    this.genreSub.unsubscribe();
+    this.tribuSub.unsubscribe();
+    this.difficultySub.unsubscribe();
   }
 
 }

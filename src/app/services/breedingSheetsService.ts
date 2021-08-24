@@ -19,16 +19,18 @@ export class BreedingSheetsService {
       shareReplay());
   }
 
-  getFiltered(family: string, subfamily: string, genre: string, tribu: string): Observable<BreedingSheet[]> {
-    return this.http.get<BreedingSheet[]>(`${this.breedingSheetsUrl}/filter`)
+  getFiltered(filterData: any[]): Observable<BreedingSheet[]> {
+    return this.http.get<BreedingSheet[]>(`${this.breedingSheetsUrl}/filter/search?family=${filterData[0]}&subfamily=${filterData[1]}&genre=${filterData[2]}&tribu=${filterData[3]}&difficulty=${filterData[4]}`)
     .pipe(
       map(filteredResult => filteredResult['breedingSheets']),
-      shareReplay());
+      shareReplay()
+    );
   }
 
   getSheet(species: string) {
-    return this.http.get<BreedingSheet>(`${this.breedingSheetsUrl}/${species}`).pipe(
-      map(result => result['sheet']),
+    return this.http.get<BreedingSheet>(`${this.breedingSheetsUrl}/${species}`)
+    .pipe(
+      map(result => result['sheet'])
     );
   }
 
