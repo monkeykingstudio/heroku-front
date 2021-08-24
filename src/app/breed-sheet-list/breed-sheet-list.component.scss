@@ -1,5 +1,18 @@
 @import '../../styles/global/mixins';
 
+.red-btn {
+  margin-top: 3rem!important;
+}
+
+.mobile-filter {
+  display: none;
+  @include breakpoint('small') {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 8rem;
+  }
+}
+
 .filters {
   @include breakpoint('large') {
     flex-wrap: wrap;
@@ -57,7 +70,7 @@ h7 {
 
 h6 {
   @include breakpoint('small') {
-    margin-top: 3rem;
+    margin-top: 2rem;
     margin-bottom: 0rem;
   }
 }

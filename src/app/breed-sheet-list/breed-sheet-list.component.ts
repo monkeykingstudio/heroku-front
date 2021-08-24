@@ -13,6 +13,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
 
   allSheets$: Observable<BreedingSheet[]>;
 
+  showFilter = true;
   filters: string[] = ['all', 'all', 'all', 'all', '0' , 'all']; // Family, SubFamily, Genre, Tribu, Difficulty, Region
   filteredSheets: BreedingSheet[];
 
@@ -55,6 +56,14 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     // ################## \\
     // # INITIALISATION # \\
     // ################## \\
+
+    if (window.screen.width <= 414) {
+      this.showFilter = false;
+    }
+
+    if (window.screen.width >= 415) {
+      this.showFilter = true;
+    }
 
     this.reloadBreedingSheets();
 
@@ -196,6 +205,10 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   // ############# \\
   // # FILTERING # \\
   // ############# \\
+
+  showFilters(): void {
+    this.showFilter = !this.showFilter;
+  }
 
   updateFamilyFilter(family) {
     this.filters.splice(0, 1, family);

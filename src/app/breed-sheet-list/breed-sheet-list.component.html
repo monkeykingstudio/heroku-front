@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-12">
-    <div class="filters d-flex">
+    <div *ngIf="showFilter === true" class="filters d-flex">
       <div class="d-flex flex-column select-box">
         <label for="family">Family</label>
         <select (change)="updateFamilyFilter($event.target.value)" class="btn-select filter-select" id="family">
@@ -46,6 +46,20 @@
           <option *ngFor="let region of sortedRegions" [value]="region">{{region}}</option>
         </select>
       </div>
+      <div class="d-flex flex-column select-box">
+        <label for="region">POLYGYNE</label>
+        <select style="min-width:100px" disabled class="btn-select filter-select" id="region">
+          <option selected value="all">all</option>
+          <option *ngFor="let region of sortedRegions" [value]="region">{{region}}</option>
+        </select>
+      </div>
+      <div class="d-flex flex-column select-box">
+        <label for="region">DIAPAUSE</label>
+        <select style="min-width:100px" disabled class="btn-select filter-select" id="region">
+          <option selected value="all">all</option>
+          <option *ngFor="let region of sortedRegions" [value]="region">{{region}}</option>
+        </select>
+      </div>
     </div>
   </div>
 </div>
@@ -53,8 +67,17 @@
   <div class="breedsheet-list-container  col-sm-12">
     <div id="breedingSheetRef" class="breedsheets row">
         <div *ngIf='(allSheets$ | async) as breedSheets; else loading' class="col-sm-12">
+          <button *ngIf="!showFilter" (click)="showFilters()" class="mobile-filter green-btn">SHOW FILTERS</button>
+          <button *ngIf="showFilter" (click)="showFilters()" class="mobile-filter red-btn">HIDE FILTERS</button>
+
           <h6>Breeding Sheets <h7>({{(breedSheets | approved).length}})</h7></h6>
           <div class="row">
+            <div *ngIf="(breedSheets | approved).length === 0">
+              <span>aucune fiche</span>
+
+
+
+            </div>
             <app-breed-card
             *ngFor="let breedingSheet of breedSheets | alphabetical | approved; index as i"
             [breedingSheet]='breedingSheet'
