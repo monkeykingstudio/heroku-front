@@ -11,10 +11,9 @@ import { BreedingSheetsService } from '../services/breedingSheetsService';
 })
 export class BreedSheetListComponent implements OnInit, OnDestroy {
 
-  private allBreedingSheetsSubject: BehaviorSubject<any>;
   allSheets$: Observable<BreedingSheet[]>;
 
-  filters: string[] = ['all', 'all', 'all', 'all', 'all', 'all']; // Family, SubFamily, Genre, Tribu, Difficulty, Region
+  filters: string[] = ['all', 'all', 'all', 'all', '0' , 'all']; // Family, SubFamily, Genre, Tribu, Difficulty, Region
   filteredSheets: BreedingSheet[];
 
   species: string[] = [];
@@ -48,8 +47,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   constructor(
     public breedingSheetsService: BreedingSheetsService
   ) {
-    this.allBreedingSheetsSubject =  new BehaviorSubject<BreedingSheet[]>(null);
-    // this.allSheets$ = this.allBreedingSheetsSubject.asObservable();
+
   }
 
   ngOnInit(): void {

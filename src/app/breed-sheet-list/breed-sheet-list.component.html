@@ -35,7 +35,7 @@
       <div class="d-flex flex-column select-box">
         <label for="difficulty">DIFFICULTY</label>
         <select (change)="updateDifficultyFilter($event.target.value)" style="min-width:100px" class="btn-select filter-select" id="difficulty">
-          <option selected value="all">all</option>
+          <option selected value='0'>all</option>
           <option *ngFor="let difficulty of sortedDifficulties" [value]="difficulty">{{difficulty}}</option>
         </select>
       </div>
