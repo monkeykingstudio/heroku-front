@@ -1,10 +1,43 @@
 @import '../../styles/global/mixins';
 
+.filters {
+  @include breakpoint('large') {
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  @include breakpoint('medium') {
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  @include breakpoint('small') {
+    margin-top: 6.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  align-items: center;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.select-box {
+  @include breakpoint('small') {
+    width: 100%;
+  }
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: .3rem;
+  text-transform: uppercase;
+}
+
 .filter-select {
   border: 0.2rem solid #333333 !important;
   border-radius: 0.5rem;
   font-size: 17px;
-  margin: 0 .5rem;
+  margin: 0 .5rem 0 0;
   &:disabled {
     border: .2rem solid grey!important;
     opacity: .6;
@@ -18,14 +51,13 @@
   }
 }
 
-
 h7 {
   color: #56ba0a;
 }
 
 h6 {
   @include breakpoint('small') {
-    margin-top: 6rem;
+    margin-top: 3rem;
     margin-bottom: 0rem;
   }
 }
@@ -45,16 +77,6 @@ h7 {
 .breedsheet-list-container {
   height: calc(100vh - 10rem);
 
-  .filters {
-    align-items: center;
-    @include breakpoint('small') {
-      flex-wrap: wrap;
-    }
-    span {
-      font-weight: bold;
-    }
-
-  }
 
   // .colony-popup {
   //   .checkboxes {
