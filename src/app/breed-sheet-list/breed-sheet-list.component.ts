@@ -14,7 +14,17 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   allSheets$: Observable<BreedingSheet[]>;
 
   showFilter = true;
-  filters: string[] = ['all', 'all', 'all', 'all', '0' , 'all']; // Family, SubFamily, Genre, Tribu, Difficulty, Region
+  filters: string[] = [ // Family, SubFamily, Genre, Tribu, Difficulty, Region, Polygyne, Diapause
+    'all',
+    'all',
+    'all',
+    'all',
+    '0',
+    'all',
+    'all',
+    'all'
+  ];
+
   filteredSheets: BreedingSheet[];
 
   species: string[] = [];
@@ -98,7 +108,6 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.reloadBreedingSheets();
 
     this.sortedRegions = this.regionList.sort();
-    console.log(this.sortedRegions);
 
     // Getting all breedingSheets
     this.sheetSub = this.allSheets$
@@ -266,6 +275,16 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
 
   updateRegionFilter(region) {
     this.filters.splice(5, 1, region);
+    this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
+  }
+
+  updatPolygyneFilter(polygyne) {
+    this.filters.splice(6, 1, polygyne);
+    this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
+  }
+
+  updateDiapauseFilter(diapause) {
+    this.filters.splice(7, 1, diapause);
     this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
   }
 

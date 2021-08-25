@@ -530,7 +530,7 @@
                 </div>
               </div>
               <div class="col-sm-12 details-cont">
-                <div style="min-height: 24rem;;height: 100%;" class="details">
+                <div style="min-height: 24rem;height: 100%;" class="details">
                   <div style="align-items: center;" class="head-card d-flex flex-column">
                   <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openCharacteristicsPopup()" class="pen-black-icon position-absolute"></i>
                     <i class="see-icon"></i>
@@ -539,8 +539,6 @@
 
                   <div *ngIf="sheet.characteristics" style="
                     display: flex;
-                    justify-content: flex-start;
-                    align-items: flex-start;
                     padding: 2rem;
                   " [innerHtml]="sheet.characteristics | safeHtml" class="body-card">
                   </div>
