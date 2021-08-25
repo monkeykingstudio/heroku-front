@@ -34,8 +34,38 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   allDifficulties: number[] = [];
   sortedDifficulties: number[] = [];
 
-  allRegions: string[] = [];
   sortedRegions: string[] = [];
+
+  regionList: Array<string> = [
+    'europa (tempered)',
+    'europa',
+    'europa (north)',
+    'europa (south)',
+    'europa (east)',
+    'europa (west)',
+    'asia',
+    'asia (north)',
+    'asia (south)',
+    'asia (east)',
+    'asia (west)',
+    'africa',
+    'africa (north)',
+    'africa (south)',
+    'africa (east)',
+    'africa (west)',
+    'india',
+    'india (north)',
+    'india (south)',
+    'india (east)',
+    'india (west)',
+    'america',
+    'america (north)',
+    'america (south)',
+    'america (east)',
+    'america (west)',
+    'australia',
+    'mediterranean basin',
+  ];
 
   public sheetSub: Subscription;
   private familySub: Subscription;
@@ -66,6 +96,9 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     }
 
     this.reloadBreedingSheets();
+
+    this.sortedRegions = this.regionList.sort();
+    console.log(this.sortedRegions);
 
     // Getting all breedingSheets
     this.sheetSub = this.allSheets$
@@ -195,13 +228,6 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     return this.sortedDifficulties;
   }
 
-  // flattenRegions(array) {
-  //   for (const item of array) {
-  //     this.sortedRegions.push(item);
-  //   }
-  //   console.log('sorted regions: ',  this.sortedRegions);
-  // }
-
   // ############# \\
   // # FILTERING # \\
   // ############# \\
@@ -236,7 +262,11 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   updateDifficultyFilter(difficulty) {
     this.filters.splice(4, 1, difficulty);
     this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
+  }
 
+  updateRegionFilter(region) {
+    this.filters.splice(5, 1, region);
+    this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
   }
 
   reloadBreedingSheets(): void {

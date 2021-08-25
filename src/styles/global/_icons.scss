@@ -1,3 +1,12 @@
+.no-record-icon {
+  display: flex;
+  background-image: url(../../app/icons/norecord.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 7rem;
+  height: 7rem;
+}
+
 .antban {
   background-image: url(../../assets/antban.png);
   // width: 12rem;

@@ -20,7 +20,7 @@ export class BreedingSheetsService {
   }
 
   getFiltered(filterData: any[]): Observable<BreedingSheet[]> {
-    return this.http.get<BreedingSheet[]>(`${this.breedingSheetsUrl}/filter/search?family=${filterData[0]}&subfamily=${filterData[1]}&genre=${filterData[2]}&tribu=${filterData[3]}&difficulty=${filterData[4]}`)
+    return this.http.get<BreedingSheet[]>(`${this.breedingSheetsUrl}/filter/search?family=${filterData[0]}&subfamily=${filterData[1]}&genre=${filterData[2]}&tribu=${filterData[3]}&difficulty=${filterData[4]}&region=${filterData[5]}`)
     .pipe(
       map(filteredResult => filteredResult['breedingSheets']),
       shareReplay()
