@@ -1,10 +1,10 @@
 
 <div [ngClass]="(backOutRight ? 'animate__backOutRight' : '') || (zoomOut ? 'animate__zoomOut' : '')" class="task-line animate__animated">
-  <div *ngIf="!task.toDo" class="checker">
-    <input type="checkbox" name="cb" id="cb1" /><label (click)='done()' for="cb1"></label>
+  <div *ngIf="task.toDo" class="checker">
+    <input type="checkbox" name="cb"/><label (click)='done()'></label>
   </div>
   <div class="data-container d-flex flex-column align-items-start">
-   <div [ngStyle]="!task.toDo ? {'border-left': '.2rem solid white'} : {'border-left': 'none'}" style="max-width: 100%;width:100%" class="d-flex flex-column data">
+  <div [ngStyle]="task.toDo ? {'border-left': '.2rem solid white'} : {'border-left': 'none'}" style="max-width: 100%;width:100%" class="d-flex flex-column data">
     <div style="overflow:hidden"class="d-flex flex-column">
       <span class="title">{{task.title}}</span>
       <span class="description">{{task.description !== '' ? task.description : 'no description provided'}}</span>
@@ -14,7 +14,7 @@
       <span class="duration"> <i class="clock-icon"></i>{{task.duration}} {{task.duration > 1 ? 'minutes' : 'minute'}}</span>
       <span (click)="switchRecurence()" *ngIf='task.recurent' class="recurent"><i class="recurent-icon"> </i>every {{task.every}}</span>
     </div>
-   </div>
+  </div>
   </div>
   <div class="actions">
     <div (click)='delete()' class="delete-trash">

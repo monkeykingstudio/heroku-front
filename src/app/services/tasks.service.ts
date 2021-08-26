@@ -38,7 +38,7 @@ export class TasksService {
   // }
 
   setTaskDone(id: string) {
-    return this.http.post<Task>(`${this.tasksUrl}/${id}`, {toDo: true})
+    return this.http.post<Task>(`${this.tasksUrl}/${id}`, {toDo: false})
     .pipe(
       shareReplay()
     );

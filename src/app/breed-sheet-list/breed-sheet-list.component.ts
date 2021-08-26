@@ -122,7 +122,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.familySub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
-
+        .filter(sheet => sheet.status === 'approved')
         .map(sheet => sheet.family)
       )
     )
@@ -137,6 +137,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.subFamilySub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
+        .filter(sheet => sheet.status === 'approved')
         .map(sheet => sheet.subfamily)
       )
     )
@@ -151,6 +152,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.genreSub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
+        .filter(sheet => sheet.status === 'approved')
         .map(sheet => sheet.genre)
       )
     )
@@ -165,6 +167,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.tribuSub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
+        .filter(sheet => sheet.status === 'approved')
         .map(sheet => sheet.tribu)
       )
     )
@@ -179,6 +182,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.difficultySub = this.allSheets$
     .pipe(
       map(breedsheets => breedsheets
+        .filter(sheet => sheet.status === 'approved')
         .map(sheet => sheet.difficulty)
       )
     )
@@ -253,19 +257,16 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   updateSubFamilyFilter(subfamily) {
     this.filters.splice(1, 1, subfamily);
     this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
-
   }
 
   updateGenreFilter(genre) {
     this.filters.splice(2, 1, genre);
     this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
-
   }
 
   updateTribuFilter(tribu) {
     this.filters.splice(3, 1, tribu);
     this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
-
   }
 
   updateDifficultyFilter(difficulty) {
