@@ -56,11 +56,11 @@ export class TaskListComponent implements OnInit, OnChanges {
     const tasks$ = this.tasksService.loadAllTasks(this.colonyId);
     this.toDoTasks$ = tasks$
     .pipe(
-      map(tasks => tasks.filter(task => task.toDo === false))
+      map(tasks => tasks.filter(task => task.toDo === true))
     );
     this.doneTasks$ = tasks$
     .pipe(
-      map(tasks => tasks.filter(task => task.toDo === true))
+      map(tasks => tasks.filter(task => task.toDo === false))
     );
     this.allTasks$ = tasks$;
   }

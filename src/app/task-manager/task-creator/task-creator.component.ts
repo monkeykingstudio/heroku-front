@@ -74,7 +74,7 @@ export class TaskCreatorComponent implements OnInit {
       recurent: formChanges.recurent,
       description: formChanges.description,
       every: formChanges.recurence !== null ? formChanges.recurence : null,
-      toDo: formChanges.toDo,
+      toDo: !formChanges.toDo,
 
     };
     return this.sub = this.tasksService.addTask(newTask)
