@@ -48,7 +48,7 @@
       </div>
       <div class="d-flex flex-column select-box">
         <label for="polygyne">POLYGYNE</label>
-        <select disabled (change)="updatePolygyneFilter($event.target.value)" style="min-width:100px" class="btn-select filter-select" id="polygyne">
+        <select (change)="updatePolygyneFilter($event.target.value)" style="min-width:100px" class="btn-select filter-select" id="polygyne">
           <option selected [ngValue]="">all</option>
           <option [ngValue]="true">yes</option>
           <option [ngValue]="false">no</option>
@@ -56,7 +56,7 @@
       </div>
       <div class="d-flex flex-column select-box">
         <label for="diapause">DIAPAUSE</label>
-        <select disabled (change)="updateDiapauseFilter($event.target.value)" style="min-width:100px" class="btn-select filter-select" id="diapause">
+        <select (change)="updateDiapauseFilter($event.target.value)" style="min-width:100px" class="btn-select filter-select" id="diapause">
           <option selected [ngValue]="">all</option>
           <option [ngValue]="true">yes</option>
           <option [ngValue]="false">no</option>

@@ -278,7 +278,7 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
     this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
   }
 
-  updatPolygyneFilter(polygyne) {
+  updatePolygyneFilter(polygyne) {
     this.filters.splice(6, 1, polygyne);
     this.allSheets$ = this.breedingSheetsService.getFiltered(this.filters);
   }
