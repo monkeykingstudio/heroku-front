@@ -3,8 +3,9 @@ export class Task {
   title: string;
   description: string;
   toDo: boolean;
-  automatic?: boolean;
   id?: string;
+  parentId?: string;
+  automatic?: boolean;
   duration?: number;
   recurent?: boolean;
   every?: string;

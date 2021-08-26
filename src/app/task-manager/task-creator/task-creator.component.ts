@@ -2,7 +2,6 @@ import { Component, Input, OnInit, Output, EventEmitter, OnDestroy } from '@angu
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Task } from './../../models/task.model';
 import { TasksService } from '../../services/tasks.service';
-import * as moment from 'moment';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -61,31 +60,12 @@ export class TaskCreatorComponent implements OnInit {
 
   get recurence() { return this.taskForm.controls['recurence']; }
 
-
-  // get day() { return this.taskForm.controls['day']; }
-  // get week() { return this.taskForm.controls['week']; }
-  // get midMonth() { return this.taskForm.controls['midMonth']; }
-  // get month() { return this.taskForm.controls['month']; }
-  // get year() { return this.taskForm.controls['year']; }
-
   ngOnInit(): void {
     this.prepareForm();
   }
 
   addTask() {
     const formChanges = this.taskForm.value;
-
-    // if (formChanges.day !== false) {
-    //   this.every = 'day';
-    // } else if (formChanges.week !== false) {
-    //   this.every = 'week';
-    // } else if (formChanges.midMonth !== false) {
-    //   this.every = '15 days';
-    // } else if (formChanges.month !== false) {
-    //   this.every = 'month';
-    // } else if (formChanges.year !== false) {
-    //   this.every = 'year';
-    // }
 
     const newTask = {
       colonyId: this.colonyId,
@@ -97,10 +77,13 @@ export class TaskCreatorComponent implements OnInit {
       toDo: formChanges.toDo,
 
     };
-    return this.sub = this.tasksService.addTask(newTask).subscribe(() => {
+    return this.sub = this.tasksService.addTask(newTask)
+    .subscribe(() => {
       this.changeMode();
       this.taskChanged.emit();
       this.prepareForm();
+
+      console.log('parent id is:');
     });
   }
 
@@ -112,11 +95,11 @@ export class TaskCreatorComponent implements OnInit {
       recurent: new FormControl(false),
       recurence: new FormControl(null),
       toDo: new FormControl(false),
-      day: new FormControl(false),
-      week: new FormControl(false),
-      midMonth: new FormControl(false),
-      month: new FormControl(false),
-      year: new FormControl(false)
+      // day: new FormControl(false),
+      // week: new FormControl(false),
+      // midMonth: new FormControl(false),
+      // month: new FormControl(false),
+      // year: new FormControl(false)
     });
   }
 
