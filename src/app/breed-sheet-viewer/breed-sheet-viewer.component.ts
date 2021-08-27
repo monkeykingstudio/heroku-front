@@ -490,9 +490,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     }
   }
 
-    // PREPARE FORMS \\
-  // ---------------- \\
-
   private prepareFood() {
     this.foodForm = new FormGroup({
       foodOne: new FormControl(),
@@ -697,10 +694,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   closePicturesPopup() {
     this.picturesPopupOpen = false;
     this.prepareGynePictures();
-  }
-
-  testData(data) {
-    console.log('my data:', data);
   }
 
   ngOnDestroy() {
