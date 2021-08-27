@@ -84,9 +84,20 @@
               <div *ngIf="gynePicturesPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
                 <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
 
-                  <img src="{{sheet?.gynePictures[i]}}" *ngFor="let gynePicture of sheet?.gynePictures; index as i">
-                    <!-- {{ sheet?.gynePictures[i] }} -->
+                  <form class="form-group options-popup" [formGroup]="gynePicturesForm" (ngSubmit)='saveGynePictures()'>
+                    <h6>Edit Gyne Pictures</h6>
 
+                    <div class="d-flex flex-column">
+
+                      <input *ngFor="let gynePicture of sheet?.gynePictures; index as i" [value]="sheet?.gynePictures[i]" type="text">
+
+                    </div>
+                    <button type="submit" class='green-btn mt-4'>SAVE</button>
+
+                  </form>
+                  <button type="button" class='close-popup' (click)="closeGynePicturesPopup(); $event.stopPropagation()">
+                    <i class="close-icon"></i>
+                  </button>
 
                 </div>
               </div>

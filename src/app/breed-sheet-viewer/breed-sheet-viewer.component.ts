@@ -51,7 +51,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   morphismPopupOpen = false;
   characteristicsPopupOpen = false;
   gynePicturesPopupOpen = false;
-
+  picturesPopupOpen = false;
 
   errorFood = false;
   errorDiapause = false;
@@ -192,8 +192,14 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   get characteristics() { return this.characteristicsForm.controls['characteristics']; }
 
   get gynePicturesControls() { return this.gynePicturesForm.controls; }
+  get gynePictureOne() { return this.gynePicturesForm.controls['gynePictureOne']; }
+  get gynePictureTwo() { return this.gynePicturesForm.controls['gynePictureTwo']; }
+  get gynePictureThree() { return this.gynePicturesForm.controls['gynePictureThree']; }
 
-
+  get picturesControls() { return this.picturesForm.controls; }
+  get pictureOne() { return this.picturesForm.controls['pictureOne']; }
+  get pictureTwo() { return this.picturesForm.controls['pictureTwo']; }
+  get pictureThree() { return this.picturesForm.controls['pictureThree']; }
 
   constructor(
     public breedingSheetsService: BreedingSheetsService,
@@ -226,6 +232,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     this.prepareMorphism();
     this.prepareCharacteristics();
     this.prepareGynePictures();
+    this.preparePictures();
   }
 
   reloadSheet() {
@@ -435,6 +442,57 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       });
   }
 
+  saveGynePictures() {
+    if (
+      (this.gynePictureOne.value === this.gynePictureTwo.value) && (this.gynePictureTwo.value !== null)
+      ||
+      (this.gynePictureTwo.value === this.gynePictureThree.value) && (this.gynePictureThree.value !== null)
+      ||
+      (this.gynePictureThree.value === this.gynePictureOne.value) && (this.gynePictureOne.value !== null)
+      ) {
+      // this.errorGeography = true;
+    } else {
+      const gynePictures = [
+        this.gynePictureOne.value,
+        this.gynePictureTwo?.value,
+        this.gynePictureThree?.value
+      ];
+      this.breedingSheetsService.updateGynePictures(this.breedSheet?.id, gynePictures)
+      .subscribe(() => {
+        this.reloadSheet();
+        this.loadSheet(this.breedSheet.species);
+      });
+      this.gynePicturesPopupOpen = false;
+    }
+  }
+
+  savePictures() {
+    if (
+      (this.pictureOne.value === this.pictureTwo.value) && (this.pictureTwo.value !== null)
+      ||
+      (this.pictureTwo.value === this.pictureThree.value) && (this.pictureThree.value !== null)
+      ||
+      (this.pictureThree.value === this.pictureOne.value) && (this.pictureOne.value !== null)
+      ) {
+      // this.errorGeography = true;
+    } else {
+      const gynePictures = [
+        this.gynePictureOne.value,
+        this.gynePictureTwo?.value,
+        this.gynePictureThree?.value
+      ];
+      this.breedingSheetsService.updateGynePictures(this.breedSheet?.id, gynePictures)
+      .subscribe(() => {
+        this.reloadSheet();
+        this.loadSheet(this.breedSheet.species);
+      });
+      this.gynePicturesPopupOpen = false;
+    }
+  }
+
+    // PREPARE FORMS \\
+  // ---------------- \\
+
   private prepareFood() {
     this.foodForm = new FormGroup({
       foodOne: new FormControl(),
@@ -536,6 +594,17 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   private prepareGynePictures() {
     this.gynePicturesForm = new FormGroup({
+      gynePictureOne: new FormControl(),
+      gynePictureTwo: new FormControl(),
+      gynePictureThree: new FormControl()
+    });
+  }
+
+  private preparePictures() {
+    this.picturesForm = new FormGroup({
+      gynePictureOne: new FormControl(),
+      gynePictureTwo: new FormControl(),
+      gynePictureThree: new FormControl()
     });
   }
 
@@ -619,6 +688,19 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   closeGynePicturesPopup() {
     this.gynePicturesPopupOpen = false;
     this.prepareGynePictures();
+  }
+
+  openPicturesPopup() {
+    this.picturesPopupOpen = true;
+  }
+
+  closePicturesPopup() {
+    this.picturesPopupOpen = false;
+    this.prepareGynePictures();
+  }
+
+  testData(data) {
+    console.log('my data:', data);
   }
 
   ngOnDestroy() {
