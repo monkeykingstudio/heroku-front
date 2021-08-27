@@ -65,6 +65,7 @@ export class TaskListComponent implements OnInit, OnChanges {
     this.allTasks$ = tasks$;
   }
 
+
   changeMode() {
     return this.tasksService.switchMode();
     if (!this.showToDo) {
