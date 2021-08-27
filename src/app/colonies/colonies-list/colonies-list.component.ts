@@ -173,6 +173,7 @@ export class ColoniesListComponent implements OnInit,  OnDestroy {
     this.switch = !this.switch;
   }
 
+
   resetPopup() {
     this.colonyForm.reset();
     this.colonyForm.patchValue({name: ''});
