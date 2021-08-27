@@ -112,7 +112,7 @@ export class ColoniesListComponent implements OnInit,  OnDestroy {
     const formChanges = this.colonyForm.value;
 
     if (!formChanges.datePicker) {
-      this.creationDate = (new Date()).format(this.DATE_RFC2822);
+      this.creationDate = moment(new Date()).format(this.DATE_RFC2822);
     } else {
       this.creationDate = moment(new Date(`
       ${formChanges.datePicker.month}-
