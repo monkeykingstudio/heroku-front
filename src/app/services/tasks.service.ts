@@ -26,7 +26,7 @@ export class TasksService {
     return this.http.post<Task>(this.tasksUrl, task)
     .pipe(
       shareReplay()
-    );
+    )
   }
 
   deleteTask(id: string) {
