@@ -1,7 +1,7 @@
 <div class='task-list' *ngIf='(currentMode && allTasks$ | async) as tasks '>
   <div class="head justify-content-between">
     <div class="d-flex">
-      <button [ngClass]="expanded ? 'orange-btn' : 'blue-btn'" (click)='expandList()' *ngIf='tasks.length > 4' style='max-width:12rem' class="align-self-end  mr-2" type="button">
+      <button [ngClass]="expanded ? 'orange-btn' : 'blue-btn'" (click)='expandList()' *ngIf='tasks.length > 4' style='max-width:12rem;margin-right: 1rem;' class="align-self-end  mr-2" type="button">
         {{!expanded ? 'expand list' : 'reduce list'}}
       </button>
       <div class="toggle-task">
@@ -35,6 +35,7 @@
     </div>
   </div>
 
+
   <div
   *ngIf='!showToDo && (currentMode && doneTasks$ | async) as doneTasks'
   [ngClass]="expanded ? 'expanded' : '' "
@@ -48,6 +49,7 @@
     <div class="d-flex flex-column">
       <app-task
       (taskDeleted)='$deleted($event)'
+      (taskRecurence)='$recurence($event)'
       [task]='doneTasks[i]'
       *ngFor="let doneTask of doneTasks; index as i">
       </app-task>
