@@ -493,11 +493,8 @@
                       <b *ngIf="sheet.majorSize !== null">{{sheet?.polymorphism ? sheet?.majorSize + 'mm' : '' }}</b>
                       <b *ngIf="sheet.majorSize === null">{{sheet?.polymorphism ? 'unknown' : '' }}</b></span>
                     <span class="card-title">{{ sheet?.maleSize ? 'Male size' : ''}} <b>{{ sheet?.maleSize ? sheet?.maleSize + 'mm' : ''}}</b></span>
-
                     <span class="card-title mt-3">Gyne's life expectancy can reach <b>{{sheet?.gyneLives}} years</b></span>
-
                     <span class="card-title">and the workers can live about  <b>{{sheet?.workerLives}} years</b></span>
-
                   </div>
                   <div *ngIf="morphismPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
                     <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
@@ -634,15 +631,71 @@
               </div>
             </div>
             <div *ngIf="sheet.pictures.length > 0" class="picture-container">
-              <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openGynePicturesPopup()" class="pen-black-icon pen-black-icon-big position-absolute"></i>
-
+              <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openPicturesPopup()" class="pen-black-icon pen-black-icon-big position-absolute"></i>
               <div [ngStyle]="{'background-image': 'url('+ actualPicture + ')'}" class="picture"></div>
+              <div *ngIf="picturesPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
+                <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+
+                  <form style="justify-content: flex-start;" class="form-group options-popup" [formGroup]="picturesForm" (ngSubmit)='savePictures()'>
+                    <h6>Edit pictures</h6>
+
+                    <div class="d-flex flex-column">
+                      <label>Picture one</label>
+                      <div class="d-flex align-items-center input-picture">
+                        <input style="
+                        line-height: 50px;
+                        font-style: italic;
+                        font-size: 1.4rem;
+                        font-weight: bold;
+                        color: #484848;
+                      " class="w-100" formControlName="pictureOne" [(ngModel)]="sheet?.pictures[0]" ([value])="sheet?.pictures[0]" type="text">
+                        <img src="{{pictureOne.value ? pictureOne.value : '../../../../assets/no-pictures.png'}}">
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-column">
+                      <label>Picture two</label>
+                      <div class="d-flex align-items-center input-picture">
+                        <input style="
+                            line-height: 50px;
+                            font-style: italic;
+                            font-size: 1.4rem;
+                            font-weight: bold;
+                            color: #484848;
+                        " class="w-100" formControlName="pictureTwo" [(ngModel)]="sheet?.pictures[1]" ([value])="sheet?.pictures[1]" type="text">
+                        <img src="{{pictureTwo.value ? pictureTwo.value : '../../../../assets/no-pictures.png'}}">
+                      </div>
+                    </div>
+
+                    <div style="flex-grow:1" class="d-flex flex-column">
+                      <label>Picture three</label>
+                      <div class="d-flex align-items-center input-picture">
+                        <input style="
+                        line-height: 50px;
+                        font-style: italic;
+                        font-size: 1.4rem;
+                        font-weight: bold;
+                        color: #484848;
+                      " class="flex-grow-1" formControlName="pictureThree" [(ngModel)]="sheet?.pictures[2]" ([value])="sheet?.pictures[2]" type="text">
+                        <img src="{{pictureThree.value ? pictureThree.value : '../../../../assets/no-pictures.png'}}">
+                      </div>
+                    </div>
+                    <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf="errorPictures">
+                      You can't select same pictures
+                    </span>
+                    <button type="submit" class='green-btn mt-4'>SAVE</button>
+
+                  </form>
+                  <button type="button" class='close-popup' (click)="closePicturesPopup(); $event.stopPropagation()">
+                    <i class="close-icon"></i>
+                  </button>
+
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
 </div>

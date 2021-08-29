@@ -60,6 +60,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   errorMorphism = false;
   errorCharacteristics = false;
   errorGynePictures = false;
+  errorPictures = false;
 
   geographyList: Array<object> = [
     {id: 28, valeur: ''},
@@ -450,8 +451,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     } else {
       const gynePictures = [
         this.gynePictureOne.value,
-        this.gynePictureTwo?.value,
-        this.gynePictureThree?.value
+        this.gynePictureTwo?.value !== '' ? this.gynePictureTwo?.value : this.gynePictureOne.value,
+        this.gynePictureThree?.value !== '' ? this.gynePictureThree?.value : this.gynePictureOne.value
       ];
       this.breedingSheetsService.updateGynePictures(this.breedSheet?.id, gynePictures)
       .subscribe(() => {
@@ -470,19 +471,19 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       ||
       (this.pictureThree.value === this.pictureOne.value) && (this.pictureOne.value !== null)
       ) {
-      // this.errorGeography = true;
+        this.errorPictures = true;
     } else {
-      const gynePictures = [
-        this.gynePictureOne.value,
-        this.gynePictureTwo?.value,
-        this.gynePictureThree?.value
+      const pictures = [
+        this.pictureOne.value,
+        this.pictureTwo?.value !== '' ? this.pictureTwo?.value : this.pictureOne.value,
+        this.pictureThree?.value !== '' ? this.pictureThree?.value : this.pictureOne.value
       ];
-      this.breedingSheetsService.updateGynePictures(this.breedSheet?.id, gynePictures)
+      this.breedingSheetsService.updatePictures(this.breedSheet?.id, pictures)
       .subscribe(() => {
         this.reloadSheet();
         this.loadSheet(this.breedSheet.species);
       });
-      this.gynePicturesPopupOpen = false;
+      this.picturesPopupOpen = false;
     }
   }
 
@@ -687,7 +688,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   closePicturesPopup() {
     this.picturesPopupOpen = false;
-    this.prepareGynePictures();
+    this.preparePictures();
   }
 
   ngOnDestroy() {
