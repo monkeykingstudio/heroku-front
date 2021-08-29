@@ -5,7 +5,6 @@ import { BreedingSheet } from './../models/breedingSheet.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map } from 'rxjs/operators';
-// import { PopupService } from '../services/popup.service';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
 
@@ -27,7 +26,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   characteristicsForm: FormGroup;
   gynePicturesForm: FormGroup;
   picturesForm: FormGroup;
-
 
   breedingSheet$: Observable<BreedingSheet>;
   private sheetId: string;

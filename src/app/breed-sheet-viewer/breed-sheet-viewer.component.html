@@ -82,7 +82,7 @@
 
               <div [ngStyle]="{'background-image': 'url('+ actualGynePicture + ')'}" class="picture"></div>
               <div *ngIf="gynePicturesPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
-                <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                <div class="popup animate__animated animate__zoomInDown  animate__delay-05s">
 
                   <form style="justify-content: flex-start;" class="form-group options-popup" [formGroup]="gynePicturesForm" (ngSubmit)='saveGynePictures()'>
                     <h6>Edit Gyne Pictures</h6>
@@ -165,7 +165,7 @@
                     </div>
                   </div>
                 <div *ngIf="foodPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
-                  <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                  <div class="popup animate__animated animate__zoomInDown  animate__delay-05s">
                     <h6>Edit food types</h6>
                     <form class="form-group options-popup" [formGroup]="foodForm" (ngSubmit)='saveFood()'>
                       <div class="d-flex flex-column">
@@ -238,7 +238,7 @@
                     </div>
                   </div>
                   <div *ngIf="diapausePopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
-                    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                    <div class="popup animate__animated animate__zoomInDown  animate__delay-05s">
                       <h6>Edit diapause</h6>
                       <form class="form-group options-popup" [formGroup]="diapauseForm" (ngSubmit)='saveDiapause()'>
 
@@ -331,7 +331,7 @@
                       {{ region }}
                     </span>
                     <div *ngIf="geographyPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
-                      <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                      <div class="popup animate__animated animate__zoomInDown  animate__delay-05s">
                         <h6>Edit geography</h6>
                         <form class="form-group options-popup" [formGroup]="geographyForm" (ngSubmit)='saveGeography()'>
                           <div class="d-flex flex-column">
@@ -395,7 +395,7 @@
                     </div>
                   </div>
                   <div *ngIf="behaviorPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
-                    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                    <div class="popup animate__animated animate__zoomInDown  animate__delay-05s">
                       <h6>Edit behaviors</h6>
                       <form class="form-group options-popup" [formGroup]="behaviorForm" (ngSubmit)='saveBehavior()'>
                         <div style="justify-content: space-around;height:100%" class="d-flex flex-column">
@@ -497,7 +497,7 @@
                     <span class="card-title">and the workers can live about  <b>{{sheet?.workerLives}} years</b></span>
                   </div>
                   <div *ngIf="morphismPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
-                    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                    <div class="popup animate__animated animate__zoomInDown  animate__delay-05s">
                       <h6 class="fix-h6">Edit morphism & metabolism</h6>
                       <form class="form-group options-popup" [formGroup]="morphismForm" (ngSubmit)='saveMorphism()'>
                         <div class="form-row">
@@ -590,7 +590,7 @@
                   " [innerHtml]="sheet.characteristics | safeHtml" class="body-card">
                   </div>
                   <div *ngIf="characteristicsPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
-                    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                    <div class="popup animate__animated animate__zoomInDown  animate__delay-05s">
                       <h6>Edit characteristics</h6>
                       <form class="form-group options-popup" [formGroup]="characteristicsForm" (ngSubmit)='saveCharacteristics()'>
                         <div class="d-flex flex-column">
@@ -634,7 +634,7 @@
               <i *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openPicturesPopup()" class="pen-black-icon pen-black-icon-big position-absolute"></i>
               <div [ngStyle]="{'background-image': 'url('+ actualPicture + ')'}" class="picture"></div>
               <div *ngIf="picturesPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
-                <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+                <div class="popup animate__animated animate__zoomInDown  animate__delay-05s">
 
                   <form style="justify-content: flex-start;" class="form-group options-popup" [formGroup]="picturesForm" (ngSubmit)='savePictures()'>
                     <h6>Edit pictures</h6>
