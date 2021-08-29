@@ -84,14 +84,53 @@
               <div *ngIf="gynePicturesPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
                 <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
 
-                  <form class="form-group options-popup" [formGroup]="gynePicturesForm" (ngSubmit)='saveGynePictures()'>
+                  <form style="justify-content: flex-start;" class="form-group options-popup" [formGroup]="gynePicturesForm" (ngSubmit)='saveGynePictures()'>
                     <h6>Edit Gyne Pictures</h6>
 
                     <div class="d-flex flex-column">
-
-                      <input *ngFor="let gynePicture of sheet?.gynePictures; index as i" [value]="sheet?.gynePictures[i]" type="text">
-
+                      <label>Picture one</label>
+                      <div class="d-flex align-items-center input-picture">
+                        <input style="
+                        line-height: 50px;
+                        font-style: italic;
+                        font-size: 1.4rem;
+                        font-weight: bold;
+                        color: #484848;
+                      " class="w-100" formControlName="gynePictureOne" [(ngModel)]="sheet?.gynePictures[0]" ([value])="sheet?.gynePictures[0]" type="text">
+                        <img src="{{gynePictureOne.value ? gynePictureOne.value : '../../../../assets/no-pictures.png'}}">
+                      </div>
                     </div>
+
+                    <div class="d-flex flex-column">
+                      <label>Picture two</label>
+                      <div class="d-flex align-items-center input-picture">
+                        <input style="
+                            line-height: 50px;
+                            font-style: italic;
+                            font-size: 1.4rem;
+                            font-weight: bold;
+                            color: #484848;
+                        " class="w-100" formControlName="gynePictureTwo" [(ngModel)]="sheet?.gynePictures[1]" ([value])="sheet?.gynePictures[1]" type="text">
+                        <img src="{{gynePictureTwo.value ? gynePictureTwo.value : '../../../../assets/no-pictures.png'}}">
+                      </div>
+                    </div>
+
+                    <div style="flex-grow:1" class="d-flex flex-column">
+                      <label>Picture three</label>
+                      <div class="d-flex align-items-center input-picture">
+                        <input style="
+                        line-height: 50px;
+                        font-style: italic;
+                        font-size: 1.4rem;
+                        font-weight: bold;
+                        color: #484848;
+                      " class="flex-grow-1" formControlName="gynePictureThree" [(ngModel)]="sheet?.gynePictures[2]" ([value])="sheet?.gynePictures[2]" type="text">
+                        <img src="{{gynePictureThree.value ? gynePictureThree.value : '../../../../assets/no-pictures.png'}}">
+                      </div>
+                    </div>
+                    <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf="errorGynePictures">
+                      You can't select same pictures
+                    </span>
                     <button type="submit" class='green-btn mt-4'>SAVE</button>
 
                   </form>
@@ -515,14 +554,14 @@
 
                           <div class="col-6">
                             <div class="d-flex flex-column form-group">
-                              <label style="display: block" for="">Gyne lives</label>
+                              <label style="display: block" for="">Gyne lives <span class="unit">(years)</span></label>
                               <div class="flex-row align-items-center">
                                 <input [(ngModel)]="sheet.gyneLives" class="form-control" type="number" formControlName="gyneLives" />
                               </div>
                           </div>
                         </div><div class="col-6">
                           <div class="d-flex flex-column form-group">
-                            <label style="display: block" for="">Worker lives</label>
+                            <label style="display: block" for="">Worker lives <span class="unit">(years)</span></label>
                             <div class="flex-row align-items-center">
                               <input [(ngModel)]="sheet.workerLives" class="form-control" type="number" formControlName="workerLives" />
                             </div>

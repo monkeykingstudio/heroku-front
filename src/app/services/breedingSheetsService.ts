@@ -66,15 +66,16 @@ export class BreedingSheetsService {
     );
   }
 
+  updateCharacteristics(id: string, characteristics: any): Observable<BreedingSheet> {
+    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upchara/${id}`, {characteristics});
+  }
+
   updateGynePictures(id: string, gynePictures: any) {
     return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/gynepictures/${id}`, {gynePictures});
   }
+
   updatePictures(id: string, pictures: any) {
     return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/pictures/${id}`, {pictures});
-  }
-
-  updateCharacteristics(id: string, characteristics: any): Observable<BreedingSheet> {
-    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/upchara/${id}`, {characteristics});
   }
 
   getSheetById(id: string) {

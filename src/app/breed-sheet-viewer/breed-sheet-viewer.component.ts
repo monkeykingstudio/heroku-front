@@ -59,6 +59,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   errorBehavior = false;
   errorMorphism = false;
   errorCharacteristics = false;
+  errorGynePictures = false;
 
   geographyList: Array<object> = [
     {id: 28, valeur: ''},
@@ -263,7 +264,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   switchGynePicture() {
     this.actualGynePicture = this.gynePictures[0];
     this.interval = setInterval(() => {
-      console.log(this.actualGynePicture);
       this.changeGyneCounter++;
       if (this.changeGyneCounter > this.gynePictures.length - 1) {
         this.changeGyneCounter = 0;
@@ -275,7 +275,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   switchPicture() {
     this.actualPicture = this.pictures[0];
     this.interval = setInterval(() => {
-      console.log(this.actualPicture);
       this.changeCounter++;
       if (this.changeCounter > this.pictures.length - 1) {
         this.changeCounter = 0;
@@ -355,7 +354,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     this.breedingSheetsService.updateDiapause(this.breedSheet?.id, needs, temperatures, months)
     .subscribe(data => {
       const res: any = data;
-      console.log('res', res);
       this.reloadSheet();
       this.loadSheet(this.breedSheet.species);
     },
@@ -374,8 +372,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     const claustral = this.clausSwitch;
     const driller = this.drillSwitch;
     const drinker = this.drinkSwitch;
-
-    console.log(polyGyne, claustral, driller, drinker);
 
     this.breedingSheetsService.updateBehavior(this.breedSheet?.id, polyGyne, claustral, driller, drinker)
     .subscribe(data => {
@@ -450,7 +446,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       ||
       (this.gynePictureThree.value === this.gynePictureOne.value) && (this.gynePictureOne.value !== null)
       ) {
-      // this.errorGeography = true;
+      this.errorGynePictures = true;
     } else {
       const gynePictures = [
         this.gynePictureOne.value,
@@ -488,36 +484,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       });
       this.gynePicturesPopupOpen = false;
     }
-  }
-
-  private prepareFood() {
-    this.foodForm = new FormGroup({
-      foodOne: new FormControl(),
-      foodTwo: new FormControl(),
-      foodThree: new FormControl()
-    });
-  }
-
-  private prepareDiapause() {
-    this.diapauseForm = new FormGroup({
-      needdiapause: new FormControl(this.breedSheet?.needDiapause),
-      diapauseTemperatureStart: new FormControl(),
-      diapauseTemperatureEnd: new FormControl(),
-      diapauseStart: new FormControl(),
-      diapauseEnd: new FormControl()
-    });
-  }
-
-  private prepareMorphism() {
-    this.morphismForm = new FormGroup({
-      polyMorphism: new FormControl(this.breedSheet?.polymorphism),
-      gyneSize: new FormControl(this.breedSheet?.gyneSize),
-      maleSize: new FormControl(this.breedSheet?.maleSize),
-      workerSize: new FormControl(this.breedSheet?.workerSize),
-      majorSize: new FormControl(this.breedSheet?.majorSize),
-      gyneLives: new FormControl(this.breedSheet?.gyneLives),
-      workerLives: new FormControl(this.breedSheet?.workerLives)
-    });
   }
 
   public diapauseSwitch() {
@@ -564,6 +530,36 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     this.drinkSwitch = !this.breedSheet?.drinker;
   }
 
+  private prepareFood() {
+    this.foodForm = new FormGroup({
+      foodOne: new FormControl(),
+      foodTwo: new FormControl(),
+      foodThree: new FormControl()
+    });
+  }
+
+  private prepareDiapause() {
+    this.diapauseForm = new FormGroup({
+      needdiapause: new FormControl(this.breedSheet?.needDiapause),
+      diapauseTemperatureStart: new FormControl(),
+      diapauseTemperatureEnd: new FormControl(),
+      diapauseStart: new FormControl(),
+      diapauseEnd: new FormControl()
+    });
+  }
+
+  private prepareMorphism() {
+    this.morphismForm = new FormGroup({
+      polyMorphism: new FormControl(this.breedSheet?.polymorphism),
+      gyneSize: new FormControl(this.breedSheet?.gyneSize),
+      maleSize: new FormControl(this.breedSheet?.maleSize),
+      workerSize: new FormControl(this.breedSheet?.workerSize),
+      majorSize: new FormControl(this.breedSheet?.majorSize),
+      gyneLives: new FormControl(this.breedSheet?.gyneLives),
+      workerLives: new FormControl(this.breedSheet?.workerLives)
+    });
+  }
+
   private prepareGeography() {
     this.geographyForm = new FormGroup({
       geographyOne: new FormControl(),
@@ -579,14 +575,12 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       driller: new FormControl(this.breedSheet?.driller),
       drinker: new FormControl(this.breedSheet?.drinker),
     });
-    console.log(this.behaviorForm);
   }
 
   private prepareCharacteristics() {
     this.characteristicsForm = new FormGroup({
       characteristics: new FormControl(this.breedSheet?.characteristics),
     });
-    console.log(this.characteristicsForm);
   }
 
   private prepareGynePictures() {
@@ -599,9 +593,9 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   private preparePictures() {
     this.picturesForm = new FormGroup({
-      gynePictureOne: new FormControl(),
-      gynePictureTwo: new FormControl(),
-      gynePictureThree: new FormControl()
+      pictureOne: new FormControl(),
+      pictureTwo: new FormControl(),
+      pictureThree: new FormControl()
     });
   }
 

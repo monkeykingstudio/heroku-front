@@ -5,7 +5,7 @@
           <h6>My colonies</h6>
         </div>
         <div class="row m-0 w-100">
-          <div (click)="openPopup('addColony')" class="d-flex col-container col-sm-12 col-md-4 col-lg-2">
+          <div (click)="openPopup('addColony')" class="d-flex col-container col-sm-12 col-md-4 col-lg-3">
             <div class="empty-colony-card">
               <i class="add-icon"></i>
             </div>
@@ -25,7 +25,7 @@
           (colonyChange)='reloadColonies()'
           *ngFor="let colony of colonies; index as i"
           [colony]='colony'
-          class="col-sm-12 col-md-4 col-lg-2">
+          class="col-sm-12 col-md-4 col-lg-3">
         </app-colony-card>
 
         <!--
