@@ -3,6 +3,17 @@
   width: 100%;
 }
 
+.primary-popup {
+  margin-top: -1rem;
+}
+
+.primary-row {
+  display: flex;
+  @include breakpoint('small') {
+    display: block!important;
+  }
+}
+
 label {
   font-weight: bold;
   font-size: 15px;
@@ -223,7 +234,7 @@ h5 {
 
   .important-container {
     position: relative;
-    top: -23px;
+    top: -47px;
     @include breakpoint('small') {
       position: relative;
       display: flex;
@@ -265,7 +276,7 @@ h5 {
     border: .1rem solid #e8e8e8;
     border-radius: .8rem;
     padding: 1rem;
-    height: 14rem;
+    height: 16rem;
 
     @include breakpoint('small') {
       align-items: center;

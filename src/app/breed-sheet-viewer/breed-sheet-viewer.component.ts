@@ -26,6 +26,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   characteristicsForm: FormGroup;
   gynePicturesForm: FormGroup;
   picturesForm: FormGroup;
+  primaryForm: FormGroup;
 
   breedingSheet$: Observable<BreedingSheet>;
   private sheetId: string;
@@ -50,6 +51,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   characteristicsPopupOpen = false;
   gynePicturesPopupOpen = false;
   picturesPopupOpen = false;
+  primaryPopupOpen = false;
 
   errorFood = false;
   errorDiapause = false;
@@ -149,6 +151,14 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     {id: 26, valeur: 30},
   ];
 
+  difficultyList: Array<object> = [
+    {id: 0, valeur: 1},
+    {id: 1, valeur: 2},
+    {id: 2, valeur: 3},
+    {id: 3, valeur: 4},
+    {id: 4, valeur: 5}
+  ];
+
   needDiapauseSwitch;
   polySwitch;
   clausSwitch;
@@ -201,6 +211,18 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   get pictureTwo() { return this.picturesForm.controls['pictureTwo']; }
   get pictureThree() { return this.picturesForm.controls['pictureThree']; }
 
+  get primaryControls() { return this.primaryForm.controls; }
+  get temperatureMin() { return this.primaryForm.controls['temperatureMin']; }
+  get temperatureMax() { return this.primaryForm.controls['temperatureMax']; }
+  get humidityMin() { return this.primaryForm.controls['temperatureMin']; }
+  get humidityMax() { return this.primaryForm.controls['temperatureMax']; }
+  get family() { return this.primaryForm.controls['family']; }
+  get subfamily() { return this.primaryForm.controls['subfamily']; }
+  get genre() { return this.primaryForm.controls['genre']; }
+  get tribe() { return this.primaryForm.controls['tribe']; }
+  get difficulty() { return this.primaryForm.controls['difficulty']; }
+
+
   constructor(
     public breedingSheetsService: BreedingSheetsService,
     public route: ActivatedRoute,
@@ -233,6 +255,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     this.prepareCharacteristics();
     this.prepareGynePictures();
     this.preparePictures();
+    this.preparePrimary();
+
   }
 
   reloadSheet() {
@@ -256,7 +280,9 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   loadGynePictures() {
     for (const pic of this.breedSheet?.gynePictures) {
-      this.gynePictures.push(pic);
+      if ((pic !== '') && (pic !== null)) {
+        this.gynePictures.push(pic);
+      }
     }
   }
 
@@ -284,7 +310,9 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   loadPictures() {
     for (const pic of this.breedSheet?.pictures) {
-      this.pictures.push(pic);
+      if ((pic !== '') && (pic !== null)) {
+        this.pictures.push(pic);
+      }
     }
   }
 
@@ -439,18 +467,18 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   saveGynePictures() {
     if (
-      (this.gynePictureOne.value === this.gynePictureTwo.value) && (this.gynePictureTwo.value !== null)
+      (this.gynePictureOne.value === this.gynePictureTwo.value) && (this.gynePictureTwo.value === '')
       ||
-      (this.gynePictureTwo.value === this.gynePictureThree.value) && (this.gynePictureThree.value !== null)
+      (this.gynePictureTwo.value === this.gynePictureThree.value) && (this.gynePictureThree.value === '')
       ||
-      (this.gynePictureThree.value === this.gynePictureOne.value) && (this.gynePictureOne.value !== null)
+      (this.gynePictureThree.value === this.gynePictureOne.value) && (this.gynePictureOne.value === '')
       ) {
       this.errorGynePictures = true;
     } else {
       const gynePictures = [
         this.gynePictureOne.value,
-        this.gynePictureTwo?.value !== '' ? this.gynePictureTwo?.value : this.gynePictureOne.value,
-        this.gynePictureThree?.value !== '' ? this.gynePictureThree?.value : this.gynePictureOne.value
+        this.gynePictureTwo?.value,
+        this.gynePictureThree?.value
       ];
       this.breedingSheetsService.updateGynePictures(this.breedSheet?.id, gynePictures)
       .subscribe(() => {
@@ -463,18 +491,18 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   savePictures() {
     if (
-      (this.pictureOne.value === this.pictureTwo.value) && (this.pictureTwo.value !== null)
+      (this.pictureOne.value === this.pictureTwo.value) && (this.pictureTwo.value === '')
       ||
-      (this.pictureTwo.value === this.pictureThree.value) && (this.pictureThree.value !== null)
+      (this.pictureTwo.value === this.pictureThree.value) && (this.pictureThree.value === '')
       ||
-      (this.pictureThree.value === this.pictureOne.value) && (this.pictureOne.value !== null)
+      (this.pictureThree.value === this.pictureOne.value) && (this.pictureOne.value === '')
       ) {
         this.errorPictures = true;
     } else {
       const pictures = [
         this.pictureOne.value,
-        this.pictureTwo?.value !== '' ? this.pictureTwo?.value : this.pictureOne.value,
-        this.pictureThree?.value !== '' ? this.pictureThree?.value : this.pictureOne.value
+        this.pictureTwo?.value,
+        this.pictureThree?.value
       ];
       this.breedingSheetsService.updatePictures(this.breedSheet?.id, pictures)
       .subscribe(() => {
@@ -483,6 +511,32 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       });
       this.picturesPopupOpen = false;
     }
+  }
+
+  savePrimary() {
+    // const needs = this.needdiapause.value;
+    // const temperatures = {
+    //   diapauseTemperatureStart : this.diapauseTemperatureStart.value,
+    //   diapauseTemperatureEnd : this.diapauseTemperatureEnd.value
+    // };
+    // const months = {
+    //   diapauseStart : this.diapauseStart.value,
+    //   diapauseEnd : this.diapauseEnd.value
+    // };
+    // this.breedingSheetsService.updateDiapause(this.breedSheet?.id, needs, temperatures, months)
+    // .subscribe(data => {
+    //   const res: any = data;
+    //   this.reloadSheet();
+    //   this.loadSheet(this.breedSheet.species);
+    // },
+    // err => {
+    //   console.log('error: ', err.message);
+    // }, () => {
+    //   console.log('ok!');
+    //   this.reloadSheet();
+    //   this.loadSheet(this.breedSheet.species);
+    //   this.primaryPopupOpen = false;
+    // });
   }
 
   public diapauseSwitch() {
@@ -578,7 +632,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   private prepareCharacteristics() {
     this.characteristicsForm = new FormGroup({
-      characteristics: new FormControl(this.breedSheet?.characteristics),
+      characteristics: new FormControl(this.breedSheet?.characteristics ? this.breedSheet?.characteristics : ''),
     });
   }
 
@@ -595,6 +649,20 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       pictureOne: new FormControl(),
       pictureTwo: new FormControl(),
       pictureThree: new FormControl()
+    });
+  }
+
+  private preparePrimary() {
+    this.primaryForm = new FormGroup({
+      temperatureMin: new FormControl(),
+      temperatureMax: new FormControl(),
+      humidityMin: new FormControl(),
+      humidityMax: new FormControl(),
+      family: new FormControl(),
+      subfamily: new FormControl(),
+      genre: new FormControl(),
+      tribe: new FormControl(),
+      difficulty: new FormControl()
     });
   }
 
@@ -687,6 +755,15 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   closePicturesPopup() {
     this.picturesPopupOpen = false;
     this.preparePictures();
+  }
+
+  openPrimaryPopup() {
+    this.primaryPopupOpen = true;
+  }
+
+  closePrimaryPopup() {
+    this.primaryPopupOpen = false;
+    this.preparePrimary();
   }
 
   ngOnDestroy() {

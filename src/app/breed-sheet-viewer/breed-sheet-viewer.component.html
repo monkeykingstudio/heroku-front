@@ -3,16 +3,122 @@
     <div class="breedsheet">
       <div class="col-sm-12 viewer">
         <div class="head">
+          <i style="bottom: 10px;top: inherit;" *ngIf="currentUser.email === sheet.creator?.email || currentUser.role === 'admin'" (click)="openPrimaryPopup()" class="pen-black-icon pen-black-icon-big position-absolute"></i>
+          <div *ngIf="primaryPopupOpen" class="custom-popup breed-popup animate__animated animate__zoomIn">
+            <div class="popup animate__animated animate__zoomInDown  animate__delay-05s">
+              <form class="form-group options-popup" [formGroup]="primaryForm" (ngSubmit)='savePrimary()'>
+
+                <div class="d-flex c switch mb-4 flex-row align-items-center">
+
+                </div>
+
+                <div class="form-row primary-row mb-2 primary-popup">
+
+                  <div class="d-flex flex-column col-sm-12 col-md-2">
+                    <div class="d-flex flex-column  form-group">
+                      <label for="">Temperature Min °C</label>
+                      <select [(ngModel)]="sheet?.temperature[0].temperatureStart" class="btn-select mb-0" formControlName='temperatureMin'>
+                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                      </select>
+                    </div>
+
+                    <div class="d-flex flex-column form-group">
+                      <label for="">Temperature Max °C</label>
+                      <select [(ngModel)]="sheet?.temperature[0].temperatureEnd" class="btn-select mb-0" formControlName='temperatureMax'>
+                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-column col-sm-12 col-md-2">
+                    <div class="d-flex flex-column form-group">
+                      <label for="">Humidity Min °C</label>
+                      <select [(ngModel)]="sheet?.temperature[0].temperatureStart" class="btn-select mb-0" formControlName='humidityMin'>
+                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                      </select>
+                    </div>
+
+                    <div class="d-flex flex-column form-group">
+                      <label for="">Humidity Max °C</label>
+                      <select [(ngModel)]="sheet?.temperature[0].temperatureEnd" class="btn-select mb-0" formControlName='humidityMax'>
+                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-column col-sm-12 col-md-3">
+                    <div class="d-flex flex-column form-group">
+                      <label for="">Family</label>
+                      <select [(ngModel)]="sheet?.temperature[0].temperatureStart" class="btn-select mb-0" formControlName='family'>
+                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                      </select>
+                    </div>
+
+                    <div class="d-flex flex-column form-group">
+                      <label for="">Sub-family</label>
+                      <select [(ngModel)]="sheet?.temperature[0].temperatureEnd" class="btn-select mb-0" formControlName='subfamily'>
+                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-column col-sm-12 col-md-3">
+                    <div class="d-flex flex-column form-group">
+                      <label for="">Genre</label>
+                      <select [(ngModel)]="sheet?.temperature[0].temperatureStart" class="btn-select mb-0" formControlName='genre'>
+                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                      </select>
+                    </div>
+
+                    <div class="d-flex flex-column form-group">
+                      <label for="">Tribe</label>
+                      <select [(ngModel)]="sheet?.temperature[0].temperatureEnd" class="btn-select mb-0" formControlName='tribe'>
+                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column col-sm-12 col-md-2">
+                    <div class="d-flex flex-column form-group">
+                      <label for="">Difficulty</label>
+                      <select [(ngModel)]="sheet.difficulty" class="btn-select mb-0" formControlName='difficulty'>
+                        <option *ngFor="let diff of difficultyList" [value]="diff.valeur">{{diff.valeur}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- <div class="d-flex form-group">
+                  <label for="">Start month</label>
+                    <select style="text-transform: capitalize;" [(ngModel)]="sheet?.diapausePeriod[0].diapauseStart" class="btn-select mb-0" formControlName='diapauseStart'>
+                      <option *ngFor="let month of monthList" [value]="month.valeur">{{month.valeur}}</option>
+                    </select>
+                </div>
+                <div class="d-flex form-group
+                ">
+                  <label for="">End month</label>
+                    <select style="text-transform: capitalize;" [(ngModel)]="sheet?.diapausePeriod[0].diapauseEnd" class="btn-select mb-0" formControlName='diapauseEnd'>
+                      <option *ngFor="let month of monthList" [value]="month.valeur">{{month.valeur}}</option>
+                    </select>
+                </div> -->
+
+                <!-- <button type="submit" class='green-btn mt-4'>SAVE</button> -->
+
+              </form>
+              <button type="button" class='close-popup' (click)="closePrimaryPopup(); $event.stopPropagation()">
+                <i class="close-icon"></i>
+              </button>
+            </div>
+          </div>
           <div class="taxonomy-container">
-            <div class="d-flex mb-1 align-items-center">
+            <div class="d-flex mb-2 align-items-center">
               <span class="entete genre">genre</span>
               <span class="data gene">{{sheet.genre}}</span>
             </div>
-            <div class="d-flex mb-1 align-items-center ">
+            <div class="d-flex mb-2 align-items-center ">
               <span class="entete family align-items-center">family</span>
               <span class="data fame">{{sheet.family}}</span>
             </div>
-            <div class="d-flex mb-1 align-items-center ">
+            <div class="d-flex mb-2 align-items-center ">
               <span class="entete subfamily align-items-center">sub-family</span>
               <span class="data subfame">{{sheet.subfamily}}</span>
             </div>
