@@ -49,16 +49,13 @@
                   <div class="d-flex flex-column col-sm-12 col-md-3">
                     <div class="d-flex flex-column form-group">
                       <label for="">Family</label>
-                      <select [(ngModel)]="sheet?.temperature[0].temperatureStart" class="btn-select mb-0" formControlName='family'>
-                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
-                      </select>
+                      <input [(ngModel)]="sheet.family" formControlName='family' ([value])="sheet.family" type="text">
                     </div>
 
                     <div class="d-flex flex-column form-group">
                       <label for="">Sub-family</label>
-                      <select [(ngModel)]="sheet?.temperature[0].temperatureEnd" class="btn-select mb-0" formControlName='subfamily'>
-                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
-                      </select>
+                      <input [(ngModel)]="sheet.subfamily" formControlName='subfamily' ([value])="sheet.subfamily" type="text">
+
                     </div>
                   </div>
 
