@@ -26,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
   user$: Observable<User>;
   currentUser: User;
 
+
   constructor(
     private router: Router,
     public usersService: UsersService,
