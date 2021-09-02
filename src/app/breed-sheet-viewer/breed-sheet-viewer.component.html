@@ -33,15 +33,15 @@
                   <div class="d-flex flex-column col-sm-12 col-md-2">
                     <div class="d-flex flex-column form-group">
                       <label for="">Humidity Min °C</label>
-                      <select [(ngModel)]="sheet?.temperature[0].temperatureStart" class="btn-select mb-0" formControlName='humidityMin'>
-                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                      <select [(ngModel)]="sheet?.hygrometry[0].hygrometryStart" class="btn-select mb-0" formControlName='humidityMin'>
+                        <option *ngFor="let hyg of hygrometryList" [value]="hyg.valeur">{{hyg.valeur}}</option>
                       </select>
                     </div>
 
                     <div class="d-flex flex-column form-group">
                       <label for="">Humidity Max °C</label>
-                      <select [(ngModel)]="sheet?.temperature[0].temperatureEnd" class="btn-select mb-0" formControlName='humidityMax'>
-                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+                      <select [(ngModel)]="sheet?.hygrometry[0].hygrometryEnd" class="btn-select mb-0" formControlName='humidityMax'>
+                        <option *ngFor="let hyg of hygrometryList" [value]="hyg.valeur">{{hyg.valeur}}</option>
                       </select>
                     </div>
                   </div>
@@ -62,16 +62,12 @@
                   <div class="d-flex flex-column col-sm-12 col-md-3">
                     <div class="d-flex flex-column form-group">
                       <label for="">Genre</label>
-                      <select [(ngModel)]="sheet?.temperature[0].temperatureStart" class="btn-select mb-0" formControlName='genre'>
-                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
-                      </select>
+                      <input [(ngModel)]="sheet.genre" formControlName='genre' ([value])="sheet.genre" type="text">
                     </div>
 
                     <div class="d-flex flex-column form-group">
                       <label for="">Tribe</label>
-                      <select [(ngModel)]="sheet?.temperature[0].temperatureEnd" class="btn-select mb-0" formControlName='tribe'>
-                        <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
-                      </select>
+                      <input [(ngModel)]="sheet.tribu" formControlName='tribe' ([value])="sheet.tribu" type="text">
                     </div>
                   </div>
                   <div class="d-flex flex-column col-sm-12 col-md-2">
@@ -81,24 +77,10 @@
                         <option *ngFor="let diff of difficultyList" [value]="diff.valeur">{{diff.valeur}}</option>
                       </select>
                     </div>
+                    <button type="submit" class='green-btn mt-4'>SAVE</button>
+
                   </div>
                 </div>
-
-                <!-- <div class="d-flex form-group">
-                  <label for="">Start month</label>
-                    <select style="text-transform: capitalize;" [(ngModel)]="sheet?.diapausePeriod[0].diapauseStart" class="btn-select mb-0" formControlName='diapauseStart'>
-                      <option *ngFor="let month of monthList" [value]="month.valeur">{{month.valeur}}</option>
-                    </select>
-                </div>
-                <div class="d-flex form-group
-                ">
-                  <label for="">End month</label>
-                    <select style="text-transform: capitalize;" [(ngModel)]="sheet?.diapausePeriod[0].diapauseEnd" class="btn-select mb-0" formControlName='diapauseEnd'>
-                      <option *ngFor="let month of monthList" [value]="month.valeur">{{month.valeur}}</option>
-                    </select>
-                </div> -->
-
-                <!-- <button type="submit" class='green-btn mt-4'>SAVE</button> -->
 
               </form>
               <button type="button" class='close-popup' (click)="closePrimaryPopup(); $event.stopPropagation()">

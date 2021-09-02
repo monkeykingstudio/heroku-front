@@ -151,6 +151,27 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     {id: 26, valeur: 30},
   ];
 
+  hygrometryList: Array<object> = [
+    {id: 0, valeur: 5},
+    {id: 1, valeur: 10},
+    {id: 2, valeur: 15},
+    {id: 3, valeur: 20},
+    {id: 4, valeur: 25},
+    {id: 5, valeur: 30},
+    {id: 6, valeur: 35},
+    {id: 7, valeur: 40},
+    {id: 8, valeur: 45},
+    {id: 9, valeur: 50},
+    {id: 10, valeur: 55},
+    {id: 11, valeur: 60},
+    {id: 12, valeur: 65},
+    {id: 13, valeur: 70},
+    {id: 14, valeur: 75},
+    {id: 15, valeur: 80},
+    {id: 16, valeur: 85},
+    {id: 17, valeur: 90},
+  ];
+
   difficultyList: Array<object> = [
     {id: 0, valeur: 1},
     {id: 1, valeur: 2},
@@ -214,8 +235,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   get primaryControls() { return this.primaryForm.controls; }
   get temperatureMin() { return this.primaryForm.controls['temperatureMin']; }
   get temperatureMax() { return this.primaryForm.controls['temperatureMax']; }
-  get humidityMin() { return this.primaryForm.controls['temperatureMin']; }
-  get humidityMax() { return this.primaryForm.controls['temperatureMax']; }
+  get humidityMin() { return this.primaryForm.controls['humidityMin']; }
+  get humidityMax() { return this.primaryForm.controls['humidityMax']; }
   get family() { return this.primaryForm.controls['family']; }
   get subfamily() { return this.primaryForm.controls['subfamily']; }
   get genre() { return this.primaryForm.controls['genre']; }
@@ -346,11 +367,11 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   saveGeography() {
     if (
-      (this.geographyOne.value === this.geographyTwo.value) && (this.geographyTwo.value !== null)
+      (this.geographyOne.value === this.geographyTwo.value) && (this.geographyTwo.value === '')
       ||
-      (this.geographyTwo.value === this.geographyThree.value) && (this.geographyThree.value !== null)
+      (this.geographyTwo.value === this.geographyThree.value) && (this.geographyThree.value  === '')
       ||
-      (this.geographyThree.value === this.geographyOne.value) && (this.geographyOne.value !== null)
+      (this.geographyThree.value === this.geographyOne.value) && (this.geographyOne.value  === '')
       ) {
       this.errorGeography = true;
     } else {
@@ -514,29 +535,36 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   }
 
   savePrimary() {
-    // const needs = this.needdiapause.value;
-    // const temperatures = {
-    //   diapauseTemperatureStart : this.diapauseTemperatureStart.value,
-    //   diapauseTemperatureEnd : this.diapauseTemperatureEnd.value
-    // };
-    // const months = {
-    //   diapauseStart : this.diapauseStart.value,
-    //   diapauseEnd : this.diapauseEnd.value
-    // };
-    // this.breedingSheetsService.updateDiapause(this.breedSheet?.id, needs, temperatures, months)
-    // .subscribe(data => {
-    //   const res: any = data;
-    //   this.reloadSheet();
-    //   this.loadSheet(this.breedSheet.species);
-    // },
-    // err => {
-    //   console.log('error: ', err.message);
-    // }, () => {
-    //   console.log('ok!');
-    //   this.reloadSheet();
-    //   this.loadSheet(this.breedSheet.species);
-    //   this.primaryPopupOpen = false;
-    // });
+    const temperature = {
+      temperatureStart : this.temperatureMin.value,
+      temperatureEnd : this.temperatureMax.value
+    };
+
+    const hygrometry = {
+      hygrometryStart : this.humidityMin.value,
+      hygrometryEnd : this.humidityMax.value
+    };
+
+    const family = this.family.value;
+    const subfamily = this.subfamily.value;
+    const genre = this.genre.value;
+    const tribu = this.tribe.value;
+    const difficulty = this.difficulty.value;
+
+    this.breedingSheetsService.updatePrimary(this.breedSheet?.id, temperature, hygrometry, family, subfamily, genre, tribu, difficulty)
+    .subscribe(data => {
+      const res: any = data;
+      this.reloadSheet();
+      this.loadSheet(this.breedSheet.species);
+    },
+    err => {
+      console.log('error: ', err.message);
+    }, () => {
+      console.log('ok!');
+      this.reloadSheet();
+      this.loadSheet(this.breedSheet.species);
+      this.primaryPopupOpen = false;
+    });
   }
 
   public diapauseSwitch() {

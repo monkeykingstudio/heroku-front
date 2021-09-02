@@ -78,6 +78,20 @@ export class BreedingSheetsService {
     return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/pictures/${id}`, {pictures});
   }
 
+  updatePrimary(
+    id: string,
+    temperature: any,
+    hygrometry: any,
+    family: string,
+    subfamily: string,
+    genre: string,
+    tribu: string,
+    difficulty: number
+    ): Observable<BreedingSheet> {
+      return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/primary/${id}`,
+      {temperature, hygrometry, family, subfamily, genre, tribu, difficulty});
+  }
+
   getSheetById(id: string) {
     return this.http.get<BreedingSheet>(`${this.breedingSheetsUrl}/${id}`).pipe(
       map(result => result['sheet']),
