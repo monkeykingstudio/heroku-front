@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { BreedingSheet } from '../models/breedingSheet.model';
 import { map, shareReplay, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BreedingSheetsService {
-  private breedingSheetsUrl = 'https://calm-waters-91692.herokuapp.com/api/breedingsheets';
+  private breedingSheetsUrl = `${environment.APIEndpoint}/api/breedingsheets`;
 
   constructor(private http: HttpClient) {}
 
