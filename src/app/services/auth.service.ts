@@ -4,12 +4,14 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { map } from 'rxjs/operators';
-
+import { environment } from 'src/environments/environment';
+console.log(environment.APIEndpoint)
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private authRoute = 'https://calm-waters-91692.herokuapp.com/api/auth';
+  private authRoute = `${environment.APIEndpoint}/api/auth`;
+ 
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<User>;
   handleError: any;
@@ -26,6 +28,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
+    console.log(this.authRoute)
     return this.http.post<any>(`${this.authRoute}/login`, { email, password })
       .pipe(
         map(user => {

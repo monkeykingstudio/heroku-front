@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Task } from '../models/task.model';
 import { map, shareReplay } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class TasksService {
   private readMode = new BehaviorSubject<boolean>(true);
   currentReadMode$ = this.readMode.asObservable();
 
-  private tasksUrl = 'https://calm-waters-91692.herokuapp.com/api/colonies/tasks';
+  private tasksUrl = `${environment.APIEndpoint}/api/colonies/tasks`;
   constructor(private http: HttpClient) {}
 
   loadAllTasks(colonyId: string) {

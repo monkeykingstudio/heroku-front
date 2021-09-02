@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 import { User } from '../models/user.model';
 
@@ -9,12 +10,12 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UsersService {
-  usersUrl: 'https://calm-waters-91692.herokuapp.com/api/users';
+
 
   constructor(private http: HttpClient) { }
 
   usersGet(): Observable<User[]> {
-    return this.http.get<any>(`https://calm-waters-91692.herokuapp.com/api/users`)
+    return this.http.get<any>(`${environment.APIEndpoint}/api/users`)
     .pipe(
       map(result => result['users']),
       shareReplay());
@@ -32,7 +33,7 @@ export class UsersService {
       'newsletter': user.newsletter,
       'coloCount': user.coloCount
     };
-    return this.http.post(`https://calm-waters-91692.herokuapp.com/api/auth/register`, userData);
+    return this.http.post(`${environment.APIEndpoint}/api/auth/register`, userData);
   }
 
   isTokenExpired(token: string) {

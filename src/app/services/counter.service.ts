@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Counter } from '../models/counter.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CounterService {
 
-  private counterUrl = 'https://calm-waters-91692.herokuapp.com/api/colonies/counter';
+  private counterUrl = `${environment.APIEndpoint}/api/colonies/counter`;
   constructor(private http: HttpClient) {}
 
   updateCounter(

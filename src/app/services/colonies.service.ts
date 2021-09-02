@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Colony } from './../colonies/colony.model';
 import { map, shareReplay, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ColoniesService {
-  private colonyUrl = 'https://calm-waters-91692.herokuapp.com/api/colonies';
+  private colonyUrl = `${environment.APIEndpoint}/api/colonies`;
 
   constructor(private http: HttpClient) {}
 
