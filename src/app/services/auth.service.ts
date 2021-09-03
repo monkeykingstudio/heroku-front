@@ -11,7 +11,7 @@ console.log(environment.APIEndpoint)
 })
 export class AuthService {
   private authRoute = `${environment.APIEndpoint}/api/auth`;
- 
+
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<User>;
   handleError: any;
@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    console.log(this.authRoute)
+    console.log(this.authRoute);
     return this.http.post<any>(`${this.authRoute}/login`, { email, password })
       .pipe(
         map(user => {
