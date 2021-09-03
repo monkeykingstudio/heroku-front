@@ -10,7 +10,6 @@ import { environment } from 'src/environments/environment';
 
 import { io } from 'socket.io-client';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -29,21 +28,14 @@ export class AppComponent implements OnInit, OnDestroy {
   user$: Observable<User>;
   currentUser: User;
 
-  private socket: any;
-  public data: any;
-
   constructor(
     private router: Router,
     public usersService: UsersService,
     public authService: AuthService
-    ) {
-      this.socket = io(`wss:localhost`);
-    }
+    ) {}
 
   ngOnInit(): void {
-    this.socket.on('notification', data => {
-      this.data = data;
-    });
+
     this.router.events
     .subscribe(event => {
       if (event instanceof RoutesRecognized ) {
