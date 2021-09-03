@@ -6,6 +6,9 @@ import { map } from 'rxjs/operators';
 import { Router, RoutesRecognized } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersService } from './services/user.service';
+import { environment } from 'src/environments/environment';
+
+import { io } from 'socket.io-client';
 
 
 @Component({
@@ -26,13 +29,21 @@ export class AppComponent implements OnInit, OnDestroy {
   user$: Observable<User>;
   currentUser: User;
 
+  private socket: any;
+  public data: any;
+
   constructor(
     private router: Router,
     public usersService: UsersService,
     public authService: AuthService
-    ) {}
+    ) {
+      this.socket = io(`wss:localhost`);
+    }
 
   ngOnInit(): void {
+    this.socket.on('notification', data => {
+      this.data = data;
+    });
     this.router.events
     .subscribe(event => {
       if (event instanceof RoutesRecognized ) {
