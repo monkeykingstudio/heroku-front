@@ -1,8 +1,8 @@
 <div class="header-container">
   <div class="bread-crumb">
-    <!-- <span>routeURL/</span>
-    <span>routeURL/</span>
-    <span class="current">currentpage</span> -->
+    <button class="green-btn" (click)="actionOnRequest('button-1')">Confirm</button>
+    <button class="red-btn" (click)="actionOnRequest('button-2')">Delete</button>
+
     <!-- <span class='debug'>Un bug majeur en cours de correction affectant le module de tâches d'une colonie est en cours de résolution. L'application peut devenir temporairement hors ligne ou instable au cours de cette semaine. Merci de votre compréhension.</span> -->
   </div>
   <div *ngIf="(authService.currentUser | async) as user" class="user-container">
@@ -10,19 +10,21 @@
       <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>
     </div>
     <i style="position:relative" class="notif-icon">
-      <div style="
-          display:flex;
-          align-items: center;
-          justify-content: center;
-          width: 1.5rem;
-          height: 1.5rem;
-          border-radius: 360px;
-          background-color: #d74444;
-          top: 5px;
-          right: 10px;
-          position: absolute;
-      "><span style="color:white;font-size:10px">0</span></div>
+      <div *ngIf="notifications.length !== 0" class="notif-count">
+        <span>{{notification}}</span>
+      </div>
     </i>
+    <div class="notif-display">
+      <div class="arrow-up"></div>
+      <div *ngIf="notifications.length !== 0" >
+        <div *ngFor="let request of notifications">
+          <span>{{request.message}}</span>
+        </div>
+      </div>
+      <div class="" *ngIf="notifications.length === 0" >
+        <span>No notifications</span>
+      </div>
+    </div>
 
     <span (click)="toggleShow()" class='d-flex align-items-center'>{{ (authService.currentUser | async)?.pseudo}} <i class="caret-icon"></i></span>
     <span (click)="toggleShow()" class='d-flex align-items-center'></span>

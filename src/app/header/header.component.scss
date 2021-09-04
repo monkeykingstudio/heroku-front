@@ -1,6 +1,53 @@
 @import '../../styles/global/colors';
 @import '../../styles/global/mixins';
 
+.notif-count {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 360px;
+  background-color: #d74444;
+  top: 5px;
+  right: 10px;
+  position: absolute;
+  span {
+    color:white;
+    font-size:10px
+  }
+}
+
+.arrow-up {
+  top: -12px;
+  left: 65.5px;
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  position: absolute;
+  border-bottom: 12px solid white;
+}
+
+.notif-display {
+  position: relative;
+  display: flex;
+  position: absolute;
+  background-color: white;
+  border-radius: 0.6rem;
+  min-height: 3rem;
+  top: 4.3rem;
+  width: 14rem;
+  right: 6.9rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 9px 6px rgba(104,104,104,.22);
+  span {
+    text-align: center;
+  }
+}
+
 :host {
   height: 6.5rem;
   display: flex;
