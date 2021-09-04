@@ -9,6 +9,7 @@ import { UsersService } from './services/user.service';
 import { environment } from 'src/environments/environment';
 
 import { io } from 'socket.io-client';
+import { WebSocketService } from './services/web-socket.service';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     public usersService: UsersService,
-    public authService: AuthService
+    public authService: AuthService,
+    private webSocketService: WebSocketService
     ) {}
 
   ngOnInit(): void {

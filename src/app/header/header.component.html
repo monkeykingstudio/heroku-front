@@ -9,15 +9,30 @@
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>
     </div>
+    <i style="position:relative" class="notif-icon">
+      <div style="
+          display:flex;
+          align-items: center;
+          justify-content: center;
+          width: 1.5rem;
+          height: 1.5rem;
+          border-radius: 360px;
+          background-color: #d74444;
+          top: 5px;
+          right: 10px;
+          position: absolute;
+      "><span style="color:white;font-size:10px">0</span></div>
+    </i>
+
     <span (click)="toggleShow()" class='d-flex align-items-center'>{{ (authService.currentUser | async)?.pseudo}} <i class="caret-icon"></i></span>
     <span (click)="toggleShow()" class='d-flex align-items-center'></span>
 
     <div class="avatar"
     ></div>
     <!-- [style.background-image]="'url('+(authService.currentUser | async).picture+')'" -->
-  </div>
 
-  <div *ngIf="!(authService.currentUser | async)" class="user-container">
+  </div>
+    <div *ngIf="!(authService.currentUser | async)" class="user-container">
     <div style="top:5.5rem;right:0" *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button (click)="toggleShow()" routerLink="/login">Login</button>
       <button (click)="toggleShow()" routerLink="/signup">Signup</button>

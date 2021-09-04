@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
+import { WebSocketService } from '../services/web-socket.service';
+
 
 @Component({
   selector: 'app-header',
@@ -17,13 +19,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isShown = false;
   currentUser: User;
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private webSocketService: WebSocketService
+    ) { }
 
   ngOnInit(): void {
+    this.webSocketService.listen('test event').subscribe((data) => {
+      console.log(data);
+    });
     this.authStatusSubscription = this.authService.currentUser.pipe(
       map(user => {
         if (user) {
           this.currentUser = user;
+          this.webSocketService.emit('test emit', this.currentUser.pseudo);
         }
       })
       ).subscribe();
