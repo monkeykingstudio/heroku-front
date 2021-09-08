@@ -3,7 +3,7 @@
     <!-- <button class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
     <button class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button> -->
 
-    <span class='debug'>Un bug majeur en cours de correction affectant la connexion et affichage des colonies est en cours de résolution.
+    <span style="max-width: 60%!important;padding:1rem!important" class='debug'>Un bug majeur en cours de correction affectant la connexion et affichage des colonies est en cours de résolution.
       L'application est actuellement instable. On travaille dessus.</span>
   </div>
   <div *ngIf="(authService.currentUser | async) as user" class="user-container">
@@ -11,13 +11,15 @@
       <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>
     </div>
     <i style="position:relative" class="notif-icon">
-      <div *ngIf="notifications.length !== 0" class="notif-count">
-        <span>{{notification}}</span>
+      <!-- *ngIf="notifications.length !== 0" -->
+      <!-- {{notification}} -->
+      <div  class="notif-count">
+        <span>0</span>
       </div>
     </i>
-    <div class="arrow-up"></div>
+    <!-- <div class="arrow-up"></div> -->
 
-    <div class="notif-display">
+    <!-- <div class="notif-display">
       <div class="w-100" *ngIf="notifications.length !== 0" >
         <div class="w-100" *ngFor="let request of notifications">
           <div class="line">
@@ -26,10 +28,10 @@
           <div class="sep"></div>
         </div>
       </div>
-      <!-- <div class="" *ngIf="notifications.length === 0" >
+      <div class="" *ngIf="notifications.length === 0" >
         <span>No notifications</span>
-      </div> -->
-    </div>
+      </div>
+    </div> -->
 
     <span (click)="toggleShow()" class='d-flex align-items-center'>{{ (authService.currentUser | async)?.pseudo}} <i class="caret-icon"></i></span>
     <span (click)="toggleShow()" class='d-flex align-items-center'></span>
