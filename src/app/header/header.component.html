@@ -1,23 +1,44 @@
 <div class="header-container">
   <div class="bread-crumb">
-    <!-- <span>routeURL/</span>
-    <span>routeURL/</span>
-    <span class="current">currentpage</span> -->
+    <button class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
+    <button class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button>
+
     <!-- <span class='debug'>Un bug majeur en cours de correction affectant le module de tâches d'une colonie est en cours de résolution. L'application peut devenir temporairement hors ligne ou instable au cours de cette semaine. Merci de votre compréhension.</span> -->
   </div>
   <div *ngIf="(authService.currentUser | async) as user" class="user-container">
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>
     </div>
+    <i style="position:relative" class="notif-icon">
+      <div *ngIf="notifications.length !== 0" class="notif-count">
+        <span>{{notification}}</span>
+      </div>
+    </i>
+    <div class="arrow-up"></div>
+
+    <div class="notif-display">
+      <div class="w-100" *ngIf="notifications.length !== 0" >
+        <div class="w-100" *ngFor="let request of notifications">
+          <div class="line">
+            <span>{{request.message}}</span>
+          </div>
+          <div class="sep"></div>
+        </div>
+      </div>
+      <div class="" *ngIf="notifications.length === 0" >
+        <span>No notifications</span>
+      </div>
+    </div>
+
     <span (click)="toggleShow()" class='d-flex align-items-center'>{{ (authService.currentUser | async)?.pseudo}} <i class="caret-icon"></i></span>
     <span (click)="toggleShow()" class='d-flex align-items-center'></span>
 
     <div class="avatar"
     ></div>
     <!-- [style.background-image]="'url('+(authService.currentUser | async).picture+')'" -->
-  </div>
 
-  <div *ngIf="!(authService.currentUser | async)" class="user-container">
+  </div>
+    <div *ngIf="!(authService.currentUser | async)" class="user-container">
     <div style="top:5.5rem;right:0" *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button (click)="toggleShow()" routerLink="/login">Login</button>
       <button (click)="toggleShow()" routerLink="/signup">Signup</button>

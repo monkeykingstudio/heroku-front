@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Colony } from './../colonies/colony.model';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -17,6 +17,10 @@ export class ColoniesService {
     return this.http.get<Colony[]>(this.colonyUrl)
     .pipe(
       map(result => result['colonies']),
+      tap(
+        data => console.log(data),
+        error => console.error(error)
+      ),
       shareReplay()
     );
   }
