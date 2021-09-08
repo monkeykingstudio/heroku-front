@@ -470,6 +470,21 @@
   }
 }
 
+.notif-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/bell-2.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 3rem;
+      height: 3rem;
+      margin: 0 1rem;
+      cursor:pointer;
+  }
+}
+
 .colony-icon {
   &:before {
       content: '';

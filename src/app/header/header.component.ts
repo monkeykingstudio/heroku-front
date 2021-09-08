@@ -5,6 +5,13 @@ import { User } from '../models/user.model';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
 
+import { io } from 'socket.io-client';
+
+
+const notificationSocket: any = io('ws://calm-waters-91692.herokuapp.com', {
+  path: '/notification/'
+});
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -17,13 +24,45 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isShown = false;
   currentUser: User;
 
-  constructor(public authService: AuthService, private router: Router) { }
+  notification: Number;
+  notifications = [];
+
+  storage;
+
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    // private webSocketService: WebSocketService
+    ) {
+      notificationSocket.on('connect', () => {
+        // console.log('connected from client');
+        // notificationSocket.emit('userAuth', this.currentUser);
+      });
+
+
+      const params = {
+        sender: JSON.parse(localStorage.getItem('currentUser'))._id
+      };
+
+      notificationSocket.emit('joinNotifications', params, () => {
+      });
+
+      notificationSocket.on('recieveNotifications', request => {
+        this.notifications.push(request);
+        console.log(this.notifications);
+        this.notification = this.notifications.length;
+      });
+  }
 
   ngOnInit(): void {
+    // this.webSocketService.listen('test event').subscribe((data) => {
+    //   console.log(data);
+    // });
     this.authStatusSubscription = this.authService.currentUser.pipe(
       map(user => {
         if (user) {
           this.currentUser = user;
+          // this.webSocketService.emit('test emit', this.currentUser.pseudo);
         }
       })
       ).subscribe();
@@ -50,4 +89,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.authStatusSubscription.unsubscribe();
   }
+
+  actionOnRequest(button) {
+    notificationSocket.emit('sendNotifications', {
+      message: `${button} from ${JSON.parse(localStorage.getItem('currentUser')).pseudo}`,
+      senderId: JSON.parse(localStorage.getItem('currentUser'))._id,
+      senderPseudo: JSON.parse(localStorage.getItem('currentUser')).pseudo,
+      reciever: '6131e7c597f50700160703fe' // User raphael
+    }, () => {
+
+    });
+    console.log(JSON.parse(localStorage.getItem('currentUser'))._id);
+  }
 }
+/**
+ Créé en backend le model notification
+  id
+  text
+  date
+  time
+  read
+  url (opt)
+
+ */
+
+  /* Rooms
+   1 room pour tout le monde
+   1 pour les admins
+   */

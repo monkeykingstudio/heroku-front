@@ -7,6 +7,7 @@ import { Router, RoutesRecognized } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersService } from './services/user.service';
 
+// import { WebSocketService } from './services/web-socket.service';
 
 @Component({
   selector: 'app-root',
@@ -29,10 +30,12 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     public usersService: UsersService,
-    public authService: AuthService
+    public authService: AuthService,
+    // private webSocketService: WebSocketService
     ) {}
 
   ngOnInit(): void {
+
     this.router.events
     .subscribe(event => {
       if (event instanceof RoutesRecognized ) {
