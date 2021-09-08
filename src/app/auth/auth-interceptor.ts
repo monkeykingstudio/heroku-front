@@ -19,7 +19,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (isLoggedIn && isApiUrl) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${currentUser.token}`
+          Authorization: `JWT ${currentUser.token}`
         }
       });
     }
