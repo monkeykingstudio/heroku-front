@@ -1,7 +1,7 @@
 <div class="header-container">
   <div class="bread-crumb">
-    <button class="green-btn" (click)="actionOnRequest('button-1')">Confirm</button>
-    <button class="red-btn" (click)="actionOnRequest('button-2')">Delete</button>
+    <button class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
+    <button class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button>
 
     <!-- <span class='debug'>Un bug majeur en cours de correction affectant le module de tâches d'une colonie est en cours de résolution. L'application peut devenir temporairement hors ligne ou instable au cours de cette semaine. Merci de votre compréhension.</span> -->
   </div>
@@ -14,11 +14,15 @@
         <span>{{notification}}</span>
       </div>
     </i>
+    <div class="arrow-up"></div>
+
     <div class="notif-display">
-      <div class="arrow-up"></div>
-      <div *ngIf="notifications.length !== 0" >
-        <div *ngFor="let request of notifications">
-          <span>{{request.message}}</span>
+      <div class="w-100" *ngIf="notifications.length !== 0" >
+        <div class="w-100" *ngFor="let request of notifications">
+          <div class="line">
+            <span>{{request.message}}</span>
+          </div>
+          <div class="sep"></div>
         </div>
       </div>
       <div class="" *ngIf="notifications.length === 0" >
