@@ -1,9 +1,10 @@
 <div class="header-container">
   <div class="bread-crumb">
-    <button class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
-    <button class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button>
+    <!-- <button class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
+    <button class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button> -->
 
-    <!-- <span class='debug'>Un bug majeur en cours de correction affectant le module de tâches d'une colonie est en cours de résolution. L'application peut devenir temporairement hors ligne ou instable au cours de cette semaine. Merci de votre compréhension.</span> -->
+    <span class='debug'>Un bug majeur en cours de correction affectant la connexion et affichage des colonies est en cours de résolution.
+      L'application est actuellement instable. On travaille dessus.</span>
   </div>
   <div *ngIf="(authService.currentUser | async) as user" class="user-container">
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
@@ -25,9 +26,9 @@
           <div class="sep"></div>
         </div>
       </div>
-      <div class="" *ngIf="notifications.length === 0" >
+      <!-- <div class="" *ngIf="notifications.length === 0" >
         <span>No notifications</span>
-      </div>
+      </div> -->
     </div>
 
     <span (click)="toggleShow()" class='d-flex align-items-center'>{{ (authService.currentUser | async)?.pseudo}} <i class="caret-icon"></i></span>
