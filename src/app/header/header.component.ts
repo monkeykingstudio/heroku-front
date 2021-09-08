@@ -34,9 +34,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private router: Router,
     // private webSocketService: WebSocketService
     ) {
-      notificationSocket.on('connection', () => {
-        console.log('connected from client');
-        notificationSocket.emit('userAuth', this.currentUser);
+      notificationSocket.on('connect', () => {
+        // console.log('connected from client');
+        // notificationSocket.emit('userAuth', this.currentUser);
       });
 
 
