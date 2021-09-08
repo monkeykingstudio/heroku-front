@@ -36,7 +36,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ) {
       notificationSocket.on('connection', () => {
         console.log('connected from client');
+        notificationSocket.emit('userAuth', this.currentUser);
       });
+
 
       const params = {
         sender: JSON.parse(localStorage.getItem('currentUser'))._id
@@ -47,6 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
       notificationSocket.on('recieveNotifications', request => {
         this.notifications.push(request);
+        console.log(this.notifications);
         this.notification = this.notifications.length;
       });
   }
