@@ -34,23 +34,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private router: Router,
     // private webSocketService: WebSocketService
     ) {
-      // notificationSocket.on('connect', () => {
-      //   console.log('connected from client');
-      // });
+      notificationSocket.on('connect', () => {
+        console.log('connected from client');
+        // notificationSocket.emit('userAuth', this.currentUser);
+      });
 
 
-      // const params = {
-      //   sender: JSON.parse(localStorage.getItem('currentUser'))._id
-      // };
+      console.log(JSON.parse(localStorage.getItem('currentUser'))?._id);
+      const params = {
+        sender: JSON.parse(localStorage.getItem('currentUser'))?._id
+      };
 
-      // notificationSocket.emit('joinNotifications', params, () => {
-      // });
+      notificationSocket.emit('joinNotifications', params, () => {
+      });
 
-      // notificationSocket.on('recieveNotifications', request => {
-      //   this.notifications.push(request);
-      //   console.log(this.notifications);
-      //   this.notification = this.notifications.length;
-      // });
+      notificationSocket.on('recieveNotifications', request => {
+        this.notifications.push(request);
+        console.log(this.notifications);
+        this.notification = this.notifications.length;
+      });
   }
 
   ngOnInit(): void {

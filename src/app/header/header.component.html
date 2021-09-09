@@ -1,25 +1,23 @@
 <div class="header-container">
   <div class="bread-crumb">
-    <!-- <button class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
-    <button class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button> -->
 
-    <span style="max-width: 60%!important;padding:1rem!important" class='debug'>Un bug majeur en cours de correction affectant la connexion et affichage des colonies est en cours de résolution.
-      L'application est actuellement instable. On travaille dessus.</span>
+    <!-- <span style="max-width: 60%!important;padding:1rem!important" class='debug'>Un bug majeur en cours de correction affectant la connexion et affichage des colonies est en cours de résolution.
+      L'application est actuellement instable. On travaille dessus.</span> -->
   </div>
   <div *ngIf="(authService.currentUser | async) as user" class="user-container">
+    <button  *ngIf="user.role === 'admin'" class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
+    <button *ngIf="user.role === 'admin'" class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button>
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>
     </div>
     <i style="position:relative" class="notif-icon">
-      <!-- *ngIf="notifications.length !== 0" -->
-      <!-- {{notification}} -->
-      <div  class="notif-count">
-        <span>0</span>
+      <div class="notif-count">
+        <span>{{notification ? notification : '0'}}</span>
       </div>
     </i>
-    <!-- <div class="arrow-up"></div> -->
+    <!-- <div class="arrow-up"></div>
 
-    <!-- <div class="notif-display">
+    <div class="notif-display">
       <div class="w-100" *ngIf="notifications.length !== 0" >
         <div class="w-100" *ngFor="let request of notifications">
           <div class="line">
