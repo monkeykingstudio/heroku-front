@@ -18,8 +18,8 @@ export class ColoniesService {
     .pipe(
       map(result => result['colonies']),
       tap(
-        data => console.log(data),
-        error => console.error(error)
+        error => console.error(error),
+        data => console.log(data)
       ),
       shareReplay()
     );

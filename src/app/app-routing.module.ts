@@ -11,6 +11,8 @@ import { BreedSheetViewerComponent } from './breed-sheet-viewer/breed-sheet-view
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ProductsComponent } from './products/products.component';
 import { BreedSheetListComponent } from './breed-sheet-list/breed-sheet-list.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+
 
 
 import { AuthGuard } from './guards/auth.guard';
@@ -19,6 +21,7 @@ import { RoleGuard } from './guards/role.guard';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'concours', component: LandingPageComponent },
   { path: 'adminpanel', component: AdminPanelComponent, canActivate: [RoleGuard, AuthGuard] },
   { path: 'breedsheetcreator', component: BreedSheetCreatorComponent, canActivate: [AuthGuard] },
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },

@@ -90,68 +90,6 @@ h7 {
 .breedsheet-list-container {
   height: calc(100vh - 10rem);
 
-
-  // .colony-popup {
-  //   .checkboxes {
-  //     padding: 0 1rem;
-  //     width: 100%;
-  //     justify-content: space-between;
-
-  //     @include breakpoint('small') {
-  //       flex-direction: column!important;
-  //       align-items: flex-start!important;
-  //     }
-  //   }
-  //   .form-check-input {
-  //     position: absolute;
-  //     margin-top: inherit;
-  //     top: 15px;
-  //   }
-
-  //   .form-check {
-  //     position: relative;
-  //   }
-
-  //   .form-check-input {
-  //     top: -.8rem;
-  //     position:initial!important;
-  //     height:2rem!important;
-  //     width: 2rem!important;
-  //     background-color: #bebebe!important;
-  //     box-shadow: inset 0 2px 0 rgb(53 53 53 / 20%);
-  //     &:checked {
-  //       background-color:#81d746;
-  //     }
-  //   }
-
-  //   .form-check-input:checked {
-  //     background-color:#81d746!important;
-  //   }
-
-  //   .checkbox-container {
-  //     margin: 0;
-  //   }
-  // }
-
-  // .no-colony {
-  //   font-size: 1.4rem;
-  //   text-align: center;
-  //   margin-top: 1.5rem;
-  //   max-height: 15rem;
-  //   // margin-left: 3rem;
-  //   border: .3rem dashed #d6d6d6;
-  //   padding: 1rem 2rem;
-  //   padding-right: 3rem;
-  //   border-radius: 1.5rem;
-  //   .title {
-  //     font-weight: bold;
-  //     // color: #81d746;
-  //     font-size: 1.8rem;
-  //     margin-bottom: .5rem;
-  //   }
-  // }
-
-
   h6 {
     border-bottom: 3px solid #d6d6d6;
     padding-bottom: .3rem;
