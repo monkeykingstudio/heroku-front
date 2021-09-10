@@ -40,7 +40,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
 
 
-      console.log(JSON.parse(localStorage.getItem('currentUser'))?._id);
       const params = {
         sender: JSON.parse(localStorage.getItem('currentUser'))?._id
       };
@@ -75,10 +74,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.authService.logout(this.currentUser?.email)
-    .subscribe(() => {
+    .then((m) => {
+      console.log(m)
       this.router.navigate(['/login']);
       this.ngOnInit();
-    });
+    }).catch(err => console.error(err) )
     this.toggleShow();
   }
 

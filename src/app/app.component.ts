@@ -41,11 +41,9 @@ export class AppComponent implements OnInit, OnDestroy {
       if (event instanceof RoutesRecognized ) {
         if (event.url === '/login') {
           this.currentRoute = event.url;
-          console.log('CURRENT', this.currentRoute);
           this.visitorMode = true;
         } else if (event.url === '/signup') {
           this.currentRoute = event.url;
-          console.log('CURRENT', this.currentRoute);
           this.visitorMode = true;
         } else {
           this.visitorMode = false;

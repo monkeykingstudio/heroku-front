@@ -1,4 +1,4 @@
-import { Observable, throwError } from 'rxjs';
+import { EMPTY, NEVER, Observable } from 'rxjs';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
@@ -16,10 +16,23 @@ export class AuthInterceptor implements HttpInterceptor {
     const currentUser = this.authService.getIsAuth;
     const isLoggedIn = currentUser && currentUser.token;
     const isApiUrl = request.url.startsWith(environment.APIEndpoint);
+    const requestPath : string =  request.url.split(environment.APIEndpoint)[1]
+    //path should not be cancelled
+    const excludedPath : Array<string> = ['/api/auth/login', '/api/auth/logout']
+
+
+    var excludedPathIsPresent : boolean = false
+     excludedPath.map((p : string) => {
+      if (requestPath === p) {
+        excludedPathIsPresent = true
+      }
+    })
+
+    if (!currentUser && !excludedPathIsPresent) return EMPTY //cancel the current request
     if (isLoggedIn && isApiUrl) {
       request = request.clone({
         setHeaders: {
-          Authorization: `JWT ${currentUser.token}`
+          Authorization: `Bearer ${currentUser.token}`
         }
       });
     }

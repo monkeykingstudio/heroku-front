@@ -9,22 +9,23 @@ import { Router } from '@angular/router';
 })
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUser = this.authService.getIsAuth;
     const isLoggedIn = currentUser && currentUser.token;
 
     return next.handle(request)
-    .pipe(catchError(err => {
-      if (err.status === 401 || err.status === 500) {
-        // auto logout if 401 response returned from api
-        this.authService.logout(currentUser?.email).subscribe();
-        this.router.navigate(['/login']);
-      }
+      .pipe(catchError(err => {
+ 
+        if (err.status === 401 || err.status === 500) {
+          // auto logout if 401 response returned from api
+          if (currentUser) this.authService.logout(currentUser?.email).catch(err => console.error(err));
+          this.router.navigate(['/login']);
+        }
 
-      const error = err.error.message || err.statusText;
-      return throwError(error);
-    }));
+        const error = err.error.message || err.statusText;
+        return throwError(error);
+      }));
   }
 }

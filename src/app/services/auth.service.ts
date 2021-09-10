@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-console.log(environment.APIEndpoint)
+import { promise } from 'selenium-webdriver';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +29,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    console.log(this.authRoute);
+
     return this.http.post<any>(`${this.authRoute}/login`, { email, password })
       .pipe(
         map(user => {
@@ -45,11 +46,26 @@ export class AuthService {
   }
 
   logout(email: string) {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+
+  
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
-    return this.http.post<any>(`${this.authRoute}/logout`, {email});
+    return new Promise((resolve, reject) => {
+      this.http.post<any>(`${this.authRoute}/logout`, {email}).subscribe(success => {
+      
+      
+          localStorage.removeItem('currentUser');
+        
+      
+        resolve({message: 'success', user: email})
+    // remove user from local storage to log user out
+   
+     }, err => {
+       if (!email) reject('{email} field is missing')
+       if (err) reject(err)
+     });
+
+    })
   }
 
   unconnect(email: string) {

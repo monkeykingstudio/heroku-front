@@ -140,10 +140,8 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   }
 
   deleteBreedSheet(id: string, user: object, species: string) {
-    console.log(id, user, species);
     return this.breedingSheetsService.deleteSheet(id)
     .subscribe((res) => {
-      console.log(res);
       this.reloadBreedingSheets();
       this.reloadPendingSheets();
 
