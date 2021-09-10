@@ -40,6 +40,7 @@ import { BreedCardComponent } from './breed-card/breed-card.component';
 import HtmlPipe from './pipes/html.pipe';
 import { AlphaPipe } from './pipes/AlphaPipe';
 import { ApprovedPipe } from './pipes/ApprovedPipe';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { ApprovedPipe } from './pipes/ApprovedPipe';
     HtmlPipe,
     BreedCardComponent,
     AlphaPipe,
-    ApprovedPipe
+    ApprovedPipe,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,

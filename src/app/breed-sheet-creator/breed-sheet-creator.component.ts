@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { BreedingSheet } from './../models/breedingSheet.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
+import { AuthService } from './../services/auth.service';
 
 @Component({
   selector: 'app-breed-sheet-creator',
@@ -13,6 +15,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./breed-sheet-creator.component.scss']
 })
 export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
+  user$: Observable<User>;
+  currentUser: User;
+  private authStatusSubscription: Subscription;
+
   breedSheetForm: FormGroup;
   DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss ZZ';
   submitted = false;
@@ -220,6 +226,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   // get sourcetext() { return this.breedSheetForm.controls['sourcetext']; }
 
   constructor(
+    public authService: AuthService,
     public breedingSheetsService: BreedingSheetsService,
     private router: Router
     ) {
@@ -227,6 +234,14 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.authStatusSubscription = this.authService.currentUser.pipe(
+      map(user => {
+        if (user) {
+          this.currentUser = user;
+          // this.webSocketService.emit('test emit', this.currentUser.pseudo);
+        }
+      })
+      ).subscribe();
     this.reloadSheets();
     this.sheetSub = this.allbreedingSheets$
     .pipe(
@@ -375,7 +390,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   add() {
     const inputs = this.formControls;
     this.breedData = {
-      creator: null,
+      creator: this.currentUser._id,
       creationDate: moment(new Date()).format(this.DATE_RFC2822),
       status: 'pending',
       genre: inputs.genre.value.toLowerCase(),
@@ -464,6 +479,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sheetSub.unsubscribe();
+    this.authStatusSubscription.unsubscribe();
+
   }
 
 }

@@ -25,6 +25,16 @@
   background-repeat: no-repeat;
 }
 
+.youtube-icon {
+  display: flex;
+  background-image: url(../../app/icons/you.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 4rem;
+  height: 4rem;
+}
+
 .recurent-icon {
   &:before {
       content: '';
@@ -445,14 +455,87 @@
 
 .padlock-icon {
   &:before {
-      content: '';
-      background-image: url('../../app/icons/padlock.svg');
-      background-size: contain;
-      background-repeat: no-repeat;
-      display: inline-block;
-      position: relative;
-      width: 3rem;
-      height: 2.5rem;
+    content: '';
+    background-image: url('../../app/icons/padlock.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 3rem;
+    height: 2.5rem;
+  }
+}
+
+.medal-first-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/concours/medal-first.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.gift-one-icon {
+  cursor: pointer;
+  height: 10rem;
+  width: 10rem;
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/concours/gift-one.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+}
+}
+
+.gift-two-icon {
+  cursor: pointer;
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/concours/gift-two.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+  }
+}
+
+.gift-three-icon {
+  cursor: pointer;
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/concours/gift-three.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+    position: relative;
+    width: 7rem;
+    height: 7rem;
+  }
+}
+
+.potdemiel-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/potdemiel.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 8rem;
+    height: 8rem;
   }
 }
 

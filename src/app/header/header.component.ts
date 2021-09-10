@@ -39,7 +39,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         // notificationSocket.emit('userAuth', this.currentUser);
       });
 
-
       const params = {
         sender: JSON.parse(localStorage.getItem('currentUser'))?._id
       };
@@ -62,7 +61,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       map(user => {
         if (user) {
           this.currentUser = user;
-          // this.webSocketService.emit('test emit', this.currentUser.pseudo);
         }
       })
       ).subscribe();
