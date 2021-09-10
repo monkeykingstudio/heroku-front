@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
+  showYoutube: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  scrollDown(): void {
+    window.scrollTo(0, document.body.scrollHeight);
   }
 
 }

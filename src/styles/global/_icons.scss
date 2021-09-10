@@ -25,6 +25,16 @@
   background-repeat: no-repeat;
 }
 
+.youtube-icon {
+  display: flex;
+  background-image: url(../../app/icons/you.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 4rem;
+  height: 4rem;
+}
+
 .recurent-icon {
   &:before {
       content: '';

@@ -1,5 +1,104 @@
 @import '../../styles/global/mixins';
 
+:host {
+
+}
+
+.partner {
+  height: 15rem;
+  position: relative;
+  margin: 0 3rem;
+}
+
+.antsfourmis-cont {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  .antsfourmis-logo {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    height: 150px;
+    width: 150px;
+    background-image: url('../../assets/antsfourmis.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+
+    &:hover {
+      .ants {
+        bottom: 0;
+        transition: all, .2s;
+      }
+    }
+
+    .ants {
+      background-image: url('../../assets/ants.png');
+      height: 120px;
+      width: 120px;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      bottom: -110px;
+      left: 1.1rem;
+      position: absolute;
+      transition: all, .9s;
+    }
+  }
+}
+
+.fourmiculture-cont {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  transition: all, .5s;
+
+  &:hover {
+    transform: rotate(360deg);
+    transition: all, .3s;
+    .fourmiculture-logo {
+      background-image: url('../../assets/fourmiculture-on.png');
+      transition: all, 1s;
+    }
+  }
+
+  .fourmiculture-logo {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    height: 150px;
+    width: 150px;
+    background-image: url('../../assets/fourmiculture-off.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+  }
+}
+
+.register {
+  max-width: 24rem;
+  margin: 4rem auto;
+  padding: 2rem;
+  letter-spacing: .1rem;
+  font-size: 2.5rem;
+}
+
+.medal-first-icon {
+  @include breakpoint('small') {
+    display: none!important
+  }
+}
+
 .landing-page-container {
   height: calc(100vh - 10rem);
 
@@ -23,7 +122,6 @@
     background-color: white;
     border-radius: 0.5rem;
     border-bottom: 0.2rem solid #bdbdbd;
-    padding: 2rem;
     min-height: 100%;
     margin: 0;
 
@@ -33,13 +131,14 @@
   }
 
   .head {
+    border-radius: 5rem;
     text-align: center;
     position: relative;
     background-image: url('../../assets/concours-bg.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    display: inline-block;
+    display: flex;
     position: relative;
     width: 100%;
     height: 15rem;
@@ -61,12 +160,18 @@
     .mobile-cont {
       height: 6rem;
       justify-content: space-between;
+      margin: auto;
+      position: absolute;
+      top: 26rem;
+      left: 4.3rem;
+      margin-top: 4rem;
+
     }
 
-    @include breakpoint('small') {
-      height: 7rem;
-      margin-top: 4rem;
-    }
+    // @include breakpoint('small') {
+    //   height: 9rem;
+    //   left: 0rem;
+    // }
 
     span {
       text-transform: uppercase;
@@ -81,8 +186,10 @@
         height: 12rem;
         top: 2.5rem;
         @include breakpoint('small') {
-          top: 0;
-          margin: 2rem;
+          width: 14rem;
+          height: 14rem;
+          top: 10rem;
+          left: 9rem;
         }
       }
     }
@@ -90,6 +197,8 @@
     .overlay {
       position: relative;
       display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100%;
       width: 100%;
       top: 0;
@@ -104,6 +213,11 @@
         z-index:3;
         animation: float 5s ease-in-out infinite;
         transition: all .6s;
+
+        @include breakpoint('small') {
+          top: 2rem;
+          right: 6rem
+        }
         &:hover {
           transition: all .3s;
           width: 11rem;
@@ -117,6 +231,10 @@
         }
         &:before {
           transform: rotateZ(10deg);
+          @include breakpoint('small') {
+            top: -1rem;
+            right: 3.4rem;
+          }
         }
       }
 
@@ -128,6 +246,10 @@
         z-index:3;
         animation: float 2.5s ease-in-out infinite;
         transition: all .6s;
+        @include breakpoint('small') {
+          left: .5rem;
+          top: 5rem;
+        }
 
         &:hover {
           transition: all .3s;
@@ -153,6 +275,11 @@
         z-index:3;
         animation: float 3s ease-in-out infinite;
         transition: all .6s;
+        @include breakpoint('small') {
+          width: 6rem;
+          top: 9rem;
+          left: 26rem
+        }
 
         &:hover {
           transition: all .3s;
@@ -191,11 +318,19 @@
     margin: 0 auto;
     margin-top: 4rem;
     text-align: center;
+
+    @include breakpoint('small') {
+      margin-top: 27rem;
+    }
     span {
       color: #2d2d2d;
       font-weight: bold;
       line-height: 3rem;
       font-size: 24px;
+
+      @include breakpoint('small') {
+        font-size: 19px;
+      }
     }
   }
 
@@ -205,6 +340,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @include breakpoint('small') {
+      margin-top: 3rem;
+    }
 
     .left {
       &:before {
@@ -227,24 +366,43 @@
       background-size: contain;
       background-repeat: no-repeat;
       position: relative;
-      width: 31rem;
+      width: 28rem;
       height: 6rem;
       margin: 0 auto;
+
+      @include breakpoint('small') {
+        width: 27rem;
+        height: 6rem;
+      }
     }
   }
 
   .price {
     margin-top: 3rem;
+
+    @include breakpoint('small') {
+      margin-top: 1.5rem;
+    }
     .title {
       font-size: 35px;
       font-weight: bold;
       margin-bottom: .8rem;
+      text-align: center;
+      line-height: 1.4rem;
+
+      @include breakpoint('small') {
+        font-size: 26px;
+      }
     }
     .sub {
-      color: #fca62f;
+      color: #8f8f8f;
       font-weight: bold;
       font-style: italic;
       font-size: 25px;
+
+      @include breakpoint('small') {
+        font-size: 20px;
+      }
     }
   }
 

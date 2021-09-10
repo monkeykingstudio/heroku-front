@@ -1,19 +1,22 @@
 <div class="row">
   <div class="landing-page-container  col-sm-12">
-    <div id="landingRef" class="landing row">
+    <div id="landingRef" class="landing">
 
     <div class="col-sm-12">
       <div class="head">
-        <span class="mobile-hide" style="top: -2rem;">concours</span>
-
-        <div class="desk-hide mobile-cont d-flex flex-column">
-          <span style="top: -2rem;">concours</span>
-          <span style="top: -2rem;">fourmis<span style="color:#62d744">labs</span></span>
+        <div style="position:relative;margin: 0 auto" class="mobile-hide">
+          <i class="potdemiel-icon"></i>
         </div>
 
-        <i class="potdemiel-icon animate__animated animate__bounceIn"></i>
-        <span class="mobile-hide" style="top: -2rem;">fourmis<span style="color:#62d744">labs</span></span>
+        <i class="desk-hide potdemiel-icon animate__animated animate__fadeIn"></i>
+        <div class="desk-hide mobile-cont d-flex flex-column">
+          <span>concours</span>
+          <span>fourmis<span style="color:#62d744">labs</span></span>
+        </div>
+
         <div class="overlay">
+          <span class="mobile-hide" style="right:3rem">concours</span>
+          <span class="mobile-hide" style="left:8rem">fourmis<span style="color:#62d744">labs</span></span>
           <i class="gift-one-icon"></i>
           <i class="gift-two-icon"></i>
           <i class="gift-three-icon"></i>
@@ -21,6 +24,7 @@
       </div>
 
       <div class="col-sm-12 col-md-9 disclaimer">
+        <!-- <div  (click)='scrollDown()' class="register green-btn">JE M'INSCRIS !</div> -->
         <span>
           Pour les <span style="color:#62d744">300 membres inscrits</span> sur l’application, nous avons décidé
           de fêter çà avec vous tous, en vous gâtant avec des lots incroyables.<br/>
@@ -29,9 +33,43 @@
         </span>
       </div>
 
+      <div style="margin:4rem 0" class="col-sm-12">
+        <h5 style="text-align: center;font-size: 2.2rem!important;text-decoration: underline;font-style: italic;">Avec comme partenaires exceptionnels</h5>
+      </div>
+
+      <div class="col-sm-12 d-flex justify-content-center align-items-center flex-row">
+        <div class="d-flex flex-column align-items-center partner">
+          <span style="font-size: 22px;font-weight:bold;text-transform: uppercase;margin-bottom:1rem">Antsfourmis</span>
+          <a (mouseover)="showYoutube = true" (mouseleave)="showYoutube = false" style="text-decoration: none;" target="_blank" href="https://www.youtube.com/channel/UCgyGS-JuEnw55L7fFk6R2zQ">
+            <div class="antsfourmis-cont">
+              <div class="antsfourmis-logo">
+                <div class="ants"></div>
+              </div>
+            </div>
+            <i *ngIf="showYoutube" style="
+            position: absolute;
+            bottom: -15px;
+            left: -1.8rem;
+            " class="animate__animated animate__jello youtube-icon"></i>
+          </a>
+        </div>
+
+        <div class="d-flex flex-column align-items-center partner">
+          <span style="font-size: 22px;font-weight:bold;text-transform: uppercase;margin-bottom:1rem">Fourmiculture</span>
+          <a style="text-decoration: none;" target="_blank" href="https://fourmiculture.com/fr">
+            <div class="fourmiculture-cont">
+              <div class="fourmiculture-logo">
+                <div class="ants"></div>
+              </div>
+            </div>
+
+
+          </a>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-sm-12 col-md-8 first-title">
-          <i class="medal-first"></i>
           <div class="first">
             <i class="medal-first-icon left"></i>
             <i class="medal-first-icon right"></i>

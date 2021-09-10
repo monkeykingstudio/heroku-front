@@ -5,8 +5,8 @@
       L'application est actuellement instable. On travaille dessus.</span> -->
   </div>
   <div *ngIf="(authService.currentUser | async) as user" class="user-container">
-    <button  *ngIf="user.role === 'admin'" class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
-    <button *ngIf="user.role === 'admin'" class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button>
+    <!-- <button  *ngIf="user.role === 'admin'" class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
+    <button *ngIf="user.role === 'admin'" class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button> -->
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>
     </div>
