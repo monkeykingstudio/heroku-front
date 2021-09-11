@@ -17,9 +17,10 @@ export class MailService {
   }
 
 activateMail(token) {
+  console.log('NEW EMAIL')
   let headers = new HttpHeaders()
-  .set('Authorization', `JWT ${token}`);
-  return this.http.get(`https://calm-waters-91692.herokuapp.com/api/mail/activate`, {
+  .set('Authorization', `Bearer ${token}`);
+  return this.http.get(`${environment.APIEndpoint}/api/mail/activate`, {
     observe: 'body',
     params: new HttpParams().append('token', token),
     'headers': headers

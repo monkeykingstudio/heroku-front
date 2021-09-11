@@ -20,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
  
         if (err.status === 401 || err.status === 500) {
           // auto logout if 401 response returned from api
-          if (currentUser) this.authService.logout(currentUser?.email).catch(err => console.error(err));
+          if (currentUser && currentUser.token) this.authService.logout(currentUser?.email).catch(err => console.error(err));
           this.router.navigate(['/login']);
         }
 
