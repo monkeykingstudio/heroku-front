@@ -37,10 +37,10 @@ export class LateralMenuComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.authService.logout(this.currentUser?.email)
-    .subscribe(() => {
+    .then(() => {
       this.router.navigate(['/login']);
       this.currentUser = undefined;
-    });
+    }).catch(err => console.error(err) );
   }
 
   hoverStatusChange() {

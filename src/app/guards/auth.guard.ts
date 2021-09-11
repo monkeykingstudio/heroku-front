@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
     const isAuth = this.authService.getIsAuth;
     if (isAuth) {
       this.storage = JSON.parse(localStorage.getItem('currentUser'));
-      console.log('user verified: ', this.storage.is_verified);
+
       if (!isAuth && !this.storage.is_verified) {
         this.router.navigate(['/login']);
         return false;

@@ -72,10 +72,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.authService.logout(this.currentUser?.email)
-    .subscribe(() => {
+    .then((m) => {
+      console.log(m)
       this.router.navigate(['/login']);
       this.ngOnInit();
-    });
+    }).catch(err => console.error(err) )
     this.toggleShow();
   }
 
