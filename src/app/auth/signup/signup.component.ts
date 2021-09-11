@@ -7,6 +7,7 @@ import { MailService } from '../../services/mail.service';
 
 import { User } from './../../models/user.model';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -77,6 +78,7 @@ export class SignupComponent implements OnInit {
 
     this.userService.userAdd(this.user)
       .subscribe(user => {
+        console.log('register 2')
         if (this.errorMsg == null) {
           this.prepareForm();
           this.router.navigate(['/login']);
@@ -100,7 +102,7 @@ export class SignupComponent implements OnInit {
 
 
     // Mail part
-    this.mailService.sendEmail('https://calm-waters-91692.herokuapp.com/api/mail/sendmail', this.user)
+    this.mailService.sendEmail(`${environment.APIEndpoint}/api/mail/sendmail`, this.user)
     .subscribe(data => {
       let res: any = data;
       console.log(`Yipee ${this.user.email} is successfully register and mail is sent for validation`);

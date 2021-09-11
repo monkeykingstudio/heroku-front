@@ -26,6 +26,7 @@ export class UsersService {
   }
 
   userAdd(user: User) {
+    console.log('register')
     const userData = {
       'email': user.email,
       'password': user.password,

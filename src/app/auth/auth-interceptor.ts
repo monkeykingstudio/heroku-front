@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const isApiUrl = request.url.startsWith(environment.APIEndpoint);
     const requestPath : string =  request.url.split(environment.APIEndpoint)[1]
     //path should not be cancelled
-    const excludedPath : Array<string> = ['/api/auth/login', '/api/auth/logout']
+    const excludedPath : Array<string> = ['/api/auth/login', '/api/auth/logout', '/api/auth/register', '/api/mail/activate', '/api/mail/sendmail']
 
 
     var excludedPathIsPresent : boolean = false
