@@ -4,14 +4,35 @@
 
 }
 
+.partner-title {
+  text-align: center;
+  font-size: 2.2rem!important;
+  text-decoration: underline;
+  font-style: italic;
+  @include breakpoint('small') {
+    font-size: 2rem!important;
+  }
+}
+
+a {
+  color: #62d744;
+}
+
 .partner {
   height: 15rem;
   position: relative;
   margin: 0 3rem;
+
+  @include breakpoint('small') {
+    margin: 1rem 0;
+    height: 20rem;
+  }
+
 }
 
 .antsfourmis-cont {
   cursor: pointer;
+  position: relative;
   overflow: hidden;
   border-radius: 360px;
   display: flex;
@@ -157,7 +178,8 @@
       }
     }
 
-    .mobile-cont {
+    .logotext-cont {
+      width: 100%;
       height: 6rem;
       justify-content: space-between;
       margin: auto;
@@ -166,12 +188,11 @@
       left: 4.3rem;
       margin-top: 4rem;
 
-    }
+      @include breakpoint('small') {
+        left: 0rem;
+      }
 
-    // @include breakpoint('small') {
-    //   height: 9rem;
-    //   left: 0rem;
-    // }
+    }
 
     span {
       text-transform: uppercase;
@@ -188,7 +209,7 @@
         @include breakpoint('small') {
           width: 14rem;
           height: 14rem;
-          top: 10rem;
+          top: 12.5rem;
           left: 9rem;
         }
       }
@@ -232,15 +253,15 @@
         &:before {
           transform: rotateZ(10deg);
           @include breakpoint('small') {
-            top: -1rem;
-            right: 3.4rem;
+            top: 0rem;
+            right: 2.4rem;
           }
         }
       }
 
       .gift-two-icon {
         position: absolute;
-        top: 1.6rem;
+        top: 5rem;
         left: 3rem;
         transform:translate(0%,-50%);
         z-index:3;
@@ -248,7 +269,7 @@
         transition: all .6s;
         @include breakpoint('small') {
           left: .5rem;
-          top: 5rem;
+          top: 16rem;
         }
 
         &:hover {
@@ -277,8 +298,8 @@
         transition: all .6s;
         @include breakpoint('small') {
           width: 6rem;
-          top: 9rem;
-          left: 26rem
+          top: 14rem;
+          left: 22rem
         }
 
         &:hover {
@@ -320,7 +341,7 @@
     text-align: center;
 
     @include breakpoint('small') {
-      margin-top: 27rem;
+      margin-top: 25rem;
     }
     span {
       color: #2d2d2d;
@@ -329,7 +350,7 @@
       font-size: 24px;
 
       @include breakpoint('small') {
-        font-size: 19px;
+        font-size: 18px;
       }
     }
   }
@@ -342,7 +363,7 @@
     align-items: center;
 
     @include breakpoint('small') {
-      margin-top: 3rem;
+      margin-top: 1.5rem;
     }
 
     .left {
@@ -377,21 +398,130 @@
     }
   }
 
-  .price {
-    margin-top: 3rem;
+  .second-title {
+    margin: 0 auto;
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @include breakpoint('small') {
       margin-top: 1.5rem;
     }
+
+    .left {
+      &:before {
+        left: -5rem;
+        top: .3rem
+      }
+    }
+    .right {
+      &:before {
+        right: -5rem;
+        top: .3rem
+      }
+    }
+
+    .first {
+      display: flex;
+      justify-content: space-between;
+      content: '';
+      background-image: url('../../assets/secondprice.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      position: relative;
+      width: 28rem;
+      height: 6rem;
+      margin: 0 auto;
+
+      @include breakpoint('small') {
+        width: 27rem;
+        height: 6rem;
+      }
+    }
+  }
+
+  .third-title {
+    margin: 0 auto;
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include breakpoint('small') {
+      margin-top: 1.5rem;
+    }
+
+    .left {
+      &:before {
+        left: -5rem;
+        top: .3rem
+      }
+    }
+    .right {
+      &:before {
+        right: -5rem;
+        top: .3rem
+      }
+    }
+
+    .first {
+      display: flex;
+      justify-content: space-between;
+      content: '';
+      background-image: url('../../assets/thirdprice.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      position: relative;
+      width: 28rem;
+      height: 6rem;
+      margin: 0 auto;
+
+      @include breakpoint('small') {
+        width: 27rem;
+        height: 6rem;
+      }
+    }
+  }
+
+  .price {
+    margin: 3rem auto 2rem auto;
+
+    @include breakpoint('small') {
+      margin-top: 1.5rem;
+
+    }
     .title {
       font-size: 35px;
       font-weight: bold;
-      margin-bottom: .8rem;
+      margin-bottom: 1rem;
       text-align: center;
       line-height: 1.4rem;
+      position: relative;
 
       @include breakpoint('small') {
         font-size: 26px;
+        line-height: 2.5rem;
+      }
+    }
+
+    .badge {
+      position: absolute;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      background-color: #d74b44;
+      font-size: 0.9rem;
+      z-index: 3;
+      border-bottom: .2rem solid #9c3530;
+      border-top: .2rem solid #d74b44;
+      top: 64px;
+      border-right: hidden;
+      right: -2.5rem;
+
+      @include breakpoint('small') {
+        font-size: 1rem;
+        top: 88px;
+        right: 0.3rem;
       }
     }
     .sub {
@@ -401,8 +531,144 @@
       font-size: 25px;
 
       @include breakpoint('small') {
-        font-size: 20px;
+        font-size: 18px;
+        top: -.5rem;
+        position: relative;
       }
+    }
+  }
+
+  .gallery {
+    min-height: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+
+    .big-first {
+      cursor: pointer;
+      height: 22rem;
+      width: 36rem;
+      border-radius: .5rem;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin-bottom: .8rem;
+      background-image: url('../icons/concours/honey-big.jpg');
+      transition: all, .2s;
+      filter: contrast(120%);
+
+      @include breakpoint('small') {
+        width: 95%;
+      }
+
+      &:hover {
+        transition: all, .2s;
+        filter: contrast(140%);
+      }
+    }
+
+    .big-second {
+      cursor: pointer;
+      height: 22rem;
+      width: 36rem;
+      border-radius: .5rem;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-bottom: .8rem;
+      background-image: url('../icons/concours/minora-big.jpg');
+      transition: all, .2s;
+      filter: contrast(120%);
+      filter: grayscale(80%);
+
+      @include breakpoint('small') {
+        width: 95%;
+      }
+
+      &:hover {
+        transition: all, .2s;
+        filter: contrast(140%);
+      }
+    }
+
+    .thumbs {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 36rem;
+      @include breakpoint('small') {
+        width: 95%;
+      }
+      .thumb {
+        cursor: pointer;
+        height: 8rem;
+        width: 8rem;
+        border-radius: .5rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 7rem;
+        width: 11.4rem;
+        filter: contrast(120%);
+
+        @include breakpoint('small') {
+          height: 7rem;
+          width: 31.5%;
+        }
+
+        &:hover {
+          transition: all, .2s;
+          filter: contrast(140%);
+        }
+      }
+
+      .pic-one-first {
+        background-image: url('../icons/concours/honey-1.jpg');
+      }
+
+      .pic-two-first {
+        background-image: url('../icons/concours/honey-2.jpg');
+      }
+
+      .pic-three-first {
+        background-image: url('../icons/concours/honey-3.jpg');
+      }
+
+      .pic-one-second {
+        background-image: url('../icons/concours/minora-1.jpg');
+      }
+
+      .pic-two-second {
+        background-image: url('../icons/concours/minora-2.jpg');
+      }
+
+      .pic-three-second {
+        background-image: url('../icons/concours/minora-3.jpg');
+      }
+    }
+  }
+
+  .youtube-icon {
+    position: absolute;
+    bottom: 0px;
+    left: -3rem;
+    @include breakpoint('small') {
+      left: -1.4rem
+    }
+  }
+
+  .green-btn {
+    letter-spacing: .15rem;
+    margin-top: 1rem;
+    width: 36rem;
+    word-spacing: .25em;
+    font-size: 18px;
+    width: 36rem;
+
+    @include breakpoint('small') {
+      width: 95%!important;
+      font-size: 12px;
     }
   }
 

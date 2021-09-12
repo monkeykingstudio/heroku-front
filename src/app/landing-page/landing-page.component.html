@@ -6,10 +6,11 @@
       <div class="head">
         <div style="position:relative;margin: 0 auto" class="mobile-hide">
           <i class="potdemiel-icon"></i>
+          <!-- <i class="laurel-icon"></i> -->
         </div>
 
         <i class="desk-hide potdemiel-icon animate__animated animate__fadeIn"></i>
-        <div class="desk-hide mobile-cont d-flex flex-column">
+        <div class="desk-hide logotext-cont d-flex flex-column">
           <span>concours</span>
           <span>fourmis<span style="color:#62d744">labs</span></span>
         </div>
@@ -27,17 +28,17 @@
         <!-- <div  (click)='scrollDown()' class="register green-btn">JE M'INSCRIS !</div> -->
         <span>
           Pour les <span style="color:#62d744">300 membres inscrits</span> sur l’application, nous avons décidé
-          de fêter çà avec vous tous, en vous gâtant avec des lots incroyables.<br/>
-          Pour participer, <span style="color:#62d744">inscrivez-vous </span>
-          en bas de page, puis <span style="color:#62d744">suivez les différentes étapes</span> afin d'obtenir votre chance d’obtenir nos différents lots !
+          de fêter çà avec vous tous, en vous gâtant avec des cadeaux incroyables.<br/><br/>
+          Pour participer, <span (click)='scrollDown()' style="color:#62d744;text-decoration: underline;cursor:pointer">inscrivez-vous</span>
+          en bas de page.<br/> Puis <span style="color:#62d744">suivez les différentes étapes</span> afin de tenter votre chance pour obtenir un des différents lots mis en jeu!
         </span>
       </div>
 
       <div style="margin:4rem 0" class="col-sm-12">
-        <h5 style="text-align: center;font-size: 2.2rem!important;text-decoration: underline;font-style: italic;">Avec comme partenaires exceptionnels</h5>
+        <h5 class="partner-title">Avec comme partenaires exceptionnels</h5>
       </div>
 
-      <div class="col-sm-12 d-flex justify-content-center align-items-center flex-row">
+      <div class="col-sm-12 d-flex justify-content-center align-items-center flex-md-row flex-column">
         <div class="d-flex flex-column align-items-center partner">
           <span style="font-size: 22px;font-weight:bold;text-transform: uppercase;margin-bottom:1rem">Antsfourmis</span>
           <a (mouseover)="showYoutube = true" (mouseleave)="showYoutube = false" style="text-decoration: none;" target="_blank" href="https://www.youtube.com/channel/UCgyGS-JuEnw55L7fFk6R2zQ">
@@ -46,11 +47,7 @@
                 <div class="ants"></div>
               </div>
             </div>
-            <i *ngIf="showYoutube" style="
-            position: absolute;
-            bottom: -15px;
-            left: -1.8rem;
-            " class="animate__animated animate__jello youtube-icon"></i>
+            <i *ngIf="showYoutube" class="animate__animated animate__jello youtube-icon"></i>
           </a>
         </div>
 
@@ -62,8 +59,6 @@
                 <div class="ants"></div>
               </div>
             </div>
-
-
           </a>
         </div>
       </div>
@@ -75,11 +70,53 @@
             <i class="medal-first-icon right"></i>
           </div>
         </div>
-        <div class="price col-sm-12">
+        <div class="price col-sm-12 col-md-8">
           <div class="d-flex flex-column align-items-center justify-content-center">
-            <span class="title">Myrmecocystus Mendax</span>
+            <span class="title">Myrmecocystus Mendax
+              <div class="badge">GYNE + COUVAIN (2021)</div>
+            </span>
             <span class="sub">(fourmi pot-de-miel)</span>
           </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="gallery col-sm-12 col-md-6">
+          <div class="big-first"></div>
+          <div class="thumbs">
+            <div class="thumb pic-one-first"></div>
+            <div class="thumb pic-two-first"></div>
+            <div class="thumb pic-three-first"></div>
+          </div>
+          <div style="margin-top:1rem" class="green-btn">CONSULTER LA FICHE D'ELEVAGE</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-8 second-title">
+          <div class="first">
+            <i class="medal-first-icon left"></i>
+            <i class="medal-first-icon right"></i>
+          </div>
+        </div>
+        <div class="price col-sm-12 col-md-8">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <span class="title">Fourmilière Plexi Minora
+            </span>
+            <span class="sub">(2.6 - Model 3 - Fourmiculture)</span>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="gallery col-sm-12 col-md-6">
+          <div class="big-second"></div>
+          <div class="thumbs">
+            <div class="thumb pic-one-second"></div>
+            <div class="thumb pic-two-second"></div>
+            <div class="thumb pic-three-second"></div>
+          </div>
+          <div style="margin-top:1rem" class="green-btn">VOIR LE NID EN BOUTIQUE</div>
         </div>
       </div>
       </div>
