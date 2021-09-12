@@ -4,6 +4,28 @@
 
 }
 
+.prix {
+  font-weight: bold;
+  font-size: 30px;
+  text-transform: uppercase;
+  margin: 2rem 0 2.5rem 0;
+  color: #fca62f;
+}
+
+.popup-wrapper {
+  background-color: rgba(0, 0, 0, 0.623);
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  z-index: 7;
+}
+
 .partner-title {
   text-align: center;
   font-size: 2.2rem!important;
@@ -580,7 +602,6 @@ a {
       background-image: url('../icons/concours/minora-big.jpg');
       transition: all, .2s;
       filter: contrast(120%);
-      filter: grayscale(80%);
 
       @include breakpoint('small') {
         width: 95%;
