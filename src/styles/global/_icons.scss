@@ -528,8 +528,23 @@
 
 .potdemiel-icon {
   &:before {
+    z-index: 4;
     content: '';
     background-image: url('../../app/icons/potdemiel.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+  }
+}
+
+.laurel-icon {
+  &:before {
+    z-index: 3;
+    content: '';
+    background-image: url('../../app/icons/concours/laurel.svg');
     background-size: contain;
     background-repeat: no-repeat;
     display: inline-block;
