@@ -15,24 +15,24 @@ export class LandingPageComponent implements OnInit {
   data: string;
 
   firstPrice: Array<string> = [
-    'honey-big.jpg',
-    'honey-1.jpg',
-    'honey-2.jpg',
-    'honey-3.jpg',
+    '../icons/concours/honey-1honey-big.jpg',
+    '../icons/concours/honey-1.jpg',
+    '../icons/concours/honey-1honey-2.jpg',
+    '../icons/concours/honey-1honey-3.jpg',
   ];
 
   secondPrice: Array<string> = [
-    'minora-big.jpg',
-    'minora-1.jpg',
-    'minora-2.jpg',
-    'minora-3.jpg',
+    '../icons/concours/honey-1minora-big.jpg',
+    '../icons/concours/honey-1minora-1.jpg',
+    '../icons/concours/honey-1minora-2.jpg',
+    '../icons/concours/honey-1minora-3.jpg',
   ];
 
   thirdPrice: Array<string> = [
-    'pack-big.jpg',
-    'pack-1.jpg',
-    'pack-2.jpg',
-    'pack-3.jpg',
+    '../icons/concours/honey-1pack-big.jpg',
+    '../icons/concours/honey-1pack-1.jpg',
+    '../icons/concours/honey-1pack-2.jpg',
+    '../icons/concours/honey-1pack-3.jpg',
   ];
 
 
