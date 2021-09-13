@@ -1,17 +1,22 @@
 <div class="row">
-  <div class="popup-wrapper">
-    <div class="popup">
-      test
+
+  <app-popup [data]='data' style="height:100vh;position:fixed!important" id='gallery' class="animate__animated animate__fadeIn">
+    <div style="background:transparent;margin-left: 6rem;" id="popup" class="popup animate__animated animate__zoomInUp animate__delay-05s">
+
+      <img src="{{data}}" id="picture" alt="">
+      <button type="button" class='close-popup animate__animated animate__bounce animate__delay-05s' (click)="closePopup('gallery'); $event.stopPropagation()">
+        <i class="close-icon "></i>
+      </button>
     </div>
-  </div>
-  <div class="landing-page-container  col-sm-12">
-    <div id="landingRef" class="landing">
+  </app-popup>
+
+  <div class="landing-page-container col-sm-12">
+    <div class="landing">
 
     <div class="col-sm-12">
       <div class="head">
         <div style="position:relative;margin: 0 auto" class="mobile-hide">
           <i class="potdemiel-icon"></i>
-          <!-- <i class="laurel-icon"></i> -->
         </div>
 
         <i class="desk-hide potdemiel-icon animate__animated animate__fadeIn"></i>
@@ -68,7 +73,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div id="galleryRef" class="row">
         <div class="col-sm-12 col-md-8 first-title">
           <div class="first">
             <i class="medal-first-icon left"></i>
@@ -87,11 +92,11 @@
       </div>
       <div class="row">
         <div class="gallery col-sm-12 col-md-6">
-          <div class="big-first"></div>
+          <div (click)="openPopup('gallery', firstPrice[0])" class="big-first"></div>
           <div class="thumbs">
-            <div class="thumb pic-one-first"></div>
-            <div class="thumb pic-two-first"></div>
-            <div class="thumb pic-three-first"></div>
+            <div (click)="openPopup('gallery', firstPrice[1])" class="thumb pic-one-first"></div>
+            <div (click)="openPopup('gallery', firstPrice[2])" class="thumb pic-two-first"></div>
+            <div (click)="openPopup('gallery', firstPrice[3])" class="thumb pic-three-first"></div>
           </div>
           <span style="
           text-align: center;
@@ -131,11 +136,11 @@
       </div>
       <div class="row">
         <div class="gallery col-sm-12 col-md-6">
-          <div class="big-second"></div>
+          <div (click)="openPopup('gallery', secondPrice[0])" class="big-second"></div>
           <div class="thumbs">
-            <div class="thumb pic-one-second"></div>
-            <div class="thumb pic-two-second"></div>
-            <div class="thumb pic-three-second"></div>
+            <div (click)="openPopup('gallery', secondPrice[1])" class="thumb pic-one-second"></div>
+            <div (click)="openPopup('gallery', secondPrice[2])" class="thumb pic-two-second"></div>
+            <div (click)="openPopup('gallery', secondPrice[3])" class="thumb pic-three-second"></div>
           </div>
           <span style="
               text-align: center;

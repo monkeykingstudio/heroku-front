@@ -19,7 +19,6 @@ import { map } from 'rxjs/operators';
 export class ColoniesListComponent implements OnInit,  OnDestroy {
   allColonies$: Observable<Colony[]>;
   allbreedingSheets$: Observable<BreedingSheet[]>;
-  // species$: Observable<string[]>;
   species = [];
 
   private sheetSub: Subscription;

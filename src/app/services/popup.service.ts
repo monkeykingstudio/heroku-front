@@ -16,7 +16,7 @@ export class PopupService {
       this.popups = this.popups.filter(x => x.id !== id);
   }
 
-  open(id: string) {
+  open(id: string, img?: string) {
       // open popup specified by id
       const popup = this.popups.find(x => x.id === id);
       popup.open();

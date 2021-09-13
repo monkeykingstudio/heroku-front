@@ -33,14 +33,13 @@ export class PopupComponent implements OnInit, OnDestroy {
       document.getElementById('colonyRef').appendChild(this.element);
     } else if (document.getElementById('foodRef')) {
       document.getElementById('foodRef').appendChild(this.element);
+    } else if (document.getElementById('galleryRef')) {
+      document.getElementById('galleryRef').appendChild(this.element);
     }
 
     if (this.element.classList[0] === 'counter-popup') {
       document.getElementById('counterRef').appendChild(this.element);
     }
-    // else if (this.element.classList[0] === 'food-popup') {
-    //   document.getElementById('foodRef').appendChild(this.element);
-    // }
 
     // close modal on background click
     this.element.addEventListener('click', el => {

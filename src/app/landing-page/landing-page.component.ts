@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PopupService } from '../services/popup.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -9,23 +10,33 @@ export class LandingPageComponent implements OnInit {
 
   showYoutube: boolean = false;
 
-  showFirstBigPopup: boolean = false;
-  showFirstOnePopup: boolean = false;
-  showFirstTwoPopup: boolean = false;
-  showFirstThreePopup: boolean = false;
+  bigFirst = false;
 
-  showSecondBigPopup: boolean = false;
-  showSecondOnePopup: boolean = false;
-  showSecondTwoPopup: boolean = false;
-  showSecondThreePopup: boolean = false;
+  data: string;
 
-  showThirdBigPopup: boolean = false;
-  showThirdOnePopup: boolean = false;
-  showThirdTwoPopup: boolean = false;
-  showThirdThreePopup: boolean = false;
+  firstPrice: Array<string> = [
+    'honey-big.jpg',
+    'honey-1.jpg',
+    'honey-2.jpg',
+    'honey-3.jpg',
+  ];
+
+  secondPrice: Array<string> = [
+    'minora-big.jpg',
+    'minora-1.jpg',
+    'minora-2.jpg',
+    'minora-3.jpg',
+  ];
+
+  thirdPrice: Array<string> = [
+    'pack-big.jpg',
+    'pack-1.jpg',
+    'pack-2.jpg',
+    'pack-3.jpg',
+  ];
 
 
-  constructor() { }
+  constructor(public popupService: PopupService) { }
 
   ngOnInit(): void {
   }
@@ -34,58 +45,14 @@ export class LandingPageComponent implements OnInit {
     window.scrollTo(0, document.body.scrollHeight);
   }
 
-  // ONE
-
-  displayFirstBigPopup() {
-
+  openPopup(id: string, img: string): void {
+    this.popupService.open(id);
+    this.data = img;
+    console.log(this.data);
   }
 
-  displayFirstOnePopup() {
-
-  }
-
-  displayFirstTwoPopup() {
-
-  }
-
-  displayFirstThreePopup() {
-
-  }
-
- // SECOND
-
-  displaySecondBigPopup() {
-
-  }
-
-  displaySecondOnePopup() {
-
-  }
-
-  displaySecondTwoPopup() {
-
-  }
-
-  displaySecondThreePopup() {
-
-  }
-
- // THIRD
-
-  displayThirdBigPopup() {
-
-  }
-
-  displayThirdOnePopup() {
-
-  }
-
-  displayThirdTwoPopup() {
-
-  }
-
-  displayThirdThreePopup() {
-
+  closePopup(id: string): void {
+    this.popupService.close(id);
   }
 
 }
