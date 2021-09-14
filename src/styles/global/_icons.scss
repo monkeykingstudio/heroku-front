@@ -479,6 +479,32 @@
   }
 }
 
+.medal-second-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/concours/medal-second.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.medal-third-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/concours/medal-third.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
 .gift-one-icon {
   cursor: pointer;
   height: 10rem;

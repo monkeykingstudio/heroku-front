@@ -29,7 +29,7 @@ export class LandingPageComponent implements OnInit {
   ];
 
   thirdPrice: Array<string> = [
-    '../../assets/concours/pack-big.jpg',
+    '../../assets/concours/pack-big.png',
     '../../assets/concours/pack-1.jpg',
     '../../assets/concours/pack-2.jpg',
     '../../assets/concours/pack-3.jpg',

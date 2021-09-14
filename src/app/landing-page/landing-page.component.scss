@@ -148,7 +148,7 @@ a {
   font-size: 2.5rem;
 }
 
-.medal-first-icon {
+.medal-first-icon, .medal-second-icon, .medal-third-icon {
   @include breakpoint('small') {
     display: none!important
   }
@@ -428,6 +428,7 @@ a {
       @include breakpoint('small') {
         width: 27rem;
         height: 6rem;
+        margin: 4rem 0 2rem 0;
       }
     }
   }
@@ -471,6 +472,7 @@ a {
       @include breakpoint('small') {
         width: 27rem;
         height: 6rem;
+        margin: 4rem 0 2rem 0;
       }
     }
   }
@@ -514,6 +516,7 @@ a {
       @include breakpoint('small') {
         width: 27rem;
         height: 6rem;
+        margin: 4rem 0 2rem 0;
       }
     }
   }
@@ -625,6 +628,29 @@ a {
       }
     }
 
+    .big-third {
+      cursor: pointer;
+      height: 22rem;
+      width: 36rem;
+      border-radius: .5rem;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-bottom: .8rem;
+      background-image: url('../../assets/concours/pack-big.png');
+      transition: all, .2s;
+      filter: contrast(120%);
+
+      @include breakpoint('small') {
+        width: 95%;
+      }
+
+      &:hover {
+        transition: all, .2s;
+        filter: contrast(140%);
+      }
+    }
+
     .thumbs {
       display: flex;
       align-items: center;
@@ -678,6 +704,18 @@ a {
 
       .pic-three-second {
         background-image: url('../../assets/concours/minora-3.jpg');
+      }
+
+      .pic-one-third {
+        background-image: url('../../assets/concours/pack-1.jpg');
+      }
+
+      .pic-two-third {
+        background-image: url('../../assets/concours/pack-2.jpg');
+      }
+
+      .pic-three-third {
+        background-image: url('../../assets/concours/pack-3.jpg');
       }
     }
   }
