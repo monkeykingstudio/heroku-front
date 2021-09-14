@@ -754,3 +754,84 @@ a {
     max-height: 60%;
   }
 }
+
+.separator {
+  margin: auto;
+  background-color: rgb(83, 83, 83);
+  height: 2px;
+  border-bottom: 2px solid rgb(41, 41, 41);
+}
+
+.stepper {
+  margin: auto;
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    font-size: 20px;
+    margin-left: 2rem;
+    font-weight: bold;
+  }
+
+  .red {
+    color: #d74444;
+    background-color: transparent!important;
+  }
+  .green {
+    color: #62d744;
+    background-color: transparent!important;
+  }
+  .blue {
+    color: #3387b2;
+    background-color: transparent!important;
+  }
+  .grey {
+    color: #464655;
+    background-color: transparent!important;
+  }
+
+  .checked {
+    background-color: #c2ffb2;
+  }
+  .deleted {
+    background-color: #ffb2b2;
+  }
+  .waited {
+    background-color: #b2e5ff;
+  }
+  .locked {
+    background-color: #464655 ;
+  }
+
+  .left, .right {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+  }
+
+  .line {
+    display: flex;
+    justify-content: space-between;
+    min-height: 9rem;
+    align-items: center;
+  }
+
+  .circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 360px;
+    width: 9rem;
+    height: 9rem;
+  }
+
+  .v-line {
+    position: relative;
+    width: 3px;
+    height: 2.5rem;
+    margin: 0;
+    left: 4.5rem;
+  }
+}

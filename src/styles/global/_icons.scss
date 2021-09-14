@@ -466,6 +466,58 @@
   }
 }
 
+.checked-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/checked.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.deleted-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/deleted.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.waited-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/waited.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.locked-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/locked.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
 .medal-first-icon {
   &:before {
     content: '';
