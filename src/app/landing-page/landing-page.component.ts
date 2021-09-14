@@ -15,7 +15,7 @@ export class LandingPageComponent implements OnInit {
   data: string;
 
   firstPrice: Array<string> = [
-    '../icons/concours/honey-big.jpg',
+    '../../assets/antban.png',
     '../icons/concours/honey-1.jpg',
     '../icons/concours/honey-2.jpg',
     '../icons/concours/honey-3.jpg',
