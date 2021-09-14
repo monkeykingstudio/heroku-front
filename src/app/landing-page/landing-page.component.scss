@@ -766,7 +766,7 @@ a {
 .stepper {
   margin: auto;
   margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -839,5 +839,22 @@ a {
     height: 2.5rem;
     margin: 0;
     left: 4.3rem;
+  }
+}
+
+.red-btn {
+  @include breakpoint('small') {
+    margin: auto!important;
+    margin-top: 3rem!important;
+    max-width: 26rem!important;
+    font-size: 18px!important;
+    padding: 2rem 1rem!important;
+    line-height: 4rem!important;
+  }
+}
+
+h5 {
+  @include breakpoint('small') {
+    font-size: 2.4rem !important;
   }
 }
