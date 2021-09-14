@@ -15,24 +15,24 @@ export class LandingPageComponent implements OnInit {
   data: string;
 
   firstPrice: Array<string> = [
-    '../../assets/antban.png',
-    '../icons/concours/honey-1.jpg',
-    '../icons/concours/honey-2.jpg',
-    '../icons/concours/honey-3.jpg',
+    '../../assets/concours/honey-big.jpg',
+    '../../assets/concours/honey-1.jpg',
+    '../../assets/concours/honey-2.jpg',
+    '../../assets/concours/honey-3.jpg',
   ];
 
   secondPrice: Array<string> = [
-    '../icons/concours/minora-big.jpg',
-    '../icons/concours/minora-1.jpg',
-    '../icons/concours/minora-2.jpg',
-    '../icons/concours/minora-3.jpg',
+    '../../assets/concours/minora-big.jpg',
+    '../../assets/concours/minora-1.jpg',
+    '../../assets/concours/minora-2.jpg',
+    '../../assets/concours/minora-3.jpg',
   ];
 
   thirdPrice: Array<string> = [
-    '../icons/concours/pack-big.jpg',
-    '../icons/concours/pack-1.jpg',
-    '../icons/concours/pack-2.jpg',
-    '../icons/concours/pack-3.jpg',
+    '../../assets/concours/pack-big.jpg',
+    '../../assets/concours/pack-1.jpg',
+    '../../assets/concours/pack-2.jpg',
+    '../../assets/concours/pack-3.jpg',
   ];
 
 

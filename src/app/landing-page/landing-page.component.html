@@ -1,7 +1,7 @@
 <div class="row">
 
   <app-popup [data]='data' style="height:100vh;position:fixed!important" id='gallery' class="animate__animated animate__fadeIn">
-    <div style="background:transparent;margin-left: 6rem;" id="popup" class="popup animate__animated animate__zoomInUp">
+    <div style="background:transparent;" id="popup" class="popup animate__animated animate__zoomInUp">
 
       <img src="{{data}}" id="picture" alt="">
       <button type="button" class='close-popup animate__animated animate__bounce animate__delay-05s' (click)="closePopup('gallery'); $event.stopPropagation()">

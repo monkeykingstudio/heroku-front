@@ -588,7 +588,7 @@ a {
       background-repeat: no-repeat;
       background-size: cover;
       margin-bottom: .8rem;
-      background-image: url('../icons/concours/honey-big.jpg');
+      background-image: url('../../assets/concours/honey-big.jpg');
       transition: all, .2s;
       filter: contrast(120%);
 
@@ -611,7 +611,7 @@ a {
       background-repeat: no-repeat;
       background-size: contain;
       margin-bottom: .8rem;
-      background-image: url('../icons/concours/minora-big.jpg');
+      background-image: url('../../assets/concours/minora-big.jpg');
       transition: all, .2s;
       filter: contrast(120%);
 
@@ -657,27 +657,27 @@ a {
       }
 
       .pic-one-first {
-        background-image: url('../icons/concours/honey-1.jpg');
+        background-image: url('../../assets/concours/honey-1.jpg');
       }
 
       .pic-two-first {
-        background-image: url('../icons/concours/honey-2.jpg');
+        background-image: url('../../assets/concours/honey-2.jpg');
       }
 
       .pic-three-first {
-        background-image: url('../icons/concours/honey-3.jpg');
+        background-image: url('../../assets/concours/honey-3.jpg');
       }
 
       .pic-one-second {
-        background-image: url('../icons/concours/minora-1.jpg');
+        background-image: url('../../assets/concours/minora-1.jpg');
       }
 
       .pic-two-second {
-        background-image: url('../icons/concours/minora-2.jpg');
+        background-image: url('../../assets/concours/minora-2.jpg');
       }
 
       .pic-three-second {
-        background-image: url('../icons/concours/minora-3.jpg');
+        background-image: url('../../assets/concours/minora-3.jpg');
       }
     }
   }
@@ -705,4 +705,14 @@ a {
     }
   }
 
+}
+
+.popup {
+  max-height: 80%;
+
+  margin-left: 6rem;
+  @include breakpoint('small') {
+    margin-left: 0;
+    max-height: 60%;
+  }
 }
