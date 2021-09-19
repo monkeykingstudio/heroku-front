@@ -771,7 +771,7 @@ a {
   justify-content: center;
   align-items: center;
 
-  padding: 2rem;
+  padding: 3rem 2rem;
   border: .3rem dashed #adadad;
   border-radius: 1rem;
 
@@ -857,4 +857,25 @@ h5 {
   @include breakpoint('small') {
     font-size: 2.4rem !important;
   }
+}
+
+.green-static-btn {
+  text-align: center;
+  color: #62d744;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  cursor: initial;
+  transition: all 0.2s;
+  border: 0.3rem dashed #62d744;
+}
+
+.green-txt {
+  color: #62d744;
+}
+
+.red-txt {
+  color: #d74444;
+
 }

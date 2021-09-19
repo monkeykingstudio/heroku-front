@@ -1,17 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PopupService } from '../services/popup.service';
+import { ConcoursService } from '../services/concours.service';
+import { UsersService } from '../services/user.service';
+import { Observable, Subscription } from 'rxjs';
+import { User } from '../models/user.model';
+import { AuthService } from '../services/auth.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss']
 })
-export class LandingPageComponent implements OnInit {
+export class LandingPageComponent implements OnInit, OnDestroy {
+  allRegisteredUsers$: Observable<any[]>;
+  usersList: any[] = [];
 
+  private authStatusSubscription: Subscription;
+  currentUser: User;
+  registered: boolean = false;
   showYoutube: boolean = false;
 
   bigFirst = false;
-
   data: string;
 
   firstPrice: Array<string> = [
@@ -35,10 +45,43 @@ export class LandingPageComponent implements OnInit {
     '../../assets/concours/pack-3.jpg',
   ];
 
-
-  constructor(public popupService: PopupService) { }
+  constructor(
+    public popupService: PopupService,
+    public concoursService: ConcoursService,
+    public usersService: UsersService,
+    public authService: AuthService
+    ) { }
 
   ngOnInit(): void {
+
+    this.authStatusSubscription = this.authService.currentUser.pipe(
+      map(user => {
+        if (user) {
+          this.currentUser = user;
+        }
+      })
+      ).subscribe();
+    this.reloadRegisteredUsers();
+
+  }
+
+  async reloadRegisteredUsers() {
+    const users$ = await this.concoursService.usersGet()
+    // this.allRegisteredUsers$ = users$
+    .subscribe((users) => {
+      console.log('registered', this.registered);
+      this.usersList = users;
+      if (this.userExists(this.currentUser.email)) {
+        console.log('bwaaah');
+        this.registered = true;
+      }
+    });
+  }
+
+  userExists(user: string) {
+    return this.usersList.some((el) => {
+      return el.email === user;
+    });
   }
 
   scrollDown(): void {
@@ -53,6 +96,18 @@ export class LandingPageComponent implements OnInit {
 
   closePopup(id: string): void {
     this.popupService.close(id);
+  }
+
+  registerConcours(): void {
+    console.log(this.usersList);
+    this.concoursService.userAdd(this.currentUser.email)
+    .subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.authStatusSubscription.unsubscribe();
   }
 
 }

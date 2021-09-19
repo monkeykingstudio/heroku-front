@@ -47,25 +47,18 @@ export class AuthService {
 
   logout(email: string) {
 
-  
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
     return new Promise((resolve, reject) => {
       this.http.post<any>(`${this.authRoute}/logout`, {email}).subscribe(success => {
-      
-      
-          localStorage.removeItem('currentUser');
-        
-      
+        localStorage.removeItem('currentUser');
         resolve({message: 'success', user: email})
     // remove user from local storage to log user out
-   
-     }, err => {
-       if (!email) reject('{email} field is missing')
-       if (err) reject(err)
-     });
-
-    })
+    }, err => {
+      if (!email) reject('{email} field is missing')
+      if (err) reject(err)
+      });
+    });
   }
 
   unconnect(email: string) {
