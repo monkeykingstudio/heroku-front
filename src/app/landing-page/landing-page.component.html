@@ -195,8 +195,8 @@
       <div class="row">
         <div class="col-sm-12 col-md-6 separator"></div>
 
-        <div *ngIf="!registered || currentUser === undefined" class="col-sm-12">
-          <div (click)="registerConcours()" style="margin:auto;margin-top:3rem;max-width:36rem;font-size:24px;padding:2rem" class="red-btn">JE M'INSCRIS AU CONCOURS</div>
+        <div *ngIf="!registered" class="col-sm-12">
+          <div *ngIf="currentUser !== undefined" (click)="registerConcours()" style="margin:auto;margin-top:3rem;max-width:36rem;font-size:24px;padding:2rem" class="red-btn">JE M'INSCRIS AU CONCOURS</div>
         </div>
 
         <div *ngIf="registered" class="col-sm-12">
@@ -231,14 +231,14 @@
               <div class="circle waited">
                 <i class="waited-icon"></i>
               </div>
-              <span class="blue">3 - Ouverture des inscriptions (28/09/21 - 9/10/21)</span>
+              <span class="blue">3 - Ouverture des inscriptions (22 sept)</span>
             </div>
             <div class="v-line waited"></div>
             <div class="line">
               <div class="circle locked">
                 <i class="locked-icon"></i>
               </div>
-              <span class="grey">4 - Clotûre des inscriptions (10 octobre)</span>
+              <span class="grey">4 - Clotûre des inscriptions (10 oct)</span>
 
             </div>
             <div class="v-line locked"></div>
