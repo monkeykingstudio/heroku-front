@@ -62,7 +62,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       })
       ).subscribe();
     this.reloadRegisteredUsers();
-
   }
 
   async reloadRegisteredUsers() {

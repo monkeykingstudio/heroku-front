@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="currentUser?.role === 'admin'" class="row">
 
   <app-popup [data]='data' style="height:100vh;position:fixed!important" id='gallery' class="animate__animated animate__fadeIn">
     <div style="background:transparent;" id="popup" class="popup animate__animated animate__zoomInUp">
@@ -255,5 +255,10 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="currentUser === undefined || currentUser?.role !== 'admin'" style="height:88vh;background-color: white;overflow:hidden" class="row">
+  <img style="margin:auto;width: 970px;border:none" src="../../assets/concours/banniere.png" alt="">
+</div>
+
 
 
