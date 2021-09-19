@@ -79,4 +79,9 @@ export class HomeComponent implements OnInit {
   goDiscord() {
     window.open('https://discord.gg/yT3349Xt6v', '_blank');
   }
+
+  goConcours() {
+    this.router.navigate (['concours']);
+
+  }
 }

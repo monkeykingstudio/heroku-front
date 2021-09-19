@@ -10,7 +10,7 @@
           <div #same class="d-flex antban">
             <div class="d-flex flex-column justify-content-center align-items-center">
               <h6 class="title">
-                WELCOME TO THE ALPHA <span class="release">V.0.12</span> !
+                WELCOME TO THE ALPHA <span class="release">V.0.12c</span> !
               </h6>
               <p class="disclaimer">
                 <span class="important">Thank you for accepting our invitation</span> to the alpha-testing phase of the development of <span class="important">FourmisLabs.</span>
@@ -55,13 +55,16 @@
                 Latest news
               </h6>
             </div>
-            <div class="no-news">
-              <i class="island-icon mb-4"></i>
-              <div class="d-flex flex-column text">
+            <div (click)='goConcours()' class="no-news">
+              <!-- <i class="island-icon mb-4"></i> -->
+              <div (click)='goConcours()' class="d-flex flex-column text">
 
-                <span>Ooops!</span>
+
+                <img (click)='goConcours()' style="margin:auto;width: 100%;border:none" src="../../assets/concours/banniere.png" alt="">
+
+                <!-- <span>Ooops!</span>
                 <span>There are <span class="important">no news for the moment</span>.</span>
-                <span>Maybe the next time :)</span>
+                <span>Maybe the next time :)</span> -->
               </div>
             </div>
 
