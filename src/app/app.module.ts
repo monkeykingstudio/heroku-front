@@ -41,7 +41,7 @@ import HtmlPipe from './pipes/html.pipe';
 import { AlphaPipe } from './pipes/AlphaPipe';
 import { ApprovedPipe } from './pipes/ApprovedPipe';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-
+import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
 
 @NgModule({
   declarations: [
@@ -83,7 +83,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     BrowserAnimationsModule,
     NgbModule,
     ChartsModule,
-    EditorModule
+    EditorModule,
+    NgxSimpleCountdownModule
   ],
   providers: [
     DatePipe,

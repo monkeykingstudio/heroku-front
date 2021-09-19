@@ -974,11 +974,35 @@ h5 {
 
 .admin {
   margin: auto;
-  margin-top: 6rem;
+  margin-top: 5rem;
   border: .2rem solid red;
   padding: 1rem;
   border-radius: .5rem;
 }
+
+.countdown {
+  font-size: 50px !important;
+  height: 3.3rem;
+  max-width: 20rem;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+
+  @include breakpoint('small') {
+    display: none;
+  }
+  }
+
+  .banniere {
+    margin:auto;
+    width: 970px;
+    border:none;
+
+    @include breakpoint('small') {
+      width: 100%;
+    }
+  }
+
 
 
 

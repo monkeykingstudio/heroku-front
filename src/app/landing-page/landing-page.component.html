@@ -113,7 +113,10 @@
         Elles sont <b>très actives</b>, mais aussi <b>très agressives</b>, et feront de leur détenteur un fourmiculteur comblé ! Attention cependant à leur <b>difficulté de maintien</b> en élevage, notez également que leur <b>cycle de développement est très lent</b> pour les jeunes fondations.
       </span>
           <span class="prix">Valeur : 180€</span>
-          <div style="margin-top:1rem" class="green-btn">CONSULTER LA FICHE D'ELEVAGE</div>
+          <a href="http://www.fourmislabs.com/breedsheetviewer/myrmecocystus%20mendax">
+            <div style="margin-top:1rem" class="green-btn">CONSULTER LA FICHE D'ELEVAGE</div>
+          </a>
+
         </div>
       </div>
 
@@ -281,9 +284,10 @@
     </div>
   </div>
 </div>
+<div class="countdown col-sm-12" simpleCountdown [dateTo]="1632330000"></div>
 
 <div *ngIf="currentUser === undefined || currentUser?.role !== 'admin'" style="height:88vh;background-color: white;overflow:hidden" class="row">
-  <img style="margin:auto;width: 970px;border:none" src="../../assets/concours/banniere.png" alt="">
+  <img src="../../assets/concours/banniere.png" class="banniere" alt="">
 </div>
 
 
