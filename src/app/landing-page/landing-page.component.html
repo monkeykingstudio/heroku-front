@@ -203,7 +203,7 @@
           <div class="animate__animated animate__pulse  animate__infinite green-static-btn">INSCRIPTION VALIDEE !</div>
         </div>
 
-        <div style="margin: auto;margin-top:6rem" class="col-sm-12 col-md-6 admin">
+        <div *ngIf="currentUser?.role === 'admin'" style="margin: auto;margin-top:6rem" class="col-sm-12 col-md-6 admin">
           <h5 style="text-transform: uppercase;color: red;text-align:center">Admins only</h5>
 
           <div class="table-cont">
