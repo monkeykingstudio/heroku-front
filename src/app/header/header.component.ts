@@ -7,8 +7,11 @@ import { Router } from '@angular/router';
 
 import { io } from 'socket.io-client';
 
+// const notificationSocket: any = io('ws://calm-waters-91692.herokuapp.com', {
+//   path: '/notification/'
+// });
 
-const notificationSocket: any = io('ws://calm-waters-91692.herokuapp.com', {
+const notificationSocket: any = io('ws://localhost:8081', {
   path: '/notification/'
 });
 
@@ -34,23 +37,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private router: Router,
     // private webSocketService: WebSocketService
     ) {
-      notificationSocket.on('connect', () => {
-        console.log('connected from client');
+      notificationSocket.on('connect', (socket) => {
+        console.log('socket.io connected from client, with id -->', notificationSocket.id);
         // notificationSocket.emit('userAuth', this.currentUser);
       });
 
-      const params = {
-        sender: JSON.parse(localStorage.getItem('currentUser'))?._id
-      };
 
-      notificationSocket.emit('joinNotifications', params, () => {
-      });
+      // const params = {
+      //   sender: JSON.parse(localStorage.getItem('currentUser'))?._id
+      // };
 
-      notificationSocket.on('recieveNotifications', request => {
-        this.notifications.push(request);
-        console.log(this.notifications);
-        this.notification = this.notifications.length;
-      });
+      // notificationSocket.emit('joinNotifications', params, () => {
+      // });
+
+      // notificationSocket.on('recieveNotifications', request => {
+      //   this.notifications.push(request);
+      //   console.log(this.notifications);
+      //   this.notification = this.notifications.length;
+      // });
   }
 
   ngOnInit(): void {
@@ -65,6 +69,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
       })
       ).subscribe();
   }
+
+  // actionOnRequest(button) {
+  //   notificationSocket.emit('sendNotifications', {
+  //     message: `${button} from ${JSON.parse(localStorage.getItem('currentUser')).pseudo}`,
+  //     senderId: JSON.parse(localStorage.getItem('currentUser'))._id,
+  //     senderPseudo: JSON.parse(localStorage.getItem('currentUser')).pseudo,
+  //     reciever: '6131e7c597f50700160703fe' // User raphael
+  //   }, () => {
+
+  //   });
+  //   console.log(JSON.parse(localStorage.getItem('currentUser'))._id);
+  // }
 
   toggleShow() {
     this.isShown = !this.isShown;
@@ -89,17 +105,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authStatusSubscription.unsubscribe();
   }
 
-  actionOnRequest(button) {
-    notificationSocket.emit('sendNotifications', {
-      message: `${button} from ${JSON.parse(localStorage.getItem('currentUser')).pseudo}`,
-      senderId: JSON.parse(localStorage.getItem('currentUser'))._id,
-      senderPseudo: JSON.parse(localStorage.getItem('currentUser')).pseudo,
-      reciever: '6131e7c597f50700160703fe' // User raphael
-    }, () => {
-
-    });
-    console.log(JSON.parse(localStorage.getItem('currentUser'))._id);
-  }
 }
 /**
  Créé en backend le model notification

@@ -5,8 +5,8 @@
       L'application est actuellement instable. On travaille dessus.</span> -->
   </div>
   <div *ngIf="(authService.currentUser | async) as user" class="user-container">
-    <!-- <button  *ngIf="user.role === 'admin'" class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
-    <button *ngIf="user.role === 'admin'" class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button> -->
+    <button class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
+    <button class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button>
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>
     </div>
@@ -15,7 +15,7 @@
         <span>{{notification ? notification : '0'}}</span>
       </div>
     </i>
-    <!-- <div class="arrow-up"></div>
+    <div class="arrow-up"></div>
 
     <div class="notif-display">
       <div class="w-100" *ngIf="notifications.length !== 0" >
@@ -29,7 +29,7 @@
       <div class="" *ngIf="notifications.length === 0" >
         <span>No notifications</span>
       </div>
-    </div> -->
+    </div>
 
     <span (click)="toggleShow()" class='d-flex align-items-center'>{{ (authService.currentUser | async)?.pseudo}} <i class="caret-icon"></i></span>
     <span (click)="toggleShow()" class='d-flex align-items-center'></span>

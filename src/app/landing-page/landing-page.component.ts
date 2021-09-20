@@ -71,7 +71,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       console.log('registered', this.registered);
       this.usersList = users;
       if (this.userExists(this.currentUser.email)) {
-        console.log('bwaaah');
         this.registered = true;
       }
     });

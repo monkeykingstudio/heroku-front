@@ -238,7 +238,6 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       map(user => {
         if (user) {
           this.currentUser = user;
-          // this.webSocketService.emit('test emit', this.currentUser.pseudo);
         }
       })
       ).subscribe();
@@ -390,7 +389,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   add() {
     const inputs = this.formControls;
     this.breedData = {
-      creator: this.currentUser._id,
+      creatorPseudo: this.currentUser?.pseudo,
+      creator: this.currentUser?._id,
       creationDate: moment(new Date()).format(this.DATE_RFC2822),
       status: 'pending',
       genre: inputs.genre.value.toLowerCase(),
