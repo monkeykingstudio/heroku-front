@@ -1012,6 +1012,11 @@ h5 {
     font-size: 25px;
     margin: 3rem auto 3rem auto;
     font-weight: bold;
+
+    @include breakpoint('small') {
+      font-size: 16px;
+
+    }
   }
 
 
