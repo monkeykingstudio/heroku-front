@@ -122,6 +122,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     console.log('component', this.formControls.prenom.value, this.formControls.nom.value);
     this.concoursService.facebookAdd(this.formControls.prenom.value, this.formControls.nom.value)
     .subscribe(() => {
+      this.fb = true;
       this.ngOnInit();
     });
   }
