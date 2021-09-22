@@ -284,10 +284,14 @@
     </div>
   </div>
 </div>
-<div class="countdown col-sm-12" simpleCountdown [dateTo]="1632322800"></div>
+<div *ngIf="currentUser === undefined || currentUser?.role !== 'admin'" class="countdown col-sm-12" simpleCountdown [dateTo]="1632322800"></div>
 
 <div *ngIf="currentUser === undefined || currentUser?.role !== 'admin'" style="height:85vh;background-color: white;overflow:hidden" class="row">
-  <img src="../../assets/concours/banniere.png" class="banniere" alt="">
+
+  <div class="d-flex flex-column" style="margin: auto">
+    <span style="margin:0 auto;text-align: center;font-weight: bold;margin-bottom: 5rem;font-size: 2.5rem;background-color:#1c1b1a;color: white;padding: 1rem;max-width: 65rem;">OUVERTURE DES INSCRIPTIONS A 17h00</span>
+    <img style="margin: 0 auto" src="../../assets/concours/banniere.png" class="banniere" alt="">
+  </div>
 </div>
 
 
