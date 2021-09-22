@@ -5,8 +5,8 @@
       L'application est actuellement instable. On travaille dessus.</span> -->
   </div>
   <div *ngIf="(authService.currentUser | async) as user" class="user-container">
-    <button class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
-    <button class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button>
+    <!-- <button class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
+    <button class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button> -->
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>
     </div>
@@ -27,7 +27,24 @@
         </div>
       </div>
       <div class="" *ngIf="notifications.length === 0" >
-        <span>No notifications</span>
+        <!-- W.I.P -->
+
+
+
+
+
+
+
+
+
+        <!-- END W.I.P -->
+
+
+
+
+
+
+        <!-- <span>No notifications</span> -->
       </div>
     </div>
 
