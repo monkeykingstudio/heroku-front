@@ -6,6 +6,8 @@ import { Observable, Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { map } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-landing-page',
@@ -16,10 +18,15 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   allRegisteredUsers$: Observable<any[]>;
   usersList: any[] = [];
 
+  facebookForm: FormGroup;
+
+
   private authStatusSubscription: Subscription;
   currentUser: User;
   registered: boolean = false;
   showYoutube: boolean = false;
+
+  fb: boolean = false;
 
   bigFirst = false;
   data: string;
@@ -49,10 +56,16 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     public popupService: PopupService,
     public concoursService: ConcoursService,
     public usersService: UsersService,
-    public authService: AuthService
+    public authService: AuthService,
+    private formBuilder: FormBuilder,
     ) { }
 
   ngOnInit(): void {
+
+    this.facebookForm = this.formBuilder.group({
+      prenom: ['', [Validators.required]],
+      nom: ['', Validators.required]
+    });
 
     this.authStatusSubscription = this.authService.currentUser.pipe(
       map(user => {
@@ -71,7 +84,6 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       console.log('registered', this.registered);
       this.usersList = users;
       if (this.userExists(this.currentUser.email)) {
-        console.log('bwaaah');
         this.registered = true;
       }
     });
@@ -104,6 +116,21 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       this.ngOnInit();
     });
   }
+
+  facebook(): void {
+    console.log(this.usersList);
+    this.concoursService.facebookAdd(this.formControls.prenom.value, this.formControls.nom.value)
+    .subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
+  facebookOk() {
+    this.fb = true;
+  }
+
+  get formControls() { return this.facebookForm.controls; }
+
 
   ngOnDestroy(): void {
     this.authStatusSubscription.unsubscribe();

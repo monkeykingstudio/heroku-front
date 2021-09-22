@@ -505,6 +505,22 @@
   }
 }
 
+.facebook-icon {
+  display: flex;
+
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/concours/facebook.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    margin: auto;
+  }
+}
+
 .locked-icon {
   &:before {
     content: '';

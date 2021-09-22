@@ -206,7 +206,28 @@
           <div class="animate__animated animate__pulse  animate__infinite green-static-btn">INSCRIPTION VALIDEE !</div>
         </div>
 
-        <div *ngIf="currentUser?.role === 'admin'" style="margin: auto;margin-top:6rem" class="col-sm-12 col-md-6 admin">
+
+          <div *ngIf="registered" style="margin-top:3rem;padding: 1rem;border-radius:.5rem;border:2px dashed #345498" class="animate__animated animate__zoomIn animate__delay-05s offset-3 col-sm-12 col-md-6 facebook flex-column">
+            <i style="margin-top: 2rem;cursor:pointer" class="facebook-icon"></i>
+            <h6 *ngIf="" style="border:none!important;color: #345498;margin-top:1rem;line-height:2rem;font-size:20px!important;text-align:center">Doublez vos chances de gagner !
+              <a *ngIf="" style="text-decoration:none" target="_blank" href="https://www.facebook.com/fourmislabs">
+                <button style="margin:1rem auto" class="facebook-btn">suivez nous sur facebook</button>
+              </a>
+              puis inscrivez ici le nom <span style="font-weight:bold;text-decoration:underline;color: #345498;">COMPLET</span> de votre profil facebook</h6>
+            <form *ngIf="" class="d-flex justify-content-center flex-column"  [formGroup]="facebookForm" (ngSubmit)="facebook()" action="">
+              <div class="d-flex">
+                <input formControlName="prenom" placeholder="Prénom" class="col" style="background-color: #c1c1c1;margin:0 .5rem" type="text">
+                <input formControlName="nom" placeholder="Nom" class="col" style="background-color: #c1c1c1;margin:0 .5rem" type="text">
+              </div>
+              <button (click)="facebookOk()" [disabled]="!facebookForm.valid" class="facebook-btn log-button mt-4" type="submit">ENVOYER !</button>
+            </form>
+            <div class="d-flex">
+              <div class="double">CHANCES DOUBLEES ! MERCI :)</div>
+            </div>
+          </div>
+
+
+        <div *ngIf="currentUser?.role === 'admin'" style="margin: auto;margin-top:6rem" class="col-sm-12 admin">
           <h5 style="text-transform: uppercase;color: red;text-align:center">Admins only</h5>
 
           <div class="table-cont">
