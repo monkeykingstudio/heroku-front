@@ -214,12 +214,12 @@
                 <button style="margin:1rem auto" class="facebook-btn">suivez nous sur facebook</button>
               </a>
               puis inscrivez ici le nom <span style="font-weight:bold;text-decoration:underline;color: #345498;">COMPLET</span> de votre profil facebook</h6>
-            <form *ngIf="!fb" class="d-flex justify-content-center flex-column"  [formGroup]="facebookForm" (ngSubmit)="facebook()" action="">
+            <form *ngIf="!fb" class="d-flex justify-content-center flex-column"  [formGroup]="facebookForm" (ngSubmit)="facebook()" >
               <div class="d-flex">
                 <input formControlName="prenom" placeholder="Prénom" class="col" style="background-color: #c1c1c1;margin:0 .5rem" type="text">
                 <input formControlName="nom" placeholder="Nom" class="col" style="background-color: #c1c1c1;margin:0 .5rem" type="text">
               </div>
-              <button (click)="facebookOk()" [disabled]="!facebookForm.valid" class="facebook-btn log-button mt-4" type="submit">ENVOYER !</button>
+              <button [disabled]="!facebookForm.valid" class="facebook-btn log-button mt-4" type="submit">ENVOYER !</button>
             </form>
             <div *ngIf='fb' class="d-flex">
               <div class="double">CHANCES DOUBLEES ! MERCI :)</div>
