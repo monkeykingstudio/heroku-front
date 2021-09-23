@@ -1,17 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, pipe, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
+import { environment } from './../../environments/environment';
 
+// Notifications
 import { io } from 'socket.io-client';
+import { NotificationService } from './../services/notification.service';
+import { Notification } from '../models/notification.model';
 
-// const notificationSocket: any = io('ws://calm-waters-91692.herokuapp.com', {
-//   path: '/notification/'
-// });
-
-const notificationSocket: any = io('ws://localhost:8081', {
+const notificationSocket: any = io(`${environment.APIEndpoint}`, {
   path: '/notification/'
 });
 
@@ -24,23 +24,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private authStatusSubscription: Subscription;
   user$: Observable<User>;
 
+  public notifSub: Subscription;
+  allNotifs$: Observable<Notification[]>;
+
   isShown = false;
   currentUser: User;
 
   notification: Number;
-  notifications = [];
+  socketNotifications = [];
+  databaseNotifications = [];
 
-  storage;
+  userNotifications = [];
+
+  // storage;
 
   constructor(
     public authService: AuthService,
     private router: Router,
-    // private webSocketService: WebSocketService
+    private notificationService: NotificationService
     ) {
       notificationSocket.on('connect', (socket) => {
         console.log('socket.io connected from client, with id -->', notificationSocket.id);
         // notificationSocket.emit('userAuth', this.currentUser);
       });
+
 
 
       // const params = {
@@ -61,6 +68,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // this.webSocketService.listen('test event').subscribe((data) => {
     //   console.log(data);
     // });
+
+    this.reloadNotifs();
+    this.getAllNotifications();
+
     this.authStatusSubscription = this.authService.currentUser.pipe(
       map(user => {
         if (user) {
@@ -89,10 +100,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onLogout() {
     this.authService.logout(this.currentUser?.email)
     .then((m) => {
-      console.log(m)
+      console.log(m);
       this.router.navigate(['/login']);
       this.ngOnInit();
-    }).catch(err => console.error(err) )
+    }).catch(err => console.error(err));
     this.toggleShow();
   }
 
@@ -101,23 +112,31 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.toggleShow();
   }
 
+  getAllNotifications() {
+    // Getting all notifications
+    this.notifSub = this.allNotifs$
+    .pipe(
+      map(notifs => notifs
+        // .map(sheet => sheet)
+      )
+    )
+    .subscribe((notifs) => {
+      console.log('userNotifications', notifs);
+      this.databaseNotifications.push(notifs);
+
+      // Merge mongoDB & socket.io notifications in one array
+      this.userNotifications = [...this.databaseNotifications, ...this.socketNotifications];
+      this.notification = this.userNotifications[0].length;
+    });
+  }
+
+  reloadNotifs(): void {
+    const notifs$ = this.notificationService.getAllNotifs();
+    this.allNotifs$ = notifs$;
+  }
+
   ngOnDestroy(): void {
     this.authStatusSubscription.unsubscribe();
   }
 
 }
-/**
- Créé en backend le model notification
-  id
-  text
-  date
-  time
-  read
-  url (opt)
-
- */
-
-  /* Rooms
-   1 room pour tout le monde
-   1 pour les admins
-   */

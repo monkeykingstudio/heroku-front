@@ -15,18 +15,13 @@
         <span>{{notification ? notification : '0'}}</span>
       </div>
     </i>
-    <div class="arrow-up"></div>
+    <!-- <div class="arrow-up"></div> -->
 
+  <div style="position: absolute;" class="notif-block animate__animated animate__bounceInUp">
     <div class="notif-display">
-      <div class="w-100" *ngIf="notifications.length !== 0" >
-        <div class="w-100" *ngFor="let request of notifications">
-          <div class="line">
-            <span>{{request.message}}</span>
-          </div>
-          <div class="sep"></div>
-        </div>
-      </div>
-      <div class="" *ngIf="notifications.length === 0" >
+      <div class="w-100">
+      <!-- DISPLAY NOTIFICATIONS -->
+
         <!-- W.I.P -->
 
 
@@ -38,15 +33,21 @@
 
 
         <!-- END W.I.P -->
-
-
-
-
-
-
-        <!-- <span>No notifications</span> -->
+      </div>
+      <div class="w-100" *ngIf="userNotifications?.length !== 0">
+        <div *ngFor="let request of userNotifications[0];index as i" class="w-100">
+          <div class="line">
+            <span>{{request.message}}</span>
+          </div>
+          <div *ngIf="i < userNotifications[0].length -1" class="sep"></div>
+        </div>
+      </div>
+      <!-- NO NOTIFICATIONS -->
+      <div class="" *ngIf="userNotifications?.length === 0" >
+        <span>No notifications</span>
       </div>
     </div>
+  </div>
 
     <span (click)="toggleShow()" class='d-flex align-items-center'>{{ (authService.currentUser | async)?.pseudo}} <i class="caret-icon"></i></span>
     <span (click)="toggleShow()" class='d-flex align-items-center'></span>
