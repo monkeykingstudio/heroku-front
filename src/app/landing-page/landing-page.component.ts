@@ -7,6 +7,7 @@ import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -58,6 +59,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     public usersService: UsersService,
     public authService: AuthService,
     private formBuilder: FormBuilder,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -132,6 +134,10 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   }
 
   get formControls() { return this.facebookForm.controls; }
+
+  seeSheet() {
+    this.router.navigate(['/breedsheetviewer/myrmecocystus%20mendax']);
+  }
 
 
   ngOnDestroy(): void {
