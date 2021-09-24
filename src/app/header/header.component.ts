@@ -21,6 +21,7 @@ const notificationSocket: any = io(`${environment.APIEndpoint}`, {
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  showNotif = false;
   private authStatusSubscription: Subscription;
   user$: Observable<User>;
 
@@ -47,6 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         console.log('socket.io connected from client, with id -->', notificationSocket.id);
         // notificationSocket.emit('userAuth', this.currentUser);
       });
+
 
 
 
@@ -133,6 +135,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   reloadNotifs(): void {
     const notifs$ = this.notificationService.getAllNotifs();
     this.allNotifs$ = notifs$;
+  }
+
+  showNotifs() {
+    this.showNotif = !this.showNotif;
+    event.stopPropagation()
+  }
+
+  close() {
+    this.showNotif = false;
   }
 
   ngOnDestroy(): void {

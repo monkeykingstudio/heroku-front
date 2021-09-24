@@ -10,41 +10,33 @@
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>
     </div>
-    <i style="position:relative" class="notif-icon">
-      <div class="notif-count">
+    <i (click)="showNotifs()" style="position:relative" class="notif-icon">
+      <div [ngClass]="
+      userNotifications[0].length > 0 ? 'animate__animated animate__heartBeat animate__infinite' : 'toto'
+      " class="notif-count">
         <span>{{notification ? notification : '0'}}</span>
       </div>
     </i>
-    <!-- <div class="arrow-up"></div> -->
 
-  <div style="position: absolute;" class="notif-block animate__animated animate__bounceInUp">
-    <div class="notif-display">
-      <div class="w-100">
-      <!-- DISPLAY NOTIFICATIONS -->
+  <div appClickoutside (clickOutside)="close($event)" *ngIf="showNotif" style="position: absolute;" class="notif-block animate__animated animate__bounceInUp">
+    <div  class="notif-display">
+      <div class="w-100" *ngIf="userNotifications?.length > 0">
+        <div *ngFor="let notif of userNotifications[0];index as i" class="w-100">
+          <div [ngClass]="notif.type" class="line">
 
-        <!-- W.I.P -->
-
-
-
-
-
-
-
-
-
-        <!-- END W.I.P -->
-      </div>
-      <div class="w-100" *ngIf="userNotifications?.length !== 0">
-        <div *ngFor="let request of userNotifications[0];index as i" class="w-100">
-          <div class="line">
-            <span>{{request.message}}</span>
+            <div class="d-flex">
+              <span>{{notif.message}}</span>
+            </div>
           </div>
           <div *ngIf="i < userNotifications[0].length -1" class="sep"></div>
         </div>
       </div>
       <!-- NO NOTIFICATIONS -->
-      <div class="" *ngIf="userNotifications?.length === 0" >
-        <span>No notifications</span>
+      <div class="line" *ngIf="userNotifications[0]?.length === 0" >
+       <div class="d-flex justify-content-evenly align-items-center">
+        <i class="island-icon"></i>
+        <span style="font-size: 14px" >No new notifications</span>
+       </div>
       </div>
     </div>
   </div>

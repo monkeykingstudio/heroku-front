@@ -42,6 +42,7 @@ import { AlphaPipe } from './pipes/AlphaPipe';
 import { ApprovedPipe } from './pipes/ApprovedPipe';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
+import { ClickoutsideDirective } from './clickoutside.directive';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
     BreedCardComponent,
     AlphaPipe,
     ApprovedPipe,
-    LandingPageComponent
+    LandingPageComponent,
+    ClickoutsideDirective
   ],
   imports: [
     BrowserModule,
