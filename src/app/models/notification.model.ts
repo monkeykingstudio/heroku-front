@@ -1,8 +1,10 @@
 export class Notification {
-  id: string;
-  dateTime: Date;
-  text: string;
-  read: boolean;
+  senderId: string;
+  senderPseudo: string;
+  message: string;
+  createdAt: Date;
+  type: string;
+  readBy?: Array<object>;
   url?: string;
-  senderId?: string;
+  id?: string;
 }

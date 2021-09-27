@@ -6,8 +6,7 @@ import { map } from 'rxjs/operators';
 import { Router, RoutesRecognized } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersService } from './services/user.service';
-
-// import { WebSocketService } from './services/web-socket.service';
+// import { SocketioService } from './services/socketio.service';
 
 @Component({
   selector: 'app-root',
@@ -31,10 +30,11 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     public usersService: UsersService,
     public authService: AuthService,
-    // private webSocketService: WebSocketService
+    // private socketService: SocketioService
     ) {}
 
   ngOnInit(): void {
+    // this.socketService.setupSocketConnection();
 
     this.router.events
     .subscribe(event => {
@@ -69,29 +69,9 @@ export class AppComponent implements OnInit, OnDestroy {
     // });
   }
 
-  // @HostListener('window:beforeunload', ['$event'])
-  // async logout ($event) {
-  //   await this.authService.unconnect(this.currentUser.email).subscribe();
-  //   $event.stopPropagation();
-  //   $event.preventDefault();
-  //   $event.returnValue = false;
-  // }
-
-  // @HostListener('window:unload', ['$event'])
-  // async unloadHandler(event) {
-  //   await this.authService.logout(this.currentUser.email).subscribe();
-  //   event.returnValue = false;
-
-  // }
-
-
-
-
-  // @HostListener('window:beforeunload')
-  async ngOnDestroy() {
-    // await this.authService.logout(this.currentUser.email)
-    // .subscribe();
-  }
+ngOnDestroy() {
+  // this.socketService.disconnect();
+}
 }
 
 

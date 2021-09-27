@@ -1,62 +1,49 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, pipe, Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
 
-import { io } from 'socket.io-client';
-
-
-const notificationSocket: any = io('ws://calm-waters-91692.herokuapp.com', {
-  path: '/notification/'
-});
+// Notifications
+import { NotificationService } from './../services/notification.service';
+import { Notification } from '../models/notification.model';
+import { SocketioService } from '../services/socketio.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  showNotif = false;
+  markRead = false;
+
   private authStatusSubscription: Subscription;
   user$: Observable<User>;
+
+  public notifSub: Subscription;
+  private databaseNotifsSubject: Subject<Notification[]>;
+
+  databaseNotifs$: Observable<Notification[]>;
+  socketNotifs: Notification[] = [];
 
   isShown = false;
   currentUser: User;
 
-  notification: Number;
-  notifications = [];
-
-  storage;
+  socketNotifications: Notification[] = [];
 
   constructor(
     public authService: AuthService,
     private router: Router,
-    // private webSocketService: WebSocketService
+    private notificationService: NotificationService,
+    private socketService: SocketioService
     ) {
-      notificationSocket.on('connect', () => {
-        console.log('connected from client');
-        // notificationSocket.emit('userAuth', this.currentUser);
-      });
-
-      const params = {
-        sender: JSON.parse(localStorage.getItem('currentUser'))?._id
-      };
-
-      notificationSocket.emit('joinNotifications', params, () => {
-      });
-
-      notificationSocket.on('recieveNotifications', request => {
-        this.notifications.push(request);
-        console.log(this.notifications);
-        this.notification = this.notifications.length;
-      });
+    this.databaseNotifsSubject = new Subject<Notification[]>();
+    this.databaseNotifs$ = this.databaseNotifsSubject.asObservable();
   }
 
   ngOnInit(): void {
-    // this.webSocketService.listen('test event').subscribe((data) => {
-    //   console.log(data);
-    // });
     this.authStatusSubscription = this.authService.currentUser.pipe(
       map(user => {
         if (user) {
@@ -64,7 +51,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
       })
       ).subscribe();
+    this.reloadSocketNotifs();
+    this.reloadDatabaseNotifs();
   }
+
 
   toggleShow() {
     this.isShown = !this.isShown;
@@ -73,10 +63,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onLogout() {
     this.authService.logout(this.currentUser?.email)
     .then((m) => {
-      console.log(m)
+      console.log(m);
       this.router.navigate(['/login']);
       this.ngOnInit();
-    }).catch(err => console.error(err) )
+    }).catch(err => console.error(err));
     this.toggleShow();
   }
 
@@ -85,34 +75,56 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.toggleShow();
   }
 
+// NOTIFICATIONS
+
+  reloadDatabaseNotifs(): void {
+    console.log('ID DE LUSER', this.currentUser?._id);
+    const notifs$ = this.notificationService.getAllNotifs(this.currentUser?._id);
+    this.databaseNotifs$ = notifs$;
+  }
+
+  reloadSocketNotifs(): void {
+    const notifs = this.socketService.socketNotifications;
+    this.socketNotifs = notifs;
+  }
+
+  showNotifs() {
+    this.showNotif = !this.showNotif;
+    event.stopPropagation();
+  }
+
+  close() {
+    if (this.markRead) {
+      setTimeout(() => {
+        this.showNotif = false;
+        this.reloadSocketNotifs();
+        this.reloadDatabaseNotifs();
+
+        this.markRead = false;
+      }, 500);
+    } else {
+      this.showNotif = false;
+    }
+  }
+
+  markAsRead(id: string) {
+    var value = document.getElementById(id);
+    value.classList.toggle('animate__zoomOut');
+    setTimeout(() => {
+      value.style.display = 'none';
+    }, 500);
+    this.notificationService.markAsRead(id)
+    .subscribe(() => {
+      this.markRead = true;
+      setTimeout(() => {
+        this.reloadSocketNotifs();
+        this.reloadDatabaseNotifs();
+      }, 500);
+    });
+  }
+
   ngOnDestroy(): void {
     this.authStatusSubscription.unsubscribe();
   }
 
-  actionOnRequest(button) {
-    notificationSocket.emit('sendNotifications', {
-      message: `${button} from ${JSON.parse(localStorage.getItem('currentUser')).pseudo}`,
-      senderId: JSON.parse(localStorage.getItem('currentUser'))._id,
-      senderPseudo: JSON.parse(localStorage.getItem('currentUser')).pseudo,
-      reciever: '6131e7c597f50700160703fe' // User raphael
-    }, () => {
-
-    });
-    console.log(JSON.parse(localStorage.getItem('currentUser'))._id);
-  }
 }
-/**
- Créé en backend le model notification
-  id
-  text
-  date
-  time
-  read
-  url (opt)
-
- */
-
-  /* Rooms
-   1 room pour tout le monde
-   1 pour les admins
-   */

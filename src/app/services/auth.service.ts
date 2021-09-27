@@ -52,7 +52,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.http.post<any>(`${this.authRoute}/logout`, {email}).subscribe(success => {
         localStorage.removeItem('currentUser');
-        resolve({message: 'success', user: email})
+        resolve({message: 'success', user: email});
     // remove user from local storage to log user out
     }, err => {
       if (!email) reject('{email} field is missing')

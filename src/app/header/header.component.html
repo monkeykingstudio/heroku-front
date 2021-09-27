@@ -1,35 +1,75 @@
-<div class="header-container">
+<div *ngIf="(databaseNotifs$ | async) as databaseNotifs" class="header-container">
   <div class="bread-crumb">
-
     <!-- <span style="max-width: 60%!important;padding:1rem!important" class='debug'>Un bug majeur en cours de correction affectant la connexion et affichage des colonies est en cours de résolution.
       L'application est actuellement instable. On travaille dessus.</span> -->
   </div>
   <div *ngIf="(authService.currentUser | async) as user" class="user-container">
-    <!-- <button  *ngIf="user.role === 'admin'" class="green-btn" (click)="actionOnRequest('CONFIRM')">Confirm</button>
-    <button *ngIf="user.role === 'admin'" class="red-btn" (click)="actionOnRequest('DELETE')">Delete</button> -->
+
     <div *ngIf="isShown" class="action-block animate__animated animate__fadeIn">
       <button class="admin-btn" (click)="goToAdmin()" *ngIf='(authService.currentUser | async).role === "admin"'>Admin</button>
     </div>
-    <i style="position:relative" class="notif-icon">
-      <div class="notif-count">
-        <span>{{notification ? notification : '0'}}</span>
+    <i (click)="showNotifs()" style="position:relative" class="notif-icon">
+      <div [ngClass]="
+      databaseNotifs?.length > 0 ? 'animate__animated animate__heartBeat animate__infinite' : 'toto'
+      " class="notif-count">
+        <span >{{databaseNotifs.length + socketNotifs.length | number}}</span>
       </div>
     </i>
-    <!-- <div class="arrow-up"></div>
 
+  <div [ngClass]="socketNotifs.length > 0 ? 'green-arrow' : '' " appClickoutside (clickOutside)="close($event)" *ngIf="showNotif" style="position: absolute;" class="notif-block ">
     <div class="notif-display">
-      <div class="w-100" *ngIf="notifications.length !== 0" >
-        <div class="w-100" *ngFor="let request of notifications">
-          <div class="line">
-            <span>{{request.message}}</span>
+      <div style="display: flex;flex-direction: column;"  class="w-100">
+        <!-- SOCKET NOTIFICATIONS -->
+        <div *ngFor="let socketNotif of socketNotifs;index as i" class="w-100">
+          <div style="background-color: rgb(197, 255, 197);" [id]="socketNotif.id" class="line animate__animated">
+            <div class="head d-flex">
+              <span class="date">
+                <i class="date-icon"></i>
+                Today,
+                {{socketNotif.createdAt | date:'shortTime'}}
+              </span>
+              <div class="d-flex">
+                <button class="green-btn">DETAILS</button>
+                <!-- <button (click)="markAsRead(socketNotif.id)" class="blue-btn">MARK AS READ</button> -->
+              </div>
+            </div>
+            <div class="body d-flex">
+              <span>{{socketNotif.message}}</span>
+            </div>
           </div>
-          <div class="sep"></div>
+          <div class="sep-green"></div>
+        </div>
+        <!-- DATABASE NOTIFICATIONS -->
+
+          <div *ngFor="let notif of databaseNotifs;index as i">
+            <div [id]="notif.id" class="line animate__animated">
+              <div class="head d-flex">
+                <span class="date">
+                  <i class="date-icon"></i>
+                  {{notif.created_at | date:'shortDate'}}
+                </span>
+                <div class="d-flex">
+                  <button class="green-btn">DETAILS</button>
+                  <button (click)="markAsRead(notif.id)" class="red-btn">DELETE</button>
+                </div>
+              </div>
+              <div class="body d-flex">
+                <span>{{notif.message}}</span>
+              </div>
+            </div>
+            <div *ngIf="i < databaseNotifs.length -1" class="sep"></div>
+          </div>
+
+      </div>
+      <!-- NO NOTIFICATIONS -->
+      <div style="justify-content: space-evenly;align-items:initial" class="line" *ngIf="databaseNotifs?.length === 0 && socketNotifs?.length === 0" >
+        <div class="d-flex justify-content-evenly align-items-center">
+        <i class="island-icon"></i>
+        <span style="font-size: 14px">No new notifications</span>
         </div>
       </div>
-      <div class="" *ngIf="notifications.length === 0" >
-        <span>No notifications</span>
-      </div>
-    </div> -->
+    </div>
+  </div>
 
     <span (click)="toggleShow()" class='d-flex align-items-center'>{{ (authService.currentUser | async)?.pseudo}} <i class="caret-icon"></i></span>
     <span (click)="toggleShow()" class='d-flex align-items-center'></span>

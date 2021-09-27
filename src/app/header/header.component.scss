@@ -1,6 +1,13 @@
 @import '../../styles/global/colors';
 @import '../../styles/global/mixins';
 
+.island-icon {
+  &:before {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
 .notif-count {
   display:flex;
   align-items: center;
@@ -12,9 +19,19 @@
   top: 5px;
   right: 10px;
   position: absolute;
+  cursor:pointer;
   span {
     color:white;
     font-size:10px
+
+  }
+}
+
+.notif-icon {
+  &:hover {
+    span {
+      color:white!important
+    }
   }
 }
 
@@ -27,7 +44,38 @@
   border-left: 18px solid transparent;
   border-right: 18px solid transparent;
   position: absolute;
-  border-bottom: 12px solid white;
+  border-bottom: 12px solid #efefef;
+  box-shadow: 0px 0px 9px 6px rgb(104 104 104 / 41%);
+}
+
+.notif-block {
+  display: flex;
+  &:before {
+    content: "";
+    top: 21px;
+    right: 159px;
+    width: 0;
+    z-index: 14;
+    height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    position: absolute;
+    border-bottom: 12px solid #efefef;
+  }
+
+  @include breakpoint('small') {
+    &:before {
+      right: 124px;
+    }
+  }
+
+}
+
+.green-arrow {
+  &:before {
+    border-bottom: 12px solid rgb(197, 255, 197)!important;
+
+  }
 }
 
 .notif-display {
@@ -46,34 +94,133 @@
     border-bottom: 0.2rem solid #468f33;
     cursor: pointer;
   }
+
   position: relative;
   display: flex;
   position: absolute;
-  background-color: white;
+  background-color: #efefef;
   border-radius: 0.6rem;
-  min-height: 3rem;
-  top: 4.3rem;
-  width: 22rem;
-  right: 3rem;
+  top: 32px;
+  width: 25rem;
+  right: 1.5rem;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0px 0px 9px 6px rgb(104 104 104 / 22%);
-  max-height: 18.5rem;
+  justify-content: flex-start;
+  box-shadow: 0px 0px 9px 6px rgb(104 104 104 / 41%);
+  max-height: 247px;
   overflow-y: auto;
+
+  @include breakpoint('small') {
+    top: 28px;
+    width: 30rem;
+    right: 0rem;
+  }
   span {
     text-align: center;
   }
   .line {
+    position: relative;
     min-width: 100%;
+    font-size: 12px;
     display: flex;
-    height: 3.6rem;
-    padding: 1rem;
-    justify-content: center;
+    flex-direction: column;
+    height: 80px;
+    cursor: pointer;
+    padding: .5rem;
+    justify-content: flex-start;
+    align-items: center;
+    transition: all, .5s;
+
+    &:hover {
+      background-color: #fff;
+      transition: all, .5s;
+    }
+
+    .date-icon {
+      &:before {
+      width: 16px!important;
+      height: 16px!important;
+      margin-top: .45rem!important;
+      margin-right: .6rem;
+      }
+    }
+
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: .4rem;
+
+      .date {
+        font-style: italic;
+        font-size: 12px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        &:hover {
+          color: #333;
+        }
+      }
+      .green-btn, .red-btn {
+        font-size: 13px!important;
+        max-height: 2.4rem!important;
+        padding: .6rem!important;
+        display: flex!important;
+        align-items: center!important;
+        justify-content: center!important;
+      }
+
+      .green-btn {
+        margin-right: .5rem!important;
+        border-top: 2px solid #62d744;
+
+        &:hover {
+          border-top: 2px solid #5aac17;
+        }
+      }
+
+      .red-btn {
+        margin-right: .5rem!important;
+        border-top: 2px solid #d74444;
+
+        &:hover {
+          border-top: 2px solid #d74444;
+        }
+      }
+
+    }
+
+    .body {
+      width: 100%;
+      height: 100%;
+      align-items: center;
+
+      span {
+        white-space: normal!important;
+        line-height: 1.3rem;
+        text-align: left;
+        font-size: .9rem;
+        &:hover {
+          color: #333;
+        }
+      }
+    }
+
+
   }
   .sep {
-    border-bottom: .1rem solid #dfdfdf;
-    height: .1rem;
+    border-bottom: 1px solid #a3a3a3;
+    height: 3px;
+    background-color: white;
+  }
+
+  .sep-green {
+    border-bottom: 1px solid #a3a3a3;
+    height: 3px;
+    background-color: #ceffce;
   }
 }
 
@@ -152,7 +299,7 @@
         position: absolute;
         background-color: white;
         min-height: 4rem;
-        box-shadow: 0px 0px 4px 2px rgb(0 0 0 / 22%);
+        box-shadow: 0px 0px 9px 6px rgb(104 104 104 / 41%);
         padding: 1rem;
         top: 4.5rem;
         right: 5.5rem;
@@ -205,5 +352,10 @@
       }
     }
   }
+}
+
+.admin {
+  // background-color: #ffdcdc;
+  color: #d74444;
 }
 

@@ -8,6 +8,9 @@ import { BreedingSheetsService } from './../services/breedingSheetsService';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { AuthService } from './../services/auth.service';
+import { SocketioService } from '../services/socketio.service';
+import { Notification } from '../models/notification.model';
+
 
 @Component({
   selector: 'app-breed-sheet-creator',
@@ -228,7 +231,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   constructor(
     public authService: AuthService,
     public breedingSheetsService: BreedingSheetsService,
-    private router: Router
+    private router: Router,
+    private socketService: SocketioService
     ) {
     this.prepareForm();
   }
@@ -238,7 +242,6 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       map(user => {
         if (user) {
           this.currentUser = user;
-          // this.webSocketService.emit('test emit', this.currentUser.pseudo);
         }
       })
       ).subscribe();
@@ -390,7 +393,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   add() {
     const inputs = this.formControls;
     this.breedData = {
-      creator: this.currentUser._id,
+      creatorPseudo: this.currentUser?.pseudo,
+      creator: this.currentUser?._id,
       creationDate: moment(new Date()).format(this.DATE_RFC2822),
       status: 'pending',
       genre: inputs.genre.value.toLowerCase(),
@@ -461,10 +465,20 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       }
     }
 
+    const dataNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      message: `a breedsheet have been created by ${this.currentUser?.pseudo}`,
+      createdAt: new Date(),
+      type: 'admin',
+      url: `/breedsheetviewer/${inputs.species.value.toLowerCase()}`
+    };
+
     this.breedingSheetsService.createSheet(this.breedData)
     .subscribe((res) => {
       console.log(res);
       this.submitted = true;
+      this.socketService.sendNotification(dataNotification);
     });
   }
 
@@ -476,6 +490,9 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   moveToHome() {
     this.router.navigate(['/home']);
   }
+
+  // Notifications
+
 
   ngOnDestroy() {
     this.sheetSub.unsubscribe();

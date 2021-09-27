@@ -27,21 +27,24 @@ import { TaskListComponent } from './task-manager/task-list/task-list.component'
 import { TaskComponent } from './task-manager/task/task.component';
 import { BreedSheetCreatorComponent } from './breed-sheet-creator/breed-sheet-creator.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-
-import { ChartsModule } from 'ng2-charts';
-import { DatePipe } from '@angular/common';
 import { BreedSheetViewerComponent } from './breed-sheet-viewer/breed-sheet-viewer.component';
 import { BreedSheetListComponent } from './breed-sheet-list/breed-sheet-list.component';
 import { ProductsComponent } from './products/products.component';
-
-import { EditorModule } from '@tinymce/tinymce-angular';
-
 import { BreedCardComponent } from './breed-card/breed-card.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+
+import { SocketioService } from './services/socketio.service';
+
+import { ChartsModule } from 'ng2-charts';
+import { DatePipe } from '@angular/common';
+import { EditorModule } from '@tinymce/tinymce-angular';
 import HtmlPipe from './pipes/html.pipe';
 import { AlphaPipe } from './pipes/AlphaPipe';
 import { ApprovedPipe } from './pipes/ApprovedPipe';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { OrderByPipe } from './pipes/orderBy.pipe';
+
 import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
+import { ClickoutsideDirective } from './clickoutside.directive';
 
 @NgModule({
   declarations: [
@@ -70,8 +73,10 @@ import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
     HtmlPipe,
     BreedCardComponent,
     AlphaPipe,
+    OrderByPipe,
     ApprovedPipe,
-    LandingPageComponent
+    LandingPageComponent,
+    ClickoutsideDirective
   ],
   imports: [
     BrowserModule,
@@ -87,6 +92,7 @@ import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
     NgxSimpleCountdownModule
   ],
   providers: [
+    SocketioService,
     DatePipe,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
