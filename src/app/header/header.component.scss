@@ -71,6 +71,13 @@
 
 }
 
+.green-arrow {
+  &:before {
+    border-bottom: 12px solid rgb(197, 255, 197)!important;
+
+  }
+}
+
 .notif-display {
   &::-webkit-scrollbar {
     width: .5rem;
@@ -157,7 +164,7 @@
           color: #333;
         }
       }
-      .green-btn, .blue-btn {
+      .green-btn, .red-btn {
         font-size: 13px!important;
         max-height: 2.4rem!important;
         padding: .6rem!important;
@@ -175,13 +182,15 @@
         }
       }
 
-      .blue-btn {
-        border-top: 2px solid #0f9ed6;
+      .red-btn {
+        margin-right: .5rem!important;
+        border-top: 2px solid #d74444;
 
         &:hover {
-          border-top: 2px solid #26b2e9;
+          border-top: 2px solid #d74444;
         }
       }
+
     }
 
     .body {
@@ -206,6 +215,12 @@
     border-bottom: 1px solid #a3a3a3;
     height: 3px;
     background-color: white;
+  }
+
+  .sep-green {
+    border-bottom: 1px solid #a3a3a3;
+    height: 3px;
+    background-color: #ceffce;
   }
 }
 

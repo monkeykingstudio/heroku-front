@@ -41,6 +41,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import HtmlPipe from './pipes/html.pipe';
 import { AlphaPipe } from './pipes/AlphaPipe';
 import { ApprovedPipe } from './pipes/ApprovedPipe';
+import { OrderByPipe } from './pipes/orderBy.pipe';
+
 import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
 import { ClickoutsideDirective } from './clickoutside.directive';
 
@@ -71,6 +73,7 @@ import { ClickoutsideDirective } from './clickoutside.directive';
     HtmlPipe,
     BreedCardComponent,
     AlphaPipe,
+    OrderByPipe,
     ApprovedPipe,
     LandingPageComponent,
     ClickoutsideDirective

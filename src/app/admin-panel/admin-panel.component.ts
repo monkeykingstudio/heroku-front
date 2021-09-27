@@ -88,7 +88,8 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     this.pendingUsers$ = this.allUsers$
     .pipe(
       map(users => users
-        .filter(user => user.is_verified === false))
+        .filter(user => user.is_verified === false)
+      )
     );
 
     this.reloadPendingSheets();

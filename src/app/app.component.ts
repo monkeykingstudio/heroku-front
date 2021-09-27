@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { Router, RoutesRecognized } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersService } from './services/user.service';
-import { SocketioService } from './services/socketio.service';
+// import { SocketioService } from './services/socketio.service';
 
 @Component({
   selector: 'app-root',
@@ -30,11 +30,11 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     public usersService: UsersService,
     public authService: AuthService,
-    private socketService: SocketioService
+    // private socketService: SocketioService
     ) {}
 
   ngOnInit(): void {
-    this.socketService.setupSocketConnection();
+    // this.socketService.setupSocketConnection();
 
     this.router.events
     .subscribe(event => {
@@ -70,7 +70,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 ngOnDestroy() {
-  this.socketService.disconnect();
+  // this.socketService.disconnect();
 }
 }
 
