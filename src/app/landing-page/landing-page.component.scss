@@ -814,7 +814,11 @@ a {
     }
   }
 
-  .red {
+  .facebook {
+    margin: 0 auto;
+  }
+
+  .redd {
     color: #d74444;
   }
   .green {
@@ -1000,6 +1004,18 @@ h5 {
 
     @include breakpoint('small') {
       width: 100%;
+    }
+  }
+
+  .double {
+    color: #345498;
+    font-size: 25px;
+    margin: 3rem auto 3rem auto;
+    font-weight: bold;
+
+    @include breakpoint('small') {
+      font-size: 16px;
+
     }
   }
 

@@ -28,4 +28,17 @@ export class ConcoursService {
       shareReplay()
     );
   }
+
+  facebookAdd(nom: string, prenom: string) {
+    console.log('from service', prenom, nom);
+    const person = {
+      prenom: prenom,
+      nom: nom
+    };
+    return this.http.post(`${environment.APIEndpoint}/api/concours/facebook`, {person})
+    .pipe(
+      map(result => result['message']),
+      shareReplay()
+    );
+  }
 }

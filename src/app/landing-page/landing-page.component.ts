@@ -6,6 +6,9 @@ import { Observable, Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { map } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-landing-page',
@@ -16,10 +19,15 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   allRegisteredUsers$: Observable<any[]>;
   usersList: any[] = [];
 
+  facebookForm: FormGroup;
+
+
   private authStatusSubscription: Subscription;
   currentUser: User;
   registered: boolean = false;
   showYoutube: boolean = false;
+
+  fb: boolean = false;
 
   bigFirst = false;
   data: string;
@@ -49,10 +57,17 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     public popupService: PopupService,
     public concoursService: ConcoursService,
     public usersService: UsersService,
-    public authService: AuthService
+    public authService: AuthService,
+    private formBuilder: FormBuilder,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
+
+    this.facebookForm = this.formBuilder.group({
+      prenom: ['', [Validators.required]],
+      nom: ['', Validators.required]
+    });
 
     this.authStatusSubscription = this.authService.currentUser.pipe(
       map(user => {
@@ -103,6 +118,27 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       this.ngOnInit();
     });
   }
+
+  facebook(): void {
+    console.log(this.usersList);
+    console.log('component', this.formControls.prenom.value, this.formControls.nom.value);
+    this.concoursService.facebookAdd(this.formControls.prenom.value, this.formControls.nom.value)
+    .subscribe(() => {
+      this.fb = true;
+      this.ngOnInit();
+    });
+  }
+
+  facebookOk() {
+    this.fb = true;
+  }
+
+  get formControls() { return this.facebookForm.controls; }
+
+  seeSheet() {
+    this.router.navigate(['/breedsheetviewer/myrmecocystus%20mendax']);
+  }
+
 
   ngOnDestroy(): void {
     this.authStatusSubscription.unsubscribe();
