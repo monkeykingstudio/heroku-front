@@ -45,25 +45,7 @@ export class SocketioService {
     this.socket.emit('connected', 'Socket connected frontend.');
   }
 
-  // actionOnRequest(button) {
-  // this.socket.emit('sendNotification', {
-  //   message: `${button} from ${JSON.parse(localStorage.getItem('currentUser')).pseudo}`,
-  //   senderId: JSON.parse(localStorage.getItem('currentUser'))._id,
-  //   senderPseudo: JSON.parse(localStorage.getItem('currentUser')).pseudo,
-  //   reciever: '6131e7c597f50700160703fe' // User raphael
-  // }, () => {
-
-  // });
-  // console.log(JSON.parse(localStorage.getItem('currentUser'))._id);
-  // }
-
   sendNotification(data: Notification) {
-    // this.socket.emit('sendNotification', {
-    //   message: `${data} from ${JSON.parse(localStorage.getItem('currentUser')).pseudo}`,
-    //   senderId: JSON.parse(localStorage.getItem('currentUser'))._id,
-    //   senderPseudo: JSON.parse(localStorage.getItem('currentUser')).pseudo,
-    //   reciever: '6131e7c597f50700160703fe' // User raphael
-    // });
     this.socket.emit('sendNotification', data, this.params, () => {
       console.log('USER SEND NOTIFICATION', JSON.parse(localStorage.getItem('currentUser'))._id);
       console.log(`sent data --> ${data}`);
