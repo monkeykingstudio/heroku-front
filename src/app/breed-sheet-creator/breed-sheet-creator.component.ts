@@ -468,7 +468,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
     const dataNotification: Notification = {
       senderId: this.currentUser?._id,
       senderPseudo: this.currentUser?.pseudo,
-      message: `a breedsheet have been created by ${this.currentUser?.pseudo}`,
+      message: `a breedsheet for species ${this.breedData.species} have been created by ${this.currentUser?.pseudo}`,
       createdAt: new Date(),
       type: 'admin',
       url: `/breedsheetviewer/${inputs.species.value.toLowerCase()}`

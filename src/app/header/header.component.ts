@@ -78,7 +78,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 // NOTIFICATIONS
 
   reloadDatabaseNotifs(): void {
-    console.log('ID DE LUSER', this.currentUser?._id);
     const notifs$ = this.notificationService.getAllNotifs(this.currentUser?._id);
     this.databaseNotifs$ = notifs$;
   }

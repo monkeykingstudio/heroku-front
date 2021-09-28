@@ -48,7 +48,6 @@ export class SocketioService {
   sendNotification(data: Notification) {
     this.socket.emit('sendNotification', data, this.params, () => {
       console.log('USER SEND NOTIFICATION', JSON.parse(localStorage.getItem('currentUser'))._id);
-      console.log(`sent data --> ${data}`);
     });
   }
 

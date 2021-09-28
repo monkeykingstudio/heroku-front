@@ -7,6 +7,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
+import { SocketioService } from '../services/socketio.service';
+import { Notification } from '../models/notification.model';
 
 @Component({
   selector: 'app-breed-sheet-viewer',
@@ -247,7 +249,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
   constructor(
     public breedingSheetsService: BreedingSheetsService,
     public route: ActivatedRoute,
-    public authService: AuthService
+    public authService: AuthService,
+    private socketService: SocketioService
   ) {}
 
   ngOnInit(): void {
@@ -356,8 +359,20 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
           this.foodTwo?.value,
           this.foodThree?.value
         ];
-        this.breedingSheetsService.updateFood(this.breedSheet?.id, foods)
+        const species = this.breedSheet?.species;
+
+        const dataNotification: Notification = {
+          senderId: this.currentUser?._id,
+          senderPseudo: this.currentUser?.pseudo,
+          message: `the '${this.breedSheet.species}' sheet have been updated by ${this.currentUser?.pseudo} on field 'foods'`,
+          createdAt: new Date(),
+          type: 'admin',
+          subType: 'breedsheet',
+          url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+        };
+        this.breedingSheetsService.updateFood(this.breedSheet?.id, foods, species, dataNotification)
         .subscribe(() => {
+          this.socketService.sendNotification(dataNotification);
           this.reloadSheet();
           this.loadSheet(this.breedSheet.species);
         });
@@ -380,8 +395,22 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
         this.geographyTwo?.value,
         this.geographyThree?.value
       ];
-      this.breedingSheetsService.updateGeography(this.breedSheet?.id, geography)
+
+      const species = this.breedSheet?.species;
+
+      const dataNotification: Notification = {
+        senderId: this.currentUser?._id,
+        senderPseudo: this.currentUser?.pseudo,
+        message: `the '${this.breedSheet.species}' sheet have been updated by ${this.currentUser?.pseudo} on field 'geography'`,
+        createdAt: new Date(),
+        type: 'admin',
+        subType: 'breedsheet',
+        url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+      };
+
+      this.breedingSheetsService.updateGeography(this.breedSheet?.id, geography, species, dataNotification)
       .subscribe(() => {
+        this.socketService.sendNotification(dataNotification);
         this.reloadSheet();
         this.loadSheet(this.breedSheet.species);
       });
@@ -399,8 +428,21 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       diapauseStart : this.diapauseStart.value,
       diapauseEnd : this.diapauseEnd.value
     };
-    this.breedingSheetsService.updateDiapause(this.breedSheet?.id, needs, temperatures, months)
+
+    const species = this.breedSheet?.species;
+
+    const dataNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      message: `the '${this.breedSheet.species}' sheet have been updated by ${this.currentUser?.pseudo} on field 'diapause'`,
+      createdAt: new Date(),
+      type: 'admin',
+      subType: 'breedsheet',
+      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+    };
+    this.breedingSheetsService.updateDiapause(this.breedSheet?.id, needs, temperatures, months, species, dataNotification)
     .subscribe(data => {
+      this.socketService.sendNotification(dataNotification);
       const res: any = data;
       this.reloadSheet();
       this.loadSheet(this.breedSheet.species);
@@ -420,9 +462,21 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     const claustral = this.clausSwitch;
     const driller = this.drillSwitch;
     const drinker = this.drinkSwitch;
+    const species = this.breedSheet?.species;
 
-    this.breedingSheetsService.updateBehavior(this.breedSheet?.id, polyGyne, claustral, driller, drinker)
+    const dataNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      message: `the '${this.breedSheet.species}' sheet have been updated by ${this.currentUser?.pseudo} on field 'behaviors'`,
+      createdAt: new Date(),
+      type: 'admin',
+      subType: 'breedsheet',
+      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+    };
+
+    this.breedingSheetsService.updateBehavior(this.breedSheet?.id, polyGyne, claustral, driller, drinker, species, dataNotification)
     .subscribe(data => {
+      this.socketService.sendNotification(dataNotification);
       const res: any = data;
       console.log('res', res);
       this.reloadSheet();
@@ -446,11 +500,23 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     const workerSize = this.workerSize?.value;
     const gyneLives = this.gyneLives?.value;
     const workerLives = this.workerLives?.value;
+    const species = this.breedSheet?.species;
+
+    const dataNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      message: `the '${this.breedSheet.species}' sheet have been updated by ${this.currentUser?.pseudo} on field 'morphism'`,
+      createdAt: new Date(),
+      type: 'admin',
+      subType: 'breedsheet',
+      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+    };
 
     this.breedingSheetsService.updateMorphism(
-      this.breedSheet?.id, polyMorphism, gyneSize, maleSize, majorSize, workerSize, gyneLives, workerLives
+      this.breedSheet?.id, polyMorphism, gyneSize, maleSize, majorSize, workerSize, gyneLives, workerLives, species, dataNotification
       )
       .subscribe(data => {
+        this.socketService.sendNotification(dataNotification);
         const res: any = data;
         console.log('res', res);
         this.reloadSheet();
@@ -468,9 +534,20 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
 
   saveCharacteristics() {
     const characteristics = this.characteristics?.value;
+    const species = this.breedSheet?.species;
 
-    this.breedingSheetsService.updateCharacteristics(this.breedSheet?.id, characteristics)
+    const dataNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      message: `the '${this.breedSheet.species}' sheet have been updated by ${this.currentUser?.pseudo} on field 'characteristics'`,
+      createdAt: new Date(),
+      type: 'admin',
+      subType: 'breedsheet',
+      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+    };
+    this.breedingSheetsService.updateCharacteristics(this.breedSheet?.id, characteristics, species, dataNotification)
       .subscribe(data => {
+        this.socketService.sendNotification(dataNotification);
         const res: any = data;
         console.log('res', res);
         this.reloadSheet();
@@ -501,8 +578,22 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
         this.gynePictureTwo?.value,
         this.gynePictureThree?.value
       ];
-      this.breedingSheetsService.updateGynePictures(this.breedSheet?.id, gynePictures)
+
+      const species = this.breedSheet?.species;
+
+      const dataNotification: Notification = {
+        senderId: this.currentUser?._id,
+        senderPseudo: this.currentUser?.pseudo,
+        message: `the '${this.breedSheet.species}' sheet have been updated by ${this.currentUser?.pseudo} on field 'gyne pictures'`,
+        createdAt: new Date(),
+        type: 'admin',
+        subType: 'breedsheet',
+        url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+      };
+
+      this.breedingSheetsService.updateGynePictures(this.breedSheet?.id, gynePictures, species, dataNotification)
       .subscribe(() => {
+        this.socketService.sendNotification(dataNotification);
         this.reloadSheet();
         this.loadSheet(this.breedSheet.species);
       });
@@ -525,8 +616,21 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
         this.pictureTwo?.value,
         this.pictureThree?.value
       ];
-      this.breedingSheetsService.updatePictures(this.breedSheet?.id, pictures)
+      const species = this.breedSheet?.species;
+
+      const dataNotification: Notification = {
+        senderId: this.currentUser?._id,
+        senderPseudo: this.currentUser?.pseudo,
+        message: `the '${this.breedSheet.species}' sheet have been updated by ${this.currentUser?.pseudo} on field 'gyne pictures'`,
+        createdAt: new Date(),
+        type: 'admin',
+        subType: 'breedsheet',
+        url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+      };
+
+      this.breedingSheetsService.updatePictures(this.breedSheet?.id, pictures, species, dataNotification)
       .subscribe(() => {
+        this.socketService.sendNotification(dataNotification);
         this.reloadSheet();
         this.loadSheet(this.breedSheet.species);
       });
@@ -550,12 +654,26 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     const genre = this.genre.value;
     const tribu = this.tribe.value;
     const difficulty = this.difficulty.value;
+    const species = this.breedSheet?.species;
 
-    this.breedingSheetsService.updatePrimary(this.breedSheet?.id, temperature, hygrometry, family, subfamily, genre, tribu, difficulty)
+    const dataNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      message: `the '${this.breedSheet.species}' sheet have been updated by ${this.currentUser?.pseudo} on field 'primary'`,
+      createdAt: new Date(),
+      type: 'admin',
+      subType: 'breedsheet',
+      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+    };
+
+    this.breedingSheetsService.updatePrimary(
+      this.breedSheet?.id, species, temperature, hygrometry, family, subfamily, genre, tribu, difficulty, dataNotification
+      )
     .subscribe(data => {
       const res: any = data;
       this.reloadSheet();
       this.loadSheet(this.breedSheet.species);
+      this.socketService.sendNotification(dataNotification);
     },
     err => {
       console.log('error: ', err.message);
@@ -567,6 +685,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Toggles
   public diapauseSwitch() {
     if (this.needDiapauseSwitch === undefined) {
       this.needDiapauseSwitch = !this.breedSheet?.needDiapause;
@@ -611,6 +730,7 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     this.drinkSwitch = !this.breedSheet?.drinker;
   }
 
+  // Prepare all forms
   private prepareFood() {
     this.foodForm = new FormGroup({
       foodOne: new FormControl(),

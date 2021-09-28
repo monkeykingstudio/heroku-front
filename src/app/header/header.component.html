@@ -44,10 +44,13 @@
           <div *ngFor="let notif of databaseNotifs;index as i">
             <div [id]="notif.id" class="line animate__animated">
               <div class="head d-flex">
-                <span class="date">
+                <div class="d-flex align-items-center">
                   <i class="date-icon"></i>
-                  {{notif.created_at | date:'shortDate'}}
-                </span>
+
+                  <span class="date">
+                    {{notif.created_at | date:'shortDate'}}
+                  </span>
+                </div>
                 <div class="d-flex">
                   <button class="green-btn">DETAILS</button>
                   <button (click)="markAsRead(notif.id)" class="red-btn">DELETE</button>

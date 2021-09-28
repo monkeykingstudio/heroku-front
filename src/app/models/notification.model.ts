@@ -4,6 +4,7 @@ export class Notification {
   message: string;
   createdAt: Date;
   type: string;
+  subType?: string;
   readBy?: Array<object>;
   url?: string;
   id?: string;
