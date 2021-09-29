@@ -156,32 +156,11 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     );
   }
 
-  deleteBreedSheet(id: string, user: object, species: string, notifReciever: string) {
-
-    const userNotification: Notification = {
-      senderId: this.currentUser?._id,
-      senderPseudo: this.currentUser?.pseudo,
-      recieverId: notifReciever,
-      message: `the breedsheet '${species}' have been deleted by an administrator`,
-      createdAt: new Date(),
-      type: 'private',
-      subType: 'breedsheet'
-    };
-
-    const adminNotification: Notification = {
-      senderId: this.currentUser?._id,
-      senderPseudo: this.currentUser?.pseudo,
-      message: `the breedsheet '${species}' have been deleted by ${this.currentUser?.pseudo}`,
-      createdAt: new Date(),
-      type: 'admin',
-      subType: 'breedsheet'
-    };
-
-    return this.breedingSheetsService.deleteSheet(id, userNotification, adminNotification)
+  deleteBreedSheet(id: string, user: object, species: string) {
+    return this.breedingSheetsService.deleteSheet(id)
     .subscribe((res) => {
       this.reloadBreedingSheets();
       this.reloadPendingSheets();
-
       // Mail part
       this.mailService.sendBreedEmail('https://calm-waters-91692.herokuapp.com/api/mail/breedtrash', {user, species})
       .subscribe(data => {
@@ -195,6 +174,27 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       });
     });
   }
+
+  // deleteBreedNotif(id: string, notifReciever: string ) {
+  //   const userNotification: Notification = {
+  //     senderId: this.currentUser?._id,
+  //     senderPseudo: this.currentUser?.pseudo,
+  //     recieverId: notifReciever,
+  //     message: `the breedsheet '${species}' have been deleted by an administrator`,
+  //     createdAt: new Date(),
+  //     type: 'private',
+  //     subType: 'breedsheet'
+  //   };
+
+  //   const adminNotification: Notification = {
+  //     senderId: this.currentUser?._id,
+  //     senderPseudo: this.currentUser?.pseudo,
+  //     message: `the breedsheet '${species}' have been deleted by ${this.currentUser?.pseudo}`,
+  //     createdAt: new Date(),
+  //     type: 'admin',
+  //     subType: 'breedsheet'
+  //   };
+  // }
 
   reviewSheet(id: string): void {
     this.router.navigate (['breedsheetviewer', id]);
