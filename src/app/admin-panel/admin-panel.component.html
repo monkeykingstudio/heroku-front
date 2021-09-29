@@ -76,7 +76,7 @@
                   <div class="four">
                     <div class="action-btn">
                       <i (click)="reviewSheet(sheet.species)" class="eye-icon"></i>
-                      <i (click)="deleteBreedSheet(sheet.id, sheet.creator, sheet.species)" class="remove-icon"></i>
+                      <i (click)="deleteBreedSheet(sheet.id, sheet.creator, sheet.species, sheet.creator._id); deleteNotif(sheet.species, sheet.creator._id)" class="remove-icon"></i>
                     </div>
                   </div>
                 </div>

@@ -8,4 +8,5 @@ export class Notification {
   readBy?: Array<object>;
   url?: string;
   id?: string;
+  recieverId?: string;
 }
