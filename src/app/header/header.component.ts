@@ -107,7 +107,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   markAsRead(id: string) {
-    var value = document.getElementById(id);
+    const value = document.getElementById(id);
     value.classList.toggle('animate__zoomOut');
     setTimeout(() => {
       value.style.display = 'none';
