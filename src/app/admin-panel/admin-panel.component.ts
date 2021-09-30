@@ -15,6 +15,7 @@ import { MailService } from '../services/mail.service';
 import { AuthService } from '../services/auth.service';
 import { SocketioService } from '../services/socketio.service';
 import { Notification } from '../models/notification.model';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-admin-panel',
@@ -157,6 +158,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   }
 
   deleteBreedSheet(id: string, user: object, species: string) {
+
     return this.breedingSheetsService.deleteSheet(id)
     .subscribe((res) => {
       this.reloadBreedingSheets();
@@ -175,26 +177,34 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     });
   }
 
-  // deleteBreedNotif(id: string, notifReciever: string ) {
-  //   const userNotification: Notification = {
-  //     senderId: this.currentUser?._id,
-  //     senderPseudo: this.currentUser?.pseudo,
-  //     recieverId: notifReciever,
-  //     message: `the breedsheet '${species}' have been deleted by an administrator`,
-  //     createdAt: new Date(),
-  //     type: 'private',
-  //     subType: 'breedsheet'
-  //   };
+  deleteBreedNotif(id: string, notifReciever: string, species: string ) {
+    console.log('reciever -->', notifReciever);
+    const userNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      recieverId: notifReciever,
+      message: `the breedsheet '${species}' have been deleted by an administrator`,
+      createdAt: new Date(),
+      type: 'private',
+      subType: 'breedsheet'
+    };
 
-  //   const adminNotification: Notification = {
-  //     senderId: this.currentUser?._id,
-  //     senderPseudo: this.currentUser?.pseudo,
-  //     message: `the breedsheet '${species}' have been deleted by ${this.currentUser?.pseudo}`,
-  //     createdAt: new Date(),
-  //     type: 'admin',
-  //     subType: 'breedsheet'
-  //   };
-  // }
+    const adminNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      message: `the breedsheet '${species}' have been deleted by ${this.currentUser?.pseudo}`,
+      createdAt: new Date(),
+      type: 'admin',
+      subType: 'breedsheet'
+    };
+
+    return this.breedingSheetsService.deleteSheetNotif(id, notifReciever, species, userNotification, adminNotification)
+    .subscribe(() => {
+      console.log('try to send notifs', userNotification, adminNotification);
+      this.socketService.sendNotification(userNotification);
+      this.socketService.sendNotification(adminNotification);
+    });
+  }
 
   reviewSheet(id: string): void {
     this.router.navigate (['breedsheetviewer', id]);

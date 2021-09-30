@@ -471,6 +471,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       message: `a breedsheet for species ${this.breedData.species} have been created by ${this.currentUser?.pseudo}`,
       createdAt: new Date(),
       type: 'admin',
+      subType: 'breedsheet',
       url: `/breedsheetviewer/${inputs.species.value.toLowerCase()}`
     };
 

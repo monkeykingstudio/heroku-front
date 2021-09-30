@@ -125,7 +125,8 @@ export class BreedingSheetsService {
       shareReplay()
     );
   }
-  // deleteSheetNotif(id: string, reciever: string) {
-  //   return this.http.post<Notification>(`${this.breedingSheetsUrl}/${id}`);
-  // }
+
+  deleteSheetNotif(id: string, reciever: string, species: string, userNotification: Notification, adminNotification: Notification) {
+    return this.http.post<Notification>(`${this.breedingSheetsUrl}/${id}`, {reciever, species, userNotification, adminNotification});
+  }
 }
