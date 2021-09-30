@@ -5,13 +5,17 @@ import { User } from './../models/user.model';
 import { BreedingSheetsService } from './../services/breedingSheetsService';
 import { ColoniesService } from './../services/colonies.service';
 import { BreedingSheet } from './../models/breedingSheet.model';
-import { filter, map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Colony } from '../colonies/colony.model';
 import { Router } from '@angular/router';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { DatePipe } from '@angular/common';
 import { MailService } from '../services/mail.service';
+import { AuthService } from '../services/auth.service';
+import { SocketioService } from '../services/socketio.service';
+import { Notification } from '../models/notification.model';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-admin-panel',
@@ -19,6 +23,9 @@ import { MailService } from '../services/mail.service';
   styleUrls: ['./admin-panel.component.scss']
 })
 export class AdminPanelComponent implements OnInit, OnDestroy {
+  public authStatusSubscription: Subscription;
+  currentUser: User;
+
   private chartSub: Subscription;
   private userData = [];
   private chartUserData = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -77,10 +84,20 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
     public colonyService: ColoniesService,
     public breedingSheetsService: BreedingSheetsService,
     private datePipe: DatePipe,
-    public router: Router
+    public router: Router,
+    private socketService: SocketioService,
+    public authService: AuthService
     ) { }
 
   ngOnInit(): void {
+    this.authStatusSubscription = this.authService.currentUser
+    .pipe(
+      map(user => {
+        if (user) {
+          this.currentUser = user;
+        }
+      })
+      ).subscribe();
     this.reloadUsers();
     this.reloadColonies();
     this.reloadBreedingSheets();
@@ -141,11 +158,11 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   }
 
   deleteBreedSheet(id: string, user: object, species: string) {
+
     return this.breedingSheetsService.deleteSheet(id)
     .subscribe((res) => {
       this.reloadBreedingSheets();
       this.reloadPendingSheets();
-
       // Mail part
       this.mailService.sendBreedEmail('https://calm-waters-91692.herokuapp.com/api/mail/breedtrash', {user, species})
       .subscribe(data => {
@@ -157,6 +174,35 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       }, () => {
         console.log('mail is sent!');
       });
+    });
+  }
+
+  deleteBreedNotif(id: string, notifReciever: string, species: string ) {
+    console.log('reciever -->', notifReciever);
+    const userNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      recieverId: notifReciever,
+      message: `the breedsheet '${species}' have been deleted by an administrator`,
+      createdAt: new Date(),
+      type: 'private',
+      subType: 'breedsheet'
+    };
+
+    const adminNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      message: `the breedsheet '${species}' have been deleted by ${this.currentUser?.pseudo}`,
+      createdAt: new Date(),
+      type: 'admin',
+      subType: 'breedsheet'
+    };
+
+    return this.breedingSheetsService.deleteSheetNotif(id, notifReciever, species, userNotification, adminNotification)
+    .subscribe(() => {
+      console.log('try to send notifs', userNotification, adminNotification);
+      this.socketService.sendNotification(userNotification);
+      this.socketService.sendNotification(adminNotification);
     });
   }
 

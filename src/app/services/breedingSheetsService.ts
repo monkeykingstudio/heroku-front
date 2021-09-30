@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BreedingSheet } from '../models/breedingSheet.model';
-import { map, shareReplay, catchError } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Notification } from '../models/notification.model';
@@ -124,5 +124,9 @@ export class BreedingSheetsService {
     .pipe(
       shareReplay()
     );
+  }
+
+  deleteSheetNotif(id: string, reciever: string, species: string, userNotification: Notification, adminNotification: Notification) {
+    return this.http.post<Notification>(`${this.breedingSheetsUrl}/${id}`, {reciever, species, userNotification, adminNotification});
   }
 }
