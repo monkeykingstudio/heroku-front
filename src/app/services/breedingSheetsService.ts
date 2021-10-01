@@ -99,8 +99,7 @@ export class BreedingSheetsService {
     genre: string,
     tribu: string,
     difficulty: number,
-    dataNotification: Notification
-
+    dataNotification: Notification,
     ): Observable<BreedingSheet> {
       return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/primary/${id}`,
       {species, temperature, hygrometry, family, subfamily, genre, tribu, difficulty, dataNotification});

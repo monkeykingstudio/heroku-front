@@ -36,4 +36,5 @@ export class BreedingSheet {
   maleSize?: string;
   majorSize?: string;
   characteristics?: string;
+  socketRef?: string;
 }

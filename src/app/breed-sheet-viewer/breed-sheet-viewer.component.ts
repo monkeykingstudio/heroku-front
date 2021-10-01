@@ -9,6 +9,7 @@ import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
 import { SocketioService } from '../services/socketio.service';
 import { Notification } from '../models/notification.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-breed-sheet-viewer',
@@ -280,7 +281,6 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
     this.prepareGynePictures();
     this.preparePictures();
     this.preparePrimary();
-
   }
 
   reloadSheet() {
@@ -368,7 +368,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
           createdAt: new Date(),
           type: 'admin',
           subType: 'breedsheet',
-          url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+          url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`,
+          socketRef: uuidv4()
         };
         this.breedingSheetsService.updateFood(this.breedSheet?.id, foods, species, dataNotification)
         .subscribe(() => {
@@ -405,7 +406,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
         createdAt: new Date(),
         type: 'admin',
         subType: 'breedsheet',
-        url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+        url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`,
+        socketRef: uuidv4()
       };
 
       this.breedingSheetsService.updateGeography(this.breedSheet?.id, geography, species, dataNotification)
@@ -438,7 +440,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       createdAt: new Date(),
       type: 'admin',
       subType: 'breedsheet',
-      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`,
+      socketRef: uuidv4()
     };
     this.breedingSheetsService.updateDiapause(this.breedSheet?.id, needs, temperatures, months, species, dataNotification)
     .subscribe(data => {
@@ -471,7 +474,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       createdAt: new Date(),
       type: 'admin',
       subType: 'breedsheet',
-      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`,
+      socketRef: uuidv4()
     };
 
     this.breedingSheetsService.updateBehavior(this.breedSheet?.id, polyGyne, claustral, driller, drinker, species, dataNotification)
@@ -509,7 +513,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       createdAt: new Date(),
       type: 'admin',
       subType: 'breedsheet',
-      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`,
+      socketRef: uuidv4()
     };
 
     this.breedingSheetsService.updateMorphism(
@@ -543,7 +548,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       createdAt: new Date(),
       type: 'admin',
       subType: 'breedsheet',
-      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`,
+      socketRef: uuidv4()
     };
     this.breedingSheetsService.updateCharacteristics(this.breedSheet?.id, characteristics, species, dataNotification)
       .subscribe(data => {
@@ -588,7 +594,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
         createdAt: new Date(),
         type: 'admin',
         subType: 'breedsheet',
-        url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+        url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`,
+        socketRef: uuidv4()
       };
 
       this.breedingSheetsService.updateGynePictures(this.breedSheet?.id, gynePictures, species, dataNotification)
@@ -625,7 +632,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
         createdAt: new Date(),
         type: 'admin',
         subType: 'breedsheet',
-        url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+        url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`,
+        socketRef: uuidv4()
       };
 
       this.breedingSheetsService.updatePictures(this.breedSheet?.id, pictures, species, dataNotification)
@@ -663,7 +671,8 @@ export class BreedSheetViewerComponent implements OnInit, OnDestroy {
       createdAt: new Date(),
       type: 'admin',
       subType: 'breedsheet',
-      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`
+      url: `/breedsheetviewer/${this.breedSheet.species.toLowerCase()}`,
+      socketRef: uuidv4()
     };
 
     this.breedingSheetsService.updatePrimary(
