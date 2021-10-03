@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { UsersService } from '../../services/user.service';
 import { MailService } from '../../services/mail.service';
+import { SocketioService } from '../../services/socketio.service';
+import { Notification } from '../../models/notification.model';
 
 // import {mimeType} from '../../images/mime-type.validator';
 
@@ -78,12 +80,11 @@ export class SignupComponent implements OnInit {
 
     this.userService.userAdd(this.user)
       .subscribe(user => {
-        console.log('register 2')
         if (this.errorMsg == null) {
           this.prepareForm();
-          this.router.navigate(['/login']);
           this.loading = false;
           this.registerSucces = true;
+          this.router.navigate(['/login']);
         }
     });
 

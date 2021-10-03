@@ -15,7 +15,8 @@ import { MailService } from '../services/mail.service';
 import { AuthService } from '../services/auth.service';
 import { SocketioService } from '../services/socketio.service';
 import { Notification } from '../models/notification.model';
-import { stringify } from '@angular/compiler/src/util';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-admin-panel',
@@ -164,7 +165,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       this.reloadBreedingSheets();
       this.reloadPendingSheets();
       // Mail part
-      this.mailService.sendBreedEmail('https://calm-waters-91692.herokuapp.com/api/mail/breedtrash', {user, species})
+      this.mailService.sendBreedEmail(`${environment.APIEndpoint}/api/mail/breedtrash`, {user, species})
       .subscribe(data => {
         let res: any = data;
         console.log(`mail is sent for breedsheet deletion`);
