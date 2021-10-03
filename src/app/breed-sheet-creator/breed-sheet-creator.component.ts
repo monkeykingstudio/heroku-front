@@ -10,6 +10,7 @@ import { User } from '../models/user.model';
 import { AuthService } from './../services/auth.service';
 import { SocketioService } from '../services/socketio.service';
 import { Notification } from '../models/notification.model';
+import { v4 as uuidv4 } from 'uuid';
 
 
 @Component({
@@ -393,6 +394,7 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
   add() {
     const inputs = this.formControls;
     this.breedData = {
+      socketRef: uuidv4(),
       creatorPseudo: this.currentUser?.pseudo,
       creator: this.currentUser?._id,
       creationDate: moment(new Date()).format(this.DATE_RFC2822),
@@ -454,8 +456,6 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       characteristics: inputs.characteristics.value
     };
 
-    console.log(this.breedData);
-
     // check if species already exists, if true, proceed
     for (const species of this.optionsSpecies) {
       if (species.replace(/ /g, '') === this.breedData.species.replace(/ /g, '')) {
@@ -472,7 +472,8 @@ export class BreedSheetCreatorComponent implements OnInit, OnDestroy {
       createdAt: new Date(),
       type: 'admin',
       subType: 'breedsheet',
-      url: `/breedsheetviewer/${inputs.species.value.toLowerCase()}`
+      url: `/breedsheetviewer/${inputs.species.value.toLowerCase()}`,
+      socketRef: this.breedData.socketRef
     };
 
     this.breedingSheetsService.createSheet(this.breedData)

@@ -28,4 +28,8 @@ export class NotificationService {
     return this.http.post<any>(`${this.notificationUrl}/read/${id}`, {});
   }
 
+  markSocketAsRead(id: string) {
+    return this.http.post<any>(`${this.notificationUrl}/socketread/${id}`, {});
+  }
+
 }

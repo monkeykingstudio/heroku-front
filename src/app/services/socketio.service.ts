@@ -51,6 +51,12 @@ export class SocketioService {
     });
   }
 
+  removeNotification(socketRef: string) {
+    const notif = this.socketNotifications.findIndex(socket => socket.socketRef === socketRef);
+    console.log(notif);
+    this.socketNotifications.splice(notif, 1);
+  }
+
   disconnect() {
     if (this.socket) {
       this.socket.disconnect();

@@ -17,6 +17,7 @@ import { SocketioService } from '../services/socketio.service';
 import { Notification } from '../models/notification.model';
 import { environment } from 'src/environments/environment';
 
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-admin-panel',
@@ -159,7 +160,6 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   }
 
   deleteBreedSheet(id: string, user: object, species: string) {
-
     return this.breedingSheetsService.deleteSheet(id)
     .subscribe((res) => {
       this.reloadBreedingSheets();
@@ -187,7 +187,8 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       message: `the breedsheet '${species}' have been deleted by an administrator`,
       createdAt: new Date(),
       type: 'private',
-      subType: 'breedsheet'
+      subType: 'breedsheet',
+      socketRef: uuidv4()
     };
 
     const adminNotification: Notification = {
@@ -196,7 +197,8 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       message: `the breedsheet '${species}' have been deleted by ${this.currentUser?.pseudo}`,
       createdAt: new Date(),
       type: 'admin',
-      subType: 'breedsheet'
+      subType: 'breedsheet',
+      socketRef: uuidv4()
     };
 
     return this.breedingSheetsService.deleteSheetNotif(id, notifReciever, species, userNotification, adminNotification)

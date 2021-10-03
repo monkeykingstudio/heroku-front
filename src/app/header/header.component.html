@@ -10,7 +10,7 @@
     </div>
     <i (click)="showNotifs()" style="position:relative" class="notif-icon">
       <div [ngClass]="
-      databaseNotifs?.length > 0 ? 'animate__animated animate__heartBeat animate__infinite' : 'toto'
+      databaseNotifs?.length > 0 || socketNotifs?.length > 0  ? 'animate__animated animate__heartBeat animate__infinite' : 'toto'
       " class="notif-count">
         <span >{{databaseNotifs.length + socketNotifs.length | number}}</span>
       </div>
@@ -21,7 +21,7 @@
       <div style="display: flex;flex-direction: column;"  class="w-100">
         <!-- SOCKET NOTIFICATIONS -->
         <div *ngFor="let socketNotif of socketNotifs;index as i" class="w-100">
-          <div style="background-color: rgb(197, 255, 197);" [id]="socketNotif.id" class="line animate__animated">
+          <div [id]="socketNotif.id" style="background-color: rgb(197, 255, 197);" [id]="socketNotif.id" class="line animate__animated">
             <div class="head d-flex">
               <div class="d-flex align-items-center">
                 <i class="date-icon"></i>
@@ -32,7 +32,7 @@
               </div>
               <div class="d-flex">
                 <button class="green-btn">DETAILS</button>
-                <!-- <button (click)="markAsRead(socketNotif.id)" class="blue-btn">MARK AS READ</button> -->
+                <button (click)="markSocketAsRead(socketNotif.id, socketNotif.socketRef)" class="red-btn">DELETE</button>
               </div>
             </div>
             <div class="body d-flex">

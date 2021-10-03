@@ -122,6 +122,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
+  markSocketAsRead(id: string, socketRef: string) {
+    const value = document.getElementById(id);
+    value.classList.toggle('animate__zoomOut');
+    setTimeout(() => {
+      value.style.display = 'none';
+    }, 500);
+    this.notificationService.markSocketAsRead(socketRef)
+    .subscribe(() => {
+      this.markRead = true;
+      setTimeout(() => {
+        this.socketService.removeNotification(socketRef);
+        this.reloadSocketNotifs();
+        this.reloadDatabaseNotifs();
+      }, 500);
+    });
+  }
+
   ngOnDestroy(): void {
     this.authStatusSubscription.unsubscribe();
   }
