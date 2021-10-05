@@ -1,0 +1,113 @@
+<h5>Diapause</h5>
+<div id="diapauseRef" class="diapause-container animate__animated animate__slideInRight">
+  <div [ngClass]="endDate && diapauseStart === true ? 'justify-content-between' : 'justify-content-end'" class="d-flex align-items-center">
+    <div *ngIf="endDate && diapauseStart" class="countDown">
+      <span> {{daysToDday}} days, {{hoursToDday}} hours, {{minutesToDday}}m:{{secondsToDday}}s  </span>
+      <!-- <span id="hours"> {{hoursToDday}} </span>H
+      <span id="minutes"> {{minutesToDday}} </span>M
+      <span id="seconds"> {{secondsToDday}} </span>S -->
+    </div>
+    <button class="align-self-end edit-btn" type="button">
+      <i class="options-icon"></i>
+    </button>
+  </div>
+
+  <div class="separator-module"></div>
+
+  <div class="body d-flex flex-column">
+    <div class="recommended">
+      <h6>recommended period</h6>
+      <div class="dates">
+        <span>
+        {{sheet?.diapausePeriod[0].diapauseStart}} <i>--></i> {{sheet?.diapausePeriod[0].diapauseEnd}}
+        </span>
+      </div>
+    </div>
+
+    <div class="schedule">
+      <form (ngSubmit)='saveDiapause()' [formGroup]="diapauseForm">
+        <div class="inner-separator"></div>
+        <div *ngIf="!diapauseStart" style="margin: 1rem 0 .5rem 0;" class=" d-flex justify-content-around">
+          <div class="form-check">
+            <input
+            (input)="switchSchedule()"
+            type="radio"
+            formControlName="schedule"
+            class="form-check-input"
+            id="autoStart"
+            [value]='false'
+            />
+            <span class="form-check-label">Start today</span><span class="info">?</span>
+          </div>
+
+          <div class="form-check">
+            <input
+            [disabled]="schedule"
+            (input)="switchSchedule()"
+            type="radio"
+            formControlName="schedule"
+            class="form-check-input"
+            id="schedule"
+            [value]='true'
+            />
+            <span class="form-check-label">Schedule</span>
+          </div>
+        </div>
+        <div *ngIf="!diapauseStart" class="inner-separator"></div>
+
+        <div *ngIf="!schedule && !diapauseStart" class="form-row direct-start">
+          <div class="form-group col-md-6">
+            <label for="">Start date</label>
+            <input
+            [disabled]='true' [value]="startDate | date:'short'" (input)="startDate=parseDate($event.target.value)" placeholder="{{startDate | date: 'shortDate'}}" class="form-control date-input">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="">End date</label>
+            <input
+            type="text" placeholder="{{endDate  | date:'short'}}" onfocus="(this.type='date')" onblur="(this.type='text')" [value]="endDate | date:'short'" (input)="endDate=parseDate($event.target.value)" class="form-control date-input">
+          </div>
+        </div>
+
+        <div *ngIf="schedule && !diapauseStart" class="form-row schedule-start">
+          <div class="form-group col-md-6">
+            <label for="">Start date</label>
+            <input
+            [value]="startDate | date:'short'" onfocus="(this.type='date')" onblur="(this.type='text')" (input)="startDate=parseDate($event.target.value)" placeholder="{{startDate | date: 'shortDate'}}" class="form-control date-input">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="">End date</label>
+            <input
+            (change)="endDate"
+            type="text" placeholder="{{endDate  | date:'short'}}" onfocus="(this.type='date')" onblur="(this.type='text')" [value]="endDate | date:'short'" (input)="endDate=parseDate($event.target.value)" class="form-control date-input">
+          </div>
+        </div>
+        <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf='!dateCheck'>End date can't be lower than start date, and start date can't be higher than end date!</span>
+
+        <div class="align-items: center; input-group"></div>
+
+        <div *ngIf="!diapauseStart" class="inner-separator"></div>
+          <div *ngIf="endDate && diapauseStart" class="line">
+            <div style="margin-bottom: 10px;" class="date-cont">
+              <span class="title">Started at: </span><span class='start-date'>{{startDate | date:'short'}}</span>
+            </div>
+            <div class="date-cont">
+              <span class="title">Will end at: </span><span class='end-date'>{{endDate | date:'short'}}</span>
+            </div>
+
+          </div>
+        <div *ngIf="endDate && diapauseStart" class="inner-separator"></div>
+        <div class="d-flex buttons">
+          <button [disabled]="!endDate" *ngIf="!diapauseStart" type='submit' class='green-btn w-100'>START DIAPAUSE</button>
+          <button *ngIf="endDate && diapauseStart" type='button' class='red-btn w-100'>STOP DIAPAUSE</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+<!-- -----------
+  Options popup
+------------ -->
+
+
+</div>

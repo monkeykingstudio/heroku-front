@@ -505,6 +505,19 @@
   }
 }
 
+.sleep-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/sleep.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
 
 .date-icon {
   &:before {
