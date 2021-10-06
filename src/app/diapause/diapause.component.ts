@@ -5,6 +5,7 @@ import { DatePipe } from '@angular/common';
 import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import { DiapauseService } from '../services/diapause.service';
 import * as moment from 'moment';
+import { Diapause } from './../models/diapause.model';
 
 
 @Component({
@@ -19,9 +20,8 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   scheduleCtrl: FormControl;
 
   schedule = false;
-
   diapauseStart = false;
-  // TIMER
+
   private subscription: Subscription;
 
   public dateNow = new Date();
@@ -73,7 +73,7 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     this.allocateTimeUnits(this.timeDifference);
   }
 
-  private allocateTimeUnits (timeDifference) {
+  private allocateTimeUnits (timeDifference: number) {
     this.secondsToDday = Math.floor(
       (timeDifference) / (this.milliSecondsInASecond) % this.SecondsInAMinute
       );
@@ -102,26 +102,37 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     });
   }
 
-  saveDiapause(): void {
+  saveDiapause() {
+    this.checkDates();
+    const diapause: Diapause = {
+      period: {
+        startDate: this.startDate,
+        endDate: this.endDate
+      },
+      species: this.sheet.species,
+      colonyId: this.colonyId,
+    };
 
-    const startDate = moment(
-      new Date(`${this.startDate.getMonth()}-${this.startDate.getDay()}-${this.startDate.getFullYear()}`)
-    );
+    return this.diapauseService.diapauseAdd(diapause)
+    .subscribe(() => {
 
-    const endDate = moment(
-      new Date(`${this.endDate.getMonth()}-${this.endDate.getDay()}-${this.endDate.getFullYear()}`)
-    );
-
-    console.log(endDate.diff(startDate, 'days'));
-    console.log(startDate.diff(endDate, 'days'));
+    });
+  }
 
 
-    if ((endDate.diff(startDate, 'days') < 0) && startDate.diff(endDate, 'days') > 0) {
+
+  checkDates() {
+    const diffInTime = this.endDate.getTime() - this.startDate.getTime();
+    const diffInDays = diffInTime / (1000 * 3600 * 24);
+
+    console.log(Math.floor(diffInDays));
+
+    if (diffInDays < 0) {
       this.dateCheck = false;
       this.diapauseStart = false;
+      return;
     } else {
       this.dateCheck = true;
-
       this.subscription = interval(1000)
       .subscribe(x => { this.getTimeDifference(); });
       this.diapauseStart = true;

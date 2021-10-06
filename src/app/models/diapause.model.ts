@@ -1,7 +1,7 @@
 export class Diapause {
-  period: [];
+  period: {};
   species: string;
-  status: string;
   colonyId: string;
+  status?: string;
   id?: string;
 }

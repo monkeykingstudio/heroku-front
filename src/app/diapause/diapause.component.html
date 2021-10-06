@@ -59,12 +59,12 @@
           <div class="form-group col-md-6">
             <label for="">Start date</label>
             <input
-            [disabled]='true' [value]="startDate | date:'short'" (input)="startDate=parseDate($event.target.value)" placeholder="{{startDate | date: 'shortDate'}}" class="form-control date-input">
+            [disabled]='true' [value]="startDate | date:'shortDate'" (input)="startDate=parseDate($event.target.value)" placeholder="{{startDate | date: 'shortDate'}}" class="form-control date-input">
           </div>
           <div class="form-group col-md-6">
             <label for="">End date</label>
             <input
-            type="text" placeholder="{{endDate  | date:'short'}}" onfocus="(this.type='date')" onblur="(this.type='text')" [value]="endDate | date:'short'" (input)="endDate=parseDate($event.target.value)" class="form-control date-input">
+            type="text" placeholder="{{endDate  | date:'shortDate'}}" onfocus="(this.type='date')" onblur="(this.type='text')" [value]="endDate | date:'shortDate'" (input)="endDate=parseDate($event.target.value)" class="form-control date-input">
           </div>
         </div>
 
@@ -72,13 +72,13 @@
           <div class="form-group col-md-6">
             <label for="">Start date</label>
             <input
-            [value]="startDate | date:'short'" onfocus="(this.type='date')" onblur="(this.type='text')" (input)="startDate=parseDate($event.target.value)" placeholder="{{startDate | date: 'shortDate'}}" class="form-control date-input">
+            [value]="startDate | date:'shortDate'" onfocus="(this.type='date')" onblur="(this.type='text')" (input)="startDate=parseDate($event.target.value)" placeholder="{{startDate | date: 'shortDate'}}" class="form-control date-input">
           </div>
           <div class="form-group col-md-6">
             <label for="">End date</label>
             <input
             (change)="endDate"
-            type="text" placeholder="{{endDate  | date:'short'}}" onfocus="(this.type='date')" onblur="(this.type='text')" [value]="endDate | date:'short'" (input)="endDate=parseDate($event.target.value)" class="form-control date-input">
+            type="text" placeholder="{{endDate | date:'shortDate'}}" onfocus="(this.type='date')" onblur="(this.type='text')" [value]="endDate | date:'shortDate'" (input)="endDate=parseDate($event.target.value)" class="form-control date-input">
           </div>
         </div>
         <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf='!dateCheck'>End date can't be lower than start date, and start date can't be higher than end date!</span>
@@ -96,7 +96,7 @@
 
           </div>
         <div *ngIf="endDate && diapauseStart" class="inner-separator"></div>
-        <div class="d-flex buttons">
+        <div [ngClass]="!diapauseStart ? 'margin-1-1' : 'margin-1'" class="d-flex buttons">
           <button [disabled]="!endDate" *ngIf="!diapauseStart" type='submit' class='green-btn w-100'>START DIAPAUSE</button>
           <button *ngIf="endDate && diapauseStart" type='button' class='red-btn w-100'>STOP DIAPAUSE</button>
         </div>
