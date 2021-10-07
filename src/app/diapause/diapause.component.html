@@ -1,8 +1,8 @@
 <h5>Diapause</h5>
 <div id="diapauseRef" class="diapause-container animate__animated animate__slideInRight">
-  <div [ngClass]="endDate && diapauseStart === true ? 'justify-content-between' : 'justify-content-end'" class="d-flex align-items-center">
-    <div *ngIf="endDate && diapauseStart" class="countDown">
-      <span> {{daysToDday}} days, {{hoursToDday}} hours, {{minutesToDday}}m:{{secondsToDday}}s  </span>
+  <div [ngClass]="(endDate && diapauseStart) || (diapauseLoaded) === true ? 'justify-content-between' : 'justify-content-end'" class="d-flex align-items-center">
+    <div *ngIf="(endDate && diapauseStart) || (diapauseLoaded)" class="countDown">
+      <span> {{daysToDday}} days, {{hoursToDday}} hours, {{minutesToDday}}m:{{secondsToDday}}s </span>
       <!-- <span id="hours"> {{hoursToDday}} </span>H
       <span id="minutes"> {{minutesToDday}} </span>M
       <span id="seconds"> {{secondsToDday}} </span>S -->
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div class="schedule">
+    <div *ngIf="!diapauseLoaded" class="schedule">
       <form (ngSubmit)='saveDiapause()' [formGroup]="diapauseForm">
         <div class="inner-separator"></div>
         <div *ngIf="!diapauseStart" style="margin: 1rem 0 .5rem 0;" class=" d-flex justify-content-around">
@@ -95,12 +95,43 @@
             </div>
 
           </div>
+          <div class="line">
+            <span>Messor Barbarus colonies currently in diapause : <b>5</b></span>
+          </div>
         <div *ngIf="endDate && diapauseStart" class="inner-separator"></div>
         <div [ngClass]="!diapauseStart ? 'margin-1-1' : 'margin-1'" class="d-flex buttons">
           <button [disabled]="!endDate" *ngIf="!diapauseStart" type='submit' class='green-btn w-100'>START DIAPAUSE</button>
           <button *ngIf="endDate && diapauseStart" type='button' class='red-btn w-100'>STOP DIAPAUSE</button>
         </div>
 
+      </form>
+    </div>
+
+    <div *ngIf="diapauseLoaded" class="schedule">
+      <span style="text-align: center">Loaded from database</span>
+      <form (ngSubmit)='saveDiapause()' [formGroup]="diapauseForm">
+        <div class="inner-separator"></div>
+
+        <div class="align-items: center; input-group"></div>
+
+          <div class="line">
+            <div style="margin-bottom: 10px;" class="date-cont">
+              <span class="title">Started at: </span><span class='start-date'>{{this.loadedDiapause[0].period.startDate | date: 'short'}}</span>
+            </div>
+            <div class="date-cont">
+              <span class="title">Will end at: </span><span class='end-date'>{{this.loadedDiapause[0].period.endDate | date: 'short'}}</span>
+            </div>
+
+          </div>
+          <div class="inner-separator"></div>
+
+          <div class="line">
+            <span>Messor Barbarus colonies currently in diapause : <b>5</b></span>
+          </div>
+        <div class="inner-separator"></div>
+        <div  class="d-flex buttons margin-1-1">
+          <button type='button' class='red-btn w-100'>ABORT DIAPAUSE</button>
+        </div>
       </form>
     </div>
   </div>

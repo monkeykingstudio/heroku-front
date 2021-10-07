@@ -23,8 +23,11 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   diapauseStart = false;
 
   private subscription: Subscription;
-
+  private loadedSubscription: Subscription;
   public dateNow = new Date();
+
+  diapauseLoaded = false;
+  loadedDiapause: Diapause;
 
   milliSecondsInASecond = 1000;
   hoursInADay = 24;
@@ -59,18 +62,30 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   ) { }
 
   private getTimeDifference () {
-    if (!this.schedule) {
-      this.timeDifference = this.endDate.getTime() - new Date().getTime();
+    if (this.loadedDiapause) {
+      this.timeDifference =
+      new Date(this.loadedDiapause[0].period.endDate).getTime() - new Date(this.loadedDiapause[0].period.startDate).getTime();
+
+      const hour = new Date(this.loadedDiapause[0].period.endDate).getHours();
+      const minutes = new Date(this.loadedDiapause[0].period.endDate).getMinutes();
+      const seconds = new Date(this.loadedDiapause[0].period.endDate).getSeconds();
+
+      this.allocateTimeUnits(this.timeDifference);
     }
     else {
-      this.timeDifference =  new Date(this.endDate).getTime() - new Date(this.startDate).getTime();
+      if (!this.schedule) {
+        this.timeDifference = this.endDate.getTime() - new Date().getTime();
+      }
+      else {
+        this.timeDifference =  new Date(this.endDate).getTime() - new Date(this.startDate).getTime();
+      }
+
+      const hour = new Date(this.endDate).getHours();
+      const minutes = new Date(this.endDate).getMinutes();
+      const seconds = new Date(this.endDate).getSeconds();
+
+      this.allocateTimeUnits(this.timeDifference);
     }
-
-    const hour = new Date(this.endDate).getHours();
-    const minutes = new Date(this.endDate).getMinutes();
-    const seconds = new Date(this.endDate).getSeconds();
-
-    this.allocateTimeUnits(this.timeDifference);
   }
 
   private allocateTimeUnits (timeDifference: number) {
@@ -89,7 +104,7 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    this.loadDiapause();
     this.startDate = new Date();
     this.diapauseStart = false;
 
@@ -112,14 +127,29 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       species: this.sheet.species,
       colonyId: this.colonyId,
     };
-
     return this.diapauseService.diapauseAdd(diapause)
-    .subscribe(() => {
-
+    .subscribe((newDiapause) => {
+      console.log(newDiapause);
     });
   }
 
+  loadDiapause() {
+    return this.diapauseService.diapauseGet(this.colonyId)
+    .subscribe((diapause) => {
+      console.log(diapause);
+      if (diapause.length === 0) {
+        this.diapauseLoaded = false;
+      }
+      else {
+        this.loadedDiapause = diapause;
+        this.diapauseLoaded = true;
+        this.subscription = interval(1000)
+        .subscribe(x => { this.getTimeDifference(); });
+        this.diapauseStart = true;
+      }
 
+    });
+  }
 
   checkDates() {
     const diffInTime = this.endDate.getTime() - this.startDate.getTime();
