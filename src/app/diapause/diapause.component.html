@@ -7,7 +7,7 @@
       <span id="minutes"> {{minutesToDday}} </span>M
       <span id="seconds"> {{secondsToDday}} </span>S -->
     </div>
-    <button class="align-self-end edit-btn" type="button">
+    <button (click)="openPopup('diapausePopup')" class="align-self-end edit-btn" type="button">
       <i class="options-icon"></i>
     </button>
   </div>
@@ -37,7 +37,10 @@
             id="autoStart"
             [value]='false'
             />
-            <span class="form-check-label">Start today</span><span class="info">?</span>
+            <span
+            class="form-check-label">Start today</span><span tooltipClass="antslab-tooltip"
+            placement="top"
+            ngbTooltip="Start a diapause from now" class="info">?</span>
           </div>
 
           <div class="form-check">
@@ -101,7 +104,7 @@
         <div *ngIf="endDate && diapauseStart" class="inner-separator"></div>
         <div [ngClass]="!diapauseStart ? 'margin-1-1' : 'margin-1'" class="d-flex buttons">
           <button [disabled]="!endDate" *ngIf="!diapauseStart" type='submit' class='green-btn w-100'>START DIAPAUSE</button>
-          <button *ngIf="endDate && diapauseStart" type='button' class='red-btn w-100'>STOP DIAPAUSE</button>
+          <button (click)="openPopup('abortPopup')" *ngIf="endDate && diapauseStart" type='button' class='red-btn w-100'>ABORT DIAPAUSE</button>
         </div>
 
       </form>
@@ -130,7 +133,7 @@
           </div>
         <div class="inner-separator"></div>
         <div  class="d-flex buttons margin-1-1">
-          <button type='button' class='red-btn w-100'>ABORT DIAPAUSE</button>
+          <button (click)="openPopup('abortPopup')" type='button' class='red-btn w-100'>ABORT DIAPAUSE</button>
         </div>
       </form>
     </div>
@@ -139,6 +142,38 @@
 <!-- -----------
   Options popup
 ------------ -->
+<app-popup [data]="loadedDiapause" class="diapause-popup animate__animated animate__zoomIn" id='diapausePopup'>
+  <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+    <h6 style="font-size:2.2rem!important;text-align: left;text-transform:capitalize">Options</h6>
+    <form class="form-group options-popup" [formGroup]="diapauseForm" (ngSubmit)='saveOptions(loadedDiapause)'>
+      <div class="checkbox-container d-flex flex-column">
+        <!-- <label class="parameters-label" > <i class="parameters-icon"></i> Parameters</label> -->
+        <div class="d-flex flex-column">
 
+        </div>
+      </div>
+
+      <button  type="submit" (click)="closePopup('diapausePopup'); $event.stopPropagation()" class='green-btn mt-4'>SAVE</button>
+
+    </form>
+    <button type="button" class='close-popup' (click)="closePopup('diapausePopup'); $event.stopPropagation()">
+      <i class="close-icon"></i>
+    </button>
+  </div>
+</app-popup>
+
+<app-popup class="diapause-popup animate__animated animate__zoomIn" id='abortPopup'>
+  <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+    <h6 style="font-size:2.2rem!important;text-transform:capitalize">Abort Diapause</h6>
+    <div class="popup-body d-flex flex-column">
+      <i class="warning-icon"></i>
+      <span>You are about to ABORT a running diapause.<span class="alert">All data will be lost.</span><br/>Are you sure ?</span>
+      <div class="d-flex w-100 justify-content-around">
+        <button type="submit" class="green-btn">YES</button>
+        <button (click)="closePopup('abortPopup')" type="button" class="red-btn">NO</button>
+      </div>
+    </div>
+  </div>
+</app-popup>
 
 </div>

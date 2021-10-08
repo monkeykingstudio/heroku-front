@@ -2,7 +2,7 @@
   <div *ngIf='(colony$ | async) as colony; else loading' class="colony-container col-sm-12">
 
     <div id="colonyRef" class="colony">
-      <app-colony-header [colony]='colony'></app-colony-header>
+      <app-colony-header [diapauseStatus]="diapauseStatus" [colony]='colony'></app-colony-header>
       <app-colony-species-banner [breedSheet]='breedSheet'></app-colony-species-banner>
       <div class="body row">
         <div class="col-sm-12 col-md-6 col-lg-3">
@@ -27,7 +27,7 @@
           <app-task-manager [colonyId]='colony.id'></app-task-manager>
         </div>
         <div class="col-sm-12 col-md-6 col-lg-3">
-          <app-diapause [sheet]="breedSheet" [colonyId]='colony.id'></app-diapause>
+          <app-diapause (diapauseChanged)="turnStatus($event)" [sheet]="breedSheet" [colonyId]='colony.id'></app-diapause>
         </div>
       </div>
     </div>

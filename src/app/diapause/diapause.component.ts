@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
 import { BreedingSheet } from 'src/app/models/breedingSheet.model';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import { DiapauseService } from '../services/diapause.service';
-import * as moment from 'moment';
 import { Diapause } from './../models/diapause.model';
+import { PopupService } from './../services/popup.service';
 
 
 @Component({
@@ -55,10 +55,14 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   @Input()
   colonyId: string;
 
+  @Output()
+  diapauseChanged = new EventEmitter<boolean>();
+
   constructor(
     private fb: FormBuilder,
     public datepipe: DatePipe,
-    public diapauseService: DiapauseService
+    public diapauseService: DiapauseService,
+    public popupService: PopupService
   ) { }
 
   private getTimeDifference () {
@@ -129,6 +133,7 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     };
     return this.diapauseService.diapauseAdd(diapause)
     .subscribe((newDiapause) => {
+      this.diapauseChanged.emit(true);
       console.log(newDiapause);
     });
   }
@@ -141,6 +146,7 @@ export class DiapauseComponent implements OnInit, OnDestroy {
         this.diapauseLoaded = false;
       }
       else {
+        this.diapauseChanged.emit(true);
         this.loadedDiapause = diapause;
         this.diapauseLoaded = true;
         this.subscription = interval(1000)
@@ -178,6 +184,18 @@ export class DiapauseComponent implements OnInit, OnDestroy {
 
   switchSchedule() {
     this.schedule = !this.schedule;
+  }
+
+  saveOptions(counter) {
+   console.log('save options diapause');
+  }
+
+  openPopup(id: string) {
+    this.popupService.open(id);
+  }
+
+  closePopup(id: string) {
+    this.popupService.close(id);
   }
 
   ngOnDestroy(): void {

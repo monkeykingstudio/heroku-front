@@ -5,6 +5,11 @@
   font-size: 12px;
 }
 
+.warning-icon {
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
 input[type="date"] {
   position: relative;
 }
@@ -245,7 +250,20 @@ h6 {
 .popup {
   width: 100%!important;
   height: 100%;
-
+  .popup-body {
+    position: relative;
+    right: 0!important;
+    span {
+      font-size: 15px;
+      line-height: 2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .alert {
+      color: #d74444;
+    }
+  }
 }
 
 .diapause-container {

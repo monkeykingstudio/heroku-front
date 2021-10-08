@@ -32,6 +32,8 @@ export class ColonyComponent implements OnInit, OnDestroy {
   private chartPolyMediumData = [];
   private chartPolyMajorData = [];
 
+  diapauseStatus = false;
+
   groupKey = 0;
 
   public barChartData: ChartDataSets[] = [
@@ -104,6 +106,7 @@ export class ColonyComponent implements OnInit, OnDestroy {
     { }
 
   ngOnInit(): void {
+    console.log('onInit',this.diapauseStatus);
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('colonyId')) {
         this.colonyId = paramMap.get('colonyId');
@@ -134,6 +137,10 @@ export class ColonyComponent implements OnInit, OnDestroy {
   loadColony(id: string): Observable<Colony> {
     console.log(`loading colony with ID: ${id}`);
     return this.colony$ = this.coloniesService.loadColony(id);
+  }
+
+  turnStatus($event) {
+    this.diapauseStatus = true;
   }
 
   ngOnDestroy(): void {
