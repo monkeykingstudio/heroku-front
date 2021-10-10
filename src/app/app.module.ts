@@ -46,6 +46,7 @@ import { OrderByPipe } from './pipes/orderBy.pipe';
 import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
 import { ClickoutsideDirective } from './clickoutside.directive';
 import { DiapauseComponent } from './diapause/diapause.component';
+import { DiapauseFormComponent } from './diapause/diapause-form/diapause-form.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { DiapauseComponent } from './diapause/diapause.component';
     ApprovedPipe,
     LandingPageComponent,
     ClickoutsideDirective,
-    DiapauseComponent
+    DiapauseComponent,
+    DiapauseFormComponent
   ],
   imports: [
     BrowserModule,

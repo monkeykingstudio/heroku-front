@@ -6,7 +6,7 @@ import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import { DiapauseService } from '../services/diapause.service';
 import { Diapause } from './../models/diapause.model';
 import { PopupService } from './../services/popup.service';
-
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-diapause',
@@ -14,6 +14,10 @@ import { PopupService } from './../services/popup.service';
   styleUrls: ['./diapause.component.scss']
 })
 export class DiapauseComponent implements OnInit, OnDestroy {
+
+  showCountdown = false;
+  ended;
+  started;
 
   diapauseForm: FormGroup;
   autoStartCtrl: FormControl;
@@ -40,10 +44,6 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   public hoursToDday;
   public daysToDday;
 
-  // Dates
-
-  DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss ZZ';
-
   startDate: Date;
   endDate: Date;
 
@@ -65,31 +65,22 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     public popupService: PopupService
   ) { }
 
-  private getTimeDifference () {
+  public getTimeDifference () {
     if (this.loadedDiapause) {
-      this.timeDifference =
-      new Date(this.loadedDiapause[0].period.endDate).getTime() - new Date(this.loadedDiapause[0].period.startDate).getTime();
+      this.timeDifference = new Date(this.loadedDiapause[0].period.endDate).getTime() - new Date().getTime();
 
       const hour = new Date(this.loadedDiapause[0].period.endDate).getHours();
       const minutes = new Date(this.loadedDiapause[0].period.endDate).getMinutes();
       const seconds = new Date(this.loadedDiapause[0].period.endDate).getSeconds();
-
-      this.allocateTimeUnits(this.timeDifference);
     }
     else {
-      if (!this.schedule) {
-        this.timeDifference = this.endDate.getTime() - new Date().getTime();
-      }
-      else {
-        this.timeDifference =  new Date(this.endDate).getTime() - new Date(this.startDate).getTime();
-      }
-
+      this.timeDifference = this.endDate.getTime() - new Date().getTime();
       const hour = new Date(this.endDate).getHours();
       const minutes = new Date(this.endDate).getMinutes();
       const seconds = new Date(this.endDate).getSeconds();
-
-      this.allocateTimeUnits(this.timeDifference);
     }
+    this.allocateTimeUnits(this.timeDifference);
+    return this.timeDifference;
   }
 
   private allocateTimeUnits (timeDifference: number) {
@@ -108,7 +99,6 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadDiapause();
     this.startDate = new Date();
     this.diapauseStart = false;
 
@@ -119,10 +109,41 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       autoStart: this.autoStartCtrl,
       schedule: this.scheduleCtrl,
     });
+    this.loadDiapause();
+  }
+
+  checkIfCountdown() {
+    let startDiff = 0;
+    let endDiff = 0;
+
+    if (this.diapauseLoaded) {
+      startDiff = new Date(this.loadedDiapause[0].period.startDate).getTime() - new Date().getTime();
+      endDiff = new Date(this.loadedDiapause[0].period.endDate).getTime() - new Date().getTime();
+    }
+    else {
+      startDiff = new Date(this.startDate).getTime() - new Date().getTime();
+      endDiff = new Date(this.endDate).getTime() - new Date().getTime();
+    }
+
+    if (endDiff <= 0) {
+      this.ended = true;
+    }
+    else {
+      this.ended = false;
+    }
+
+    if (startDiff >= 0) {
+      this.started = false;
+      this.showCountdown = false;
+    }
+    else {
+      this.started = true;
+      this.showCountdown = true;
+    }
   }
 
   saveDiapause() {
-    this.checkDates();
+    this.checkValidDates();
     const diapause: Diapause = {
       period: {
         startDate: this.startDate,
@@ -131,37 +152,49 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       species: this.sheet.species,
       colonyId: this.colonyId,
     };
-    return this.diapauseService.diapauseAdd(diapause)
-    .subscribe((newDiapause) => {
-      this.diapauseChanged.emit(true);
-      console.log(newDiapause);
-    });
+    if (this.dateCheck) {
+      return this.diapauseService.diapauseAdd(diapause)
+      .subscribe((newDiapause) => {
+        this.diapauseChanged.emit(true);
+        console.log(newDiapause);
+      });
+    } else {
+      return;
+    }
   }
 
   loadDiapause() {
     return this.diapauseService.diapauseGet(this.colonyId)
     .subscribe((diapause) => {
-      console.log(diapause);
       if (diapause.length === 0) {
         this.diapauseLoaded = false;
       }
       else {
+        console.log('Diapause Loaded', diapause);
         this.diapauseChanged.emit(true);
         this.loadedDiapause = diapause;
         this.diapauseLoaded = true;
-        this.subscription = interval(1000)
-        .subscribe(x => { this.getTimeDifference(); });
-        this.diapauseStart = true;
-      }
 
+        if (this.getTimeDifference() >= 0 ) {
+          this.subscription = interval(1000)
+          .subscribe(x => {
+            this.checkIfCountdown();
+            this.getTimeDifference();
+          });
+          this.diapauseStart = true;
+        }
+        else {
+          this.ended = true;
+        }
+      }
     });
   }
 
-  checkDates() {
-    const diffInTime = this.endDate.getTime() - this.startDate.getTime();
-    const diffInDays = diffInTime / (1000 * 3600 * 24);
-
-    console.log(Math.floor(diffInDays));
+  checkValidDates() {
+    const start = DateTime.fromISO(this.startDate.toISOString());
+    const end = DateTime.fromISO(this.endDate.toISOString());
+    const diff = end.diff(start, ['years', 'months', 'days', 'hours', 'minutes', 'seconds']);
+    const diffInDays = end.diff(start, ['days']);
 
     if (diffInDays < 0) {
       this.dateCheck = false;
@@ -170,7 +203,10 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     } else {
       this.dateCheck = true;
       this.subscription = interval(1000)
-      .subscribe(x => { this.getTimeDifference(); });
+      .subscribe(x => {
+        this.checkIfCountdown();
+        this.getTimeDifference();
+      });
       this.diapauseStart = true;
     }
   }
@@ -187,7 +223,7 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   }
 
   saveOptions(counter) {
-   console.log('save options diapause');
+    console.log('save options diapause');
   }
 
   openPopup(id: string) {

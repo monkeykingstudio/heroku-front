@@ -22,7 +22,6 @@ export class DiapauseService {
 
   // GET Diapause
   diapauseGet(colonyId: string) {
-    console.log('from service', colonyId);
     return this.http.get(`${environment.APIEndpoint}/api/diapause/${colonyId}`)
     .pipe(
       map(result => result['diapause']),

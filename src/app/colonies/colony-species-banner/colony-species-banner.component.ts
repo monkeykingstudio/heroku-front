@@ -11,7 +11,6 @@ export class ColonySpeciesBannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('breedsheet', this.breedSheet);
   }
 
 }
