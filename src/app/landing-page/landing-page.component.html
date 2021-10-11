@@ -195,7 +195,7 @@
       <div class="row">
         <div class="col-sm-12 col-md-6 separator"></div>
 
-        <div *ngIf="!registered" class="col-sm-12">
+        <div  class="col-sm-12">
           <!-- *ngIf="currentUser !== undefined" (click)="registerConcours()" -->
           <div  disabled style="margin:auto;margin-top:3rem;max-width:36rem;font-size:24px;padding:2rem" class="red-btn">INSCRIPTIONS TERMINEES :(</div>
           <div style="display:flex;justify-content: center;margin:auto;margin-top:2rem">
@@ -205,12 +205,12 @@
           </div>
         </div>
 
-        <div *ngIf="registered" class="col-sm-12">
+        <!-- <div *ngIf="registered" class="col-sm-12">
           <div class="animate__animated animate__pulse  animate__infinite green-static-btn">INSCRIPTION VALIDEE !</div>
-        </div>
+        </div> -->
 
 
-          <div *ngIf="registered" style="margin-top:3rem;padding: 1rem;border-radius:.5rem;border:2px dashed #345498" class="animate__animated animate__zoomIn animate__delay-05s offset-md-3 col-sm-12 col-md-6 facebook flex-column">
+          <!-- <div *ngIf="registered" style="margin-top:3rem;padding: 1rem;border-radius:.5rem;border:2px dashed #345498" class="animate__animated animate__zoomIn animate__delay-05s offset-md-3 col-sm-12 col-md-6 facebook flex-column">
             <i style="margin-top: 2rem;cursor:pointer" class="facebook-icon"></i>
             <h6 *ngIf="!fb" style="border:none!important;color: #345498;margin-top:1rem;line-height:2rem;font-size:20px!important;text-align:center">Doublez vos chances de gagner !
               <a *ngIf="!fb" style="text-decoration:none" target="_blank" href="https://www.facebook.com/fourmislabs">
@@ -227,7 +227,7 @@
             <div *ngIf='fb' class="d-flex">
               <div class="double">CHANCES DOUBLEES ! MERCI :)</div>
             </div>
-          </div>
+          </div> -->
 
 
         <div *ngIf="currentUser?.role === 'admin'" style="margin: auto;margin-top:6rem" class="col-sm-12 admin">
@@ -299,7 +299,7 @@
               <div class="circle waited">
                 <i class="waited-icon"></i>
               </div>
-              <span class="blue desktop-steps">5 - Tirages au sort et résultats (15.10.21)</span>
+              <span class="blue desktop-steps">5 - Tirages au sort et résultats (20.10.21)</span>
             </div>
             </div>
           </div>
