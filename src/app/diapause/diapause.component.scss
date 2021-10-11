@@ -5,10 +5,9 @@
   font-size: 12px;
 }
 
-.warning-icon, .info-icon {
+.warning-icon {
   margin: auto;
   margin-bottom: 2rem;
-  margin-top: 2rem;
 }
 
 input[type="date"] {
@@ -177,17 +176,13 @@ h6 {
     right: 0!important;
     span {
       font-size: 15px;
-      line-height: 2.5rem;
+      line-height: 2rem;
       font-weight: bold;
       text-align: center;
-      margin-top: 1rem;
+      margin-bottom: 2rem;
     }
     .alert {
       color: #d74444;
-    }
-
-    .information {
-      color: #0f9ed6;
     }
   }
 }

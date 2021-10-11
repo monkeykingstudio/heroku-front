@@ -140,8 +140,7 @@ export class ColonyComponent implements OnInit, OnDestroy {
   }
 
   turnStatus($event) {
-    console.log('MY EVENT', $event);
-    this.diapauseStatus = $event;
+    this.diapauseStatus = true;
   }
 
   ngOnDestroy(): void {

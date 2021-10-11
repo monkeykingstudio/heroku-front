@@ -19,9 +19,6 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   ended;
   started;
 
-  activeEmited = false;
-  innactiveEmited = false;
-
   diapauseForm: FormGroup;
   autoStartCtrl: FormControl;
   scheduleCtrl: FormControl;
@@ -30,6 +27,7 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   diapauseStart = false;
 
   private subscription: Subscription;
+  private loadedSubscription: Subscription;
   public dateNow = new Date();
 
   diapauseLoaded = false;
@@ -126,31 +124,21 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       startDiff = new Date(this.startDate).getTime() - new Date().getTime();
       endDiff = new Date(this.endDate).getTime() - new Date().getTime();
     }
-    if (endDiff < 0 && startDiff < 0) {
-      this.ended = true;
-      if (!this.innactiveEmited) {
-        this.emitInnactiveEvent();
-        console.log('Inannictvated endDiff < 0');
-        this.innactiveEmited = true;
-      }
 
+    if (endDiff <= 0) {
+      this.ended = true;
     }
     else {
       this.ended = false;
     }
 
-    if (startDiff >= 0 && endDiff >= 0) {
+    if (startDiff >= 0) {
       this.started = false;
       this.showCountdown = false;
-
     }
     else {
       this.started = true;
       this.showCountdown = true;
-      if (!this.activeEmited) {
-        this.emitActiveEvent();
-        this.activeEmited = true;
-      }
     }
   }
 
@@ -164,17 +152,11 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       species: this.sheet.species,
       colonyId: this.colonyId,
     };
-
     if (this.dateCheck) {
       return this.diapauseService.diapauseAdd(diapause)
       .subscribe((newDiapause) => {
-        if (this.getTimeDifference() >= 0 ) {
-          this.subscription = interval(1000)
-          .subscribe(x => {
-            this.checkIfCountdown();
-            this.getTimeDifference();
-          });
-        }
+        this.diapauseChanged.emit(true);
+        console.log(newDiapause);
       });
     } else {
       return;
@@ -203,24 +185,15 @@ export class DiapauseComponent implements OnInit, OnDestroy {
         }
         else {
           this.ended = true;
-          this.emitInnactiveEvent();
-          console.log(this.ended);
         }
       }
-    });
-  }
-
-  deleteDiapause() {
-    return this.diapauseService.diapauseDelete(this.colonyId)
-    .subscribe((res) => {
-      this.emitInnactiveEvent();
-      this.ngOnInit();
     });
   }
 
   checkValidDates() {
     const start = DateTime.fromISO(this.startDate.toISOString());
     const end = DateTime.fromISO(this.endDate.toISOString());
+    const diff = end.diff(start, ['years', 'months', 'days', 'hours', 'minutes', 'seconds']);
     const diffInDays = end.diff(start, ['days']);
 
     if (diffInDays < 0) {
@@ -229,6 +202,11 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       return;
     } else {
       this.dateCheck = true;
+      this.subscription = interval(1000)
+      .subscribe(x => {
+        this.checkIfCountdown();
+        this.getTimeDifference();
+      });
       this.diapauseStart = true;
     }
   }
@@ -254,14 +232,6 @@ export class DiapauseComponent implements OnInit, OnDestroy {
 
   closePopup(id: string) {
     this.popupService.close(id);
-  }
-
-  emitActiveEvent() {
-    this.diapauseChanged.emit(true);
-  }
-
-  emitInnactiveEvent() {
-    this.diapauseChanged.emit(false);
   }
 
   ngOnDestroy(): void {

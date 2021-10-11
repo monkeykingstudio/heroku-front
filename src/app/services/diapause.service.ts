@@ -28,14 +28,4 @@ export class DiapauseService {
       shareReplay()
     );
   }
-
-  // DELETE Diapause
-  diapauseDelete(colonyId: string) {
-    console.log('from servive diapause deletz')
-    return this.http.delete(`${environment.APIEndpoint}/api/diapause/delete/${colonyId}`)
-    .pipe(
-      map(result => result['diapause']),
-      shareReplay()
-    );
-  }
 }
