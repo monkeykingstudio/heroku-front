@@ -19,15 +19,18 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   ended;
   started;
 
+  activeEmited = false;
+  innactiveEmited = false;
+
   diapauseForm: FormGroup;
   autoStartCtrl: FormControl;
   scheduleCtrl: FormControl;
+  currentTemperatureCtrl: FormControl;
 
   schedule = false;
   diapauseStart = false;
 
   private subscription: Subscription;
-  private loadedSubscription: Subscription;
   public dateNow = new Date();
 
   diapauseLoaded = false;
@@ -43,6 +46,36 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   public minutesToDday;
   public hoursToDday;
   public daysToDday;
+
+  temperatureList: Array<object> = [
+    {id: 0, valeur: 3},
+    {id: 1, valeur: 5},
+    {id: 2, valeur: 6},
+    {id: 3, valeur: 7},
+    {id: 4, valeur: 8},
+    {id: 5, valeur: 9},
+    {id: 6, valeur: 10},
+    {id: 7, valeur: 11},
+    {id: 8, valeur: 12},
+    {id: 9, valeur: 13},
+    {id: 10, valeur: 14},
+    {id: 11, valeur: 15},
+    {id: 12, valeur: 16},
+    {id: 13, valeur: 17},
+    {id: 14, valeur: 18},
+    {id: 15, valeur: 19},
+    {id: 16, valeur: 20},
+    {id: 17, valeur: 21},
+    {id: 18, valeur: 22},
+    {id: 19, valeur: 23},
+    {id: 20, valeur: 24},
+    {id: 21, valeur: 25},
+    {id: 22, valeur: 26},
+    {id: 23, valeur: 27},
+    {id: 24, valeur: 28},
+    {id: 25, valeur: 29},
+    {id: 26, valeur: 30},
+  ];
 
   startDate: Date;
   endDate: Date;
@@ -104,10 +137,13 @@ export class DiapauseComponent implements OnInit, OnDestroy {
 
     this.autoStartCtrl = this.fb.control(true);
     this.scheduleCtrl = this.fb.control(false);
+    this.currentTemperatureCtrl = this.fb.control(15);
+
 
     this.diapauseForm = this.fb.group({
       autoStart: this.autoStartCtrl,
       schedule: this.scheduleCtrl,
+      currentTemperature: this.currentTemperatureCtrl
     });
     this.loadDiapause();
   }
@@ -124,25 +160,38 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       startDiff = new Date(this.startDate).getTime() - new Date().getTime();
       endDiff = new Date(this.endDate).getTime() - new Date().getTime();
     }
-
-    if (endDiff <= 0) {
+    if (endDiff < 0 && startDiff < 0) {
       this.ended = true;
+      if (!this.innactiveEmited) {
+        this.emitInnactiveEvent();
+        console.log('Inannictvated endDiff < 0');
+        this.innactiveEmited = true;
+      }
+
     }
     else {
       this.ended = false;
     }
 
-    if (startDiff >= 0) {
+    if (startDiff >= 0 && endDiff >= 0) {
       this.started = false;
       this.showCountdown = false;
+
     }
     else {
       this.started = true;
       this.showCountdown = true;
+      if (!this.activeEmited) {
+        this.emitActiveEvent();
+        this.activeEmited = true;
+      }
     }
   }
 
   saveDiapause() {
+
+    const formChanges = this.diapauseForm.value;
+
     this.checkValidDates();
     const diapause: Diapause = {
       period: {
@@ -151,12 +200,20 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       },
       species: this.sheet.species,
       colonyId: this.colonyId,
+      currentTemperature: formChanges.currentTemperature
+
     };
+
     if (this.dateCheck) {
       return this.diapauseService.diapauseAdd(diapause)
       .subscribe((newDiapause) => {
-        this.diapauseChanged.emit(true);
-        console.log(newDiapause);
+        if (this.getTimeDifference() >= 0 ) {
+          this.subscription = interval(1000)
+          .subscribe(x => {
+            this.checkIfCountdown();
+            this.getTimeDifference();
+          });
+        }
       });
     } else {
       return;
@@ -185,15 +242,24 @@ export class DiapauseComponent implements OnInit, OnDestroy {
         }
         else {
           this.ended = true;
+          this.emitInnactiveEvent();
+          console.log(this.ended);
         }
       }
+    });
+  }
+
+  deleteDiapause() {
+    return this.diapauseService.diapauseDelete(this.colonyId)
+    .subscribe((res) => {
+      this.emitInnactiveEvent();
+      this.ngOnInit();
     });
   }
 
   checkValidDates() {
     const start = DateTime.fromISO(this.startDate.toISOString());
     const end = DateTime.fromISO(this.endDate.toISOString());
-    const diff = end.diff(start, ['years', 'months', 'days', 'hours', 'minutes', 'seconds']);
     const diffInDays = end.diff(start, ['days']);
 
     if (diffInDays < 0) {
@@ -202,11 +268,6 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       return;
     } else {
       this.dateCheck = true;
-      this.subscription = interval(1000)
-      .subscribe(x => {
-        this.checkIfCountdown();
-        this.getTimeDifference();
-      });
       this.diapauseStart = true;
     }
   }
@@ -232,6 +293,14 @@ export class DiapauseComponent implements OnInit, OnDestroy {
 
   closePopup(id: string) {
     this.popupService.close(id);
+  }
+
+  emitActiveEvent() {
+    this.diapauseChanged.emit(true);
+  }
+
+  emitInnactiveEvent() {
+    this.diapauseChanged.emit(false);
   }
 
   ngOnDestroy(): void {

@@ -82,37 +82,42 @@
           </div>
         </div>
         <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf='!dateCheck'>End date can't be lower than start date, and start date can't be higher than end date!</span>
+        <div style="margin-top:1rem" class="d-flex flex-column">
+          <label for="">Select Current Temperature</label>
+          <select [(ngModel)]="sheet?.temperature[0].temperatureStart" class="btn-select mb-0" formControlName='currentTemperature'>
+            <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+          </select>
 
+        </div>
         <div class="align-items: center; input-group"></div>
 
-        <div *ngIf="!diapauseStart" class="inner-separator"></div>
+        <!-- <div *ngIf="!diapauseStart" class="inner-separator"></div> -->
           <div *ngIf="endDate && diapauseStart" class="line">
             <div style="margin-bottom: 10px;" class="date-cont">
-              <span class="title">Started at: </span><span class='start-date'>{{startDate | date:'mediumDate'}}, {{startDate | date:'h:mm'}}</span>
+              <span *ngIf="ended && !showCountdown" class="title">Started: </span><span *ngIf="!showCountdown && !ended" class="title">Will start: </span><span *ngIf="showCountdown" class="title">started at: </span><span class='start-date'>{{startDate | date:'mediumDate'}}, {{startDate | date:'h:mm'}}</span>
             </div>
             <div class="date-cont">
-              <span class="title">Will end at: </span><span class='end-date'>{{endDate | date:'mediumDate'}}, {{endDate | date:'h:mm'}}</span>
+              <span *ngIf="ended && !showCountdown" class="title">ended: </span><span *ngIf="!showCountdown && !ended" class="title">will end: </span><span *ngIf="showCountdown" class="title">Will end at: </span><span class='end-date'>{{endDate | date:'mediumDate'}}, {{endDate | date:'h:mm'}}</span>
             </div>
 
           </div>
           <div class="line">
-            <span>Messor Barbarus colonies currently in diapause : <b>5</b></span>
+            <div class="inner-separator"></div>
+
+            <span style="font-size: 12px;text-align: center;"><b style="text-transform: capitalize;font-style: italic;">{{sheet.species}}</b> colonies currently in diapause : <b>5</b></span>
           </div>
         <div *ngIf="endDate && diapauseStart" class="inner-separator"></div>
         <div [ngClass]="!diapauseStart ? 'margin-1-1' : 'margin-1'" class="d-flex buttons">
-          <button [disabled]="!endDate" *ngIf="!diapauseStart" type='submit' class='green-btn w-100'>START DIAPAUSE</button>
-          <button (click)="openPopup('abortPopup')" *ngIf="endDate && diapauseStart" type='button' class='red-btn w-100'>ABORT DIAPAUSE</button>
+          <button [disabled]="!endDate" *ngIf="!diapauseStart" type='submit' class='green-btn w-100'>{{scheduled ? 'SCHEDULE DIAPAUSE' : 'START DIAPAUSE'}}</button>
+          <button (click)="openPopup('abortPopup')" *ngIf="endDate && diapauseStart" type='button' class='green-btn w-100'>{{ ended ? 'ARCHIVE DIAPAUSE' : 'ABORT DIAPAUSE' }}</button>
         </div>
 
       </form>
     </div>
 
     <div *ngIf="diapauseLoaded" class="schedule">
-      <span style="text-align: center">Loaded from database</span>
       <form (ngSubmit)='saveDiapause()' [formGroup]="diapauseForm">
         <div class="inner-separator"></div>
-
-
 
           <div class="line">
             <div style="margin-bottom: 10px;" class="date-cont">
@@ -131,7 +136,8 @@
           </div>
         <div class="inner-separator"></div>
         <div  class="d-flex buttons margin-1-1">
-          <button (click)="openPopup('abortPopup')" type='button' class='red-btn w-100'>ABORT DIAPAUSE</button>
+          <button *ngIf="!ended" (click)="openPopup('abortPopup')" type='button' class='red-btn w-100'>{{ 'ABORT DIAPAUSE' }}</button>
+          <button *ngIf="ended" (click)="openPopup('archivePopup')" type='button' class='green-btn w-100'>{{ 'ARCHIVE DIAPAUSE' }}</button>
         </div>
       </form>
     </div>
@@ -163,12 +169,26 @@
 <app-popup class="diapause-popup animate__animated animate__zoomIn" id='abortPopup'>
   <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
     <h6 style="font-size:2.2rem!important;text-transform:capitalize">Abort Diapause</h6>
-    <div class="popup-body d-flex flex-column">
+    <div style="height:100%;top:0" class="popup-body d-flex flex-column">
       <i class="warning-icon"></i>
-      <span>You are about to ABORT a running diapause.<span class="alert">All data will be lost.</span><br/>Are you sure ?</span>
-      <div class="d-flex w-100 justify-content-around">
-        <button type="submit" class="green-btn">YES</button>
+      <span>You are about to<span class="alert">ABORT</span>a running diapause.<span class="alert"><br/>All data will be lost.</span><br/>ARE YOU SURE ?</span>
+      <div style="flex-grow: 1;align-items: flex-end;" class="d-flex w-100 justify-content-around">
+        <button (click)="closePopup('abortPopup');deleteDiapause()" type="submit" class="green-btn">YES</button>
         <button (click)="closePopup('abortPopup')" type="button" class="red-btn">NO</button>
+      </div>
+    </div>
+  </div>
+</app-popup>
+
+<app-popup class="diapause-popup animate__animated animate__zoomIn" id='archivePopup'>
+  <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+    <h6 style="font-size:2.2rem!important;text-transform:capitalize">Archive Diapause</h6>
+    <div style="height:100%;top:0" class="popup-body d-flex flex-column">
+      <i class="info-icon"></i>
+      <span>You are about to <span class="information">ARCHIVE</span> a successfully ended diapause.<span class="information"><br/>All statistics will be saved.</span></span>
+      <div style="flex-grow: 1;align-items: flex-end;" class="d-flex w-100 justify-content-around">
+        <button (click)="closePopup('archivePopup')" type="submit" class="green-btn">YES</button>
+        <button (click)="closePopup('archivePopup')" type="button" class="red-btn">NO</button>
       </div>
     </div>
   </div>
