@@ -4,8 +4,8 @@ import { BreedingSheet } from 'src/app/models/breedingSheet.model';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import { DiapauseService } from '../services/diapause.service';
-import * as moment from 'moment';
 import { Diapause } from './../models/diapause.model';
+import { DateTime, Interval } from 'luxon';
 
 
 @Component({
@@ -15,42 +15,24 @@ import { Diapause } from './../models/diapause.model';
 })
 export class DiapauseComponent implements OnInit, OnDestroy {
 
-  diapauseForm: FormGroup;
-  autoStartCtrl: FormControl;
-  scheduleCtrl: FormControl;
-
-  schedule = false;
-  diapauseStart = false;
-
-  private subscription: Subscription;
-
-  public dateNow = new Date();
-
-  milliSecondsInASecond = 1000;
-  hoursInADay = 24;
-  minutesInAnHour = 60;
-  SecondsInAMinute  = 60;
-
-  public timeDifference;
-  public secondsToDday;
-  public minutesToDday;
-  public hoursToDday;
-  public daysToDday;
-
-  // Dates
-
-  DATE_RFC2822 = 'ddd, DD MMM YYYY HH:mm:ss ZZ';
-
-  startDate: Date;
-  endDate: Date;
-
-  dateCheck = true;
-
   @Input()
   sheet: BreedingSheet;
 
   @Input()
   colonyId: string;
+
+  diapauseForm: FormGroup;
+  autoStartCtrl: FormControl;
+  scheduleCtrl: FormControl;
+  schedule = false;
+  diapauseStart: boolean;
+  intervalDateIsValid = true;
+
+  private subscription: Subscription;
+  dateNow = DateTime.now();
+  startOfDiapause = this.dateNow;
+  endOfDiapause = DateTime.local(2021, 10, 10, 17, 36); // this time tomorrow;
+
 
   constructor(
     private fb: FormBuilder,
@@ -58,39 +40,9 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     public diapauseService: DiapauseService
   ) { }
 
-  private getTimeDifference () {
-    if (!this.schedule) {
-      this.timeDifference = this.endDate.getTime() - new Date().getTime();
-    }
-    else {
-      this.timeDifference =  new Date(this.endDate).getTime() - new Date(this.startDate).getTime();
-    }
-
-    const hour = new Date(this.endDate).getHours();
-    const minutes = new Date(this.endDate).getMinutes();
-    const seconds = new Date(this.endDate).getSeconds();
-
-    this.allocateTimeUnits(this.timeDifference);
-  }
-
-  private allocateTimeUnits (timeDifference: number) {
-    this.secondsToDday = Math.floor(
-      (timeDifference) / (this.milliSecondsInASecond) % this.SecondsInAMinute
-      );
-    this.minutesToDday = Math.floor(
-      (timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour) % this.SecondsInAMinute
-    );
-    this.hoursToDday = Math.floor(
-      (timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute) % this.hoursInADay
-      );
-    this.daysToDday = Math.floor(
-      (timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute * this.hoursInADay)
-      );
-  }
-
   ngOnInit(): void {
 
-    this.startDate = new Date();
+    this.startOfDiapause = DateTime.now();
     this.diapauseStart = false;
 
     this.autoStartCtrl = this.fb.control(true);
@@ -102,53 +54,43 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     });
   }
 
-  saveDiapause() {
-    this.checkDates();
-    const diapause: Diapause = {
-      period: {
-        startDate: this.startDate,
-        endDate: this.endDate
-      },
-      species: this.sheet.species,
-      colonyId: this.colonyId,
-    };
-
-    return this.diapauseService.diapauseAdd(diapause)
-    .subscribe(() => {
-
-    });
-  }
-
-
-
-  checkDates() {
-    const diffInTime = this.endDate.getTime() - this.startDate.getTime();
-    const diffInDays = diffInTime / (1000 * 3600 * 24);
-
-    console.log(Math.floor(diffInDays));
-
-    if (diffInDays < 0) {
-      this.dateCheck = false;
-      this.diapauseStart = false;
-      return;
-    } else {
-      this.dateCheck = true;
-      this.subscription = interval(1000)
-      .subscribe(x => { this.getTimeDifference(); });
+  saveDiapause(): object {
+    if (this.checkDates()) {
+      const diapause: Diapause = {
+        period: {
+          startDiapause: this.startOfDiapause,
+          endDiapause: this.endOfDiapause
+        },
+        species: this.sheet.species,
+        colonyId: this.colonyId,
+      };
       this.diapauseStart = true;
+      return this.diapauseService.diapauseAdd(diapause)
+      .subscribe(() => {
+      });
+      // TODO : return un success ou une error de l'observable et pas l'object lui même
+    } else {
+      return { error: 'you cannot choose last date behind start date.'};
     }
   }
 
-  parseDate(dateString: string): Date {
-    if (dateString) {
-        return new Date(dateString);
-    }
-    return null;
+  public checkDates(): boolean {
+    return Interval.fromDateTimes(this.startOfDiapause, this.endOfDiapause).isValid ? true : false;
   }
 
-  switchSchedule() {
-    this.schedule = !this.schedule;
+  getTimeDifference(): any {
+    if (this.schedule) {
+      const diffTime = this.endOfDiapause.diff(this.startOfDiapause, ['months', 'days', 'hours']).toObject();
+      console.log(diffTime);
+      return diffTime;
+    }
+    else {
+      const diffTime = this.endOfDiapause.diffNow().toFormat("dd 'days, 'hh 'hours,' mm 'minutes,' ss 'sec'");
+      console.log(diffTime);
+      return diffTime;
+    }
   }
+
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

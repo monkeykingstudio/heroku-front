@@ -1,5 +1,10 @@
+import {DateTime} from 'luxon';
+
 export class Diapause {
-  period: {};
+  period: {
+    startDiapause: DateTime;
+    endDiapause: DateTime;
+  };
   species: string;
   colonyId: string;
   status?: string;
