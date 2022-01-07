@@ -130,7 +130,7 @@
         <div *ngIf="endDate && diapauseStart" class="inner-separator"></div>
         <div [ngClass]="!diapauseStart ? 'margin-1-1' : 'margin-1'" class="d-flex buttons">
           <button [disabled]="!endDate" *ngIf="!diapauseStart" type='submit' class='green-btn w-100'>{{schedule ? 'SCHEDULE DIAPAUSE' : 'START DIAPAUSE'}}</button>
-          <button (click)="openPopup('abortPopup')" *ngIf="endDate && diapauseStart" type='button' class='green-btn w-100'>{{ ended ? 'ARCHIVE DIAPAUSE' : 'CANCEL DIAPAUSE' }}</button>
+          <button style="margin-bottom:1rem" (click)="openPopup('abortPopup')" *ngIf="endDate && diapauseStart" type='button' class='red-btn w-100'>{{ ended ? 'ARCHIVE DIAPAUSE' : 'CANCEL DIAPAUSE' }}</button>
         </div>
       </form>
     </div>
@@ -142,10 +142,16 @@
 
           <div class="line">
             <div style="margin-bottom: 10px;" class="date-cont">
-              <span *ngIf="ended && !showCountdown" class="title">Started: </span><span *ngIf="!showCountdown && !ended" class="title">Will start: </span><span *ngIf="showCountdown" class="title">started at: </span><span class='start-date'>{{this.loadedDiapause[0].period.startDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.startDate | date:'h:mm'}}</span>
+              <span *ngIf="ended && !showCountdown" class="title">Started: </span>
+              <span *ngIf="!showCountdown && !ended" class="title">Will start: </span>
+              <span *ngIf="showCountdown" class="title">started at: </span>
+              <span class='start-date'>{{this.loadedDiapause[0].period.startDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.startDate | date:'h:mm'}}</span>
             </div>
             <div class="date-cont">
-              <span *ngIf="ended && !showCountdown" class="title">ended: </span><span *ngIf="!showCountdown && !ended" class="title">will end: </span><span *ngIf="showCountdown" class="title">Will end at: </span><span class='end-date'>{{this.loadedDiapause[0].period.endDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.endDate | date:'h:mm'}}</span>
+              <span *ngIf="ended && !showCountdown" class="title">ended: </span>
+              <span *ngIf="!showCountdown && !ended" class="title">will end: </span>
+              <span *ngIf="showCountdown" class="title">Will end at: </span>
+              <span class='end-date'>{{this.loadedDiapause[0].period.endDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.endDate | date:'h:mm'}}</span>
             </div>
 
           </div>

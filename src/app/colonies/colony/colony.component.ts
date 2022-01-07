@@ -139,8 +139,8 @@ export class ColonyComponent implements OnInit, OnDestroy {
     return this.colony$ = this.coloniesService.loadColony(id);
   }
 
-  turnStatus($event) {
-    this.diapauseStatus = true;
+  turnStatus($event): void {
+    this.diapauseStatus = !this.diapauseStatus;
   }
 
   ngOnDestroy(): void {
