@@ -29,13 +29,26 @@ export class DiapauseService {
     );
   }
 
+  // TODO : refactoriser le ${colonyId} par un ${diapauseId} pour éviter un conflit s'il y a plusieurs diapauses
+
   // DELETE Diapause
   diapauseDelete(colonyId: string) {
-    console.log('from servive diapause deletz')
+    console.log('from servive diapause delete');
     return this.http.delete(`${environment.APIEndpoint}/api/diapause/delete/${colonyId}`)
     .pipe(
       map(result => result['diapause']),
       shareReplay()
     );
   }
+
+    // ARCHIVE Diapause
+    diapauseArchive(colonyId: string) {
+      console.log('from servive diapause archive');
+
+      return this.http.put(`${environment.APIEndpoint}/api/diapause/archive/${colonyId}`, 'innactive')
+      .pipe(
+        map(result => result['message']),
+        shareReplay()
+      );
+    }
 }

@@ -14,6 +14,23 @@ import { DateTime } from 'luxon';
   styleUrls: ['./diapause.component.scss']
 })
 export class DiapauseComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
+  public dateNow = new Date();
+  milliSecondsInASecond = 1000;
+  hoursInADay = 24;
+  minutesInAnHour = 60;
+  SecondsInAMinute  = 60;
+
+  public timeDifference;
+  public secondsToDday;
+  public minutesToDday;
+  public hoursToDday;
+  public daysToDday;
+
+  startDate: Date;
+  endDate: Date;
+
+  dateCheck = true;
 
   showCountdown = false;
   ended;
@@ -29,23 +46,8 @@ export class DiapauseComponent implements OnInit, OnDestroy {
 
   schedule = false;
   diapauseStart = false;
-
-  private subscription: Subscription;
-  public dateNow = new Date();
-
   diapauseLoaded = false;
   loadedDiapause: Diapause;
-
-  milliSecondsInASecond = 1000;
-  hoursInADay = 24;
-  minutesInAnHour = 60;
-  SecondsInAMinute  = 60;
-
-  public timeDifference;
-  public secondsToDday;
-  public minutesToDday;
-  public hoursToDday;
-  public daysToDday;
 
   temperatureList: Array<object> = [
     {id: 0, valeur: 3},
@@ -76,11 +78,6 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     {id: 25, valeur: 29},
     {id: 26, valeur: 30},
   ];
-
-  startDate: Date;
-  endDate: Date;
-
-  dateCheck = true;
 
   @Input()
   sheet: BreedingSheet;
@@ -137,7 +134,7 @@ export class DiapauseComponent implements OnInit, OnDestroy {
 
     this.autoStartCtrl = this.fb.control(true);
     this.scheduleCtrl = this.fb.control(false);
-    this.currentTemperatureCtrl = this.fb.control(15);
+    this.currentTemperatureCtrl = this.fb.control(0);
 
 
     this.diapauseForm = this.fb.group({
@@ -220,6 +217,8 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     }
   }
 
+  //TODO refacoriser afin que la condition if (diapause.length === 0) devienne diapause.active === true
+
   loadDiapause() {
     return this.diapauseService.diapauseGet(this.colonyId)
     .subscribe((diapause) => {
@@ -253,6 +252,16 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     return this.diapauseService.diapauseDelete(this.colonyId)
     .subscribe((res) => {
       this.emitInnactiveEvent();
+      this.ngOnInit();
+    });
+  }
+
+  //TODO faire en sorte que la diapause change au statut 'innactive' si le compteur est caché.
+
+  archiveDiapause() {
+    return this.diapauseService.diapauseArchive(this.colonyId)
+    .subscribe((res) => {
+      // this.emitInnactiveEvent();
       this.ngOnInit();
     });
   }
