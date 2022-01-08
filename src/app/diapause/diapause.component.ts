@@ -193,7 +193,7 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     this.checkValidDates();
 
     if (this.schedule) {
-      currentStatus = 'schedule';
+      currentStatus = 'scheduled';
       console.log('diapause scheduled');
     } else {
       currentStatus = 'active';
