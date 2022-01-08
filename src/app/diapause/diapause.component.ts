@@ -189,8 +189,16 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   saveDiapause() {
 
     const formChanges = this.diapauseForm.value;
-
+    let currentStatus: string;
     this.checkValidDates();
+
+    if (this.schedule) {
+      currentStatus = 'schedule';
+      console.log('diapause scheduled');
+    } else {
+      currentStatus = 'active';
+      console.log('diapause active');
+    }
     const diapause: Diapause = {
       period: {
         startDate: this.startDate,
@@ -198,8 +206,8 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       },
       species: this.sheet.species,
       colonyId: this.colonyId,
-      currentTemperature: formChanges.currentTemperature
-
+      currentTemperature: formChanges.currentTemperature,
+      status: currentStatus
     };
 
     if (this.dateCheck) {
@@ -219,10 +227,15 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   }
 
   //TODO refacoriser afin que la condition if (diapause.length === 0) devienne diapause.active === true
+  // 'scheduled'
+  // 'active'
+  // 'ended'
+  // 'archived'
 
   loadDiapause() {
     return this.diapauseService.diapauseGet(this.colonyId)
     .subscribe((diapause) => {
+      console.log('debug diapause -->', diapause[0]?.status);
       if (diapause.length === 0) {
         this.diapauseLoaded = false;
       }
@@ -254,15 +267,18 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     .subscribe((res) => {
       this.emitInnactiveEvent();
       this.ngOnInit();
+      this.schedule = false;
     });
   }
 
-  //TODO faire en sorte que la diapause change au statut 'innactive' si le compteur est caché.
+  //TODO faire en sorte que la diapause change au statut 'ended' en base a la fin de la diapause.
+  // La solution privilegiée etant un job toutes les heures pour verifier si une diapause a une fin de date antérieure à Date.now()
+  //TODO faire en sorte que la diapause change au statut 'archived' en base une fois archivée.
+
 
   archiveDiapause() {
     return this.diapauseService.diapauseArchive(this.colonyId)
     .subscribe((res) => {
-      // this.emitInnactiveEvent();
       this.ngOnInit();
     });
   }
