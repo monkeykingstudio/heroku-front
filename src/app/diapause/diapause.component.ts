@@ -157,6 +157,7 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       startDiff = new Date(this.startDate).getTime() - new Date().getTime();
       endDiff = new Date(this.endDate).getTime() - new Date().getTime();
     }
+
     if (endDiff < 0 && startDiff < 0) {
       this.ended = true;
       if (!this.innactiveEmited) {
@@ -173,11 +174,11 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     if (startDiff >= 0 && endDiff >= 0) {
       this.started = false;
       this.showCountdown = false;
-
     }
     else {
       this.started = true;
       this.showCountdown = true;
+
       if (!this.activeEmited) {
         this.emitActiveEvent();
         this.activeEmited = true;

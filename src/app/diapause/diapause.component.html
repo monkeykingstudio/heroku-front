@@ -144,16 +144,13 @@
             <div style="margin-bottom: 10px;" class="date-cont">
               <span *ngIf="ended && !showCountdown" class="title">Started: </span>
               <span *ngIf="!showCountdown && !ended" class="title">Will start: </span>
-              <span *ngIf="showCountdown" class="title">started at: </span>
               <span class='start-date'>{{this.loadedDiapause[0].period.startDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.startDate | date:'h:mm'}}</span>
             </div>
             <div class="date-cont">
               <span *ngIf="ended && !showCountdown" class="title">ended: </span>
-              <span *ngIf="!showCountdown && !ended" class="title">will end: </span>
-              <span *ngIf="showCountdown" class="title">Will end at: </span>
+              <span *ngIf="!showCountdown && !ended" class="title">Will end: </span>
               <span class='end-date'>{{this.loadedDiapause[0].period.endDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.endDate | date:'h:mm'}}</span>
             </div>
-
           </div>
 
           <div class="inner-separator"></div>
@@ -162,7 +159,7 @@
             <span>Messor Barbarus colonies currently in diapause : <b>5</b></span>
           </div>
         <div class="inner-separator"></div>
-        <div  class="d-flex buttons margin-1-1">
+        <div  class="d-flex buttons">
           <button *ngIf="!ended" (click)="openPopup('abortPopup')" type='button' class='red-btn w-100'>{{ 'ABORT DIAPAUSE' }}</button>
           <button *ngIf="ended" (click)="openPopup('archivePopup')" type='button' class='green-btn w-100'>{{ 'ARCHIVE DIAPAUSE' }}</button>
         </div>
