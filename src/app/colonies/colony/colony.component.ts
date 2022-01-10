@@ -32,7 +32,8 @@ export class ColonyComponent implements OnInit, OnDestroy {
   private chartPolyMediumData = [];
   private chartPolyMajorData = [];
 
-  diapauseStatus = false;
+  diapauseStatus = 'innactive';
+
 
   groupKey = 0;
 
@@ -106,7 +107,7 @@ export class ColonyComponent implements OnInit, OnDestroy {
     { }
 
   ngOnInit(): void {
-    console.log('onInit',this.diapauseStatus);
+    console.log('onInit diapause status: ', this.diapauseStatus);
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('colonyId')) {
         this.colonyId = paramMap.get('colonyId');
@@ -139,8 +140,8 @@ export class ColonyComponent implements OnInit, OnDestroy {
     return this.colony$ = this.coloniesService.loadColony(id);
   }
 
-  turnStatus($event): void {
-    this.diapauseStatus = !this.diapauseStatus;
+  changeStatus($event): void {
+    this.diapauseStatus = $event;
   }
 
   ngOnDestroy(): void {

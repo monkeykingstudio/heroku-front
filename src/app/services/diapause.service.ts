@@ -42,13 +42,13 @@ export class DiapauseService {
   }
 
     // ARCHIVE Diapause
-    diapauseArchive(colonyId: string) {
-      console.log('from servive diapause archive');
+  diapauseArchive(colonyId: string, status: string) {
+    console.log('from servive diapause archive', 'get status: ', status);
 
-      return this.http.put(`${environment.APIEndpoint}/api/diapause/archive/${colonyId}`, 'innactive')
-      .pipe(
-        map(result => result['message']),
-        shareReplay()
-      );
-    }
+    return this.http.post(`${environment.APIEndpoint}/api/diapause/archive/${colonyId}`, {status})
+    .pipe(
+      map(result => result['message']),
+      shareReplay()
+    );
+  }
 }

@@ -37,7 +37,10 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   started;
 
   activeEmited = false;
+  endedEmited = false;
   innactiveEmited = false;
+  archiveEmited = false;
+
 
   diapauseForm: FormGroup;
   autoStartCtrl: FormControl;
@@ -87,6 +90,9 @@ export class DiapauseComponent implements OnInit, OnDestroy {
 
   @Output()
   diapauseChanged = new EventEmitter<boolean>();
+
+  @Output()
+  diapauseChangeStatus = new EventEmitter<string>();
 
   constructor(
     private fb: FormBuilder,
@@ -158,30 +164,37 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       endDiff = new Date(this.endDate).getTime() - new Date().getTime();
     }
 
-    if (endDiff < 0 && startDiff < 0) {
-      this.ended = true;
-      if (!this.innactiveEmited) {
-        this.emitInnactiveEvent();
-        console.log('Inannictvated endDiff < 0');
-        this.innactiveEmited = true;
-      }
-
-    }
-    else {
-      this.ended = false;
-    }
-
-    if (startDiff >= 0 && endDiff >= 0) {
+    // SCHEDULE
+    if (startDiff > 0 && endDiff > 0) {
       this.started = false;
+      this.ended = false;
       this.showCountdown = false;
+      this.emitScheduleEvent();
     }
-    else {
+
+    // ACTIVE
+    else if (startDiff <= 0 && endDiff > 0) {
       this.started = true;
+      this.ended = false;
       this.showCountdown = true;
 
       if (!this.activeEmited) {
+        console.log('diapause need to be changed status active please');
         this.emitActiveEvent();
         this.activeEmited = true;
+      }
+    }
+
+    // ENDED
+    else if (endDiff < 0 && startDiff < 0) {
+      this.started = true;
+      this.ended = true;
+      this.showCountdown = false;
+
+      if (!this.endedEmited) {
+        console.log('diapause need to be changed status ended please');
+        this.emitEndedEvent();
+        this.innactiveEmited = true;
       }
     }
   }
@@ -194,11 +207,10 @@ export class DiapauseComponent implements OnInit, OnDestroy {
 
     if (this.schedule) {
       currentStatus = 'scheduled';
-      console.log('diapause scheduled');
     } else {
       currentStatus = 'active';
-      console.log('diapause active');
     }
+
     const diapause: Diapause = {
       period: {
         startDate: this.startDate,
@@ -226,22 +238,17 @@ export class DiapauseComponent implements OnInit, OnDestroy {
     }
   }
 
-  //TODO refacoriser afin que la condition if (diapause.length === 0) devienne diapause.active === true
-  // 'scheduled'
-  // 'active'
-  // 'ended'
-  // 'archived'
-
   loadDiapause() {
     return this.diapauseService.diapauseGet(this.colonyId)
     .subscribe((diapause) => {
       console.log('debug diapause -->', diapause[0]?.status);
+
+      // On peux se permettre de tester sur la length() car il ne peut jamais y avoir plus d'une diapause active ou schedulée !
       if (diapause.length === 0) {
         this.diapauseLoaded = false;
       }
       else {
-        console.log('Diapause Loaded', diapause);
-        this.diapauseChanged.emit(true);
+        console.log('Diapause Loaded', diapause[0]);
         this.loadedDiapause = diapause;
         this.diapauseLoaded = true;
 
@@ -252,11 +259,14 @@ export class DiapauseComponent implements OnInit, OnDestroy {
             this.getTimeDifference();
           });
           this.diapauseStart = true;
+          this.emitActiveEvent();
+          console.log('from loadDiapuse: diapause status est', this.loadedDiapause[0].status, 'et devrait être au status active ou scheduled');
+
         }
         else {
           this.ended = true;
-          this.emitInnactiveEvent();
-          console.log(this.ended);
+          this.emitEndedEvent();
+          console.log('diapause status est', this.loadedDiapause[0].status, 'et devrait être au status ended');
         }
       }
     });
@@ -265,9 +275,10 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   deleteDiapause() {
     return this.diapauseService.diapauseDelete(this.colonyId)
     .subscribe((res) => {
-      this.emitInnactiveEvent();
       this.ngOnInit();
+      this.switchSchedule();
       this.schedule = false;
+      this.emitInnactiveEvent();
     });
   }
 
@@ -277,9 +288,10 @@ export class DiapauseComponent implements OnInit, OnDestroy {
 
 
   archiveDiapause() {
-    return this.diapauseService.diapauseArchive(this.colonyId)
+    return this.diapauseService.diapauseArchive(this.colonyId, 'archived')
     .subscribe((res) => {
       this.ngOnInit();
+      this.emitInnactiveEvent();
     });
   }
 
@@ -322,12 +334,27 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   }
 
   emitActiveEvent() {
-    this.diapauseChanged.emit(true);
+    this.diapauseChangeStatus.emit('active');
+    this.activeEmited = true;
+    this.innactiveEmited = false;
+    this.endedEmited = false;
+    this.archiveEmited = false;
   }
 
   emitInnactiveEvent() {
-    this.diapauseChanged.emit(false);
+    this.diapauseChangeStatus.emit('innactive');
+    this.innactiveEmited = true;
   }
+
+  emitEndedEvent() {
+    this.diapauseChangeStatus.emit('ended');
+    this.endedEmited = true;
+  }
+
+  emitScheduleEvent() {
+    this.diapauseChangeStatus.emit('scheduled');
+  }
+
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

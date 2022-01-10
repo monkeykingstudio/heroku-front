@@ -18,7 +18,7 @@ export class ColonyHeaderComponent implements OnInit, OnDestroy {
   colony: Colony;
 
   @Input()
-  diapauseStatus: boolean;
+  diapauseStatus: string;
 
   breedSheet: BreedingSheet;
   private breedingSheetsub: Subscription;
