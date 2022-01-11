@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DiapauseComponent } from './diapause.component';
+import { DiapauseStatsComponent } from './diapause-stats.component';
 
-describe('DiapauseComponent', () => {
-  let component: DiapauseComponent;
-  let fixture: ComponentFixture<DiapauseComponent>;
+describe('DiapauseStatsComponent', () => {
+  let component: DiapauseStatsComponent;
+  let fixture: ComponentFixture<DiapauseStatsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DiapauseComponent ]
+      declarations: [ DiapauseStatsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DiapauseComponent);
+    fixture = TestBed.createComponent(DiapauseStatsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

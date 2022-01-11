@@ -1,0 +1,16 @@
+.dates {
+  background-color: #0fd671;
+  padding: 10px;
+  border-radius: 10rem;
+  color: #e8e8e8;
+  border-top: 1px solid gainsboro;
+  max-width: 80%;
+  margin: auto;
+  text-align: center;
+  border-bottom: 3px solid #0c9952;
+  text-transform: uppercase;
+  span {
+    font-weight:bold;
+    color: white;
+  }
+}

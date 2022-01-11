@@ -51,17 +51,7 @@ input[type="date"]::-webkit-inner-spin-button {
   flex-direction: column;
 }
 
-.countDown {
-  font-size: 12px;
-  font-weight: bold;
-  background-color: #ffa9a9;
-  padding: .5rem .8rem;
-  border-radius: 25px;
-  border: 1px solid #d4d4d4;
-  span {
-    color: #c84848 !important;
-  }
-}
+
 
 h5 {
   font-size: 22px!important;
@@ -96,63 +86,24 @@ h6 {
   }
 }
 
-.line {
-  display: flex;
-  flex-direction: column;
-  .date-cont {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .start-date {
-    background-color: #5daa1e;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 13px;
-    color: white;
-    font-weight: bold;
-    min-width: 152px;
-    text-align: center;
-  }
-  .end-date {
-    min-width: 152px;
-    background-color: #aa2b1e;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 13px;
-    color: white;
-    font-weight: bold;
-    text-align: center;
-  }
 
-  .title {
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: bold;
-  }
-}
 
-.dates {
-  background-color: #0fd671;
-  padding: 10px;
-  border-radius: 10rem;
-  color: #e8e8e8;
-  border-top: 1px solid gainsboro;
-  max-width: 80%;
-  margin: auto;
-  text-align: center;
-  border-bottom: 3px solid #0c9952;
-  text-transform: uppercase;
-  span {
-    font-weight:bold;
-    color: white;
-  }
+
+
+.separator-module {
+
 }
 
 .separator-module {
   top: 3.5rem;
-  margin: 2rem 0;
+  top: 4rem;
+  left: 0;
+  height: 0.2rem;
+  background-color: #ffffff;
+  position: inherit!important;
+  width: 100%;
+  margin: 1rem 0;
+  border-top: 0.1rem solid #c9c9c9;
 }
 
 .inner-separator {
@@ -165,9 +116,7 @@ h6 {
   border-top: 0.1rem solid #c9c9c9;
 }
 
-.body {
-  margin-top: 2rem;
-}
+
 
 .popup {
   width: 100%!important;

@@ -1,0 +1,111 @@
+    <!-- // Si aucune diapause n'est chargée -->
+    <div class="schedule">
+      <form (ngSubmit)='saveDiapause()' [formGroup]="diapauseForm">
+        <!-- <div *ngIf="!diapauseStart" style="margin: 1rem 0 .5rem 0;" class=" d-flex justify-content-around">
+          <div class="form-check">
+            <input
+            (input)="switchSchedule()"
+            type="radio"
+            formControlName="schedule"
+            class="form-check-input"
+            id="autoStart"
+            [value]='false'
+            />
+            <span
+            class="form-check-label">Start today</span><span tooltipClass="antslab-tooltip"
+            placement="top"
+            ngbTooltip="Start a diapause from now" class="info">?</span>
+          </div>
+
+          <div class="form-check">
+            <input
+            [disabled]="schedule"
+            (input)="switchSchedule()"
+            type="radio"
+            formControlName="schedule"
+            class="form-check-input"
+            id="schedule"
+            [value]='true'
+            />
+            <span class="form-check-label">Schedule</span>
+          </div>
+        </div> -->
+        <!-- <div *ngIf="!diapauseStart" class="inner-separator"></div>
+
+        <div *ngIf="!schedule && !diapauseStart" class="form-row direct-start">
+          <div class="form-group col-md-6">
+            <label for="">Start date</label>
+            <input
+            [disabled]='true' [value]="startDate | date:'yyyy-MM-dd, hh:mm'" (input)="startDate=parseDate($event.target.value)" placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}" class="form-control date-input">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="">End date</label>
+            <input
+            type="text" min="startDate" placeholder="{{endDate  | date:'yyyy-MM-dd, hh:mm'}}" onfocus="(this.type='datetime-Local')" onblur="(this.type='text')" [value]="endDate | date:'yyyy-MM-dd,hh:mm'" (input)="endDate=parseDate($event.target.value)" class="form-control date-input">
+          </div>
+        </div>
+        <div *ngIf="schedule && !diapauseStart" class="form-row schedule-start">
+          <div class="form-group col-md-6">
+            <label for="">Start date</label>
+            <input
+            [value]="startDate | date:'yyyy-MM-dd, hh:mm'" onfocus="(this.type='datetime-Local')" onblur="(this.type='text')" (input)="startDate=parseDate($event.target.value)" placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}" class="form-control date-input">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="">End date</label>
+            <input
+            (change)="endDate"
+            type="text" placeholder="{{endDate | date:'yyyy-MM-dd, hh:mm'}}" onfocus="(this.type='datetime-Local')" onblur="(this.type='text')" [value]="endDate | date:'yyyy-MM-dd, hh:mm'" (input)="endDate=parseDate($event.target.value)" class="form-control date-input">
+          </div>
+        </div>
+        <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf='!dateCheck'>End date can't be lower than start date, and start date can't be higher than end date!</span>
+
+        <div *ngIf="!diapauseStart" style="margin-top:1rem" class="d-flex flex-column">
+          <label for="">Select Start Temperature</label>
+          <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart" class="btn-select mb-0" formControlName='currentTemperature'>
+            <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+          </select>
+        </div> -->
+        <!-- // Modifier la temperature en cours de diapause -->
+        <!-- <div *ngIf="diapauseStart" style="margin-top:1rem" class="d-flex flex-column">
+          <label for="">Select Current Temperature</label>
+          <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart" class="btn-select mb-0" formControlName='currentTemperature'>
+            <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+          </select>
+        </div> -->
+          <!-- // Affichage des dates si la diapause est planifiée || en cours -->
+          <!-- <div *ngIf="endDate && diapauseStart" class="line">
+            <div style="margin-bottom: 10px;" class="date-cont">
+              <span *ngIf="ended && !showCountdown" class="title">Started: </span>
+              <span *ngIf="!showCountdown && !ended" class="title">Will start: </span>
+              <span *ngIf="showCountdown && !ended" class="title">Started: </span>
+              <span class='start-date'>{{startDate | date:'mediumDate'}}, {{startDate | date:'h:mm'}}</span>
+            </div>
+            <div class="date-cont">
+              <span *ngIf="ended && !showCountdown" class="title">ended: </span>
+              <span *ngIf="!showCountdown && !ended" class="title">will end: </span>
+              <span *ngIf="showCountdown && !ended" class="title">Will end: </span>
+              <span class='end-date'>{{endDate | date:'mediumDate'}}, {{endDate | date:'h:mm'}}</span>
+            </div>
+
+          </div> -->
+          <!-- <div class="line">
+            <div class="inner-separator"></div>
+            <span style="font-size: 12px;text-align: center;">
+              <b style="text-transform: capitalize;font-style: italic;">{{sheet?.species}}</b>
+              colonies currently in diapause : <b>5</b>
+            </span>
+          </div> -->
+        <!-- <div *ngIf="endDate && diapauseStart" class="inner-separator"></div>
+        <div [ngClass]="!diapauseStart ? 'margin-1-1' : 'margin-1'" class="d-flex buttons row">
+          <div *ngIf="!diapauseStart" class="col-sm-12">
+            <button [disabled]="!endDate" type='submit' class='green-btn w-100'>{{schedule ? 'SCHEDULE DIAPAUSE' : 'START DIAPAUSE'}}</button>
+          </div>
+          <div *ngIf="diapauseStart" class="col-sm-12">
+            <button (click)="openPopup('abortPopup')" type='button' class='red-btn w-100'>{{ 'DELETE DIAPAUSE' }}</button>
+          </div>
+          <div *ngIf="ended && diapauseStart" class="col-sm-12">
+            <button (click)="openPopup('archivePopup')" type='button' class='green-btn w-100'>{{ 'ARCHIVE DIAPAUSE' }}</button>
+          </div>
+        </div> -->
+      </form>
+    </div>
