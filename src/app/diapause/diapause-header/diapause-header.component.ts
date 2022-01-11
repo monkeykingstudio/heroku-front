@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { PopupService } from '../../services/popup.service';
+import { DiapauseService } from '../../services/diapause.service';
 
 
 @Component({
@@ -8,7 +9,16 @@ import { PopupService } from '../../services/popup.service';
   styleUrls: ['./diapause-header.component.scss']
 })
 export class DiapauseHeaderComponent implements OnInit {
-    public dateNow = new Date();
+  @Input()
+  diapauseLoaded;
+
+  @Input()
+  colonyId: string;
+
+  @Output()
+  reloadDiapause: EventEmitter<any> = new EventEmitter();
+
+  public dateNow = new Date();
   milliSecondsInASecond = 1000;
   hoursInADay = 24;
   minutesInAnHour = 60;
@@ -21,13 +31,19 @@ export class DiapauseHeaderComponent implements OnInit {
   public daysToDday;
 
   constructor(
-    public popupService: PopupService
+    public popupService: PopupService,
+    public diapauseService: DiapauseService
   ) { }
 
   ngOnInit(): void {
   }
 
-
+  // changeDiapauseStatus(status: string) {
+  //   return this.diapauseService.changeStatus(this.colonyId, status)
+  //     .subscribe((res) => {
+  //       this.reloadDiapause.emit();
+  //     });
+  // }
   // public getTimeDifference () {
   //   if (this.loadedDiapause) {
   //     this.timeDifference = new Date(this.loadedDiapause[0].period.endDate).getTime() - new Date().getTime();

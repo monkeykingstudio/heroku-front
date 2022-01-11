@@ -1,7 +1,7 @@
     <!-- // Si aucune diapause n'est chargée -->
     <div class="schedule">
       <form (ngSubmit)='saveDiapause()' [formGroup]="diapauseForm">
-        <!-- <div *ngIf="!diapauseStart" style="margin: 1rem 0 .5rem 0;" class=" d-flex justify-content-around">
+        <div style="margin: 1rem 0 .5rem 0;" class=" d-flex justify-content-around">
           <div class="form-check">
             <input
             (input)="switchSchedule()"
@@ -19,7 +19,7 @@
 
           <div class="form-check">
             <input
-            [disabled]="schedule"
+            [disabled]="diapauseSchedule"
             (input)="switchSchedule()"
             type="radio"
             formControlName="schedule"
@@ -29,10 +29,9 @@
             />
             <span class="form-check-label">Schedule</span>
           </div>
-        </div> -->
-        <!-- <div *ngIf="!diapauseStart" class="inner-separator"></div>
+        </div>
 
-        <div *ngIf="!schedule && !diapauseStart" class="form-row direct-start">
+        <div *ngIf="!diapauseSchedule && !diapauseStart" class="form-row direct-start">
           <div class="form-group col-md-6">
             <label for="">Start date</label>
             <input
@@ -44,7 +43,7 @@
             type="text" min="startDate" placeholder="{{endDate  | date:'yyyy-MM-dd, hh:mm'}}" onfocus="(this.type='datetime-Local')" onblur="(this.type='text')" [value]="endDate | date:'yyyy-MM-dd,hh:mm'" (input)="endDate=parseDate($event.target.value)" class="form-control date-input">
           </div>
         </div>
-        <div *ngIf="schedule && !diapauseStart" class="form-row schedule-start">
+        <div *ngIf="diapauseSchedule && !diapauseStart" class="form-row schedule-start">
           <div class="form-group col-md-6">
             <label for="">Start date</label>
             <input
@@ -64,14 +63,14 @@
           <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart" class="btn-select mb-0" formControlName='currentTemperature'>
             <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
           </select>
-        </div> -->
+        </div>
         <!-- // Modifier la temperature en cours de diapause -->
-        <!-- <div *ngIf="diapauseStart" style="margin-top:1rem" class="d-flex flex-column">
+        <div *ngIf="diapauseStart" style="margin-top:1rem" class="d-flex flex-column">
           <label for="">Select Current Temperature</label>
           <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart" class="btn-select mb-0" formControlName='currentTemperature'>
             <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
           </select>
-        </div> -->
+        </div>
           <!-- // Affichage des dates si la diapause est planifiée || en cours -->
           <!-- <div *ngIf="endDate && diapauseStart" class="line">
             <div style="margin-bottom: 10px;" class="date-cont">

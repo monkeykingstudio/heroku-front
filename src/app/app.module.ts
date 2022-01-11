@@ -1,3 +1,9 @@
+import { DiapauseSwitcherComponent } from './diapause/diapause-switcher/diapause-switcher.component';
+import { DiapauseStatsComponent } from './diapause/diapause-stats/diapause-stats.component';
+import { DiapausePeriodComponent } from './diapause/diapause-period/diapause-period.component';
+import { DiapauseHeaderComponent } from './diapause/diapause-header/diapause-header.component';
+import { DiapauseDatesTrackerComponent } from './diapause/diapause-dates-tracker/diapause-dates-tracker.component';
+import { DiapauseButtonsComponent } from './diapause/diapause-buttons/diapause-buttons.component';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -78,7 +84,13 @@ import { DiapauseComponent } from './diapause/diapause.component';
     ApprovedPipe,
     LandingPageComponent,
     ClickoutsideDirective,
-    DiapauseComponent
+    DiapauseComponent,
+    DiapauseButtonsComponent,
+    DiapauseDatesTrackerComponent,
+    DiapauseHeaderComponent,
+    DiapausePeriodComponent,
+    DiapauseStatsComponent,
+    DiapauseSwitcherComponent
   ],
   imports: [
     BrowserModule,

@@ -1,20 +1,20 @@
 <h5>Diapause</h5>
 <div id="diapauseRef" class="diapause-container animate__animated animate__slideInRight">
-  <app-diapause-header></app-diapause-header>
+  <app-diapause-header (reloadDiapause)="reloadDiapause()" [colonyId]='colonyId' [diapauseLoaded]="diapauseLoaded"></app-diapause-header>
   <div class="body d-flex flex-column">
-  <div class="separator-module"></div>
-  <app-diapause-period></app-diapause-period>
-  <div class="separator-module"></div>
-  <app-diapause-switcher></app-diapause-switcher>
-  <div class="separator-module"></div>
-  <app-diapause-dates-tracker></app-diapause-dates-tracker>
-  <div class="separator-module"></div>
-  <app-diapause-stats></app-diapause-stats>
-  <div class="separator-module"></div>
-  <app-diapause-buttons></app-diapause-buttons>
+      <div class="separator-module"></div>
+    <app-diapause-period [sheet]="sheet"></app-diapause-period>
+      <div class="separator-module"></div>
+    <app-diapause-switcher [sheet]="sheet"></app-diapause-switcher>
+      <div class="separator-module"></div>
+    <app-diapause-dates-tracker></app-diapause-dates-tracker>
+      <div class="separator-module"></div>
+    <app-diapause-stats></app-diapause-stats>
+      <div class="separator-module"></div>
+    <app-diapause-buttons (diapauseChangeStatus)="changeStatus($event)" (reloadDiapause)="reloadDiapause()" [colonyId]='colonyId'></app-diapause-buttons>
 
-    <!-- // Si une diapause à été trouvée et chargée -->
-    <!-- <div *ngIf="diapauseLoaded" class="schedule">
+      <!-- // Si une diapause à été trouvée et chargée -->
+      <!-- <div *ngIf="diapauseLoaded" class="schedule">
       <form (ngSubmit)='saveDiapause()' [formGroup]="diapauseForm">
         <div class="inner-separator"></div>
 
@@ -70,19 +70,5 @@
     </div>
   </app-popup> -->
 
-  <!-- // Archiver la diapause -->
-  <!-- <app-popup class="diapause-popup animate__animated animate__zoomIn" id='archivePopup'>
-    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
-      <h6 style="font-size:2.2rem!important;text-transform:capitalize">Archive Diapause</h6>
-      <div style="height:100%;top:0" class="popup-body d-flex flex-column">
-        <i class="info-icon"></i>
-        <span>You are about to <span class="information">ARCHIVE</span> a successfully ended diapause.<span class="information"><br/>All statistics will be saved.</span></span>
-        <div style="flex-grow: 1;align-items: flex-end;" class="d-flex w-100 justify-content-around">
-          <button (click)="closePopup('archivePopup');archiveDiapause()" type="submit" class="green-btn">YES</button>
-          <button (click)="closePopup('archivePopup')" type="button" class="red-btn">NO</button>
-        </div>
-      </div>
-    </div>
-  </app-popup> -->
 
 </div>

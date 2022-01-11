@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription, interval, Subject, Observable } from 'rxjs';
-// import { Subject } from 'rxjs';
 import { BreedingSheet } from 'src/app/models/breedingSheet.model';
 import { DatePipe } from '@angular/common';
 import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
@@ -17,67 +16,7 @@ import { DateTime } from 'luxon';
 export class DiapauseComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private diapauseSubject: Subject<Diapause>;
-  diapauseLoaded$: Observable<Diapause>;
-
-
-
-  public validDiapauseSub: Subscription;
-
-
-  // startDate: Date;
-  // endDate: Date;
-
-  // dateCheck = true;
-
-  // showCountdown = false;
-  // ended;
-  // started;
-
-  // activeEmited = false;
-  // endedEmited = false;
-  // innactiveEmited = false;
-  // archiveEmited = false;
-
-
-  // diapauseForm: FormGroup;
-  // autoStartCtrl: FormControl;
-  // scheduleCtrl: FormControl;
-  // currentTemperatureCtrl: FormControl;
-
-  // schedule = false;
-  // diapauseStart = false;
-  // diapauseLoaded = false;
-  // loadedDiapause: Diapause;
-
-  temperatureList: Array<object> = [
-    {id: 0, valeur: 3},
-    {id: 1, valeur: 5},
-    {id: 2, valeur: 6},
-    {id: 3, valeur: 7},
-    {id: 4, valeur: 8},
-    {id: 5, valeur: 9},
-    {id: 6, valeur: 10},
-    {id: 7, valeur: 11},
-    {id: 8, valeur: 12},
-    {id: 9, valeur: 13},
-    {id: 10, valeur: 14},
-    {id: 11, valeur: 15},
-    {id: 12, valeur: 16},
-    {id: 13, valeur: 17},
-    {id: 14, valeur: 18},
-    {id: 15, valeur: 19},
-    {id: 16, valeur: 20},
-    {id: 17, valeur: 21},
-    {id: 18, valeur: 22},
-    {id: 19, valeur: 23},
-    {id: 20, valeur: 24},
-    {id: 21, valeur: 25},
-    {id: 22, valeur: 26},
-    {id: 23, valeur: 27},
-    {id: 24, valeur: 28},
-    {id: 25, valeur: 29},
-    {id: 26, valeur: 30},
-  ];
+  diapauseLoaded: Observable<Diapause[]>;
 
   @Input()
   sheet: BreedingSheet;
@@ -86,25 +25,31 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   colonyId: string;
 
   @Output()
-  diapauseChanged = new EventEmitter<boolean>();
-
-  @Output()
   diapauseChangeStatus = new EventEmitter<string>();
+
+  status: string;
+
+  // showCountdown = false;
 
   constructor(
     public datepipe: DatePipe,
     public diapauseService: DiapauseService
-  ) {
-    this.diapauseSubject = new Subject<Diapause>();
-    this.diapauseLoaded$ = this.diapauseSubject.asObservable();
-  }
-
+  ) {}
 
   ngOnInit(): void {
-    // this.startDate = new Date();
-    // this.diapauseStart = false;
-
     this.reloadDiapause();
+  }
+
+  changeStatus($event): any {
+    this.status = $event;
+    if (this.status === 'archived') {
+      this.diapauseChangeStatus.emit('archived');
+    }
+    console.log('string event', this.status);
+    return this.diapauseService.changeStatus(this.colonyId, this.status)
+      .subscribe((res) => {
+        this.reloadDiapause();
+      });
   }
 
     // loadDiapause() {
@@ -141,7 +86,9 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   reloadDiapause(): void {
     const diapause$ = this.diapauseService.diapauseGet(this.colonyId)
     .subscribe((diapause) => {
-      console.log('debug diapause -->', diapause[0]?.status);
+      console.log('diapause status -->', diapause[0]?.status);
+      console.log('reload diapause -->', diapause);
+      this.diapauseLoaded = diapause;
     });
   }
 
@@ -323,20 +270,7 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   //   }
   // }
 
-  parseDate(dateString: string): Date {
-    if (dateString) {
-        return new Date(dateString);
-    }
-    return null;
-  }
 
-  // switchSchedule() {
-  //   this.schedule = !this.schedule;
-  // }
-
-  // saveOptions(counter) {
-  //   console.log('save options diapause');
-  // }
 
 
   // emitActiveEvent() {

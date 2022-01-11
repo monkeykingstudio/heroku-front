@@ -1,0 +1,36 @@
+.popup {
+  width: 100%!important;
+  height: 100%;
+  .popup-body {
+    position: relative;
+    right: 0!important;
+    span {
+      font-size: 15px;
+      line-height: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .alert {
+      color: #d74444;
+    }
+
+    .information {
+      color: #0f9ed6;
+    }
+  }
+}
+.warning-icon, .info-icon {
+  margin: auto;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+
+.buttons {
+  flex-grow: 1;
+  align-items: flex-end;
+
+  button {
+    max-height: 4.5rem;
+  }
+}

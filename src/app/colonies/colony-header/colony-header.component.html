@@ -52,6 +52,7 @@
   <div *ngIf="breedSheet?.needDiapause" class="diapause">
     <span>diapause</span>
     <span *ngIf="diapauseStatus === 'innactive'" class="badge-required animate__animated animate__flipInX">innactive</span>
+    <span *ngIf="diapauseStatus === 'archived'" class="badge-archive animate__animated animate__flipInX">archived</span>
     <span *ngIf="diapauseStatus === 'ended'" class="badge-no animate__animated animate__flipInX">ended</span>
     <span *ngIf="diapauseStatus === 'active'" class="badge-yes animate__animated animate__flipInX">active</span>
     <span *ngIf="diapauseStatus === 'scheduled'" class="badge-schedule animate__animated animate__flipInX">scheduled</span>
