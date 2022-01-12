@@ -1,14 +1,14 @@
-<div class="line">
+<div *ngIf="diapauseFound" class="line">
   <div style="margin-bottom: 10px;" class="date-cont">
     <span class="title">Start: </span>
     <!-- <span class="title">Will start: </span> -->
-    <span class="start-date">12/12/2022</span>
+    <span class="start-date"></span>
     <!-- <span class='start-date'>{{this.loadedDiapause[0].period.startDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.startDate | date:'h:mm'}}</span> -->
   </div>
   <div class="date-cont">
     <span class="title">end: </span>
     <!-- <span class="title">Will end: </span> -->
-    <span class="end-date">12/12/2022</span>
+    <span class="end-date"></span>
     <!-- <span class='end-date'>{{this.loadedDiapause[0].period.endDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.endDate | date:'h:mm'}}</span> -->
   </div>
 </div>

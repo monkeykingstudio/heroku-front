@@ -1,5 +1,4 @@
-    <!-- // Si aucune diapause n'est chargée -->
-    <div class="schedule">
+    <div *ngIf="!diapauseFound" class="schedule">
       <form (ngSubmit)='saveDiapause()' [formGroup]="diapauseForm">
         <div style="margin: 1rem 0 .5rem 0;" class=" d-flex justify-content-around">
           <div class="form-check">
@@ -40,14 +39,14 @@
           <div class="form-group col-md-6">
             <label for="">End date</label>
             <input
-            type="text" min="startDate" placeholder="{{endDate  | date:'yyyy-MM-dd, hh:mm'}}" onfocus="(this.type='datetime-Local')" onblur="(this.type='text')" [value]="endDate | date:'yyyy-MM-dd,hh:mm'" (input)="endDate=parseDate($event.target.value)" class="form-control date-input">
+            type="text" min="startDate" placeholder="{{endDate  | date:'yyyy-MM-dd, hh:mm'}}" onfocus="(this.type='datetime-Local')" onblur="(this.type='text')" [value]="endDate | date:'yyyy-MM-dd,hh:mm'" (input)="endDate=parseDate($event.target.value);returnEndDate(endDate)" class="form-control date-input">
           </div>
         </div>
         <div *ngIf="diapauseSchedule && !diapauseStart" class="form-row schedule-start">
           <div class="form-group col-md-6">
             <label for="">Start date</label>
             <input
-            [value]="startDate | date:'yyyy-MM-dd, hh:mm'" onfocus="(this.type='datetime-Local')" onblur="(this.type='text')" (input)="startDate=parseDate($event.target.value)" placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}" class="form-control date-input">
+            [value]="startDate | date:'yyyy-MM-dd, hh:mm'" onfocus="(this.type='datetime-Local')" onblur="(this.type='text')" (input)="startDate=parseDate($event.target.value);returnStartDate(startDate)" placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}" class="form-control date-input">
           </div>
           <div class="form-group col-md-6">
             <label for="">End date</label>

@@ -48,11 +48,9 @@ export class DiapauseService {
     );
   }
 
-  // TODO : refactoriser le ${colonyId} par un ${diapauseId} pour éviter un conflit s'il y a plusieurs diapauses
-
   // DELETE Diapause
   diapauseDelete(colonyId: string) {
-    console.log('from servive diapause delete');
+    console.log('from servive diapause delete', colonyId);
     return this.http.delete(`${environment.APIEndpoint}/api/diapause/delete/${colonyId}`)
     .pipe(
       map(result => result['diapause']),

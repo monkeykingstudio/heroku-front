@@ -14,8 +14,26 @@ export class DiapauseButtonsComponent implements OnInit {
   @Input()
   colonyId: string;
 
+  @Input()
+  endDate: Date;
+
+  @Input()
+  status: string;
+
+  @Input()
+  diapauseFound: string;
+
+  @Input()
+  outputStartDate: Date;
+
+  @Input()
+  outputEndDate: Date;
+
   @Output()
   diapauseChangeStatus = new EventEmitter<string>();
+
+  @Output()
+  deleteDiapause = new EventEmitter();
 
   constructor(
     public popupService: PopupService,
@@ -23,13 +41,15 @@ export class DiapauseButtonsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
   }
 
   changeStatusArchived(): void {
     this.diapauseChangeStatus.emit('archived');
   }
 
+  deleteCurrentDiapause(): void {
+    this.deleteDiapause.emit();
+  }
 
   openPopup(id: string): void {
     this.popupService.open(id);

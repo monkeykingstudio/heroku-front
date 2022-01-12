@@ -12,6 +12,14 @@ export class DiapauseSwitcherComponent implements OnInit {
   @Input()
   sheet: BreedingSheet;
 
+  @Input()
+  diapauseFound: string;
+
+  @Output()
+  getEndDate = new EventEmitter<Date>();
+  @Output()
+  getStartDate = new EventEmitter<Date>();
+
   diapauseForm: FormGroup;
   autoStartCtrl: FormControl;
   scheduleCtrl: FormControl;
@@ -76,12 +84,19 @@ export class DiapauseSwitcherComponent implements OnInit {
   switchSchedule(): void {
     this.diapauseSchedule = !this.diapauseSchedule;
   }
-
   parseDate(dateString: string): Date {
     if (dateString) {
         return new Date(dateString);
     }
     return null;
+  }
+
+  returnEndDate(date): void {
+    this.getEndDate.emit(date);
+  }
+
+  returnStartDate(date): void {
+    this.getStartDate.emit(date);
   }
 
     saveDiapause() {

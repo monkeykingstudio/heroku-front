@@ -1,9 +1,10 @@
-<!-- {{diapauseLoaded[0].status}} -->
-<!-- <button (click)="changeDiapauseStatus('scheduled')">change to toto</button> -->
-
-<div class="d-flex align-items-center justify-content-between">
+<div [ngClass]="(status === 'active')
+? 'justify-content-between'
+: 'justify-content-end'"
+class="countDown"
+class="d-flex align-items-center">
     <!-- // Compte à rebours -->
-    <div class="countDown">
+    <div *ngIf="status === 'active'" class="countDown">
       <span> {{daysToDday}} days, {{hoursToDday}} hours, {{minutesToDday}}m, {{secondsToDday}}s</span>
     </div>
     <!-- // Bouton d'options -->

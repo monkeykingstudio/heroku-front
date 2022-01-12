@@ -10,7 +10,7 @@ import { DiapauseService } from '../../services/diapause.service';
 })
 export class DiapauseHeaderComponent implements OnInit {
   @Input()
-  diapauseLoaded;
+  status;
 
   @Input()
   colonyId: string;

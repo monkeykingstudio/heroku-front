@@ -9,6 +9,9 @@ import { BreedingSheet } from 'src/app/models/breedingSheet.model';
 export class DiapausePeriodComponent implements OnInit {
   @Input()
   sheet: BreedingSheet;
+
+  @Input()
+  diapauseFound;
   constructor() { }
 
   ngOnInit(): void {

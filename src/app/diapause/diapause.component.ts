@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter, AfterViewInit } from '@angular/core';
 import { Subscription, interval, Subject, Observable } from 'rxjs';
 import { BreedingSheet } from 'src/app/models/breedingSheet.model';
 import { DatePipe } from '@angular/common';
@@ -13,10 +13,11 @@ import { DateTime } from 'luxon';
   templateUrl: './diapause.component.html',
   styleUrls: ['./diapause.component.scss']
 })
-export class DiapauseComponent implements OnInit, OnDestroy {
+export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   private subscription: Subscription;
   private diapauseSubject: Subject<Diapause>;
   diapauseLoaded: Observable<Diapause[]>;
+  diapauseFound: boolean;
 
   @Input()
   sheet: BreedingSheet;
@@ -27,9 +28,10 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   @Output()
   diapauseChangeStatus = new EventEmitter<string>();
 
-  status: string;
+  status = 'innactive';
 
-  // showCountdown = false;
+  outputStartDate: Date;
+  outputEndDate: Date;
 
   constructor(
     public datepipe: DatePipe,
@@ -39,8 +41,10 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.reloadDiapause();
   }
-
+  ngAfterViewInit(): void {
+  }
   changeStatus($event): any {
+    console.log('event: ', $event);
     this.status = $event;
     if (this.status === 'archived') {
       this.diapauseChangeStatus.emit('archived');
@@ -50,6 +54,49 @@ export class DiapauseComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         this.reloadDiapause();
       });
+  }
+  reloadDiapause(): void {
+    const diapause$ = this.diapauseService.diapauseGet(this.colonyId)
+    .subscribe((diapause) => {
+      if (diapause.length === 0) {
+          this.diapauseFound = false;
+          this.status = 'innactive';
+          console.log('%c status set to innactive: ', 'background: #222; color: #bada55', this.status);
+          return;
+        }
+        else {
+          console.log('a diapause is found!', diapause[0]);
+          this.diapauseFound = true;
+          this.diapauseLoaded = diapause;
+          this.status = diapause[0].status;
+          if (this.status === 'active') {
+            this.diapauseChangeStatus.emit('active');
+          }
+          else if (this.status === 'scheduled') {
+            this.diapauseChangeStatus.emit('scheduled');
+          }
+          else if (this.status === 'ended') {
+            this.diapauseChangeStatus.emit('ended');
+          }
+        }
+    });
+  }
+  deleteDiapause(): any{
+    return this.diapauseService.diapauseDelete(this.colonyId)
+    .subscribe((res) => {
+      this.reloadDiapause();
+      this.diapauseChangeStatus.emit('innactive');
+    });
+  }
+
+  getEndDate(date: Date): void {
+    console.log('from parent endDate: ', date);
+    this.outputEndDate = date;
+  }
+
+  getStartDate(date: Date): void {
+    console.log('from parent StartDate: ', date);
+    this.outputStartDate = date;
   }
 
     // loadDiapause() {
@@ -80,25 +127,6 @@ export class DiapauseComponent implements OnInit, OnDestroy {
   //         this.emitEndedEvent();
   //       }
   //     }
-  //   });
-  // }
-
-  reloadDiapause(): void {
-    const diapause$ = this.diapauseService.diapauseGet(this.colonyId)
-    .subscribe((diapause) => {
-      console.log('diapause status -->', diapause[0]?.status);
-      console.log('reload diapause -->', diapause);
-      this.diapauseLoaded = diapause;
-    });
-  }
-
-  // deleteDiapause() {
-  //   return this.diapauseService.diapauseDelete(this.colonyId)
-  //   .subscribe((res) => {
-  //     this.ngOnInit();
-  //     this.switchSchedule();
-  //     this.schedule = false;
-  //     this.emitInnactiveEvent();
   //   });
   // }
 
