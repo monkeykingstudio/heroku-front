@@ -51,6 +51,7 @@ export class DiapauseButtonsComponent implements OnInit {
 
   startDiapause(): void {
     this.diapauseStart.emit();
+    this.reloadDiapause.emit();
   }
 
   changeStatusArchived(): void {

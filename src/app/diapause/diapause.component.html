@@ -3,7 +3,11 @@
   <app-diapause-header
   [status]="status"
   (reloadDiapause)="reloadDiapause()"
-  [colonyId]='colonyId'>
+  [colonyId]='colonyId'
+  [secondsToDday]="secondsToDday"
+  [minutesToDday]="minutesToDday"
+  [hoursToDday]="hoursToDday"
+  [daysToDday]="daysToDday">
   </app-diapause-header>
 
   <div class="body d-flex flex-column">
@@ -22,7 +26,8 @@
     (getStartDate)="getStartDate($event)"
     (getSchedule)="getSchedule($event)"
     [diapauseFound]="diapauseFound"
-    [sheet]="sheet">
+    [sheet]="sheet"
+    [dateCheck]="dateCheck">
     </app-diapause-switcher>
 
     <div *ngIf="!diapauseFound" class="separator-module"></div>

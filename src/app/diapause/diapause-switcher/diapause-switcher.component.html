@@ -36,7 +36,7 @@
             <input
             [disabled]='true'
             [value]="startDate | date:'yyyy-MM-dd, hh:mm'"
-            (input)="startDate=parseDate($event.target.value);returnStartDate(startDate)"
+            (input)="startDate=$event.target.value;returnStartDate(startDate)"
             placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}"
             class="form-control date-input">
           </div>
@@ -48,7 +48,7 @@
             onfocus="(this.type='datetime-Local')"
             onblur="(this.type='text')"
             [value]="endDate | date:'yyyy-MM-dd,hh:mm'"
-            (input)="endDate=parseDate($event.target.value);returnEndDate(endDate)"
+            (input)="endDate=$event.target.value;returnEndDate(endDate)"
             class="form-control date-input">
           </div>
         </div>
@@ -61,7 +61,7 @@
             [value]="startDate | date:'yyyy-MM-dd, hh:mm'"
             onfocus="(this.type='datetime-Local')"
             onblur="(this.type='text')"
-            (input)="startDate=parseDate($event.target.value);returnStartDate(startDate)"
+            (input)="startDate=$event.target.value;returnStartDate(startDate)"
             placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}"
             class="form-control date-input">
           </div>
@@ -72,7 +72,7 @@
             type="text" placeholder="{{endDate | date:'yyyy-MM-dd, hh:mm'}}"
             onfocus="(this.type='datetime-Local')" onblur="(this.type='text')"
             [value]="endDate | date:'yyyy-MM-dd, hh:mm'"
-            (input)="endDate=parseDate($event.target.value);returnEndDate(startDate)"
+            (input)="endDate=$event.target.value;returnEndDate(endDate)"
             class="form-control date-input">
           </div>
         </div>

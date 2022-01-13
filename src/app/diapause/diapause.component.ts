@@ -32,50 +32,165 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   outputStartDate: Date;
   outputEndDate: Date;
   outputSchedule: boolean;
+  dateCheck = true;
+
+  milliSecondsInASecond = 1000;
+  hoursInADay = 24;
+  minutesInAnHour = 60;
+  SecondsInAMinute  = 60;
+
+  public timeDifference;
+  public secondsToDday;
+  public minutesToDday;
+  public hoursToDday;
+  public daysToDday;
+
+  // empêcher l'execution dans checkIfCountDown()
+  scheduleTriggered = false;
+  activeTriggered = false;
+  endedTriggered = false;
 
   constructor(
     public datepipe: DatePipe,
     public diapauseService: DiapauseService
   ) {}
 
+  public getTimeDifference(): number {
+    if (this.diapauseFound) {
+      this.timeDifference = new Date(this.diapauseLoaded[0].period.endDate)?.getTime() - new Date().getTime();
+
+      const hour = new Date(this.diapauseLoaded[0].period.endDate)?.getHours();
+      const minutes = new Date(this.diapauseLoaded[0].period.endDate)?.getMinutes();
+      const seconds = new Date(this.diapauseLoaded[0].period.endDate)?.getSeconds();
+    }
+    else {
+      this.timeDifference = new Date(this.outputEndDate)?.getTime() - new Date().getTime();
+      const hour = new Date(this.outputEndDate)?.getHours();
+      const minutes = new Date(this.outputEndDate)?.getMinutes();
+      const seconds = new Date(this.outputEndDate)?.getSeconds();
+    }
+    this.allocateTimeUnits(this.timeDifference);
+    return this.timeDifference;
+  }
+
+  private allocateTimeUnits (timeDifference: number) {
+    this.secondsToDday = Math.floor(
+      (timeDifference) / (this.milliSecondsInASecond) % this.SecondsInAMinute
+      );
+    this.minutesToDday = Math.floor(
+      (timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour) % this.SecondsInAMinute
+    );
+    this.hoursToDday = Math.floor(
+      (timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute) % this.hoursInADay
+      );
+    this.daysToDday = Math.floor(
+      (timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute * this.hoursInADay)
+      );
+  }
+
+  checkIfCountdown() {
+    let startDiff = 0;
+    let endDiff = 0;
+
+    if (this.diapauseLoaded) {
+      startDiff = new Date(this.diapauseLoaded[0].period.startDate).getTime() - new Date().getTime();
+      endDiff = new Date(this.diapauseLoaded[0].period.endDate).getTime() - new Date().getTime();
+    }
+    else {
+      startDiff = new Date(this.outputStartDate).getTime() - new Date().getTime();
+      endDiff = new Date(this.outputEndDate).getTime() - new Date().getTime();
+    }
+
+    // SCHEDULE
+    if (startDiff > 0 && endDiff > 0 && !this.scheduleTriggered) {
+      console.log('schedule!!!!');
+      this.scheduleTriggered = true;
+    }
+
+    // ACTIVE
+    else if (startDiff <= 0 && endDiff > 0 && !this.activeTriggered) {
+      console.log('active!!!!');
+      this.changeStatus('active');
+      this.activeTriggered = true;
+    }
+
+    // ENDED
+    else if (endDiff < 0 && startDiff < 0 && !this.endedTriggered) {
+      console.log('ended!!!!');
+      this.changeStatus('ended');
+      this.endedTriggered = true;
+    }
+  }
+
   ngOnInit(): void {
     this.reloadDiapause();
   }
   ngAfterViewInit(): void {
   }
-  diapauseStart(): void {
+  diapauseStart(): any {
     this.checkValidDates();
     let currentStatus: string;
-    if (this.getSchedule) {
+
+    if (this.outputSchedule) {
       console.log('scheduled diapause');
       currentStatus = 'scheduled';
     } else {
       console.log('active diapause');
       currentStatus = 'active';
     }
+
+    const newDiapause: Diapause = {
+      period: {
+        startDate: this.outputStartDate,
+        endDate: this.outputEndDate
+      },
+      species: this.sheet.species,
+      colonyId: this.colonyId,
+      currentTemperature: 0,
+      status: currentStatus
+    };
+    console.log(newDiapause);
+    if (this.dateCheck) {
+      return this.diapauseService.diapauseAdd(newDiapause)
+      .subscribe((diapause) => {
+        if (this.getTimeDifference() >= 0 ) {
+          this.subscription = interval(1000)
+          .subscribe(x => {
+            this.checkIfCountdown();
+            this.getTimeDifference();
+          });
+        }
+        this.reloadDiapause();
+      });
+    }
   }
-    checkValidDates(): void {
-      // const start = DateTime.fromISO(this.getStartDate.toISOString());
-      const start = DateTime.fromISO(this.getStartDate);
-      const end = DateTime.fromISO(this.getEndDate);
+  checkValidDates(): void {
+    if (this.outputSchedule) {
+      const start = DateTime.fromISO(this.outputStartDate);
+      const end = DateTime.fromISO(this.outputEndDate);
       const diffInDays = end.diff(start, ['days']);
-      console.log('checkValidDates', start, end);
+
       if (diffInDays < 0) {
-        // this.dateCheck = false;
-        // this.diapauseStart = false;
-        console.log('diff days < 0', diffInDays);
+        this.dateCheck = false;
+        console.log('diff < 0', diffInDays);
         return;
       } else {
-        console.log('diff days > 0', diffInDays);
-        // this.dateCheck = true;
-        // this.diapauseStart = true;
+        this.dateCheck = true;
+        console.log('diff > 0', diffInDays);
       }
+    }
   }
   changeStatus($event): any {
     console.log('event: ', $event);
     this.status = $event;
     if (this.status === 'archived') {
       this.diapauseChangeStatus.emit('archived');
+    }
+    else if (this.status === 'active') {
+      this.diapauseChangeStatus.emit('active');
+    }
+    else if (this.status === 'ended') {
+      this.diapauseChangeStatus.emit('ended');
     }
     console.log('string event', this.status);
     return this.diapauseService.changeStatus(this.colonyId, this.status)
@@ -107,6 +222,15 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
             this.diapauseChangeStatus.emit('ended');
           }
         }
+
+      if (this.getTimeDifference() >= 0 ) {
+        this.subscription = interval(1000)
+        .subscribe(x => {
+          this.checkIfCountdown();
+          this.getTimeDifference();
+        });
+        // this.emitActiveEvent();
+      }
     });
   }
   deleteDiapause(): any{
@@ -131,111 +255,6 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('from parent schedule: ', schedule);
     this.outputSchedule = schedule;
   }
-
-    // loadDiapause() {
-  //   return this.diapauseService.diapauseGet(this.colonyId)
-  //   .subscribe((diapause) => {
-  //     console.log('debug diapause -->', diapause[0]?.status);
-
-  //     // On peux se permettre de tester sur la length() car il ne peut jamais y avoir plus d'une diapause active ou schedulée !
-  //     if (diapause.length === 0) {
-  //       this.diapauseLoaded = false;
-  //     }
-  //     else {
-  //       console.log('Diapause Loaded', diapause[0]);
-  //       this.loadedDiapause = diapause;
-  //       this.diapauseLoaded = true;
-
-  //       if (this.getTimeDifference() >= 0 ) {
-  //         this.subscription = interval(1000)
-  //         .subscribe(x => {
-  //           this.checkIfCountdown();
-  //           this.getTimeDifference();
-  //         });
-  //         this.diapauseStart = true;
-  //         this.emitActiveEvent();
-  //       }
-  //       else {
-  //         this.ended = true;
-  //         this.emitEndedEvent();
-  //       }
-  //     }
-  //   });
-  // }
-
-  // saveDiapause() {
-
-  //   const formChanges = this.diapauseForm.value;
-  //   let currentStatus: string;
-  //   this.checkValidDates();
-
-  //   if (this.schedule) {
-  //     currentStatus = 'scheduled';
-  //   } else {
-  //     currentStatus = 'active';
-  //   }
-
-  //   const diapause: Diapause = {
-  //     period: {
-  //       startDate: this.startDate,
-  //       endDate: this.endDate
-  //     },
-  //     species: this.sheet.species,
-  //     colonyId: this.colonyId,
-  //     currentTemperature: formChanges.currentTemperature,
-  //     status: currentStatus
-  //   };
-
-  //   if (this.dateCheck) {
-  //     return this.diapauseService.diapauseAdd(diapause)
-  //     .subscribe((newDiapause) => {
-  //       if (this.getTimeDifference() >= 0 ) {
-  //         this.subscription = interval(1000)
-  //         .subscribe(x => {
-  //           this.checkIfCountdown();
-  //           this.getTimeDifference();
-  //         });
-  //       }
-  //     });
-  //   } else {
-  //     return;
-  //   }
-  // }
-
-  // loadDiapause() {
-  //   return this.diapauseService.diapauseGet(this.colonyId)
-  //   .subscribe((diapause) => {
-  //     console.log('debug diapause -->', diapause[0]?.status);
-
-  //     // On peux se permettre de tester sur la length() car il ne peut jamais y avoir plus d'une diapause active ou schedulée !
-  //     if (diapause.length === 0) {
-  //       this.diapauseLoaded = false;
-  //     }
-  //     else {
-  //       console.log('Diapause Loaded', diapause[0]);
-  //       this.loadedDiapause = diapause;
-  //       this.diapauseLoaded = true;
-
-  //       if (this.getTimeDifference() >= 0 ) {
-  //         this.subscription = interval(1000)
-  //         .subscribe(x => {
-  //           this.checkIfCountdown();
-  //           this.getTimeDifference();
-  //         });
-  //         this.diapauseStart = true;
-  //         this.emitActiveEvent();
-  //         console.log('from loadDiapuse: diapause status est', this.loadedDiapause[0].status, 'et devrait être au status active ou scheduled');
-
-  //       }
-  //       else {
-  //         this.ended = true;
-  //         this.emitEndedEvent();
-  //         console.log('diapause status est', this.loadedDiapause[0].status, 'et devrait être au status ended');
-  //       }
-  //     }
-  //   });
-  // }
-
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

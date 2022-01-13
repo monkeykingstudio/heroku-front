@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import { BreedingSheet } from '../../models/breedingSheet.model';
 
@@ -7,12 +7,14 @@ import { BreedingSheet } from '../../models/breedingSheet.model';
   templateUrl: './diapause-switcher.component.html',
   styleUrls: ['./diapause-switcher.component.scss']
 })
-export class DiapauseSwitcherComponent implements OnInit {
+export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
 
   @Input()
   sheet: BreedingSheet;
   @Input()
   diapauseFound: string;
+  @Input()
+  dateCheck: boolean;
 
   @Output()
   getEndDate = new EventEmitter<Date>();
@@ -28,9 +30,8 @@ export class DiapauseSwitcherComponent implements OnInit {
 
   diapauseSchedule = false;
   diapauseStart = false;
-  dateCheck = true;
 
-  startDate: Date;
+  startDate: any;
   endDate: Date;
 
   temperatureStart: number;
@@ -69,7 +70,7 @@ export class DiapauseSwitcherComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.startDate = new Date();
+    this.startDate = new Date().toISOString();
 
     this.autoStartCtrl = this.fb.control(true);
     this.scheduleCtrl = this.fb.control(false);
@@ -80,6 +81,10 @@ export class DiapauseSwitcherComponent implements OnInit {
       schedule: this.scheduleCtrl,
       currentTemperature: this.currentTemperatureCtrl
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.getStartDate.emit(this.startDate);
   }
 
   switchSchedule(): void {
@@ -103,46 +108,5 @@ export class DiapauseSwitcherComponent implements OnInit {
   returnSchedule(): void  {
     this.getSchedule.emit(this.diapauseSchedule);
   }
-
-    saveDiapause() {
-
-    // const formChanges = this.diapauseForm.value;
-    // let currentStatus: string;
-    // this.checkValidDates();
-
-    // if (this.schedule) {
-    //   currentStatus = 'scheduled';
-    // } else {
-    //   currentStatus = 'active';
-    // }
-
-    // const diapause: Diapause = {
-    //   period: {
-    //     startDate: this.startDate,
-    //     endDate: this.endDate
-    //   },
-    //   species: this.sheet.species,
-    //   colonyId: this.colonyId,
-    //   currentTemperature: formChanges.currentTemperature,
-    //   status: currentStatus
-    // };
-
-    // if (this.dateCheck) {
-    //   return this.diapauseService.diapauseAdd(diapause)
-    //   .subscribe((newDiapause) => {
-    //     if (this.getTimeDifference() >= 0 ) {
-    //       this.subscription = interval(1000)
-    //       .subscribe(x => {
-    //         this.checkIfCountdown();
-    //         this.getTimeDifference();
-    //       });
-    //     }
-    //   });
-    // } else {
-    //   return;
-    // }
-  }
-
-
 
 }
