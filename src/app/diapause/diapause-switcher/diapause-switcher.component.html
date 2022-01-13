@@ -1,9 +1,9 @@
     <div *ngIf="!diapauseFound" class="schedule">
-      <form (ngSubmit)='saveDiapause()' [formGroup]="diapauseForm">
-        <div style="margin: 1rem 0 .5rem 0;" class=" d-flex justify-content-around">
+      <form [formGroup]="diapauseForm">
+        <div class=" d-flex justify-content-around">
           <div class="form-check">
             <input
-            (input)="switchSchedule()"
+            (input)="switchSchedule();returnSchedule()"
             type="radio"
             formControlName="schedule"
             class="form-check-input"
@@ -19,7 +19,7 @@
           <div class="form-check">
             <input
             [disabled]="diapauseSchedule"
-            (input)="switchSchedule()"
+            (input)="switchSchedule();returnSchedule()"
             type="radio"
             formControlName="schedule"
             class="form-check-input"
@@ -29,34 +29,56 @@
             <span class="form-check-label">Schedule</span>
           </div>
         </div>
-
+        <!-- // Start à partir d'aujourd'hui -->
         <div *ngIf="!diapauseSchedule && !diapauseStart" class="form-row direct-start">
           <div class="form-group col-md-6">
             <label for="">Start date</label>
             <input
-            [disabled]='true' [value]="startDate | date:'yyyy-MM-dd, hh:mm'" (input)="startDate=parseDate($event.target.value)" placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}" class="form-control date-input">
+            [disabled]='true'
+            [value]="startDate | date:'yyyy-MM-dd, hh:mm'"
+            (input)="startDate=parseDate($event.target.value);returnStartDate(startDate)"
+            placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}"
+            class="form-control date-input">
           </div>
           <div class="form-group col-md-6">
             <label for="">End date</label>
             <input
-            type="text" min="startDate" placeholder="{{endDate  | date:'yyyy-MM-dd, hh:mm'}}" onfocus="(this.type='datetime-Local')" onblur="(this.type='text')" [value]="endDate | date:'yyyy-MM-dd,hh:mm'" (input)="endDate=parseDate($event.target.value);returnEndDate(endDate)" class="form-control date-input">
+            type="text" min="startDate"
+            placeholder="{{endDate  | date:'yyyy-MM-dd, hh:mm'}}"
+            onfocus="(this.type='datetime-Local')"
+            onblur="(this.type='text')"
+            [value]="endDate | date:'yyyy-MM-dd,hh:mm'"
+            (input)="endDate=parseDate($event.target.value);returnEndDate(endDate)"
+            class="form-control date-input">
           </div>
         </div>
+
+        <!-- // Start défini à une date ultérieure -->
         <div *ngIf="diapauseSchedule && !diapauseStart" class="form-row schedule-start">
           <div class="form-group col-md-6">
             <label for="">Start date</label>
             <input
-            [value]="startDate | date:'yyyy-MM-dd, hh:mm'" onfocus="(this.type='datetime-Local')" onblur="(this.type='text')" (input)="startDate=parseDate($event.target.value);returnStartDate(startDate)" placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}" class="form-control date-input">
+            [value]="startDate | date:'yyyy-MM-dd, hh:mm'"
+            onfocus="(this.type='datetime-Local')"
+            onblur="(this.type='text')"
+            (input)="startDate=parseDate($event.target.value);returnStartDate(startDate)"
+            placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}"
+            class="form-control date-input">
           </div>
           <div class="form-group col-md-6">
             <label for="">End date</label>
             <input
             (change)="endDate"
-            type="text" placeholder="{{endDate | date:'yyyy-MM-dd, hh:mm'}}" onfocus="(this.type='datetime-Local')" onblur="(this.type='text')" [value]="endDate | date:'yyyy-MM-dd, hh:mm'" (input)="endDate=parseDate($event.target.value)" class="form-control date-input">
+            type="text" placeholder="{{endDate | date:'yyyy-MM-dd, hh:mm'}}"
+            onfocus="(this.type='datetime-Local')" onblur="(this.type='text')"
+            [value]="endDate | date:'yyyy-MM-dd, hh:mm'"
+            (input)="endDate=parseDate($event.target.value);returnEndDate(startDate)"
+            class="form-control date-input">
           </div>
         </div>
         <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf='!dateCheck'>End date can't be lower than start date, and start date can't be higher than end date!</span>
 
+        <!-- // Définir la temperature de départ de diapause -->
         <div *ngIf="!diapauseStart" style="margin-top:1rem" class="d-flex flex-column">
           <label for="">Select Start Temperature</label>
           <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart" class="btn-select mb-0" formControlName='currentTemperature'>
@@ -86,24 +108,5 @@
             </div>
 
           </div> -->
-          <!-- <div class="line">
-            <div class="inner-separator"></div>
-            <span style="font-size: 12px;text-align: center;">
-              <b style="text-transform: capitalize;font-style: italic;">{{sheet?.species}}</b>
-              colonies currently in diapause : <b>5</b>
-            </span>
-          </div> -->
-        <!-- <div *ngIf="endDate && diapauseStart" class="inner-separator"></div>
-        <div [ngClass]="!diapauseStart ? 'margin-1-1' : 'margin-1'" class="d-flex buttons row">
-          <div *ngIf="!diapauseStart" class="col-sm-12">
-            <button [disabled]="!endDate" type='submit' class='green-btn w-100'>{{schedule ? 'SCHEDULE DIAPAUSE' : 'START DIAPAUSE'}}</button>
-          </div>
-          <div *ngIf="diapauseStart" class="col-sm-12">
-            <button (click)="openPopup('abortPopup')" type='button' class='red-btn w-100'>{{ 'DELETE DIAPAUSE' }}</button>
-          </div>
-          <div *ngIf="ended && diapauseStart" class="col-sm-12">
-            <button (click)="openPopup('archivePopup')" type='button' class='green-btn w-100'>{{ 'ARCHIVE DIAPAUSE' }}</button>
-          </div>
-        </div> -->
       </form>
     </div>

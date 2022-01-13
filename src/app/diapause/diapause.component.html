@@ -20,6 +20,7 @@
     <app-diapause-switcher
     (getEndDate)="getEndDate($event)"
     (getStartDate)="getStartDate($event)"
+    (getSchedule)="getSchedule($event)"
     [diapauseFound]="diapauseFound"
     [sheet]="sheet">
     </app-diapause-switcher>
@@ -30,15 +31,19 @@
     [diapauseFound]="diapauseFound">
     </app-diapause-dates-tracker>
 
-    <!-- <app-diapause-stats>
-    </app-diapause-stats> -->
+    <app-diapause-stats
+    [sheet]="sheet">
+    </app-diapause-stats>
 
-    <div class="separator-module"></div>
+    <div *ngIf="diapauseFound" class="separator-module"></div>
 
     <app-diapause-buttons
     [status]="status"
     [outputEndDate]="outputEndDate"
+    [outputStartDate]="outputEndDate"
     [diapauseFound]="diapauseFound"
+    [outputSchedule]="outputSchedule"
+    (diapauseStart)="diapauseStart()"
     (diapauseChangeStatus)="changeStatus($event)"
     (reloadDiapause)="reloadDiapause()"
     (deleteDiapause)="deleteDiapause()"

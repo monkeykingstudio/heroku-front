@@ -29,6 +29,12 @@ export class DiapauseButtonsComponent implements OnInit {
   @Input()
   outputEndDate: Date;
 
+  @Input()
+  outputSchedule: boolean;
+
+  @Output()
+  diapauseStart = new EventEmitter();
+
   @Output()
   diapauseChangeStatus = new EventEmitter<string>();
 
@@ -41,6 +47,10 @@ export class DiapauseButtonsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  startDiapause(): void {
+    this.diapauseStart.emit();
   }
 
   changeStatusArchived(): void {

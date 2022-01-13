@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { BreedingSheet } from 'src/app/models/breedingSheet.model';
 
 @Component({
   selector: 'app-diapause-stats',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./diapause-stats.component.scss']
 })
 export class DiapauseStatsComponent implements OnInit {
+  @Input()
+  sheet: BreedingSheet;
 
   constructor() { }
 

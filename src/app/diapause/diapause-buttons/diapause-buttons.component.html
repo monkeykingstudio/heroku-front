@@ -1,6 +1,6 @@
 <div  class="d-flex buttons">
   <div *ngIf="!diapauseFound" style="margin-bottom: 1rem;" class="col-sm-12">
-    <button [disabled]="!outputEndDate" type='submit' class='green-btn w-100'>{{schedule ? 'SCHEDULE DIAPAUSE' : 'START DIAPAUSE'}}</button>
+    <button (click)="startDiapause()" [disabled]="!outputEndDate || !outputStartDate" type='submit' class='green-btn w-100'>{{outputSchedule ? 'SCHEDULE DIAPAUSE' : 'START DIAPAUSE'}}</button>
   </div>
 
   <div *ngIf="
