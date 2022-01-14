@@ -5,12 +5,14 @@
 
   <div *ngIf="
     status === 'active' ||
-    status === 'scheduled' ||
-    status === 'ended'
-  " class="col-md-6">
-    <button style="margin: 1rem .5rem" (click)="openPopup('abortPopup')" type='button' class='red-btn'>DELETE DIAPAUSE</button>
+    status === 'scheduled'
+  " class="col-md-12">
+    <button style="margin: 1rem 0" (click)="openPopup('abortPopup')" type='button' class='red-btn w-100'>DELETE DIAPAUSE</button>
   </div>
 
+  <div *ngIf="status === 'ended'" class="col-md-6">
+    <button style="margin: 1rem .5rem" (click)="openPopup('abortPopup')" type='button' class='red-btn'>DELETE DIAPAUSE</button>
+  </div>
   <div *ngIf="status === 'ended'" class="col-md-6">
     <button style="margin: 1rem .5rem" (click)="openPopup('archivePopup')" type='button' class='green-btn'>ARCHIVE DIAPAUSE</button>
   </div>

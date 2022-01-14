@@ -55,42 +55,5 @@
 
     [colonyId]='colonyId'>
     </app-diapause-buttons>
-
-      <!-- // Si une diapause à été trouvée et chargée -->
-      <!-- <div *ngIf="diapauseLoaded" class="schedule">
-      <form (ngSubmit)='saveDiapause()' [formGroup]="diapauseForm">
-        <div class="inner-separator"></div>
-
-          <div class="line">
-            <div style="margin-bottom: 10px;" class="date-cont">
-              <span *ngIf="ended && !showCountdown" class="title">Started: </span>
-              <span *ngIf="!showCountdown && !ended" class="title">Will start: </span>
-              <span *ngIf="showCountdown && !ended" class="title">Started: </span>
-
-              <span class='start-date'>{{this.loadedDiapause[0].period.startDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.startDate | date:'h:mm'}}</span>
-            </div>
-            <div class="date-cont">
-              <span *ngIf="ended && !showCountdown" class="title">ended: </span>
-              <span *ngIf="!showCountdown && !ended" class="title">Will end: </span>
-              <span *ngIf="showCountdown && !ended" class="title">Will end: </span>
-              <span class='end-date'>{{this.loadedDiapause[0].period.endDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.endDate | date:'h:mm'}}</span>
-            </div>
-          </div>
-
-          <div class="inner-separator"></div>
-        <div class="inner-separator"></div>
-        <div  class="d-flex buttons row">
-          <div *ngIf="!ended" class="col-sm-12">
-            <button (click)="openPopup('abortPopup')" type='button' class='red-btn w-100'>{{ 'DELETE !ended DIAPAUSE load' }}</button>
-          </div>
-          <div *ngIf="ended" ="col-sm-12">
-            <button (click)="openPopup('abortPopup')" type='button' class='red-btn w-100'>{{ 'DELETE ended DIAPAUSE load' }}</button>
-          </div>
-          <div *ngIf="ended" class="col-sm-12">
-            <button (click)="openPopup('archivePopup')" type='button' class='green-btn w-100'>{{ 'ARCHIVE ended DIAPAUSE load' }}</button>
-          </div>
-        </div>
-      </form>
-    </div> -->
   </div>
 </div>

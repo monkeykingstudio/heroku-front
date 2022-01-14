@@ -115,16 +115,20 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     // ENDED
-    else if (endDiff < 0 && startDiff < 0 && !this.endedTriggered) {
+    else if (endDiff <= 0 && startDiff <= 0 && !this.endedTriggered) {
       console.log('ended!!!!');
       this.changeStatus('ended');
       this.endedTriggered = true;
+      // On re initialise pour ne pas empêcher une autre diapause sans refresh de la page
+      this.scheduleTriggered = false;
+      this.activeTriggered = false;
     }
   }
 
   ngOnInit(): void {
     this.reloadDiapause();
   }
+
   ngAfterViewInit(): void {
   }
   diapauseStart(): any {
@@ -161,6 +165,8 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
           });
         }
         this.reloadDiapause();
+        // On démarre un nouvelle diapause donc on dévérouille la désactivation du boolean
+        this.endedTriggered = false;
       });
     }
   }
