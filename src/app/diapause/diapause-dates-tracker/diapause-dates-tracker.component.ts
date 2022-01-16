@@ -8,6 +8,8 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 export class DiapauseDatesTrackerComponent implements OnInit {
   @Input()
   diapauseFound: string;
+  @Input()
+  diapauseLoaded;
 
   constructor() { }
 

@@ -16,8 +16,8 @@ export class MailService {
     return this.http.post(url, data);
   }
 
-activateMail(token) {
-  console.log('NEW EMAIL')
+  activateMail(token) {
+  console.log('NEW EMAIL');
   let headers = new HttpHeaders()
   .set('Authorization', `Bearer ${token}`);
   return this.http.get(`${environment.APIEndpoint}/api/mail/activate`, {

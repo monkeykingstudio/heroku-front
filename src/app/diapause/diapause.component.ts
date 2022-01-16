@@ -5,6 +5,12 @@ import { DatePipe } from '@angular/common';
 import { DiapauseService } from '../services/diapause.service';
 import { Diapause } from './../models/diapause.model';
 import { DateTime } from 'luxon';
+import { AuthService } from '../services/auth.service';
+import { User } from '../models/user.model';
+import { map } from 'rxjs/operators';
+import { SocketioService } from '../services/socketio.service';
+import { Notification } from '../models/notification.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-diapause',
@@ -13,7 +19,10 @@ import { DateTime } from 'luxon';
 })
 export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   private subscription: Subscription;
+  private authStatusSubscription: Subscription;
 
+  user$: Observable<User>;
+  currentUser: User;
   diapauseLoaded: Observable<Diapause[]>;
   diapauseFound: boolean;
 
@@ -52,7 +61,9 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     public datepipe: DatePipe,
-    public diapauseService: DiapauseService
+    public diapauseService: DiapauseService,
+    public authService: AuthService,
+    private socketService: SocketioService
   ) {}
 
   public getTimeDifference(): number {
@@ -126,11 +137,19 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.authStatusSubscription = this.authService.currentUser.pipe(
+      map(user => {
+        if (user) {
+          this.currentUser = user;
+        }
+      })
+      ).subscribe();
     this.reloadDiapause();
   }
 
   ngAfterViewInit(): void {
   }
+
   diapauseStart(): any {
     this.checkValidDates();
     let currentStatus: string;
@@ -143,6 +162,17 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
       currentStatus = 'active';
     }
 
+    const dataNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      message: `a diapause for species ${this.sheet.species} have been created by ${this.currentUser?.pseudo}`,
+      createdAt: new Date(),
+      type: 'admin',
+      subType: 'diapause',
+      url: `/colonies/${this.colonyId}`,
+      socketRef: uuidv4()
+    };
+
     const newDiapause: Diapause = {
       period: {
         startDate: this.outputStartDate,
@@ -151,9 +181,12 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
       species: this.sheet.species,
       colonyId: this.colonyId,
       currentTemperature: 0,
-      status: currentStatus
+      status: currentStatus,
+      creatorId: this.currentUser?._id,
+      creatorPseudo: this.currentUser?.pseudo,
+      creatorEmail: this.currentUser?.email,
+      socketRef: dataNotification.socketRef
     };
-    console.log(newDiapause);
     if (this.dateCheck) {
       return this.diapauseService.diapauseAdd(newDiapause)
       .subscribe((diapause) => {
@@ -164,6 +197,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
             this.getTimeDifference();
           });
         }
+        this.socketService.sendNotification(dataNotification);
         this.reloadDiapause();
         // On démarre un nouvelle diapause donc on dévérouille la désactivation du boolean
         this.endedTriggered = false;
@@ -264,5 +298,6 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.authStatusSubscription.unsubscribe();
   }
 }

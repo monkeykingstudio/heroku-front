@@ -1,14 +1,12 @@
 <div *ngIf="diapauseFound" class="line">
   <div style="margin-bottom: 10px;" class="date-cont">
-    <span class="title">Start: </span>
-    <!-- <span class="title">Will start: </span> -->
-    <span class="start-date"></span>
-    <!-- <span class='start-date'>{{this.loadedDiapause[0].period.startDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.startDate | date:'h:mm'}}</span> -->
+    <span *ngIf="diapauseLoaded[0].status === 'scheduled'" class="title">Will start: </span>
+    <span *ngIf="diapauseLoaded[0].status === 'active' || diapauseLoaded[0].status === 'ended'" class="title">Started: </span>
+    <span class="start-date">{{diapauseLoaded[0].period.startDate | date: 'longDate'}}</span>
   </div>
   <div class="date-cont">
-    <span class="title">end: </span>
-    <!-- <span class="title">Will end: </span> -->
-    <span class="end-date"></span>
-    <!-- <span class='end-date'>{{this.loadedDiapause[0].period.endDate | date: 'mediumDate'}}, {{this.loadedDiapause[0].period.endDate | date:'h:mm'}}</span> -->
+    <span *ngIf="diapauseLoaded[0].status === 'scheduled' || diapauseLoaded[0].status === 'active'" class="title">Will end: </span>
+    <span *ngIf="diapauseLoaded[0].status === 'ended'" class="title">Ended: </span>
+    <span class="end-date">{{diapauseLoaded[0].period.endDate | date: 'longDate'}}</span>
   </div>
 </div>

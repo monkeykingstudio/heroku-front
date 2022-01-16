@@ -33,8 +33,11 @@
     <div *ngIf="!diapauseFound" class="separator-module"></div>
 
     <app-diapause-dates-tracker
-    [diapauseFound]="diapauseFound">
+    [diapauseFound]="diapauseFound"
+    [diapauseLoaded]= "diapauseLoaded">
     </app-diapause-dates-tracker>
+
+    <div *ngIf="diapauseFound" class="separator-module"></div>
 
     <app-diapause-stats
     [sheet]="sheet">

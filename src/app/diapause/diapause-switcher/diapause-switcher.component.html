@@ -92,21 +92,5 @@
             <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
           </select>
         </div>
-          <!-- // Affichage des dates si la diapause est planifiée || en cours -->
-          <!-- <div *ngIf="endDate && diapauseStart" class="line">
-            <div style="margin-bottom: 10px;" class="date-cont">
-              <span *ngIf="ended && !showCountdown" class="title">Started: </span>
-              <span *ngIf="!showCountdown && !ended" class="title">Will start: </span>
-              <span *ngIf="showCountdown && !ended" class="title">Started: </span>
-              <span class='start-date'>{{startDate | date:'mediumDate'}}, {{startDate | date:'h:mm'}}</span>
-            </div>
-            <div class="date-cont">
-              <span *ngIf="ended && !showCountdown" class="title">ended: </span>
-              <span *ngIf="!showCountdown && !ended" class="title">will end: </span>
-              <span *ngIf="showCountdown && !ended" class="title">Will end: </span>
-              <span class='end-date'>{{endDate | date:'mediumDate'}}, {{endDate | date:'h:mm'}}</span>
-            </div>
-
-          </div> -->
       </form>
     </div>
