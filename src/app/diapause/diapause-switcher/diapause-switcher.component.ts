@@ -15,6 +15,8 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
   diapauseFound: string;
   @Input()
   dateCheck: boolean;
+  @Input()
+  status: string;
 
   @Output()
   getEndDate = new EventEmitter<Date>();
@@ -22,6 +24,10 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
   getStartDate = new EventEmitter<Date>();
   @Output()
   getSchedule = new EventEmitter<boolean>();
+  @Output()
+  getStartTemperature = new EventEmitter<number>();
+  @Output()
+  getCurrentTemperature = new EventEmitter<number>();
 
   diapauseForm: FormGroup;
   autoStartCtrl: FormControl;
@@ -33,8 +39,9 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
 
   startDate: any;
   endDate: Date;
-
   temperatureStart: number;
+  temperatureCurrent: number;
+
   temperatureList: Array<object> = [
     {id: 0, valeur: 3},
     {id: 1, valeur: 5},
@@ -107,6 +114,14 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
 
   returnSchedule(): void  {
     this.getSchedule.emit(this.diapauseSchedule);
+  }
+
+  returnStartTemperature(): void  {
+    this.getStartTemperature.emit(this.temperatureStart);
+  }
+
+  returnCurrentTemperature(): void  {
+    this.getStartTemperature.emit(this.temperatureCurrent);
   }
 
 }

@@ -1,96 +1,109 @@
-    <div *ngIf="!diapauseFound" class="schedule">
-      <form [formGroup]="diapauseForm">
-        <div class=" d-flex justify-content-around">
-          <div class="form-check">
-            <input
-            (input)="switchSchedule();returnSchedule()"
-            type="radio"
-            formControlName="schedule"
-            class="form-check-input"
-            id="autoStart"
-            [value]='false'
-            />
-            <span
-            class="form-check-label">Start today</span><span tooltipClass="antslab-tooltip"
-            placement="top"
-            ngbTooltip="Start a diapause from now" class="info">?</span>
-          </div>
-
-          <div class="form-check">
-            <input
-            [disabled]="diapauseSchedule"
-            (input)="switchSchedule();returnSchedule()"
-            type="radio"
-            formControlName="schedule"
-            class="form-check-input"
-            id="schedule"
-            [value]='true'
-            />
-            <span class="form-check-label">Schedule</span>
-          </div>
-        </div>
-        <!-- // Start à partir d'aujourd'hui -->
-        <div *ngIf="!diapauseSchedule && !diapauseStart" class="form-row direct-start">
-          <div class="form-group col-md-6">
-            <label for="">Start date</label>
-            <input
-            [disabled]='true'
-            [value]="startDate | date:'yyyy-MM-dd, hh:mm'"
-            (input)="startDate=$event.target.value;returnStartDate(startDate)"
-            placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}"
-            class="form-control date-input">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="">End date</label>
-            <input
-            type="text" min="startDate"
-            placeholder="{{endDate  | date:'yyyy-MM-dd, hh:mm'}}"
-            onfocus="(this.type='datetime-Local')"
-            onblur="(this.type='text')"
-            [value]="endDate | date:'yyyy-MM-dd,hh:mm'"
-            (input)="endDate=$event.target.value;returnEndDate(endDate)"
-            class="form-control date-input">
-          </div>
+  <form [formGroup]="diapauseForm">
+      <div *ngIf="!diapauseFound" class="schedule">
+      <div class=" d-flex justify-content-around">
+        <div class="form-check">
+          <input
+          (input)="switchSchedule();returnSchedule()"
+          type="radio"
+          formControlName="schedule"
+          class="form-check-input"
+          id="autoStart"
+          [value]='false'
+          />
+          <span
+          class="form-check-label">Start today</span><span tooltipClass="antslab-tooltip"
+          placement="top"
+          ngbTooltip="Start a diapause from now" class="info">?</span>
         </div>
 
-        <!-- // Start défini à une date ultérieure -->
-        <div *ngIf="diapauseSchedule && !diapauseStart" class="form-row schedule-start">
-          <div class="form-group col-md-6">
-            <label for="">Start date</label>
-            <input
-            [value]="startDate | date:'yyyy-MM-dd, hh:mm'"
-            onfocus="(this.type='datetime-Local')"
-            onblur="(this.type='text')"
-            (input)="startDate=$event.target.value;returnStartDate(startDate)"
-            placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}"
-            class="form-control date-input">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="">End date</label>
-            <input
-            (change)="endDate"
-            type="text" placeholder="{{endDate | date:'yyyy-MM-dd, hh:mm'}}"
-            onfocus="(this.type='datetime-Local')" onblur="(this.type='text')"
-            [value]="endDate | date:'yyyy-MM-dd, hh:mm'"
-            (input)="endDate=$event.target.value;returnEndDate(endDate)"
-            class="form-control date-input">
-          </div>
+        <div class="form-check">
+          <input
+          [disabled]="diapauseSchedule"
+          (input)="switchSchedule();returnSchedule()"
+          type="radio"
+          formControlName="schedule"
+          class="form-check-input"
+          id="schedule"
+          [value]='true'
+          />
+          <span class="form-check-label">Schedule</span>
         </div>
-        <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf='!dateCheck'>End date can't be lower than start date, and start date can't be higher than end date!</span>
+      </div>
+      <!-- // Start à partir d'aujourd'hui -->
+      <div *ngIf="!diapauseSchedule && !diapauseStart" class="form-row direct-start">
+        <div class="form-group col-md-6">
+          <label for="">Start date</label>
+          <input
+          [disabled]='true'
+          [value]="startDate | date:'yyyy-MM-dd, hh:mm'"
+          (input)="startDate=$event.target.value;returnStartDate(startDate)"
+          placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}"
+          class="form-control date-input">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="">End date</label>
+          <input
+          type="text" min="startDate"
+          placeholder="{{endDate  | date:'yyyy-MM-dd, hh:mm'}}"
+          onfocus="(this.type='datetime-Local')"
+          onblur="(this.type='text')"
+          [value]="endDate | date:'yyyy-MM-dd,hh:mm'"
+          (input)="endDate=$event.target.value;returnEndDate(endDate)"
+          class="form-control date-input">
+        </div>
+      </div>
 
-        <!-- // Définir la temperature de départ de diapause -->
-        <div *ngIf="!diapauseStart" style="margin-top:1rem" class="d-flex flex-column">
-          <label for="">Select Start Temperature</label>
-          <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart" class="btn-select mb-0" formControlName='currentTemperature'>
-            <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
-          </select>
+      <!-- // Start défini à une date ultérieure -->
+      <div *ngIf="diapauseSchedule && !diapauseStart" class="form-row schedule-start">
+        <div class="form-group col-md-6">
+          <label for="">Start date</label>
+          <input
+          [value]="startDate | date:'yyyy-MM-dd, hh:mm'"
+          onfocus="(this.type='datetime-Local')"
+          onblur="(this.type='text')"
+          (input)="startDate=$event.target.value;returnStartDate(startDate)"
+          placeholder="{{startDate | date: 'yyyy-MM-dd, hh:mm'}}"
+          class="form-control date-input">
         </div>
-        <!-- // Modifier la temperature en cours de diapause -->
-        <div *ngIf="diapauseStart" style="margin-top:1rem" class="d-flex flex-column">
-          <label for="">Select Current Temperature</label>
-          <select [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart" class="btn-select mb-0" formControlName='currentTemperature'>
-            <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
-          </select>
+        <div class="form-group col-md-6">
+          <label for="">End date</label>
+          <input
+          (change)="endDate"
+          type="text" placeholder="{{endDate | date:'yyyy-MM-dd, hh:mm'}}"
+          onfocus="(this.type='datetime-Local')" onblur="(this.type='text')"
+          [value]="endDate | date:'yyyy-MM-dd, hh:mm'"
+          (input)="endDate=$event.target.value;returnEndDate(endDate)"
+          class="form-control date-input">
         </div>
-      </form>
+      </div>
+      <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf='!dateCheck'>End date can't be lower than start date, and start date can't be higher than end date!</span>
+
+      <!-- // Définir la temperature de départ de diapause -->
+      <div *ngIf="!diapauseStart" style="margin-top:1rem" class="d-flex flex-column">
+        <label for="">Select Start Temperature</label>
+        <select
+        [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart"
+        (input)="temperatureStart=$event.target.value;returnStartTemperature(temperature)"
+        class="btn-select mb-0 temperature-select" formControlName='currentTemperature'>
+          <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+        </select>
+      </div>
     </div>
+    <div>
+      <!-- // Modifier la temperature en cours de diapause -->
+      <div *ngIf="diapauseFound && status !== 'ended'" style="margin:1rem 0" class="d-flex flex-column">
+        <label for="">Current Temperature</label>
+        <div class="d-flex">
+          <select
+          [(ngModel)]="sheet?.diapauseTemperature[0].diapauseTemperatureStart"
+          (input)="temperatureCurrent=$event.target.value;returnCurrentTemperature(temperature)"
+          style="flex-grow:1"
+          class="btn-select mb-0 temperature-select" formControlName='currentTemperature'>
+            <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
+          </select>
+          <button style="margin-left: 1rem;padding: 0.5rem .8rem;" class="green-btn"> <i style="margin-right:.5rem" class="reload-icon"></i> update</button>
+        </div>
+      </div>
+    </div>
+  <form>
+

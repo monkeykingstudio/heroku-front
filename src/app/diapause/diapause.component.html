@@ -25,9 +25,12 @@
     (getEndDate)="getEndDate($event)"
     (getStartDate)="getStartDate($event)"
     (getSchedule)="getSchedule($event)"
+    (getStartTemperature)="getStartTemperature($event)"
+    (getCurrentTemperature)="getCurrentTemperature($event)"
     [diapauseFound]="diapauseFound"
     [sheet]="sheet"
-    [dateCheck]="dateCheck">
+    [dateCheck]="dateCheck"
+    [status]="status">
     </app-diapause-switcher>
 
     <div *ngIf="!diapauseFound" class="separator-module"></div>

@@ -212,6 +212,21 @@
   }
 }
 
+.reload-icon {
+  &:before {
+    top: 0.1rem;
+    content: '';
+    background-image: url('../../app/icons/reload-temp.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+
 .warning-icon {
   &:before {
       content: '';
