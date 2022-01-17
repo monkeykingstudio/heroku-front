@@ -1,0 +1,35 @@
+<div [ngClass]="(status === 'active')
+? 'justify-content-between'
+: 'justify-content-end'"
+class="countDown"
+class="d-flex align-items-center">
+    <!-- // Compte à rebours -->
+    <div *ngIf="status === 'active'" class="countDown">
+      <span> {{daysToDday}} days, {{hoursToDday}} hours, {{minutesToDday}}m, {{secondsToDday}}s</span>
+    </div>
+    <!-- // Bouton d'options -->
+    <button (click)="openPopup('diapausePopup')" class="align-self-end edit-btn" type="button">
+      <i class="options-icon"></i>
+    </button>
+  </div>
+
+  <app-popup class="diapause-popup animate__animated animate__zoomIn" id='diapausePopup'>
+    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+      <h6 style="font-size:2.2rem!important;text-align: left;text-transform:capitalize">Options</h6>
+      <form class="form-group options-popup">
+        <div class="checkbox-container d-flex flex-column">
+          <!-- <label class="parameters-label" > <i class="parameters-icon"></i> Parameters</label> -->
+          <div class="d-flex flex-column">
+
+          </div>
+        </div>
+
+        <button  type="submit" (click)="closePopup('diapausePopup'); $event.stopPropagation()" class='green-btn mt-4'>SAVE</button>
+
+      </form>
+      <button type="button" class='close-popup' (click)="closePopup('diapausePopup'); $event.stopPropagation()">
+        <i class="close-icon"></i>
+      </button>
+    </div>
+  </app-popup>
+

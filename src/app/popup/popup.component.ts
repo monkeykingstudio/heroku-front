@@ -40,6 +40,9 @@ export class PopupComponent implements OnInit, OnDestroy {
     if (this.element.classList[0] === 'counter-popup') {
       document.getElementById('counterRef').appendChild(this.element);
     }
+    if (this.element.classList[0] === 'diapause-popup') {
+      document.getElementById('diapauseRef').appendChild(this.element);
+    }
 
     // close modal on background click
     this.element.addEventListener('click', el => {

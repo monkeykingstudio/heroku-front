@@ -70,26 +70,32 @@ span {
 }
 .antslab-tooltip .tooltip-inner {
   background-color: #62d744;
-  font-size: 125%;
-  padding: 2rem;
+  text-transform:uppercase!important;
+  font-size: 14px;
+  font-weight:bold;
+  padding: 1rem;
+  position: relative;
+  border-radius: 10px;
+  // margin-left: 1rem;
+
 }
 
-.bs-tooltip-right .arrow::before {
-  right: 0;
-  border-width: 0.4rem 0.4rem 0.4rem 0;
-  border-right-color: #71db56!important;
-}
-.antslab-tooltip .tooltip-arrow::before {
-  border-color: #62d744!important;
-}
+// .bs-tooltip-right .arrow::before {
+//   right: 0;
+//   border-width: 0.4rem 0.4rem 0.4rem 0;
+//   border-right-color: #71db56!important;
+// }
+// .antslab-tooltip .tooltip-arrow::before {
+//   border-color: #62d744!important;
+// }
 
-.tooltip.right .tooltip-arrow {
-  top: 0;
-  left: 50%;
-  margin-left: -5px;
-  border-bottom-color: #ff0000; /* black */
-  border-width: 0 5px 5px;
-}
+// .tooltip.right .tooltip-arrow {
+//   top: 0;
+//   left: 50%;
+//   margin-left: -5px;
+//   border-bottom-color: #ff0000; /* black */
+//   border-width: 0 5px 5px;
+// }
 
 
 .form-check {
@@ -553,7 +559,7 @@ select {
   background-color: #d74444;
   color: white!important;
   border-radius: 30rem;
-  padding: .4rem 0;
+  padding: .2rem 0;
   display: flex;
   justify-content: center;
   min-width: 8rem;
@@ -565,7 +571,7 @@ select {
   background-color: #c5b021;
   color: white!important;
   border-radius: 30rem;
-  padding: .4rem 0;
+  padding: .2rem 0;
   display: flex;
   justify-content: center;
   min-width: 8rem;
@@ -577,7 +583,7 @@ select {
   background-color: #9744d7;
   color: white!important;
   border-radius: 30rem;
-  padding: .4rem 0;
+  padding: .2rem 0;
   display: flex;
   justify-content: center;
   min-width: 8rem;
@@ -589,7 +595,7 @@ select {
   background-color: #44bdd7;
   color: white!important;
   border-radius: 30rem;
-  padding: .4rem .8rem;
+  padding: .2rem .4rem;
   display: flex;
   justify-content: center;
   min-width: 8rem;
@@ -601,7 +607,7 @@ select {
   background-color: #f37a00;
   color: white!important;
   border-radius: 30rem;
-  padding: .4rem 0;
+  padding: .2rem 0;
   display: flex;
   justify-content: center;
   min-width: 8rem;
@@ -613,7 +619,7 @@ select {
   background-color: #948833;
   color: white!important;
   border-radius: 30rem;
-  padding: .4rem 0;
+  padding: .2rem 0;
   display: flex;
   justify-content: center;
   min-width: 10rem;
@@ -625,7 +631,7 @@ select {
   background-color: #00f349;
   color: white!important;
   border-radius: 30rem;
-  padding: .4rem 0;
+  padding: .2rem 0;
   display: flex;
   justify-content: center;
   min-width: 9rem;
@@ -637,7 +643,7 @@ select {
   background-color: #9b5f23;
   color: white!important;
   border-radius: 30rem;
-  padding: .4rem 0;
+  padding: .2rem 0;
   display: flex;
   justify-content: center;
   min-width: 11rem;

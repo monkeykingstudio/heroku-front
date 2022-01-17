@@ -1,3 +1,9 @@
+import { DiapauseSwitcherComponent } from './diapause/diapause-switcher/diapause-switcher.component';
+import { DiapauseStatsComponent } from './diapause/diapause-stats/diapause-stats.component';
+import { DiapausePeriodComponent } from './diapause/diapause-period/diapause-period.component';
+import { DiapauseHeaderComponent } from './diapause/diapause-header/diapause-header.component';
+import { DiapauseDatesTrackerComponent } from './diapause/diapause-dates-tracker/diapause-dates-tracker.component';
+import { DiapauseButtonsComponent } from './diapause/diapause-buttons/diapause-buttons.component';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -45,6 +51,7 @@ import { OrderByPipe } from './pipes/orderBy.pipe';
 
 import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
 import { ClickoutsideDirective } from './clickoutside.directive';
+import { DiapauseComponent } from './diapause/diapause.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +83,14 @@ import { ClickoutsideDirective } from './clickoutside.directive';
     OrderByPipe,
     ApprovedPipe,
     LandingPageComponent,
-    ClickoutsideDirective
+    ClickoutsideDirective,
+    DiapauseComponent,
+    DiapauseButtonsComponent,
+    DiapauseDatesTrackerComponent,
+    DiapauseHeaderComponent,
+    DiapausePeriodComponent,
+    DiapauseStatsComponent,
+    DiapauseSwitcherComponent
   ],
   imports: [
     BrowserModule,

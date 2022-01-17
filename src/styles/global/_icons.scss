@@ -212,6 +212,34 @@
   }
 }
 
+.reload-icon {
+  &:before {
+    top: 0.1rem;
+    content: '';
+    background-image: url('../../app/icons/reload-temp.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+
+.warning-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/warning.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 6rem;
+      height: 6rem;
+  }
+}
+
 .user-pending-icon {
   &:before {
       content: '';
@@ -502,6 +530,19 @@
     position: relative;
     width: 5rem;
     height: 5rem;
+  }
+}
+
+.sleep-icon {
+  &:before {
+    content: '';
+    background-image: url('../../app/icons/sleep.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
   }
 }
 
@@ -812,6 +853,7 @@
       position: relative;
       width: 2rem;
       height: 2rem;
+      top: -4px;
   }
 }
 
@@ -823,8 +865,8 @@
       background-repeat: no-repeat;
       display: inline-block;
       position: relative;
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 4.5rem;
+      height: 4.5rem;
   }
 }
 
@@ -862,8 +904,8 @@
       background-repeat: no-repeat;
       display: inline-block;
       position: relative;
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 4.5rem;
+      height: 4.5rem;
   }
 }
 
@@ -875,8 +917,8 @@
       background-repeat: no-repeat;
       display: inline-block;
       position: relative;
-      width: 3.5rem;
-      height: 3.5rem;
+      width: 4.5rem;
+      height: 4.5rem;
   }
 }
 
@@ -888,8 +930,8 @@
       background-repeat: no-repeat;
       display: inline-block;
       position: relative;
-      width: 4rem;
-      height: 4rem;
+      width: 4.5rem;
+      height: 4.5rem;
   }
 }
 
@@ -1011,8 +1053,8 @@
       background-repeat: no-repeat;
       display: inline-block;
       position: relative;
-      width: 3rem;
-      height: 3rem;
+      width: 4rem;
+      height: 4rem;
   }
 }
 

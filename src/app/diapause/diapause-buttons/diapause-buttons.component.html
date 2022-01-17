@@ -1,0 +1,49 @@
+<div  class="d-flex buttons">
+  <div *ngIf="!diapauseFound" style="margin-bottom: 1rem;" class="col-sm-12">
+    <button (click)="startDiapause()" [disabled]="!outputEndDate || !outputStartDate" type='submit' class='green-btn w-100'>{{outputSchedule ? 'SCHEDULE DIAPAUSE' : 'START DIAPAUSE'}}</button>
+  </div>
+
+  <div *ngIf="
+    status === 'active' ||
+    status === 'scheduled'
+  " class="col-md-12">
+    <button style="margin: 1rem 0" (click)="openPopup('abortPopup')" type='button' class='red-btn w-100'>DELETE DIAPAUSE</button>
+  </div>
+
+  <div *ngIf="status === 'ended'" class="col-md-6">
+    <button style="margin: 1rem .5rem" (click)="openPopup('abortPopup')" type='button' class='red-btn'>DELETE DIAPAUSE</button>
+  </div>
+  <div *ngIf="status === 'ended'" class="col-md-6">
+    <button style="margin: 1rem .5rem" (click)="openPopup('archivePopup')" type='button' class='green-btn'>ARCHIVE DIAPAUSE</button>
+  </div>
+</div>
+
+  <!-- // Archiver la diapause -->
+  <app-popup class="diapause-popup animate__animated animate__zoomIn" id='archivePopup'>
+    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+      <h6 style="font-size:2.2rem!important;text-transform:capitalize">Archive Diapause</h6>
+      <div style="height:100%;top:0" class="popup-body d-flex flex-column">
+        <i class="info-icon"></i>
+        <span>You are about to <span class="information">ARCHIVE</span> a successfully ended diapause.<span class="information"><br/>All statistics will be saved.</span></span>
+        <div style="flex-grow: 1;align-items: flex-end;" class="d-flex w-100 justify-content-around">
+          <button (click)="closePopup('archivePopup');changeStatusArchived()" type="submit" class="green-btn">YES</button>
+          <button (click)="closePopup('archivePopup')" type="button" class="red-btn">NO</button>
+        </div>
+      </div>
+    </div>
+  </app-popup>
+
+  <!-- // Supprimer la diapause -->
+  <app-popup class="diapause-popup animate__animated animate__zoomIn" id='abortPopup'>
+    <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+      <h6 style="font-size:2.2rem!important;text-transform:capitalize">DELETE Diapause</h6>
+      <div style="height:100%;top:0" class="popup-body d-flex flex-column">
+        <i class="warning-icon"></i>
+        <span>You are about to<span class="alert">DELETE</span>a running diapause.<span class="alert"><br/>All data will be lost.</span><br/>ARE YOU SURE ?</span>
+        <div style="flex-grow: 1;align-items: flex-end;" class="d-flex w-100 justify-content-around">
+          <button (click)="closePopup('abortPopup');deleteCurrentDiapause()" type="submit" class="green-btn">YES</button>
+          <button (click)="closePopup('abortPopup')" type="button" class="red-btn">NO</button>
+        </div>
+      </div>
+    </div>
+  </app-popup>

@@ -12,8 +12,13 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./colony-header.component.scss']
 })
 export class ColonyHeaderComponent implements OnInit, OnDestroy {
+  difficulties;
+
   @Input()
   colony: Colony;
+
+  @Input()
+  diapauseStatus: string;
 
   breedSheet: BreedingSheet;
   private breedingSheetsub: Subscription;
@@ -28,6 +33,8 @@ export class ColonyHeaderComponent implements OnInit, OnDestroy {
   constructor(public breedingSheetsService: BreedingSheetsService) { }
 
   ngOnInit(): void {
+    this.difficulties = Array(5).fill(1).map((x, i) => i + 1);
+    console.log(this.difficulties);
     this.breedingSheetsub = this.breedingSheetsService.getSheet(this.colony.species)
     .subscribe((sheet) => {
       this.breedSheet = sheet;

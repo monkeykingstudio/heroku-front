@@ -1,0 +1,12 @@
+<div *ngIf="diapauseFound" class="line">
+  <div style="margin-bottom: 10px;" class="date-cont">
+    <span *ngIf="diapauseLoaded[0].status === 'scheduled'" class="title">Will start: </span>
+    <span *ngIf="diapauseLoaded[0].status === 'active' || diapauseLoaded[0].status === 'ended'" class="title">Started: </span>
+    <span class="start-date">{{diapauseLoaded[0].period.startDate | date: 'longDate'}}</span>
+  </div>
+  <div class="date-cont">
+    <span *ngIf="diapauseLoaded[0].status === 'scheduled' || diapauseLoaded[0].status === 'active'" class="title">Will end: </span>
+    <span *ngIf="diapauseLoaded[0].status === 'ended'" class="title">Ended: </span>
+    <span class="end-date">{{diapauseLoaded[0].period.endDate | date: 'longDate'}}</span>
+  </div>
+</div>

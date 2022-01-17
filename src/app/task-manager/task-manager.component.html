@@ -1,16 +1,20 @@
-<div class="row justify-content-center">
-  <div class="col-sm-12 task-manager-container">
-    <div class="task-manager">
-    <app-task-creator
-    (taskChanged)='reloadTasks($event)'
-    [currentMode]='currentMode'
-    [colonyId]='colonyId'>
-    </app-task-creator>
-    <app-task-list
-    [reload]='reload'
-    [currentMode]='currentMode'
-    [colonyId]='colonyId'>
-    </app-task-list>
+<h5>Task Manager</h5>
+
+<div class="row justify-content-center animate__animated animate__slideInUp">
+  <div class="col-sm-12">
+    <div class="task-manager-container">
+      <div class="task-manager">
+      <app-task-creator
+      (taskChanged)='reloadTasks($event)'
+      [currentMode]='currentMode'
+      [colonyId]='colonyId'>
+      </app-task-creator>
+      <app-task-list
+      [reload]='reload'
+      [currentMode]='currentMode'
+      [colonyId]='colonyId'>
+      </app-task-list>
+      </div>
     </div>
   </div>
 </div>

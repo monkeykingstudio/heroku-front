@@ -1,0 +1,132 @@
+@import '../../styles/global/mixins';
+
+.badge-invalid {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+
+
+input[type="date"] {
+  position: relative;
+}
+
+/* create a new arrow, because we are going to mess up the native one
+see "List of symbols" below if you want another, you could also try to add a font-awesome icon.. */
+input[type="date"]:after {
+  content: "\25BC";
+  color: transparent;
+  padding: 0 5px;
+}
+
+/* change color of symbol on hover */
+input[type="date"]:after {
+ display: none!important;
+}
+
+/* make the native arrow invisible and stretch it over the whole field so you can click anywhere in the input field to trigger the native datepicker*/
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  color: transparent;
+  background: transparent;
+}
+
+/* adjust increase/decrease button */
+input[type="date"]::-webkit-inner-spin-button {
+  z-index: 1;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.body {
+  flex-grow: 1;
+}
+h5 {
+  font-size: 22px!important;
+  border-bottom: 3px solid #c5c5c5;
+  padding-bottom: 2px;
+}
+
+.separator-module {
+  top: 3.5rem;
+  top: 4rem;
+  left: 0;
+  height: 0.2rem;
+  background-color: #ffffff;
+  position: inherit!important;
+  width: 100%;
+  margin: 1rem 0;
+  border-top: 0.1rem solid #c9c9c9;
+}
+
+.inner-separator {
+  position: relative;
+  margin: 2rem 0;
+  height: 0.2rem;
+  background-color: #ffffff;
+  width: 100%;
+  margin: 1rem 0;
+  border-top: 0.1rem solid #c9c9c9;
+}
+
+
+.diapause-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: .5rem;
+  padding: 1rem;
+  background-color: #e8e8e8;
+  border-bottom: .2rem solid #bdbdbd;
+  min-height: 37.3rem;
+  padding-bottom: 0rem;
+}
+
+h6 {
+  margin-bottom: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.disabled {
+  background-color: #cccccb;
+  border-right: 1px solid #e9e9e9;
+  border-bottom: 0.2rem solid #999999;
+  color: #afafaf!important;
+}
+
+
+.options-popup {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  form {
+    flex-grow: 1;
+
+  }
+}
+
+.options-input {
+  font-size: 1.6rem;
+  margin-top: .5rem;
+}
+
+
+
+
+
+
+
+

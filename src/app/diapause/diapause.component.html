@@ -1,0 +1,65 @@
+<h5>Diapause</h5>
+<div id="diapauseRef" class="diapause-container animate__animated animate__slideInRight">
+  <app-diapause-header
+  [status]="status"
+  (reloadDiapause)="reloadDiapause()"
+  [colonyId]='colonyId'
+  [secondsToDday]="secondsToDday"
+  [minutesToDday]="minutesToDday"
+  [hoursToDday]="hoursToDday"
+  [daysToDday]="daysToDday">
+  </app-diapause-header>
+
+  <div class="body d-flex flex-column">
+
+    <div class="separator-module"></div>
+
+    <app-diapause-period
+    [diapauseFound]="diapauseFound"
+    [sheet]="sheet">
+    </app-diapause-period>
+
+    <div *ngIf="!diapauseFound" class="separator-module"></div>
+
+    <app-diapause-switcher
+    (getEndDate)="getEndDate($event)"
+    (getStartDate)="getStartDate($event)"
+    (getSchedule)="getSchedule($event)"
+    (getStartTemperature)="getStartTemperature($event)"
+    (getCurrentTemperature)="getCurrentTemperature($event)"
+    [diapauseFound]="diapauseFound"
+    [sheet]="sheet"
+    [dateCheck]="dateCheck"
+    [status]="status">
+    </app-diapause-switcher>
+
+    <div *ngIf="!diapauseFound" class="separator-module"></div>
+
+    <app-diapause-dates-tracker
+    [diapauseFound]="diapauseFound"
+    [diapauseLoaded]= "diapauseLoaded">
+    </app-diapause-dates-tracker>
+
+    <div *ngIf="diapauseFound" class="separator-module"></div>
+
+    <app-diapause-stats
+    [sheet]="sheet">
+    </app-diapause-stats>
+
+    <div *ngIf="diapauseFound" class="separator-module"></div>
+
+    <app-diapause-buttons
+    [status]="status"
+    [outputEndDate]="outputEndDate"
+    [outputStartDate]="outputEndDate"
+    [diapauseFound]="diapauseFound"
+    [outputSchedule]="outputSchedule"
+    (diapauseStart)="diapauseStart()"
+    (diapauseChangeStatus)="changeStatus($event)"
+    (reloadDiapause)="reloadDiapause()"
+    (deleteDiapause)="deleteDiapause()"
+
+    [colonyId]='colonyId'>
+    </app-diapause-buttons>
+  </div>
+</div>

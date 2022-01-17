@@ -1,16 +1,16 @@
 <div class="col-sm-12 d-flex header-colony-container p-0">
-  <!-- <div class="difficulty"
-  placement="right"
+  <div class="difficulty"
   tooltipClass="antslab-tooltip"
-  ngbTooltip="">
+  placement="right"
+  ngbTooltip="Difficulty level">
     <div
-    *ngFor="let difficulty of breedSheet?.difficulty"
+    *ngFor="let difficulty of difficulties; index as i"
     [ngClass]="{
-      'fill': difficulty == 1,
-      'empty': difficulty == 0
+      'fill': difficulty <= breedSheet?.difficulty,
+      'empty': difficulty > breedSheet?.difficulty
     }"
     class="bar"></div>
-  </div> -->
+  </div>
 
 <div class="d-flex flex-column align-items-center">
   <h2 class="colony-name">{{colony.name}}</h2>
@@ -51,7 +51,12 @@
 
   <div *ngIf="breedSheet?.needDiapause" class="diapause">
     <span>diapause</span>
-    <span class="badge-no">off</span>
+    <span *ngIf="diapauseStatus === 'innactive'" class="badge-required animate__animated animate__flipInX">innactive</span>
+    <span *ngIf="diapauseStatus === 'archived'" class="badge-archive animate__animated animate__flipInX">archived</span>
+    <span *ngIf="diapauseStatus === 'ended'" class="badge-no animate__animated animate__flipInX">ended</span>
+    <span *ngIf="diapauseStatus === 'active'" class="badge-yes animate__animated animate__flipInX">active</span>
+    <span *ngIf="diapauseStatus === 'scheduled'" class="badge-schedule animate__animated animate__flipInX">scheduled</span>
+
   </div>
   <div *ngIf="!breedSheet?.needDiapause" class="diapause">
     <span class="badge-required">no diapause</span>

@@ -172,7 +172,6 @@ export class ColoniesListComponent implements OnInit,  OnDestroy {
     this.switch = !this.switch;
   }
 
-
   resetPopup() {
     this.colonyForm.reset();
     this.colonyForm.patchValue({name: ''});
@@ -182,7 +181,7 @@ export class ColoniesListComponent implements OnInit,  OnDestroy {
   }
 
   addGyne() {
-   this.polyGyneCountCtrl.patchValue(this.polyGyneCountCtrl.value + 1);
+  this.polyGyneCountCtrl.patchValue(this.polyGyneCountCtrl.value + 1);
   }
 
   subGyne() {
