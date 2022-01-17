@@ -48,6 +48,16 @@ export class DiapauseService {
     );
   }
 
+  diapauseUpdate(colonyId: string, currentTemperature: number) {
+    console.log('from servive diapause update', 'get temperature: ', currentTemperature);
+
+    return this.http.post(`${environment.APIEndpoint}/api/diapause/update/${colonyId}`, {currentTemperature})
+    .pipe(
+      map(result => result['message']),
+      shareReplay()
+    );
+  }
+
   // DELETE Diapause
   diapauseDelete(colonyId: string) {
     console.log('from servive diapause delete', colonyId);

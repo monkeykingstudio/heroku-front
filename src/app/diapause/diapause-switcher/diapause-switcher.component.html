@@ -91,7 +91,7 @@
     </div>
     <div>
       <!-- // Modifier la temperature en cours de diapause -->
-      <div *ngIf="diapauseFound && status !== 'ended'" style="margin:1rem 0" class="d-flex flex-column">
+      <div *ngIf="diapauseFound && status !== 'ended' && diapauseLoaded" style="margin:1rem 0" class="d-flex flex-column">
         <label for="">Current Temperature</label>
         <div class="d-flex">
           <select
@@ -101,7 +101,7 @@
           class="btn-select mb-0 temperature-select" formControlName='currentTemperature'>
             <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
           </select>
-          <button style="margin-left: 1rem;padding: 0.5rem .8rem;" class="green-btn"> <i style="margin-right:.5rem" class="reload-icon"></i> update</button>
+          <button type="button" (click)="updateTemperature()" style="margin-left: 1rem;padding: 0.5rem .8rem;" class="green-btn"> <i style="margin-right:.5rem" class="reload-icon"></i> update</button>
         </div>
       </div>
     </div>

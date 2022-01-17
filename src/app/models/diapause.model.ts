@@ -5,7 +5,8 @@ export class Diapause {
   period: {};
   species: string;
   colonyId: string;
-  currentTemperature: number;
+  startTemperature: number;
+  currentTemperature: [{}];
   status: string;
   socketRef?: string;
   id?: string;

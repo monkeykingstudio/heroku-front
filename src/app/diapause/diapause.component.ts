@@ -151,6 +151,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
   }
 
   diapauseStart(): any {
@@ -183,7 +184,13 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
       },
       species: this.sheet.species,
       colonyId: this.colonyId,
-      currentTemperature: this.outputStartTemperature,
+      startTemperature: this.outputStartTemperature,
+      currentTemperature: [
+        {
+          date: this.outputStartDate,
+          temperature: this.outputStartTemperature
+        }
+      ],
       status: currentStatus,
       creatorId: this.currentUser?._id,
       creatorPseudo: this.currentUser?.pseudo,
@@ -308,6 +315,16 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('from parent current temperature: ', temperature);
     this.outputCurrentTemperature = temperature;
   }
+
+  updateCurrentTemperature() {
+    if (this.outputCurrentTemperature === undefined) {
+      this.outputCurrentTemperature = this.sheet?.diapauseTemperature[0]?.diapauseTemperatureStart;
+    }
+    console.log('tststtst', this.outputCurrentTemperature);
+    this.diapauseService.diapauseUpdate(this.colonyId, this.outputCurrentTemperature)
+    .subscribe();
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.authStatusSubscription.unsubscribe();

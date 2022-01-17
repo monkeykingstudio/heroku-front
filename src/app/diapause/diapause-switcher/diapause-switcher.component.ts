@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
+import { Diapause } from 'src/app/models/diapause.model';
 import { BreedingSheet } from '../../models/breedingSheet.model';
 
 @Component({
@@ -13,6 +14,8 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
   sheet: BreedingSheet;
   @Input()
   diapauseFound: string;
+  @Input()
+  diapauseLoaded: Diapause;
   @Input()
   dateCheck: boolean;
   @Input()
@@ -28,6 +31,8 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
   getStartTemperature = new EventEmitter<number>();
   @Output()
   getCurrentTemperature = new EventEmitter<number>();
+  @Output()
+  updateCurrentTemperature = new EventEmitter();
 
   diapauseForm: FormGroup;
   autoStartCtrl: FormControl;
@@ -88,6 +93,14 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
       schedule: this.scheduleCtrl,
       currentTemperature: this.currentTemperatureCtrl
     });
+
+    if (this.diapauseFound) {
+      console.log('diapause found!');
+      this.temperatureCurrent = this.diapauseLoaded[0]?.startTemperature;
+    }
+    if (this.temperatureCurrent === undefined) {
+      this.temperatureCurrent = this.sheet?.diapauseTemperature[0].diapauseTemperatureStart;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -121,7 +134,11 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
   }
 
   returnCurrentTemperature(): void  {
-    this.getStartTemperature.emit(this.temperatureCurrent);
+    this.getCurrentTemperature.emit(this.temperatureCurrent);
+  }
+
+  updateTemperature(): void {
+    this.updateCurrentTemperature.emit();
   }
 
 }
