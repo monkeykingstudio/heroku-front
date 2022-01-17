@@ -16,6 +16,10 @@ export class MailService {
     return this.http.post(url, data);
   }
 
+  sendDiapauseEmail(url, data) {
+    return this.http.post(url, data);
+  }
+
   activateMail(token) {
   console.log('NEW EMAIL');
   let headers = new HttpHeaders()

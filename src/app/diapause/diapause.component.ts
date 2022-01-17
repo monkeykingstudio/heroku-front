@@ -11,6 +11,8 @@ import { map } from 'rxjs/operators';
 import { SocketioService } from '../services/socketio.service';
 import { Notification } from '../models/notification.model';
 import { v4 as uuidv4 } from 'uuid';
+import { MailService } from '../services/mail.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-diapause',
@@ -66,7 +68,8 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     public datepipe: DatePipe,
     public diapauseService: DiapauseService,
     public authService: AuthService,
-    private socketService: SocketioService
+    private socketService: SocketioService,
+    private mailService: MailService
   ) {}
 
   public getTimeDifference(): number {
@@ -241,6 +244,20 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     else if (this.status === 'ended') {
       this.diapauseChangeStatus.emit('ended');
+      const userEmail = this.diapauseLoaded[0]?.creatorEmail;
+      const userPseudo = this.diapauseLoaded[0]?.creatorPseudo;
+      const species = this.diapauseLoaded[0]?.species;
+
+      this.mailService.sendDiapauseEmail(`${environment.APIEndpoint}/api/mail/diapauseend`, {userEmail, userPseudo, species})
+      .subscribe(data => {
+        let res: any = data;
+        console.log(`mail is sent for diapause status ended`);
+      },
+      err => {
+        console.log('error mail: ', err);
+      }, () => {
+        console.log('mail is sent!');
+      });
     }
     console.log('string event', this.status);
     return this.diapauseService.changeStatus(this.colonyId, this.status)
