@@ -1,5 +1,17 @@
 <h5>Diapause</h5>
 <div id="diapauseRef" class="diapause-container animate__animated animate__slideInRight">
+    <div *ngIf="status === 'ended' && !diapauseLoaded[0].endedSaw" class="app-popup">
+      <div style="background: white;height:100%;padding:1rem" class="popup">
+        <i class="cold-icon"></i>
+        <span style="text-align:center"><span style="font-weight:bold;color:#33d8dd;font-size:18px">Your diapause has ended!</span><br/><br/>
+          <b>Congratulations!</b> Now is the time to gradually warm up your ants. Also, give them food and then enter it in the food module</span><br/>
+          <span style="text-align:center">If you want to <b>share your diapause data</b> to improve the statistical data, click the <i><b>archive diapause</b></i> button
+          </span>
+          <div style="flex-grow: 1;align-items: center;" class="d-flex w-100 justify-content-around">
+            <button (click)="closeEndedSaw()" class="green-btn">OK</button>
+          </div>
+        </div>
+    </div>
   <app-diapause-header
   [status]="status"
   (reloadDiapause)="reloadDiapause()"
@@ -30,6 +42,7 @@
     (updateCurrentTemperature)="updateCurrentTemperature()"
     [diapauseFound]="diapauseFound"
     [diapauseLoaded]= "diapauseLoaded"
+    [checkTemperature]= 'checkTemperature'
     [sheet]="sheet"
     [dateCheck]="dateCheck"
     [status]="status">

@@ -38,6 +38,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   diapauseChangeStatus = new EventEmitter<string>();
 
   status = 'innactive';
+  checkTemperature = true;
 
   // output $event status recuperes depuis les children
   outputStartDate: Date;
@@ -157,9 +158,20 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
+  closeEndedSaw(): void {
+    this.diapauseService.endedSaw(this.colonyId, true)
+    .subscribe(() => {
+      this.reloadDiapause();
+    });
+  }
+
   diapauseStart(): any {
     this.checkValidDates();
     let currentStatus: string;
+
+    if (this.outputStartTemperature === undefined) {
+      this.outputStartTemperature = this.sheet?.diapauseTemperature[0]?.diapauseTemperatureStart;
+    }
 
     if (this.outputSchedule) {
       console.log('scheduled diapause');
@@ -250,8 +262,20 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.mailService.sendDiapauseEmail(`${environment.APIEndpoint}/api/mail/diapauseend`, {userEmail, userPseudo, species})
       .subscribe(data => {
-        let res: any = data;
         console.log(`mail is sent for diapause status ended`);
+        const dataNotification: Notification = {
+          senderId: '007',
+          senderPseudo: 'fourmislabs bot',
+          createdAt: new Date(Date.now()),
+          recieverId: this.diapauseLoaded[0]?.creatorId,
+          message: `a diapause for species ${this.diapauseLoaded[0]?.species} has come to an end at:  ${this.diapauseLoaded[0]?.period.endDate}`,
+          type: 'private',
+          subType: 'diapause',
+          socketRef: uuidv4(),
+          url: `/${ this.diapauseLoaded[0]?.colonyId}/${ this.diapauseLoaded[0]?.species?.toLowerCase()}`
+        };
+        this.socketService.sendNotification(dataNotification);
+        console.log('a notif socket has been sent', dataNotification);
       },
       err => {
         console.log('error mail: ', err);
@@ -337,9 +361,17 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.outputCurrentTemperature === undefined) {
       this.outputCurrentTemperature = this.sheet?.diapauseTemperature[0]?.diapauseTemperatureStart;
     }
-    console.log('tststtst', this.outputCurrentTemperature);
-    this.diapauseService.diapauseUpdate(this.colonyId, this.outputCurrentTemperature)
-    .subscribe();
+    if (Number(this.outputCurrentTemperature) === Number(this.diapauseLoaded[0].startTemperature)) {
+      console.log('no ok', Number(this.outputCurrentTemperature), Number(this.diapauseLoaded[0].startTemperature));
+      this.checkTemperature = false;
+    }
+    else {
+      this.diapauseService.diapauseUpdate(this.colonyId, this.outputCurrentTemperature)
+      .subscribe(() => {
+        console.log('ok');
+        this.checkTemperature = true;
+      });
+    }
   }
 
   ngOnDestroy(): void {

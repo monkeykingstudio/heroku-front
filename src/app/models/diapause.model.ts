@@ -10,4 +10,5 @@ export class Diapause {
   status: string;
   socketRef?: string;
   id?: string;
+  endedSaw?: boolean;
 }

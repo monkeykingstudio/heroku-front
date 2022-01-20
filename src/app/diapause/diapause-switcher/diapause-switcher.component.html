@@ -101,9 +101,24 @@
           class="btn-select mb-0 temperature-select" formControlName='currentTemperature'>
             <option *ngFor="let temp of temperatureList" [value]="temp.valeur">{{temp.valeur}}</option>
           </select>
-          <button type="button" (click)="updateTemperature()" style="margin-left: 1rem;padding: 0.5rem .8rem;" class="green-btn"> <i style="margin-right:.5rem" class="reload-icon"></i> update</button>
+          <button type="button" (click)="updateTemperature();openPopup('updateTemperaturePopup')" style="margin-left: 1rem;padding: 0.5rem .8rem;" class="green-btn"> <i style="margin-right:.5rem" class="reload-icon"></i> update</button>
         </div>
+        <span class="animate__animated animate__fadeInDown badge-invalid" *ngIf='!checkTemperature'>You can't update the same value, select another one!</span>
+
       </div>
     </div>
   <form>
+
+    <app-popup class="diapause-popup animate__animated animate__zoomIn" id='updateTemperaturePopup'>
+      <div class="popup animate__animated animate__bounceInUp animate__delay-05s">
+        <h6 style="font-size:2.2rem!important;text-transform:capitalize">Update temperature</h6>
+        <div style="height:100%;top:0;padding: 2em 0;" class="popup-body d-flex flex-column">
+          <i style="margin: 5rem auto 0" class="checked-icon"></i>
+          <div style="font-weight:bold">Your <span class="success">current temperature</span> is updated!<span class="success"><br/>It has been stored in our database.</span></div>
+          <div style="flex-grow: 1;align-items: flex-end;" class="d-flex w-100 justify-content-around">
+            <button (click)="closePopup('updateTemperaturePopup');$event.stopPropagation()" class="green-btn">OK</button>
+          </div>
+        </div>
+      </div>
+    </app-popup>
 

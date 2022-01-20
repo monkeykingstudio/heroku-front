@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import { Diapause } from 'src/app/models/diapause.model';
+import { PopupService } from 'src/app/services/popup.service';
 import { BreedingSheet } from '../../models/breedingSheet.model';
 
 @Component({
@@ -20,6 +21,8 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
   dateCheck: boolean;
   @Input()
   status: string;
+  @Input()
+  checkTemperature: boolean;
 
   @Output()
   getEndDate = new EventEmitter<Date>();
@@ -78,7 +81,8 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
   ];
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public popupService: PopupService
   ) { }
 
   ngOnInit(): void {
@@ -139,6 +143,16 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
 
   updateTemperature(): void {
     this.updateCurrentTemperature.emit();
+  }
+
+  openPopup(id: string) {
+    if (!this.checkTemperature) {
+      this.popupService.open(id);
+    }
+  }
+
+  closePopup(id: string) {
+    this.popupService.close(id);
   }
 
 }

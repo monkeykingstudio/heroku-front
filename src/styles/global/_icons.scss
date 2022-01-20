@@ -240,6 +240,20 @@
   }
 }
 
+.archive-icon {
+  margin: 1rem auto 0;
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/archiver.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 6rem;
+      height: 6rem;
+  }
+}
+
 .user-pending-icon {
   &:before {
       content: '';

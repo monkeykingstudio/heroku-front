@@ -234,7 +234,7 @@ h5 {
 
   .important-container {
     position: relative;
-    top: -47px;
+    top: -35px;
     @include breakpoint('small') {
       position: relative;
       display: flex;
@@ -291,9 +291,9 @@ h5 {
     .temperature-icon {
       &:before {
         margin-left: -0.4rem !important;
-        width: 2.5rem !important;
+        width: 4rem !important;
         margin-top: .2rem;
-        height: 2.5rem !important;
+        height: 4rem !important;
       }
     }
 
