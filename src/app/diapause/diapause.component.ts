@@ -271,7 +271,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
           message: `a diapause for species ${this.diapauseLoaded[0]?.species} has come to an end at:  ${this.diapauseLoaded[0]?.period.endDate}`,
           type: 'private',
           subType: 'diapause',
-          socketRef: this.diapauseLoaded[0]?.socketRef,
+          socketRef: `${this.diapauseLoaded[0]?.socketRef}end`,
           url: `/${ this.diapauseLoaded[0]?.colonyId}/${ this.diapauseLoaded[0]?.species?.toLowerCase()}`
         };
         this.socketService.sendNotification(dataNotification);
