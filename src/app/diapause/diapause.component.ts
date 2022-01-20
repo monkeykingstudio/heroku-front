@@ -264,7 +264,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
       .subscribe(data => {
         console.log(`mail is sent for diapause status ended`);
         const dataNotification: Notification = {
-          senderId: '007',
+          senderId: 'frontend',
           senderPseudo: 'fourmislabs bot',
           createdAt: new Date(Date.now()),
           recieverId: this.diapauseLoaded[0]?.creatorId,
