@@ -91,7 +91,7 @@
     </div>
     <div>
       <!-- // Modifier la temperature en cours de diapause -->
-      <div *ngIf="diapauseFound && status !== 'ended' && diapauseLoaded" style="margin:1rem 0" class="d-flex flex-column">
+      <div *ngIf="diapauseFound && status !== 'ended' && status!== 'scheduled' && diapauseLoaded" style="margin:1rem 0" class="d-flex flex-column">
         <label for="">Current Temperature</label>
         <div class="d-flex">
           <select
