@@ -40,6 +40,8 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   status = 'innactive';
   checkTemperature = true;
 
+  tempIndex;
+
   // output $event status recuperes depuis les children
   outputStartDate: Date;
   outputEndDate: Date;
@@ -357,21 +359,41 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.outputCurrentTemperature = temperature;
   }
 
-  updateCurrentTemperature() {
-    if (this.outputCurrentTemperature === undefined) {
-      this.outputCurrentTemperature = this.sheet?.diapauseTemperature[0]?.diapauseTemperatureStart;
+  updateCurrentTemperature(): void {
+    this.tempIndex = this.diapauseLoaded[0].currentTemperature.length - 1;
+    console.log('temp index', this.tempIndex);
+
+    // Si undefinded et currentemperature chargee
+    if (this.outputCurrentTemperature === undefined && this.tempIndex !== -1) {
+      this.outputCurrentTemperature = this.sheet?.diapauseTemperature[0].diapauseTemperatureStart;
     }
-    if (Number(this.outputCurrentTemperature) === Number(this.diapauseLoaded[0].startTemperature)) {
-      console.log('no ok', Number(this.outputCurrentTemperature), Number(this.diapauseLoaded[0].startTemperature));
-      this.checkTemperature = false;
+    // Si undefinded et pas de currentemperature chargee
+    else if (this.outputCurrentTemperature === undefined && this.tempIndex === -1) {
+      // this.outputCurrentTemperature = this.diapauseLoaded[0].currentTemperature[this.tempIndex].temperature; faux!!!
+      console.log('output after undefined: ', this.outputCurrentTemperature);
     }
-    else {
-      this.diapauseService.diapauseUpdate(this.colonyId, this.outputCurrentTemperature)
-      .subscribe(() => {
-        console.log('ok');
-        this.checkTemperature = true;
-      });
-    }
+    console.log('Output temperature', this.outputCurrentTemperature);
+    console.log('loaded temperature', Number(this.diapauseLoaded[0].currentTemperature.length)); // si on a length 0 --> ??? ;)
+
+
+    // this.diapauseService.diapauseUpdate(this.colonyId, this.outputCurrentTemperature)
+    // .subscribe(() => {
+    //   console.log('ok');
+    //   this.checkTemperature = true;
+    // });
+
+
+
+  //   if (
+  //   Number(this.outputCurrentTemperature)
+  //   ===
+  //   Number(this.diapauseLoaded[0].currentTemperature[this.tempIndex].temperature)) {
+  //   console.log('no ok',
+  //   Number(this.outputCurrentTemperature),
+  //   Number(this.diapauseLoaded[0].currentTemperature[this.tempIndex].temperature));
+  //   this.checkTemperature = false;
+  // }
+
   }
 
   ngOnDestroy(): void {

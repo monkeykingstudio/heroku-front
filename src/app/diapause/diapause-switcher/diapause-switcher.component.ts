@@ -146,9 +146,9 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
   }
 
   openPopup(id: string) {
-    if (!this.checkTemperature) {
+
       this.popupService.open(id);
-    }
+
   }
 
   closePopup(id: string) {
