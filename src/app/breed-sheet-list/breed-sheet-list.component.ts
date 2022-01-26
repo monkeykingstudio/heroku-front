@@ -3,6 +3,7 @@ import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { BreedingSheet } from '../models/breedingSheet.model';
 import { BreedingSheetsService } from '../services/breedingSheetsService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-breed-sheet-list',
@@ -86,7 +87,8 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
   private regionSub: Subscription;
 
   constructor(
-    public breedingSheetsService: BreedingSheetsService
+    public breedingSheetsService: BreedingSheetsService,
+    public router: Router
   ) {
 
   }
@@ -192,6 +194,10 @@ export class BreedSheetListComponent implements OnInit, OnDestroy {
       }
       this.difficultyStore(this.allDifficulties);
     });
+  }
+
+  goBreedSheet() {
+    this.router.navigate(['/breedsheetcreator']);
   }
 
   // Store each unique occurences for re use in taxonomy filters

@@ -4,6 +4,14 @@
   margin-top: 3rem!important;
 }
 
+.green-btn {
+  margin-left: auto;
+  @include breakpoint('small') {
+    margin:auto;
+    margin-top:1rem;
+  }
+}
+
 .mobile-filter {
   display: none;
   @include breakpoint('small') {
@@ -69,9 +77,15 @@ h7 {
 }
 
 h6 {
+  padding-bottom: 1rem;
+  align-items: flex-end;
+  padding-bottom:1rem!important;
   @include breakpoint('small') {
+    padding-bottom:.5rem;
     margin-top: 2rem;
     margin-bottom: 0rem;
+    align-items: center;
+    flex-direction: column;
   }
 }
 
