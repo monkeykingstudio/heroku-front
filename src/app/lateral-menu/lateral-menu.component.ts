@@ -35,6 +35,9 @@ export class LateralMenuComponent implements OnInit, OnDestroy {
       ).subscribe();
   }
 
+  onAntscanner(): void{
+    window.open('https://antscanner.fr/', '_blank');
+}
   onLogout() {
     this.authService.logout(this.currentUser?.email)
     .then(() => {

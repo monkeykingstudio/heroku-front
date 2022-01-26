@@ -38,6 +38,11 @@
   <span *ngIf="hoverStatus" class="name">Settings</span>
 </div>
 <div *ngIf="currentUser !== undefined" class="separator"></div>
+<div (click)="onAntscanner()" *ngIf="currentUser !== undefined" class="item">
+  <i class="antscanner-icon"></i>
+  <span *ngIf="hoverStatus" class="name">Antscanner</span>
+</div>
+<div *ngIf="currentUser !== undefined" class="separator"></div>
 <div routerLink="/login" *ngIf="currentUser == undefined" class="item">
   <i class="login-icon"></i>
   <span *ngIf="hoverStatus" class="name">Login</span>

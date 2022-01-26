@@ -55,6 +55,21 @@
   }
 }
 
+.antscanner-icon {
+  transition: all .1s;
+  &:before {
+      transition: all .1s;
+      content: '';
+      background-image: url('../../app/icons/logo-antscanner.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 4rem;
+      height: 4rem;
+  }
+}
+
 .forum-icon {
   transition: all .1s;
   &:before {
