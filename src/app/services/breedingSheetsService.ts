@@ -125,7 +125,33 @@ export class BreedingSheetsService {
     );
   }
 
-  deleteSheetNotif(id: string, reciever: string, species: string, userNotification: Notification, adminNotification: Notification) {
+  deleteSheetNotif(
+    id: string,
+    reciever: string,
+    species: string,
+    userNotification: Notification,
+    adminNotification: Notification
+    ) {
     return this.http.post<Notification>(`${this.breedingSheetsUrl}/${id}`, {reciever, species, userNotification, adminNotification});
+  }
+
+  approveSheet(id: string) {
+    console.log('from service approve sheet', id);
+    return this.http.post<BreedingSheet>(`${this.breedingSheetsUrl}/approve/${id}`, {})
+    .pipe(
+      shareReplay()
+    );
+  }
+
+  approveSheetNotif(
+    id: string,
+    reciever: string,
+    species: string,
+    userNotification: Notification,
+    adminNotification: Notification
+    ) {
+    console.log('from service approve sheet notifications', reciever, species, userNotification, adminNotification);
+    // tslint:disable-next-line:max-line-length
+    return this.http.post<Notification>(`${this.breedingSheetsUrl}/approvenotif/${id}`, {reciever, species, userNotification, adminNotification});
   }
 }

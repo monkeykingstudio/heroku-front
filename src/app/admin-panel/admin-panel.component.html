@@ -43,45 +43,70 @@
         </div>
       </div>
       <div *ngIf="(pendingBreedingSheet$ | async)?.length > 0" class="col-sm-12">
-        <h6>Pendind breedsheets</h6>
-        <div *ngIf='(pendingBreedingSheet$ | async) as pendingBreedingSheets;' class="col-md-9">
-          <div class="">
-            <div class="custom-table breed-table">
-              <div class="head">
-                <div class="one">
-                  <span>date</span>
-                </div>
-                <div class="two">
-                  <span>species</span>
-                </div>
-                <div class="three">
-                  <span>creator</span>
-                </div>
-                <div style="border-right:none!important" class="four">
-                  <span>action</span>
-                </div>
-
-              </div>
-              <div class="body">
-                <div *ngFor="let sheet of pendingBreedingSheets; index as i" class="line">
+        <div class="row">
+          <div *ngIf='(pendingBreedingSheet$ | async) as pendingBreedingSheets;' class="col-sm-12 col-md-9">
+            <h6>Pendind breedsheets</h6>
+            <div class="">
+              <div class="custom-table breed-table">
+                <div class="head">
                   <div class="one">
-                    <span>{{ sheet.creationDate | date: 'dd/MM/yyyy' }}</span>
+                    <span>date</span>
                   </div>
                   <div class="two">
-                    <span>{{ sheet.species }}</span>
+                    <span>species</span>
                   </div>
                   <div class="three">
-                    <span class="">{{sheet.creator?.pseudo}}</span>
+                    <span>creator</span>
                   </div>
                   <div class="four">
-                    <div class="action-btn">
-                      <i (click)="reviewSheet(sheet.species)" class="eye-icon"></i>
-                      <i (click)="deleteBreedSheet(sheet.id, sheet.creator, sheet.species); deleteBreedNotif(sheet.id, sheet.creator._id, sheet.species)" class="remove-icon"></i>
+                    <span>action</span>
+                  </div>
+                  <div style="border-right:none!important" class="five">
+                    <span>status</span>
+                  </div>
+
+                </div>
+                <div class="body">
+                  <div *ngFor="let sheet of pendingBreedingSheets; index as i" class="line">
+                    <div class="one">
+                      <span>{{ sheet.creationDate | date: 'dd/MM/yyyy' }}</span>
+                    </div>
+                    <div class="two">
+                      <span>{{ sheet.species }}</span>
+                    </div>
+                    <div class="three">
+                      <span class="">{{sheet.creator?.pseudo}}</span>
+                    </div>
+                    <div class="four">
+                      <div class="action-btn">
+                        <i (click)="reviewSheet(sheet.species)" class="eye-icon"></i>
+                        <i (click)="approveBreedSheet(sheet.id, sheet.creator, sheet.species);approveBreedNotif(sheet.id, sheet.creator._id, sheet.species)" class="accept-icon"></i>
+                        <i style="
+                        filter: grayscale(100%);
+                        cursor: default!important;
+                        " class="correction-icon"></i>
+                        <i (click)="deleteBreedSheet(sheet.id, sheet.creator, sheet.species);deleteBreedNotif(sheet.id, sheet.creator._id, sheet.species)" class="remove-icon"></i>
+                      </div>
+                    </div>
+                    <div class="five">
+                      <span [ngClass]="{
+                        'pending': sheet?.status === 'pending',
+                        'review-asked': sheet?.status === 'review asked',
+                        'reviewed': sheet?.status === 'reviewed'
+                      }">{{sheet.status}}</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="col-sm-6 col-md-3">
+            <h6>Diapause Statistics</h6>
+            <span>Total amount of running diapauses: 9</span>
+            <span>Total amount of arvhived diapauses: 9</span>
+            <span>Last archived: </span>
+
           </div>
         </div>
       </div>

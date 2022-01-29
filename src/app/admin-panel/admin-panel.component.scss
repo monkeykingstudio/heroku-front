@@ -1,5 +1,17 @@
 @import '../../styles/global/mixins';
 
+.pending{
+  color: #d97204
+}
+
+.review-asked {
+  color: #d92f04
+}
+
+.reviewed {
+  color: #0479d9
+}
+
 .admin-panel-container {
   height: calc(100vh - 10rem);
 }
@@ -124,25 +136,42 @@ h6, .h6 {
       white-space: nowrap;
     }
   }
+
   .one {
-    min-width: 20%!important;
-    max-width: 20%!important;
+    min-width: 15%!important;
+    max-width: 15%!important;
+     @include breakpoint('small') {
+      min-width: 100%!important;
+      max-width:100%!important;
+    }
   }
 
   .two {
     min-width: 30%!important;
     max-width: 30%!important;
+    @include breakpoint('small') {
+      min-width: 100%!important;
+      max-width:100%!important;
+    }
   }
 
   .three {
-    min-width: 30%!important;
-    max-width: 30%!important;
+    min-width: 20%!important;
+    max-width: 20%!important;
+    @include breakpoint('small') {
+      min-width: 100%!important;
+      max-width:100%!important;
+    }
   }
 
   .four {
     min-width: 20%!important;
     max-width: 20%!important;
     border-right: none!important;
+    @include breakpoint('small') {
+      min-width: 100%!important;
+      max-width:100%!important;
+    }
     .action-btn {
       display: flex;
       align-items: center;
@@ -152,6 +181,16 @@ h6, .h6 {
       i {
         cursor: pointer;
       }
+    }
+  }
+
+  .five {
+    min-width: 15%!important;
+    max-width: 15%!important;
+    border-right: none!important;
+    @include breakpoint('small') {
+      min-width: 100%!important;
+      max-width:100%!important;
     }
   }
 

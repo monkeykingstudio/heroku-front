@@ -73,7 +73,7 @@
           <button *ngIf="!showFilter" (click)="showFilters()" class="mobile-filter green-btn">SHOW FILTERS</button>
           <button *ngIf="showFilter" (click)="showFilters()" class="mobile-filter red-btn">HIDE FILTERS</button>
 
-          <h6 class="d-flex">Breeding Sheets <h7>({{(breedSheets | approved).length}})</h7>
+          <h6 class="d-flex">Breeding Sheets  <h7 style="margin-left: .5rem"> ({{(breedSheets | approved).length}})</h7>
             <button (click)="goBreedSheet()" type="button" class="green-btn">create new species</button>
           </h6>
           <div style="margin:auto;margin-bottom: 2rem" class="d-flex">

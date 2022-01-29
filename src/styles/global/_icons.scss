@@ -771,6 +771,32 @@
   }
 }
 
+.accept-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/accept.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
+.correction-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/correction.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 2rem;
+      height: 2rem;
+  }
+}
+
 .mail-icon {
   &:before {
       content: '';

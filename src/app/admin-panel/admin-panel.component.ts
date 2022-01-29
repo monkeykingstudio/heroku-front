@@ -157,7 +157,6 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
         .filter(sheet => sheet.status === 'pending'))
     );
   }
-
   deleteBreedSheet(id: string, user: object, species: string) {
     return this.breedingSheetsService.deleteSheet(id)
     .subscribe((res) => {
@@ -176,7 +175,6 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       });
     });
   }
-
   deleteBreedNotif(id: string, notifReciever: string, species: string ) {
     console.log('reciever -->', notifReciever);
     const userNotification: Notification = {
@@ -205,6 +203,56 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       console.log('try to send notifs', userNotification, adminNotification);
       this.socketService.sendNotification(userNotification);
       this.socketService.sendNotification(adminNotification);
+    });
+  }
+
+  approveBreedSheet(id: string, user: object, species: string) {
+    return this.breedingSheetsService.approveSheet(id)
+    .subscribe((res) => {
+      this.reloadBreedingSheets();
+      this.reloadPendingSheets();
+      // Mail part
+      this.mailService.sendBreedEmail(`${environment.APIEndpoint}/api/mail/breedapprove`, {user, species})
+      .subscribe(data => {
+        console.log(`mail is sent for breedsheet deletion`);
+      },
+      err => {
+        console.log('error mail: ', err);
+      }, () => {
+        console.log('mail is sent!');
+      });
+    });
+  }
+  approveBreedNotif(id: string, notifReciever: string, species: string ) {
+    console.log('reciever -->', notifReciever);
+    const userNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      recieverId: notifReciever,
+      message: `your breedsheet '${species}' have been approved by ${this.currentUser?.pseudo}. Thank you!`,
+      createdAt: new Date(),
+      type: 'private',
+      subType: 'breedsheet',
+      socketRef: uuidv4()
+    };
+
+    const adminNotification: Notification = {
+      senderId: this.currentUser?._id,
+      senderPseudo: this.currentUser?.pseudo,
+      message: `the breedsheet '${species}' have been approved by ${this.currentUser?.pseudo}`,
+      createdAt: new Date(),
+      type: 'admin',
+      subType: 'breedsheet',
+      socketRef: uuidv4()
+    };
+    this.reloadBreedingSheets();
+
+    return this.breedingSheetsService.approveSheetNotif(id, notifReciever, species, userNotification, adminNotification)
+    .subscribe(() => {
+      console.log('try to send approval notifs', userNotification, adminNotification);
+      this.socketService.sendNotification(userNotification);
+      this.socketService.sendNotification(adminNotification);
+      console.log('notifs may be sended');
     });
   }
 
