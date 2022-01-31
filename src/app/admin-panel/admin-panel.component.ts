@@ -278,6 +278,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
 
   dispatchData() {
     this.userData.forEach((group, index) => {
+      console.log('group: ', group.group);
       this.chartUserData.splice(group.group - 1, 1, group.data.length);
     });
     console.log(this.chartUserData);

@@ -10,9 +10,16 @@ export class DiapauseStatsComponent implements OnInit {
   @Input()
   sheet: BreedingSheet;
 
+  @Input()
+  chartDataStart: any;
+
+  @Input()
+  chartDataEnd: any;
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log('from stat module', this.chartDataStart);
   }
 
 }

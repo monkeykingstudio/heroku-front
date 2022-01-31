@@ -1,5 +1,5 @@
 <h5>Diapause</h5>
-<div id="diapauseRef" class="diapause-container animate__animated animate__slideInRight">
+<div *ngIf="diapauseDataStart.length > 0" id="diapauseRef" class="diapause-container animate__animated animate__slideInRight">
     <div *ngIf="status === 'ended' && !diapauseLoaded[0].endedSaw" class="app-popup">
       <div style="background: white;height:100%;padding:1rem" class="popup">
         <i class="cold-icon"></i>
@@ -12,7 +12,7 @@
           </div>
         </div>
     </div>
-  <app-diapause-header
+  <!-- <app-diapause-header
   [status]="status"
   (reloadDiapause)="reloadDiapause()"
   [colonyId]='colonyId'
@@ -20,11 +20,11 @@
   [minutesToDday]="minutesToDday"
   [hoursToDday]="hoursToDday"
   [daysToDday]="daysToDday">
-  </app-diapause-header>
+  </app-diapause-header> -->
 
   <div class="body d-flex flex-column">
 
-    <div class="separator-module"></div>
+    <!-- <div class="separator-module"></div> -->
 
     <app-diapause-period
     [diapauseFound]="diapauseFound"
@@ -57,9 +57,27 @@
 
     <div *ngIf="diapauseFound" class="separator-module"></div>
 
-    <app-diapause-stats
+    <!-- <app-diapause-stats
+    [chartDataStart]="chartDataStart"
+    [chartDataEnd]="chartDataEnd"
     [sheet]="sheet">
-    </app-diapause-stats>
+    </app-diapause-stats> -->
+
+    <div class="chart-wrapper">
+      <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [colors]="barChartColors"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          [plugins]="barChartPlugins">
+      </canvas>
+    </div>
+
+    <!-- <div class="chart-wrapper">
+      <canvas id="diapauseChart"></canvas>
+    </div> -->
 
     <div *ngIf="diapauseFound" class="separator-module"></div>
 

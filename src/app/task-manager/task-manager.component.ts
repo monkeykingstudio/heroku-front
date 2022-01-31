@@ -22,7 +22,6 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
 
   reloadMode() {
     this.mode = this.tasksService.getMode().subscribe((mode) => {
-      console.log(mode);
       this.currentMode = mode;
     });
   }

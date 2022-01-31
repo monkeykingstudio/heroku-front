@@ -34,7 +34,6 @@ export class ColonyHeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.difficulties = Array(5).fill(1).map((x, i) => i + 1);
-    console.log(this.difficulties);
     this.breedingSheetsub = this.breedingSheetsService.getSheet(this.colony.species)
     .subscribe((sheet) => {
       this.breedSheet = sheet;

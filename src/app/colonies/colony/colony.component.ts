@@ -107,7 +107,6 @@ export class ColonyComponent implements OnInit, OnDestroy {
     { }
 
   ngOnInit(): void {
-    console.log('onInit diapause status: ', this.diapauseStatus);
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('colonyId')) {
         this.colonyId = paramMap.get('colonyId');
@@ -136,7 +135,6 @@ export class ColonyComponent implements OnInit, OnDestroy {
   }
 
   loadColony(id: string): Observable<Colony> {
-    console.log(`loading colony with ID: ${id}`);
     return this.colony$ = this.coloniesService.loadColony(id);
   }
 

@@ -26,7 +26,6 @@ export class SocketioService {
     this.setupSocketConnection();
 
     this.socket.on('connect', (socket) => {
-      console.log('socket.io connected from client, with id -->', this.socket?.id);
     });
 
     this.socket.emit('joinNotifications', this.params, () => {

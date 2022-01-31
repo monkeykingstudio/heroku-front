@@ -3,7 +3,7 @@ import { Diapause } from './../models/diapause.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map, shareReplay } from 'rxjs/operators';
-import { Subscription, interval, Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -14,8 +14,6 @@ export class DiapauseService {
   constructor(private http: HttpClient) { }
 
   changeStatus(colonyId: string, status: string) {
-    console.log('from service diapause change status', status);
-
     return this.http.post(`${environment.APIEndpoint}/api/diapause/status/${colonyId}`, {status})
     .pipe(
       map(result => result['message']),
@@ -48,9 +46,17 @@ export class DiapauseService {
     );
   }
 
+  // GET all Diapauses
+  getDiapauses(species: string) {
+    return this.http.get(`${environment.APIEndpoint}/api/diapause/all/${species}`)
+    .pipe(
+      map(result => result['diapause']),
+      shareReplay()
+    );
+  }
+
 // POST Update
   diapauseUpdate(colonyId: string, currentTemperature: number) {
-    console.log('from servive diapause update', 'get temperature: ', currentTemperature);
 
     return this.http.post(`${environment.APIEndpoint}/api/diapause/update/${colonyId}`, {currentTemperature})
     .pipe(
@@ -58,7 +64,6 @@ export class DiapauseService {
       shareReplay()
     );
   }
-
 
 // POST endedSaw
 endedSaw(colonyId: string, endedSaw: boolean) {

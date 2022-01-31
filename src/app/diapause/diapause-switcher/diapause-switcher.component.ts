@@ -99,7 +99,6 @@ export class DiapauseSwitcherComponent implements OnInit, AfterViewInit {
     });
 
     if (this.diapauseFound) {
-      console.log('diapause found!');
       this.temperatureCurrent = this.diapauseLoaded[0]?.startTemperature;
     }
     if (this.temperatureCurrent === undefined) {

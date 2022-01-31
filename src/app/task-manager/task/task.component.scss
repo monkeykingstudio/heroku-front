@@ -9,6 +9,7 @@
   margin: .5rem 0;
   min-height: 7.5rem;
   transition: all 2s;
+  min-height: 115px;
   &:first-child {
     margin-top: 0;
   }
@@ -37,9 +38,10 @@
   }
 
   .description {
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    // text-overflow: ellipsis;
+    // white-space: nowrap;
     margin-right: 1.5rem;
+    min-height: 50px;
     &:first-letter {
       text-transform: capitalize;
     }
@@ -94,9 +96,7 @@
   }
 }
 
-
 .actions {
-  height: 7.5rem;
   display: flex;
   width: 6rem;
   border-left: 1px solid #c6c6c6;
@@ -106,7 +106,7 @@
 }
 
 .checker {
-  height: 7.5rem;
+  height: 9.3rem;
   display: flex;
   width: 4rem;
   border-right: 1px solid #c6c6c6;

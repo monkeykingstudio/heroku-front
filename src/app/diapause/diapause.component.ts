@@ -13,6 +13,9 @@ import { Notification } from '../models/notification.model';
 import { v4 as uuidv4 } from 'uuid';
 import { MailService } from '../services/mail.service';
 import { environment } from 'src/environments/environment';
+import {Chart} from 'chart.js';
+import { ChartDataSets } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
 
 @Component({
   selector: 'app-diapause',
@@ -20,8 +23,61 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./diapause.component.scss']
 })
 export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
+  public diapauseData = [];
+  public diapauseDataStart = [];
+  public diapauseDataEnd = [];
+
+  public chartDataStart = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  public chartDataEnd =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  barChartData: ChartDataSets[] = [
+    {
+      data: this.chartDataStart,
+      label: 'Start month'
+    },
+    {
+      data: this.chartDataEnd,
+      label: 'End month'
+    }
+  ];
+  barChartLabels: Label[] = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
+  barChartOptions = {
+    responsive: true,
+  };
+  barChartColors: Color[] = [
+    {
+      borderColor: 'rgb(31 31 31)',
+      backgroundColor: 'rgb(99 215 69)',
+    },
+    {
+      borderColor: 'rgb(31 31 31)',
+      backgroundColor: 'rgb(170 43 30)',
+    },
+  ];
+  barChartLegend = true;
+  barChartPlugins = [];
+  barChartType = 'horizontalBar';
+  // end stats
+  allDiapauses: Observable<Diapause[]>;
+
+
   private subscription: Subscription;
   private authStatusSubscription: Subscription;
+  private chartStartSub: Subscription;
+  private chartEndSub: Subscription;
 
   user$: Observable<User>;
   currentUser: User;
@@ -68,11 +124,11 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   endedTriggered = false;
 
   constructor(
-    public datepipe: DatePipe,
     public diapauseService: DiapauseService,
     public authService: AuthService,
     private socketService: SocketioService,
-    private mailService: MailService
+    private mailService: MailService,
+    private datePipe: DatePipe,
   ) {}
 
   public getTimeDifference(): number {
@@ -123,20 +179,17 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
 
     // SCHEDULE
     if (startDiff > 0 && endDiff > 0 && !this.scheduleTriggered) {
-      console.log('schedule!!!!');
       this.scheduleTriggered = true;
     }
 
     // ACTIVE
     else if (startDiff <= 0 && endDiff > 0 && !this.activeTriggered) {
-      console.log('active!!!!');
       this.changeStatus('active');
       this.activeTriggered = true;
     }
 
     // ENDED
     else if (endDiff <= 0 && startDiff <= 0 && !this.endedTriggered) {
-      console.log('ended!!!!');
       this.changeStatus('ended');
       this.endedTriggered = true;
       // On re initialise pour ne pas empêcher une autre diapause sans refresh de la page
@@ -146,6 +199,9 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.reloadAllDiapauses();
+    this.reloadDiapause();
+    // current user
     this.authStatusSubscription = this.authService.currentUser.pipe(
       map(user => {
         if (user) {
@@ -153,12 +209,98 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       })
       ).subscribe();
-    this.reloadDiapause();
+    // this.initDiapauseChart();
+
   }
 
   ngAfterViewInit(): void {
-
+    this.initStartChart();
+    this.initEndChart();
   }
+
+  // CHARTS LOGIC
+  initStartChart(): void {
+    this.chartStartSub = this.allDiapauses
+    .pipe(
+      map(diapauses => diapauses
+        .map((diapause: any) => diapause.period.startDate))
+    )
+    .subscribe((res) => {
+      for (const item of res) {
+        this.diapauseDataStart.push({
+          start: {month: this.datePipe.transform(item, 'dd-MM-YYY')}
+        });
+      }
+      console.log('start inited', this.diapauseDataStart);
+      this.computeStartData();
+      this.dispatchStartData();
+    });
+  }
+
+  initEndChart(): void {
+    this.chartEndSub = this.allDiapauses
+    .pipe(
+      map(diapauses => diapauses
+        .map((diapause: any) => diapause.period.endDate))
+    )
+    .subscribe((res) => {
+      for (const item of res) {
+        this.diapauseDataEnd.push({
+          end: {month: this.datePipe.transform(item, 'dd-MM-YYY')}
+        });
+      }
+      console.log('end inited', this.diapauseDataEnd);
+      this.computeEndData();
+      this.dispatchEndData();
+    });
+  }
+
+  computeStartData(): void{
+    const startgroups = this.diapauseDataStart
+    .reduce((r, o) => {
+      const m = o.start.month.split(('-'))[1];
+      (r[m])
+      ? r[m].data.push(o.start)
+      : r[m] = {group: Number(m), data: [o.start]};
+      return r;
+    }, {});
+    const startResult = Object.keys(startgroups)
+    .map((k) => startgroups[k]);
+    this.diapauseDataStart = startResult;
+    console.log('computed start', this.diapauseDataStart);
+  }
+
+  computeEndData(): void {
+    const endgroups = this.diapauseDataEnd
+    .reduce((r, o) => {
+      const m = o.end.month.split(('-'))[1];
+      (r[m])
+      ? r[m].data.push(o.end)
+      : r[m] = {group: Number(m), data: [o.end]};
+      return r;
+    }, {});
+    const endResult = Object.keys(endgroups)
+    .map((k) => endgroups[k]);
+    this.diapauseDataEnd = endResult;
+    console.log('computed end', this.diapauseDataEnd);
+  }
+
+
+  dispatchStartData() {
+    this.diapauseDataStart.forEach((group, index) => {
+      this.chartDataStart.splice(group.group - 1, 1, group.data.length);
+    });
+    console.log('dispatched start data: ', this.chartDataStart);
+  }
+
+  dispatchEndData() {
+    this.diapauseDataEnd.forEach((group, index) => {
+      this.chartDataEnd.splice(group.group - 1, 1, group.data.length);
+    });
+    console.log('dispatched end data: ', this.chartDataEnd);
+  }
+
+// END CHARTS LOGIC
 
   closeEndedSaw(): void {
     this.diapauseService.endedSaw(this.colonyId, true)
@@ -176,10 +318,10 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     if (this.outputSchedule) {
-      console.log('scheduled diapause');
+      // console.log('scheduled diapause');
       currentStatus = 'scheduled';
     } else {
-      console.log('active diapause');
+      // console.log('active diapause');
       currentStatus = 'active';
     }
 
@@ -239,16 +381,16 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
 
       if (diffInDays < 0) {
         this.dateCheck = false;
-        console.log('diff < 0', diffInDays);
+        // console.log('diff < 0', diffInDays);
         return;
       } else {
         this.dateCheck = true;
-        console.log('diff > 0', diffInDays);
+        // console.log('diff > 0', diffInDays);
       }
     }
   }
   changeStatus($event): any {
-    console.log('event: ', $event);
+    // console.log('event: ', $event);
     this.status = $event;
     if (this.status === 'archived') {
       this.diapauseChangeStatus.emit('archived');
@@ -264,7 +406,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
 
       this.mailService.sendDiapauseEmail(`${environment.APIEndpoint}/api/mail/diapauseend`, {userEmail, userPseudo, species})
       .subscribe(data => {
-        console.log(`mail is sent for diapause status ended`);
+        // console.log(`mail is sent for diapause status ended`);
         const dataNotification: Notification = {
           senderId: 'frontend',
           senderPseudo: 'fourmislabs bot',
@@ -277,7 +419,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
           url: `/${ this.diapauseLoaded[0]?.colonyId}/${ this.diapauseLoaded[0]?.species?.toLowerCase()}`
         };
         this.socketService.sendNotification(dataNotification);
-        console.log('a notif socket has been sent', dataNotification);
+        // console.log('a notif socket has been sent', dataNotification);
       },
       err => {
         console.log('error mail: ', err);
@@ -285,7 +427,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log('mail is sent!');
       });
     }
-    console.log('string event', this.status);
+    // console.log('string event', this.status);
     return this.diapauseService.changeStatus(this.colonyId, this.status)
       .subscribe((res) => {
         this.reloadDiapause();
@@ -301,7 +443,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
           return;
         }
         else {
-          console.log('a diapause is found!', diapause[0]);
+          // console.log('a diapause is found!', diapause[0]);
           this.diapauseFound = true;
           this.diapauseLoaded = diapause;
           this.status = diapause[0].status;
@@ -326,6 +468,11 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     });
   }
+
+  reloadAllDiapauses(): void {
+    const diapauses$ = this.diapauseService.getDiapauses(this.sheet.species);
+    this.allDiapauses = diapauses$;
+  }
   deleteDiapause(): any{
     return this.diapauseService.diapauseDelete(this.colonyId)
     .subscribe((res) => {
@@ -335,30 +482,24 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getEndDate(date: Date): void {
-    console.log('from parent endDate: ', date);
     this.outputEndDate = date;
   }
 
   getStartDate(date: Date): void {
-    console.log('from parent StartDate: ', date);
     this.outputStartDate = date;
   }
 
   getSchedule(schedule: boolean): void {
-    console.log('from parent schedule: ', schedule);
     this.outputSchedule = schedule;
   }
 
   getStartTemperature(temperature: number): void {
-    console.log('from parent start temperature: ', temperature);
     this.outputStartTemperature = temperature;
   }
 
   getCurrentTemperature(temperature: number): void {
-    console.log('from parent current temperature: ', temperature);
     this.outputCurrentTemperature = temperature;
   }
-
   updateCurrentTemperature(): void {
     this.tempIndex = this.diapauseLoaded[0].currentTemperature.length - 1;
     console.log('temp index', this.tempIndex);

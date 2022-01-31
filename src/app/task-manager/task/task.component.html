@@ -3,7 +3,7 @@
   <div *ngIf="task.toDo" class="checker">
     <input type="checkbox" name="cb"/><label (click)='done()'></label>
   </div>
-  <div class="data-container d-flex flex-column align-items-start">
+  <div style="height:100%" class="data-container d-flex flex-column align-items-start">
   <div [ngStyle]="task.toDo ? {'border-left': '.2rem solid white'} : {'border-left': 'none'}" style="max-width: 100%;width:100%" class="d-flex flex-column data">
     <div style="overflow:hidden"class="d-flex flex-column">
       <span class="title">{{task.title}}</span>
