@@ -74,9 +74,9 @@
           [plugins]="barChartPlugins">
       </canvas>
     </div>
-    <div class="d-flex m-auto flex-column">
+    <div *ngIf="diapauseDataStart.length === 0 && diapauseDataEnd.length === 0" class="d-flex m-auto flex-column">
       <i style="margin:1rem auto;" class="nostats-icon"></i>
-      <span style="text-align: center;margin: auto;margin-bottom:1rem"><b>No stats to display!</b><br/> Wait for other users to archive their diapauses for this species</span>
+      <span style="text-align: center;margin: auto;margin-bottom:1rem"><b>No stats to display!</b><br/> Wait for other users to archive their<br/> diapauses for this species</span>
     </div>
 
     <!-- <div class="chart-wrapper">
