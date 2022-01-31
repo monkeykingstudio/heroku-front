@@ -12,7 +12,7 @@
           </div>
         </div>
     </div>
-  <!-- <app-diapause-header
+  <app-diapause-header
   [status]="status"
   (reloadDiapause)="reloadDiapause()"
   [colonyId]='colonyId'
@@ -20,11 +20,11 @@
   [minutesToDday]="minutesToDday"
   [hoursToDday]="hoursToDday"
   [daysToDday]="daysToDday">
-  </app-diapause-header> -->
+  </app-diapause-header>
 
   <div class="body d-flex flex-column">
 
-    <!-- <div class="separator-module"></div> -->
+    <div class="separator-module"></div>
 
     <app-diapause-period
     [diapauseFound]="diapauseFound"
@@ -76,7 +76,10 @@
     </div>
     <div *ngIf="diapauseDataStart.length === 0 && diapauseDataEnd.length === 0" class="d-flex m-auto flex-column">
       <i style="margin:1rem auto;" class="nostats-icon"></i>
-      <span style="text-align: center;margin: auto;margin-bottom:1rem"><b>No stats to display!</b><br/> Wait for other users to archive their<br/> diapauses for this species</span>
+      <span style="text-align: center;margin: auto;margin-bottom:1rem"><b>No stats to display!</b><br/> Wait for other users to <i>archive</i> their<br/> diapauses for this species</span>
+    </div>
+    <div style="text-align:center;margin:.5rem auto">
+     <b><i>{{sheet.species}}</i></b><br/> colonies currently in diapause : <span style="font-weight:bold;font-size:18px">{{activeAmount}}</span>
     </div>
 
     <!-- <div class="chart-wrapper">

@@ -30,6 +30,8 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   public chartDataStart = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   public chartDataEnd =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
+  activeAmount: number;
+
   barChartData: ChartDataSets[] = [
     {
       data: this.chartDataStart,
@@ -71,8 +73,8 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   barChartPlugins = [];
   barChartType = 'horizontalBar';
   // end stats
-  allDiapauses: Observable<Diapause[]>;
-
+  archivedDiapauses: Observable<Diapause[]>;
+  activeDiapauses: Observable<Diapause[]>;
 
   private subscription: Subscription;
   private authStatusSubscription: Subscription;
@@ -163,7 +165,6 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
       (timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute * this.hoursInADay)
       );
   }
-
   checkIfCountdown() {
     let startDiff = 0;
     let endDiff = 0;
@@ -199,7 +200,8 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.reloadAllDiapauses();
+    this.reloadArchivedDiapauses();
+    this.reloadActiveDiapauses();
     this.reloadDiapause();
     // current user
     this.authStatusSubscription = this.authService.currentUser.pipe(
@@ -209,8 +211,6 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       })
       ).subscribe();
-    // this.initDiapauseChart();
-
   }
 
   ngAfterViewInit(): void {
@@ -220,7 +220,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // CHARTS LOGIC
   initStartChart(): void {
-    this.chartStartSub = this.allDiapauses
+    this.chartStartSub = this.archivedDiapauses
     .pipe(
       map(diapauses => diapauses
         .map((diapause: any) => diapause.period.startDate))
@@ -238,7 +238,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   initEndChart(): void {
-    this.chartEndSub = this.allDiapauses
+    this.chartEndSub = this.archivedDiapauses
     .pipe(
       map(diapauses => diapauses
         .map((diapause: any) => diapause.period.endDate))
@@ -284,7 +284,6 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.diapauseDataEnd = endResult;
     console.log('computed end', this.diapauseDataEnd);
   }
-
 
   dispatchStartData() {
     this.diapauseDataStart.forEach((group, index) => {
@@ -469,9 +468,23 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  reloadAllDiapauses(): void {
-    const diapauses$ = this.diapauseService.getDiapauses(this.sheet.species);
-    this.allDiapauses = diapauses$;
+  reloadArchivedDiapauses(): void {
+    const diapauses$ = this.diapauseService.getArchivedDiapauses(this.sheet.species);
+    this.archivedDiapauses = diapauses$;
+  }
+  reloadActiveDiapauses(): void {
+    const diapauses$ = this.diapauseService.getArchivedDiapauses(this.sheet.species);
+    this.activeDiapauses = diapauses$;
+    console.log(
+      this.activeDiapauses
+      .pipe(
+        map(diapauses => diapauses
+          .map((diapause: any) => diapause))
+      )
+      .subscribe((res) => {
+        this.activeAmount = res.length;
+      })
+      );
   }
   deleteDiapause(): any{
     return this.diapauseService.diapauseDelete(this.colonyId)

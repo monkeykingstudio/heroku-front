@@ -46,9 +46,17 @@ export class DiapauseService {
     );
   }
 
-  // GET all Diapauses
-  getDiapauses(species: string) {
-    return this.http.get(`${environment.APIEndpoint}/api/diapause/all/${species}`)
+  // GET all archived Diapauses
+  getArchivedDiapauses(species: string) {
+    return this.http.get(`${environment.APIEndpoint}/api/diapause/archived/${species}`)
+    .pipe(
+      map(result => result['diapause']),
+      shareReplay()
+    );
+  }
+
+  getActiveDiapauses(species: string) {
+    return this.http.get(`${environment.APIEndpoint}/api/diapause/active/${species}`)
     .pipe(
       map(result => result['diapause']),
       shareReplay()
