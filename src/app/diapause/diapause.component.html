@@ -1,5 +1,5 @@
 <h5>Diapause</h5>
-<div *ngIf="diapauseDataStart.length > 0" id="diapauseRef" class="diapause-container animate__animated animate__slideInRight">
+<div id="diapauseRef" class="diapause-container animate__animated animate__slideInRight">
     <div *ngIf="status === 'ended' && !diapauseLoaded[0].endedSaw" class="app-popup">
       <div style="background: white;height:100%;padding:1rem" class="popup">
         <i class="cold-icon"></i>
@@ -63,7 +63,7 @@
     [sheet]="sheet">
     </app-diapause-stats> -->
 
-    <div class="chart-wrapper">
+    <div *ngIf="diapauseDataStart.length > 0 && diapauseDataEnd.length > 0" class="chart-wrapper">
       <canvas baseChart
           [datasets]="barChartData"
           [labels]="barChartLabels"
@@ -73,6 +73,10 @@
           [chartType]="barChartType"
           [plugins]="barChartPlugins">
       </canvas>
+    </div>
+    <div class="d-flex m-auto flex-column">
+      <i style="margin:1rem auto;" class="nostats-icon"></i>
+      <span style="text-align: center;margin: auto;margin-bottom:1rem"><b>No stats to display!</b><br/> Wait for other users to archive their diapauses for this species</span>
     </div>
 
     <!-- <div class="chart-wrapper">

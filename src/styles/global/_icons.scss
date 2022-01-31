@@ -732,6 +732,19 @@
   }
 }
 
+.nostats-icon {
+  &:before {
+      content: '';
+      background-image: url('../../app/icons/analytics.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: inline-block;
+      position: relative;
+      width: 5rem;
+      height: 5rem;
+  }
+}
+
 .colony-icon {
   &:before {
       content: '';
