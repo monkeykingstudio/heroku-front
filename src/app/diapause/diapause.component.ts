@@ -13,7 +13,6 @@ import { Notification } from '../models/notification.model';
 import { v4 as uuidv4 } from 'uuid';
 import { MailService } from '../services/mail.service';
 import { environment } from 'src/environments/environment';
-import {Chart} from 'chart.js';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 
@@ -23,7 +22,6 @@ import { Color, Label } from 'ng2-charts';
   styleUrls: ['./diapause.component.scss']
 })
 export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
-  public diapauseData = [];
   public diapauseDataStart = [];
   public diapauseDataEnd = [];
 
@@ -64,13 +62,13 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
           beginAtZero: true,
           min: 0
         },
-         scaleLabel: {
+        scaleLabel: {
             display: true,
             beginAtZero: true,
             min: 0
-         }
+        }
       }]
-   }
+  }
   };
   barChartColors: Color[] = [
     {

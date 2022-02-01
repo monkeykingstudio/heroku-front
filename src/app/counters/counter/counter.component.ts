@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { Counter } from '../../models/counter.model';
 import { CounterService } from '../../services/counter.service';
 import { PopupService } from './../../services/popup.service';
@@ -16,6 +16,9 @@ export class CounterComponent implements OnInit {
 
   @Input()
   colonyId: string;
+
+  @Output()
+  reloadCounterStats = new EventEmitter<string>();
 
   optionsForm: FormGroup;
   counterForm: FormGroup;
@@ -197,6 +200,7 @@ export class CounterComponent implements OnInit {
     }
 
     this.reloadPopulation();
+    this.reloadCounterStats.emit();
   }
 
   sub(typeRef): void {
@@ -252,11 +256,11 @@ export class CounterComponent implements OnInit {
           console.log(`Sorry, wrong type for counter ${typeRef}.`);
       }
     }
-
     this.reloadPopulation();
+    this.reloadCounterStats.emit();
   }
 
-  closePopup(id: string) {
+  closePopup(id: string): void {
     this.popupService.close(id);
   }
 }

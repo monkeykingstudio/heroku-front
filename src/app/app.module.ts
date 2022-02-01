@@ -52,6 +52,7 @@ import { OrderByPipe } from './pipes/orderBy.pipe';
 import { NgxSimpleCountdownModule } from 'ngx-simple-countdown';
 import { ClickoutsideDirective } from './clickoutside.directive';
 import { DiapauseComponent } from './diapause/diapause.component';
+import { PopulationStatsComponent } from './colonies/population-stats/population-stats.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { DiapauseComponent } from './diapause/diapause.component';
     DiapauseHeaderComponent,
     DiapausePeriodComponent,
     DiapauseStatsComponent,
-    DiapauseSwitcherComponent
+    DiapauseSwitcherComponent,
+    PopulationStatsComponent
   ],
   imports: [
     BrowserModule,
