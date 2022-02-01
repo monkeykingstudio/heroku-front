@@ -1,6 +1,18 @@
-<div class="chart-wrapper">
+<div *ngIf="polyMorph" class="chart-wrapper">
   <canvas baseChart
-  [datasets]="barChartData"
+  [datasets]="polyChartData"
+  [labels]="barChartLabels"
+  [options]="barChartOptions"
+  [plugins]="barChartPlugins"
+  [legend]="barChartLegend"
+  [chartType]="barChartType"
+  [colors]="colors">
+  </canvas>
+</div>
+
+<div *ngIf="!polyMorph" class="chart-wrapper">
+  <canvas baseChart
+  [datasets]="monoChartData"
   [labels]="barChartLabels"
   [options]="barChartOptions"
   [plugins]="barChartPlugins"

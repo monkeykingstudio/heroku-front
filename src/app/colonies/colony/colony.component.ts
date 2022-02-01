@@ -27,6 +27,7 @@ export class ColonyComponent implements OnInit, OnDestroy {
   private chartSub: Subscription;
 
   // private counterData = [];
+  public chartMonoData = [];
   public chartPolyMinorData = [];
   public chartPolyMediumData = [];
   public chartPolyMajorData = [];
@@ -73,6 +74,7 @@ export class ColonyComponent implements OnInit, OnDestroy {
       this.chartPolyMinorData.push(res.counter.minorCount);
       this.chartPolyMediumData.push(res.counter.mediumCount);
       this.chartPolyMajorData.push(res.counter.majorCount);
+      this.chartMonoData.push(res.counter.polyCount);
     });
   }
 
@@ -91,6 +93,9 @@ export class ColonyComponent implements OnInit, OnDestroy {
 
       this.chartPolyMajorData = [];
       this.chartPolyMajorData.push(res.counter.majorCount);
+
+      this.chartMonoData = [];
+      this.chartMonoData.push(res.counter.polyCount);
     });
   }
 

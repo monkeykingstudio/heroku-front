@@ -9,11 +9,15 @@ import { Color, Label } from 'ng2-charts';
 })
 export class PopulationStatsComponent implements OnInit, OnChanges  {
   @Input()
+  chartMonoData;
+  @Input()
   chartPolyMinorData;
   @Input()
   chartPolyMediumData;
   @Input()
   chartPolyMajorData;
+  @Input()
+  polyMorph: boolean;
 
   barChartLabels: Label[] = [
     'Population'
@@ -43,7 +47,9 @@ export class PopulationStatsComponent implements OnInit, OnChanges  {
   }] }
   };
 
-  barChartData: ChartDataSets[];
+  polyChartData: ChartDataSets[];
+  monoChartData: ChartDataSets[];
+
 
   public colors = [
   {
@@ -68,26 +74,35 @@ export class PopulationStatsComponent implements OnInit, OnChanges  {
   constructor() { }
 
   ngOnInit(): void {
-    this.barChartData = [
-      {
-        data: this.chartPolyMinorData,
-        label: 'Minor'
-      },
-      {
-        data: this.chartPolyMediumData,
-        label: 'Media'
-      },
-      {
-        data: this.chartPolyMajorData,
-        label: 'Major'
-      }
-    ];
+    if (this.polyMorph) {
+      this.polyChartData = [
+        {
+          data: this.chartPolyMinorData,
+          label: 'Minor'
+        },
+        {
+          data: this.chartPolyMediumData,
+          label: 'Media'
+        },
+        {
+          data: this.chartPolyMajorData,
+          label: 'Major'
+        }
+      ];
+    }
+    else {
+      this.monoChartData = [
+        {
+          data: this.chartMonoData,
+          label: 'Worker'
+        }
+      ];
+    }
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('change detected', changes.prop);
-
-    console.log('change detected', this.barChartData);
     this.ngOnInit();
   }
 

@@ -9,6 +9,8 @@
           <h5>Population statistics</h5>
           <div class="mb-4 chart-box animate__animated animate__flipInX">
           <app-population-stats
+          [polyMorph]="colony.counter.polymorph"
+          [chartMonoData]="chartMonoData"
           [chartPolyMinorData]="chartPolyMinorData"
           [chartPolyMediumData]="chartPolyMediumData"
           [chartPolyMajorData]="chartPolyMajorData"
