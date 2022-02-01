@@ -9,8 +9,7 @@ import { BreedingSheetsService } from './../../services/breedingSheetsService';
 import { map } from 'rxjs/operators';
 
 import { ChartDataSets } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
-import { Counter } from 'src/app/models/counter.model';
+// import { Counter } from 'src/app/models/counter.model';
 
 
 @Component({
@@ -20,84 +19,22 @@ import { Counter } from 'src/app/models/counter.model';
 })
 export class ColonyComponent implements OnInit, OnDestroy {
   colony$: Observable<Colony>;
-  chartCounter$: Observable<Counter[]>;
+  // chartCounter$: Observable<Counter[]>;
   private colonyId: string;
 
   breedSheet: BreedingSheet;
   private breedingSheetSub: Subscription;
   private chartSub: Subscription;
 
-  private counterData = [];
-  private chartPolyMinorData = [];
-  private chartPolyMediumData = [];
-  private chartPolyMajorData = [];
+  // private counterData = [];
+  public chartPolyMinorData = [];
+  public chartPolyMediumData = [];
+  public chartPolyMajorData = [];
 
   diapauseStatus = 'innactive';
 
-
   groupKey = 0;
 
-  public barChartData: ChartDataSets[] = [
-    {
-      data: this.chartPolyMinorData,
-      label: 'Minor'
-    },
-    {
-      data: this.chartPolyMediumData,
-      label: 'Media'
-    },
-    {
-      data: this.chartPolyMajorData,
-      label: 'Major'
-    }
-  ];
-
-  barChartLabels: Label[] = [
-    'Population'
-  ];
-
-  barChartOptions = {
-    responsive: true,
-    scales: {
-      xAxes: [{
-      display: true,
-        scaleLabel: {
-          display: true,
-          labelString: ''
-        }
-      }],
-      yAxes: [{
-      display: true,
-      scaleLabel: {
-        display: true,
-        labelString: 'Amount'
-      },
-      ticks: {
-        beginAtZero: true,
-        steps: 5,
-        stepValue: 100,
-      }
-  }] }
-  };
-
-  public colors = [
-  {
-    borderColor: 'black',
-    backgroundColor: '#62d744'
-  },
-  {
-    borderColor: 'black',
-    backgroundColor: '#44a4d7'
-  },
-  {
-    borderColor: 'black',
-    backgroundColor: '#d74444'
-  }
-  ];
-
-  barChartLegend = true;
-  barChartPlugins = [];
-  barChartType = 'bar';
 
   constructor(
     public coloniesService: ColoniesService,
@@ -123,6 +60,11 @@ export class ColonyComponent implements OnInit, OnDestroy {
       });
     })).subscribe();
 
+    this.reloadChartPopulation();
+  }
+
+  reloadChartPopulation(): void {
+    console.log('event graph population');
     this.chartSub = this.colony$
     .pipe(
       map(colony => colony)
@@ -130,6 +72,24 @@ export class ColonyComponent implements OnInit, OnDestroy {
     .subscribe((res) => {
       this.chartPolyMinorData.push(res.counter.minorCount);
       this.chartPolyMediumData.push(res.counter.mediumCount);
+      this.chartPolyMajorData.push(res.counter.majorCount);
+    });
+  }
+
+  refreshChart(): void {
+    console.log('refreshstats');
+    this.chartSub = this.colony$
+    .pipe(
+      map(colony => colony)
+    )
+    .subscribe((res) => {
+      this.chartPolyMinorData = [];
+      this.chartPolyMinorData.push(res.counter.minorCount);
+
+      this.chartPolyMediumData = [];
+      this.chartPolyMediumData.push(res.counter.mediumCount);
+
+      this.chartPolyMajorData = [];
       this.chartPolyMajorData.push(res.counter.majorCount);
     });
   }
