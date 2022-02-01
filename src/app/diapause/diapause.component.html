@@ -74,9 +74,17 @@
           [plugins]="barChartPlugins">
       </canvas>
     </div>
-    <div *ngIf="diapauseDataStart.length === 0 && diapauseDataEnd.length === 0" class="d-flex m-auto flex-column">
-      <i style="margin:1rem auto;" class="nostats-icon"></i>
-      <span style="text-align: center;margin: auto;margin-bottom:1rem"><b>No stats to display!</b><br/> Wait for other users to <i>archive</i> their<br/> diapauses for this species</span>
+    <div style="min-width: 100%;" *ngIf="diapauseDataStart.length === 0 && diapauseDataEnd.length === 0" class="d-flex m-auto flex-column">
+      <canvas baseChart
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [colors]="barChartColors"
+      [legend]="barChartLegend"
+      [chartType]="barChartType"
+      [plugins]="barChartPlugins">
+  </canvas>
+    <span style="text-align: center;margin: auto;margin-bottom:1rem"><b>No stats to display!</b><br/> Wait for other users to <i>archive</i> their<br/> diapauses for this species</span>
     </div>
     <div style="text-align:center;margin:.5rem auto">
      <b><i>{{sheet.species}}</i></b><br/> colonies currently in diapause : <span style="font-weight:bold;font-size:18px">{{activeAmount}}</span>

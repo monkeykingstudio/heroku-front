@@ -58,6 +58,19 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
   ];
   barChartOptions = {
     responsive: true,
+    scales: {
+      xAxes: [{
+        ticks: {
+          beginAtZero: true,
+          min: 0
+        },
+         scaleLabel: {
+            display: true,
+            beginAtZero: true,
+            min: 0
+         }
+      }]
+   }
   };
   barChartColors: Color[] = [
     {
@@ -367,6 +380,9 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
         }
         this.socketService.sendNotification(dataNotification);
         this.reloadDiapause();
+        this.reloadActiveDiapauses();
+        this.reloadArchivedDiapauses();
+
         // On démarre un nouvelle diapause donc on dévérouille la désactivation du boolean
         this.endedTriggered = false;
       });
@@ -393,6 +409,8 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.status = $event;
     if (this.status === 'archived') {
       this.diapauseChangeStatus.emit('archived');
+      this.reloadArchivedDiapauses();
+      this.reloadActiveDiapauses();
     }
     else if (this.status === 'active') {
       this.diapauseChangeStatus.emit('active');
@@ -473,7 +491,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.archivedDiapauses = diapauses$;
   }
   reloadActiveDiapauses(): void {
-    const diapauses$ = this.diapauseService.getArchivedDiapauses(this.sheet.species);
+    const diapauses$ = this.diapauseService.getActiveDiapauses(this.sheet.species);
     this.activeDiapauses = diapauses$;
     console.log(
       this.activeDiapauses
@@ -491,6 +509,7 @@ export class DiapauseComponent implements OnInit, OnDestroy, AfterViewInit {
     .subscribe((res) => {
       this.reloadDiapause();
       this.diapauseChangeStatus.emit('innactive');
+      this.reloadActiveDiapauses();
     });
   }
 
