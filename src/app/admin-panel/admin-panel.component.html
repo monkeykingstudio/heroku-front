@@ -61,7 +61,7 @@
                   <div class="four">
                     <span>action</span>
                   </div>
-                  <div style="border-right:none!important" class="five">
+                  <div class="five">
                     <span>status</span>
                   </div>
 
@@ -94,6 +94,9 @@
                         'review-asked': sheet?.status === 'review asked',
                         'reviewed': sheet?.status === 'reviewed'
                       }">{{sheet.status}}</span>
+                    </div>
+                    <div class="six">
+
                     </div>
                   </div>
                 </div>
@@ -159,6 +162,9 @@
               <div class="seven">
                 <span>last visit</span>
               </div>
+              <div class="height">
+                <span>newsletter</span>
+              </div>
             </div>
             <div class="body">
               <div *ngFor="let user of users; index as i" class="line">
@@ -192,6 +198,10 @@
                     <span>{{ user.lastLogin | date: 'dd/MM/yyyy' }}</span>
                     <span class="diff">{{daysDiff}} {{daysDiff < 2 ? 'day' : 'days'}}, {{hoursDiff}} {{hoursDiff < 2 ? 'hour' : 'hours'}}</span>
                   </div>
+                </div>
+                <div class="height">
+                  <span style="color: #618c28;font-weight:bold" *ngIf="user.newsletter">YES</span>
+                  <span style="color: #d74444;font-weight:bold" *ngIf="!user.newsletter">NO</span>
                 </div>
               </div>
             </div>

@@ -257,7 +257,7 @@ h6, .h6 {
   width: 100%;
   border-radius: .5rem;
 
-  .one, .two, .three, .four, .five, .six, .seven {
+  .one, .two, .three, .four, .five, .six, .seven, .height {
     justify-content: center;
     display: flex;
     padding: 1rem;
@@ -274,7 +274,7 @@ h6, .h6 {
     border-right: .1rem solid #cacaca;
   }
 
-  .two, .three, .four, .five, .six, .seven {
+  .two, .three, .four, .five, .six, .seven, .height {
     border-left: .1rem solid #fefefe;
   }
 
@@ -284,13 +284,13 @@ h6, .h6 {
   }
 
   .two {
-    min-width: 15%;
-    max-width: 15%;
+    min-width: 10%;
+    max-width: 10%;
   }
 
   .three {
-    min-width: 25%;
-    max-width: 25%;
+    min-width: 20%;
+    max-width: 20%;
   }
 
   .four {
@@ -311,6 +311,10 @@ h6, .h6 {
   .seven {
     min-width: 15%;
     max-width: 15%;
+  }
+  .height {
+    min-width: 10%;
+    max-width: 10%;
   }
 
   .head {

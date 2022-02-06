@@ -19,14 +19,12 @@ import { ChartDataSets } from 'chart.js';
 })
 export class ColonyComponent implements OnInit, OnDestroy {
   colony$: Observable<Colony>;
-  // chartCounter$: Observable<Counter[]>;
   private colonyId: string;
 
   breedSheet: BreedingSheet;
   private breedingSheetSub: Subscription;
   private chartSub: Subscription;
 
-  // private counterData = [];
   public chartMonoData = [];
   public chartPolyMinorData = [];
   public chartPolyMediumData = [];

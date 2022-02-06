@@ -8,7 +8,7 @@
         'background-color': 'white'
       }"
       class='power-btn' type='button' (click)="powerModeChange()"><i class="power-icon"></i>
-    </button>
+  </button>
   <button class="align-self-end edit-btn" type="button" (click)="openPopup('counterPopup')">
     <i class="options-icon"></i>
   </button>
@@ -16,47 +16,51 @@
   <div class="separator-module"></div>
 
   <form class="form-group incrementors" [formGroup]="counterForm" (ngSubmit)='saveCount()'>
-    <div *ngIf="counter.polymorph" class="d-flex align-items-end mb-3">
-      <div class="d-flex flex-column">
-        <span class="types">Minor</span>
-        <div class="d-flex">
-          <button class='green-btn sub' [ngClass]="{disabled: counter.minorCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('minorRef')">-</button>
-          <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('minorRef')">+</button>
+    <div *ngIf="counter.polymorph" class="d-flex flex-column">
+    <!-- MINOR -->
+      <div class="d-flex align-items-end mb-3">
+        <div class="d-flex flex-column">
+          <span class="types">Minor</span>
+          <div class="d-flex">
+            <button class='green-btn sub' [ngClass]="{disabled: counter.minorCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('minorRef')">-</button>
+            <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('minorRef')">+</button>
+          </div>
         </div>
+        <select *ngIf="powerMode" #multiMinor (change)="changeMultiplicatorMinor(multiMinor.value)" formControlName='multiplicatorMinor' class="multiplicator" id="multiplicatorMinor">
+          <option *ngFor="let multiplicatorMinor of multiplicators" [value]="multiplicatorMinor.valeur">X {{multiplicatorMinor.valeur}}</option>
+        </select>
+        <input disabled='true' class="form-control" type="text" value='{{counter.minorCount}}' name="minor" #minorRef>
       </div>
-      <select *ngIf="powerMode" #multiMinor (change)="changeMultiplicatorMinor(multiMinor.value)" formControlName='multiplicatorMinor' class="multiplicator" id="multiplicatorMinor">
-        <option *ngFor="let multiplicatorMinor of multiplicators" [value]="multiplicatorMinor.valeur">X {{multiplicatorMinor.valeur}}</option>
-      </select>
-      <input disabled='true' class="form-control" type="text" value='{{counter.minorCount}}' name="minor" #minorRef>
-    </div>
 
-    <div *ngIf="counter.polymorph" class="d-flex align-items-end mb-3">
-      <div class="d-flex flex-column">
-        <span class="types">Media</span>
-        <div class="d-flex">
-          <button class='green-btn sub' [ngClass]="{disabled: counter.mediumCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('mediumRef')">-</button>
-          <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('mediumRef')">+</button>
+      <div class="d-flex align-items-end mb-3">
+        <div class="d-flex flex-column">
+          <span class="types">Media</span>
+          <div class="d-flex">
+            <button class='green-btn sub' [ngClass]="{disabled: counter.mediumCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('mediumRef')">-</button>
+            <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('mediumRef')">+</button>
+          </div>
         </div>
+        <select *ngIf="powerMode" #multiMedium (change)="changeMultiplicatorMedium(multiMedium.value)" formControlName='multiplicatorMedium' class="multiplicator" id="multiplicatorMedium">
+          <option *ngFor="let multiplicatorMedium of multiplicators" [value]="multiplicatorMedium.valeur">X {{multiplicatorMedium.valeur}}</option>
+        </select>
+        <input disabled='true' class="form-control" type="text" value='{{counter.mediumCount}}' name="medium" #mediumRef>
       </div>
-      <select *ngIf="powerMode" #multiMedium (change)="changeMultiplicatorMedium(multiMedium.value)" formControlName='multiplicatorMedium' class="multiplicator" id="multiplicatorMedium">
-        <option *ngFor="let multiplicatorMedium of multiplicators" [value]="multiplicatorMedium.valeur">X {{multiplicatorMedium.valeur}}</option>
-      </select>
-      <input disabled='true' class="form-control" type="text" value='{{counter.mediumCount}}' name="medium" #mediumRef>
-    </div>
-
-    <div *ngIf="counter.polymorph" class="d-flex align-items-end">
-      <div class="d-flex flex-column">
-        <span class="types">Major</span>
-        <div class="d-flex">
-          <button class='green-btn sub' [ngClass]="{disabled: counter.majorCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('majorRef')">-</button>
-          <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('majorRef')">+</button>
+    <!-- MAJOR -->
+      <div class="d-flex align-items-end">
+        <div class="d-flex flex-column">
+          <span class="types">Major</span>
+          <div class="d-flex">
+            <button class='green-btn sub' [ngClass]="{disabled: counter.majorCount == 0}" [disabled]="isLoading" type='submit' (click)="sub('majorRef')">-</button>
+            <button class='green-btn add' [disabled]="isLoading" type='submit' (click)="add('majorRef')">+</button>
+          </div>
         </div>
+        <select *ngIf="powerMode" #multiMajor (change)="changeMultiplicatorMajor(multiMajor.value)" formControlName='multiplicatorMajor' class="multiplicator" id="multiplicatorMajor">
+          <option *ngFor="let multiplicatorMajor of multiplicators" [value]="multiplicatorMajor.valeur">X {{multiplicatorMajor.valeur}}</option>
+        </select>
+        <input disabled='true' class="form-control" type="text" value='{{counter.majorCount}}' name="major" #majorRef>
       </div>
-      <select *ngIf="powerMode" #multiMajor (change)="changeMultiplicatorMajor(multiMajor.value)" formControlName='multiplicatorMajor' class="multiplicator" id="multiplicatorMajor">
-        <option *ngFor="let multiplicatorMajor of multiplicators" [value]="multiplicatorMajor.valeur">X {{multiplicatorMajor.valeur}}</option>
-      </select>
-      <input disabled='true' class="form-control" type="text" value='{{counter.majorCount}}' name="major" #majorRef>
     </div>
+    <!-- MONOMORPH -->
 
     <div *ngIf="counter.polymorph === false" class="d-flex align-items-end">
       <div class="d-flex flex-column">
@@ -72,6 +76,7 @@
       <input disabled='true' class="form-control" type="text" value='{{counter.polyCount}}' name="poly" #polyRef>
     </div>
 
+    <!-- BREED -->
     <div *ngIf="counter.breed" class="d-flex align-items-end mt-3">
       <div class="d-flex flex-column">
         <span class="types">Brood</span>
